@@ -18,7 +18,6 @@ import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
 import { ProductComponent } from './components/product/product.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
-import { TestingComponent } from './components/testing/testing.component';
 
 
 @NgModule({
@@ -39,7 +38,7 @@ import { TestingComponent } from './components/testing/testing.component';
     ProductComponent,
     InvoiceComponent,
     InventoryDetailsComponent,
-    TestingComponent,
+
   ],
   imports: [
     BrowserModule,
