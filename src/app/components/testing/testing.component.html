@@ -21,7 +21,38 @@
                        </div>
                      </div>
                    </nav><br>
-
-
-
-                </div></div></div></div></section></main>
+                   <div>
+                    <select (change)="toggleTable()">
+                      <option value="">Select an option</option>
+                      <option value="option1">Option 1</option>
+                      <option value="option2">Option 2</option>
+                      <option value="option3">Option 3</option>
+                    </select>
+                    <table *ngIf="showTable">
+                      <thead>
+                        <tr>
+                          <th>Column 1</th>
+                          <th>Column 2</th>
+                          <th>Column 3</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Data 1</td>
+                          <td>Data 2</td>
+                          <td>Data 3</td>
+                        </tr>
+                        <tr>
+                          <td>Data 4</td>
+                          <td>Data 5</td>
+                          <td>Data 6</td>
+                        </tr>
+                        <tr>
+                          <td>Data 7</td>
+                          <td>Data 8</td>
+                          <td>Data 9</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  </div></div></div></div></section></main>

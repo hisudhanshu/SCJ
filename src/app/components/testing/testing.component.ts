@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./testing.component.css']
 })
 export class TestingComponent implements OnInit {
+  showTable = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  toggleTable(): void {
+    this.showTable = !this.showTable;
+  }
 }
