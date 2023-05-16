@@ -12,4 +12,9 @@ export class AuthServicesService {
   login(data: any):Observable<any>{
     return this.http.post(`${baseUrl}Authentication/UserLogin`,data);
   }
+//  Get Product API call Service code start here
+
+  getProduct(data: any):Observable<any>{
+    return this.http.post(``,data);
+  }
 }

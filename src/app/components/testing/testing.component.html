@@ -1,58 +1,135 @@
 <main id="main" class="main">
-    <div class="pagetitle">
+  <div class="pagetitle">
+     </div>
+     <section class="section">
+        <div class="container-fluid">
+           <div class="col-lg-12">
+              <div class="card">
+                 <div class="card-body">
+                   <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                      <div class="container-fluid">
+                        <a class="container-fluid"><strong><b><h1 class="card-title"><strong>Product Master</strong></h1></b></strong></a>
+                      </div>
+                    </nav>
+  <form [formGroup]="userForm">
+    <div class="mt-5 box">
+      <div class="form-row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Add Product</label>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                placeholder=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Add Product Brand</label>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <input
+                type="text"
+                formControlName="address"
+                class="form-control"
+                placeholder=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Add Material</label>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <input
+                type="text"
+                formControlName="contactNo"
+                class="form-control"
+                placeholder=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Add Quantity</label>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <input
+                type="text"
+                formControlName="gender"
+                class="form-control"
+                placeholder=""
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row mt-4">
+          <div class="col-md-6">
+            <button type="button" class="btn btn-primary" (click)="addItem()">
+              Add
+            </button>
+            <span style="margin-left: 10px;"></span> <!-- Adds 10px margin between the buttons -->
+            <button type="button" class="btn btn-danger" (click)="reset()">
+              Remove
+            </button>
+          </div>
+        </div>
+        
+      </div>
     </div>
-    <section class="section">
-       <div class="container-fluid">
-          <div class="col-lg-12">
-             <div class="card">
-                <div class="card-body">
-                  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                     <div class="container-fluid">
-                       <a class="container-fluid"><strong><b><h1 class="card-title"><strong></strong></h1></b></strong></a>
-                       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                           <li class="nav-item">
-                             <a class="nav-link active" aria-current="page" href="#"></a>
-                           </li>
-                           <li class="nav-item">
-                             <a class="nav-link" href="#"></a>
-                           </li>
-                           </ul>
-                       </div>
-                     </div>
-                   </nav><br>
-                   <div>
-                    <select (change)="toggleTable()">
-                      <option value="">Select an option</option>
-                      <option value="option1">Option 1</option>
-                      <option value="option2">Option 2</option>
-                      <option value="option3">Option 3</option>
-                    </select>
-                    <table *ngIf="showTable">
-                      <thead>
-                        <tr>
-                          <th>Column 1</th>
-                          <th>Column 2</th>
-                          <th>Column 3</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Data 1</td>
-                          <td>Data 2</td>
-                          <td>Data 3</td>
-                        </tr>
-                        <tr>
-                          <td>Data 4</td>
-                          <td>Data 5</td>
-                          <td>Data 6</td>
-                        </tr>
-                        <tr>
-                          <td>Data 7</td>
-                          <td>Data 8</td>
-                          <td>Data 9</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  </div></div></div></div></section></main>
+  </form>
+
+  <div class="col-md-8 mt-4 mb-4">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Product Brand</th>
+          <th>Material</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listData">
+          <td>
+            <span>{{ item.name }}</span>
+          </td>
+          <td>
+            <span>{{ item.address }}</span>
+          </td>
+          <td>
+            <span>{{ item.contactNo }}</span>
+          </td>
+          <td>
+            <span>{{ item.gender }}</span>
+          </td>
+          <td>
+            <button
+              class="btn btn-danger"
+              type="button"
+              (click)="removeItem(item)"
+            >
+              Remove
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+                  </div></div></div></section></main>

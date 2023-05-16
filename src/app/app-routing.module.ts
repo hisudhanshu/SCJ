@@ -14,9 +14,11 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
 import { TestingComponent } from './components/testing/testing.component';
 import { InventoryAddProductsComponent } from './components/inventory-add-products/inventory-add-products.component';
+import { PagesProductComponentComponent } from './components/pages-product-component/pages-product-component.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
+  { path: 'PagesProductComponent', component: PagesProductComponentComponent},
   { path: 'addproduct', component: InventoryAddProductsComponent},
   { path:'testing', component: TestingComponent},
   { path: 'Inventory', component:InventoryDetailsComponent}, 

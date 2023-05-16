@@ -22,6 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InventoryAddProductsComponent } from './components/inventory-add-products/inventory-add-products.component';
 import { CallstoredComponent } from './callstored/callstored.component';
+import { TestingComponent } from './components/testing/testing.component';
+import { PagesProductComponentComponent } from './components/pages-product-component/pages-product-component.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { CallstoredComponent } from './callstored/callstored.component';
     InventoryDetailsComponent,
     InventoryAddProductsComponent,
     CallstoredComponent,
+    TestingComponent,
+    PagesProductComponentComponent,
 
   ],
   imports: [
