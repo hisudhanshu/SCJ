@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ProductService } from './productservice.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,9 +23,7 @@ import { InventoryDetailsComponent } from './components/inventory-details/invent
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InventoryAddProductsComponent } from './components/inventory-add-products/inventory-add-products.component';
-import { CallstoredComponent } from './callstored/callstored.component';
-import { TestingComponent } from './components/testing/testing.component';
-import { PagesProductComponentComponent } from './components/pages-product-component/pages-product-component.component';
+import { TestingComponent } from './components/testing/testing.component';;
 
 @NgModule({
   declarations: [
@@ -44,10 +44,7 @@ import { PagesProductComponentComponent } from './components/pages-product-compo
     InvoiceComponent,
     InventoryDetailsComponent,
     InventoryAddProductsComponent,
-    CallstoredComponent,
     TestingComponent,
-    PagesProductComponentComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -55,9 +52,8 @@ import { PagesProductComponentComponent } from './components/pages-product-compo
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

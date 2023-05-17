@@ -7,14 +7,16 @@ import { baseUrl } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthServicesService {
+  
+  getToken() {
+    throw new Error('Method not implemented.');
+  }
+  static setToken() {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private http:HttpClient) { }
   login(data: any):Observable<any>{
     return this.http.post(`${baseUrl}Authentication/UserLogin`,data);
-  }
-//  Get Product API call Service code start here
-
-  getProduct(data: any):Observable<any>{
-    return this.http.post(``,data);
   }
 }

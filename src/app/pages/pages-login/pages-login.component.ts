@@ -1,8 +1,9 @@
+import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthServicesService } from 'src/app/auth-services.service';
-
+import { SessionStorageService } from 'src/app/shared/services/session-storage.service'; 
 
 @Component({
   selector: 'app-pages-login',
@@ -10,38 +11,41 @@ import { AuthServicesService } from 'src/app/auth-services.service';
   styleUrls: ['./pages-login.component.css']
 })
 export class PagesLoginComponent implements OnInit {
+  formGroup!: FormGroup;
 
-formGroup!: FormGroup;
-constructor( private router: Router, private authServices: AuthServicesService) {}
-ngOnInit(): void {
-  this.initForm();
-}
-initForm(){
-  this.formGroup = new FormGroup({
-    userName: new FormControl("",[Validators.required]),
-    password: new FormControl("",[Validators.required])
-  });
-}
+  constructor(
+    private router: Router,
+    private authServices: AuthServicesService,
+    private sessionStorageService: SessionStorageService
+  ) {}
 
-loginProcess(){
-  // debugger
-
-  if (this.formGroup.valid){
-    this.authServices.login(this.formGroup.value).subscribe(result=>{
-      this.router.navigate((['/dashboard']))
-
-      console.log(result);
-
-      if (result.success){
-        console.log(result);
-        alert(result.message);
-      }
-    
-      else
-      {
-        alert(result.message);
-        } 
-    })
+  ngOnInit(): void {
+    this.initForm();
   }
-}
+
+  initForm() {
+    this.formGroup = new FormGroup({
+      userName: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required])
+    });
+  }
+
+  loginProcess() {
+    if (this.formGroup.valid) {
+      this.authServices.login(this.formGroup.value).subscribe(result => {
+        console.log(result);
+        this.router.navigate(['/dashboard']);
+
+        if (result.success) {
+          this.sessionStorageService.setToken(result.token); // Store token in session storage
+          var authToken = JSON.parse(result.token);
+          console.log(authToken)
+          this.router.navigate(['/dashboard']);
+          alert(result.message);
+        } else {
+          alert(result.message);
+        }
+      });
+    }
+  }
 }
