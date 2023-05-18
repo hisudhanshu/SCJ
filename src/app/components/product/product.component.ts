@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from 'src/app/productservice.service'; 
-import { HttpClient } from '@angular/common/http';
-import { baseUrl1 } from 'src/environments/environment';
+import { NgModule } from '@angular/core';
 
 @Component({
   selector: 'app-product',
@@ -9,75 +7,22 @@ import { baseUrl1 } from 'src/environments/environment';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  products: any[] = [];
+   successMessage: string = '';
 
-  constructor(private productService: ProductService) { }
-  ngOnInit() {
-    // Initialize products array
-    this.fetchProducts();
+  showPopup: boolean = false;
+
+  saveProduct(): void {
+    // Logic to save the product goes here
+
+    // Display the pop-up message
+    this.showPopup = true;
+
+    // Hide the pop-up message after 3 seconds
+    setTimeout(() => {
+      this.showPopup = false;
+    }, 3000);
   }
+  ngOnInit(): void {
 
-  fetchProducts() {
-    this.productService.getProducts().subscribe(
-      (data: any) => {
-        this.products = data;
-        console.log(this.products); // Check if the data is logged correctly
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
   }
 }
-
-//   ngOnInit() {
-//     this.productService.getProducts().subscribe(
-//       (data: any) => {
-//         this.products = data;
-//         console.log(this.products); // Check if the data is logged correctly
-//       },
-//       (error: any) => {
-//         console.error(error);
-//       }
-//     );
-//   }
-// }
-
-
-  
-
-//   products: any[] = [];
-
-//   constructor(private http: HttpClient) { }
-
-//   ngOnInit(): void {
-//     this.getProducts();
-//   }
-
-//   getProducts(): void {
-//     this.http.get<any>('https://localhost:44384/api/Authentication/GetProducts').subscribe(
-//       response => {
-//         this.products = response; 
-//       },
-//       error => {
-//         console.error('Error occurred while fetching products:', error);
-//       }
-//     );
-//   }
-// }
-// products: any[] | undefined;
-
-//   constructor(private authService: AuthServicesService) {}
-
-
-  // getProducts(): void {
-  //   const requestData = {}; // Add your request data here
-  //   this.authService.getProduct(requestData).subscribe(
-  //     (response) => {
-  //       this.products = response;
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }}

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductService } from './productservice.service';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -23,7 +24,7 @@ import { InventoryDetailsComponent } from './components/inventory-details/invent
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InventoryAddProductsComponent } from './components/inventory-add-products/inventory-add-products.component';
-import { TestingComponent } from './components/testing/testing.component';;
+import { TestingComponent } from './components/testing/testing.component';
 
 @NgModule({
   declarations: [

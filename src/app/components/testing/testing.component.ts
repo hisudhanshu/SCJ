@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -8,37 +7,55 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./testing.component.css']
 })
 export class TestingComponent implements OnInit {
- 
-  userForm: FormGroup;
-  listData: any;
+  
+  successMessage: string = '';
+  selectedCategory: string = '';
+  selectedSubcategory: string = '';
 
-  constructor(private fb: FormBuilder) {
-    this.listData = [];
+  categories: string[] = ['Category 1', 'Category 2', 'Category 3'];
+  subcategories: string[] = [];
 
-    this.userForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      contactNo: ['', Validators.required],
-      gender: ['', Validators.required],
-    });
+  addProduct(): void {
+    // Your logic to add the product here
+
+    // Show success message
+    this.successMessage = 'Product added successfully';
+
+    // Reset dropdown values
+    this.selectedCategory = '';
+    this.selectedSubcategory = '';
   }
 
-  public addItem(): void {
-    this.listData.push(this.userForm.value);
-    this.userForm.reset();
+  onCategoryChange(): void {
+    // Logic to update subcategories based on the selected category
+    // For simplicity, let's assume the subcategories are hard-coded here
+    if (this.selectedCategory === 'Category 1') {
+      this.subcategories = ['Subcategory 1.1', 'Subcategory 1.2'];
+    } else if (this.selectedCategory === 'Category 2') {
+      this.subcategories = ['Subcategory 2.1', 'Subcategory 2.2', 'Subcategory 2.3'];
+    } else if (this.selectedCategory === 'Category 3') {
+      this.subcategories = ['Subcategory 3.1'];
+    } else {
+      this.subcategories = [];
+    }
+
+    // Reset selected subcategory
+    this.selectedSubcategory = '';
   }
 
-  reset() {
-    this.userForm.reset();
-  }
+  ngOnInit(): void {
+    
+  }  } 
 
-  removeItem(element: any) {
-    this.listData.forEach((value: any, index: any) => {
-      if (value == element) {
-        this.listData.splice(index, 1);
-      }
-    });
-  }
+  //  selectedOption1: string | undefined;
+  // selectedOption2: string | undefined;
 
-  ngOnInit() {}
-}
+  // save() {
+  //   console.log('Selected Option 1:', this.selectedOption1);
+  //   console.log('Selected Option 2:', this.selectedOption2);
+  //   // Replace with your saving logic for both dropdown values
+
+  //   // Reset the dropdown values if needed
+  //   this.selectedOption1 = '';
+  //   this.selectedOption2 = '';
+  // }
