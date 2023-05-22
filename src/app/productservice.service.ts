@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { baseUrl1 } from 'src/environments/environment';
 
+
 // const API_URL = 'https://localhost:44384/api/Authentication/GetProducts';
 
 
@@ -20,11 +21,8 @@ export class ProductService {
   getProducts()
   {
 
-    let url=this.urlprefix+"api/Authentication/GetProducts"
+    let url=this.urlprefix+"/api/Authentication/GetProducts"
 
     return this.http.get(url,{ headers: this.header });
   }
-
-
 }
-

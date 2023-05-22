@@ -13,12 +13,10 @@ import { ProductComponent } from './components/product/product.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
 import { TestingComponent } from './components/testing/testing.component';
-import { InventoryAddProductsComponent } from './components/inventory-add-products/inventory-add-products.component';;
 
 
 const routes: Routes = [
   { path: '', component: PagesLoginComponent },
-  { path: 'addproduct', component: InventoryAddProductsComponent},
   { path:'testing', component: TestingComponent},
   { path: 'Inventory', component:InventoryDetailsComponent}, 
   { path: 'invoice', component: InvoiceComponent},

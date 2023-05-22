@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
-import { ProductService } from 'src/app/productservice.service';
+import { ProductService } from 'src/app/productservice.service'; 
 
 @Component({
   selector: 'app-product',
@@ -9,9 +9,10 @@ import { ProductService } from 'src/app/productservice.service';
 })
 export class ProductComponent implements OnInit {
   products: any[] = [];
-   successMessage: string = '';
+  successMessage: string = '';
 
   constructor(private productService: ProductService) { }
+
   ngOnInit() {
     // Initialize products array
     this.fetchProducts();
@@ -29,6 +30,7 @@ export class ProductComponent implements OnInit {
     );
   }
 }
+
 
 //   ngOnInit() {
 //     this.productService.getProducts().subscribe(

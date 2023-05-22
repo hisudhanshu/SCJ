@@ -23,7 +23,6 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { InventoryAddProductsComponent } from './components/inventory-add-products/inventory-add-products.component';
 import { TestingComponent } from './components/testing/testing.component';
 
 @NgModule({
@@ -44,7 +43,6 @@ import { TestingComponent } from './components/testing/testing.component';
     ProductComponent,
     InvoiceComponent,
     InventoryDetailsComponent,
-    InventoryAddProductsComponent,
     TestingComponent,
   ],
   imports: [
