@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { ProductService } from 'src/app/productservice.service';
 
 @Component({
   selector: 'app-product',
@@ -7,22 +8,55 @@ import { NgModule } from '@angular/core';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
+  products: any[] = [];
    successMessage: string = '';
 
-  showPopup: boolean = false;
-
-  saveProduct(): void {
-    // Logic to save the product goes here
-
-    // Display the pop-up message
-    this.showPopup = true;
-
-    // Hide the pop-up message after 3 seconds
-    setTimeout(() => {
-      this.showPopup = false;
-    }, 3000);
+  constructor(private productService: ProductService) { }
+  ngOnInit() {
+    // Initialize products array
+    this.fetchProducts();
   }
-  ngOnInit(): void {
 
+  fetchProducts() {
+    this.productService.getProducts().subscribe(
+      (data: any) => {
+        this.products = data;
+        console.log(this.products); // Check if the data is logged correctly
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 }
+
+//   ngOnInit() {
+//     this.productService.getProducts().subscribe(
+//       (data: any) => {
+//         this.products = data;
+//         console.log(this.products); // Check if the data is logged correctly
+//       },
+//       (error: any) => {
+//         console.error(error);
+//       }
+//     );
+//   }
+// }
+
+//   constructor(private http: HttpClient) { }
+
+//   ngOnInit(): void {
+//     this.getProducts();
+//   }
+
+//   getProducts(): void {
+//     this.http.get<any>('https://localhost:44384/api/Authentication/GetProducts').subscribe(
+//       response => {
+//         this.products = response; 
+//       },
+//       error => {
+//         console.error('Error occurred while fetching products:', error);
+//       }
+//     );
+//   }
+// }
