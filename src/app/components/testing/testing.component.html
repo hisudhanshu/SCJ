@@ -1,135 +1,113 @@
 <main id="main" class="main">
   <div class="pagetitle">
-     </div>
-     <section class="section">
-        <div class="container-fluid">
-           <div class="col-lg-12">
-              <div class="card">
-                 <div class="card-body">
-                   <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                      <div class="container-fluid">
-                        <a class="container-fluid"><strong><b><h1 class="card-title"><strong>Product Master</strong></h1></b></strong></a>
-                      </div>
-                    </nav>
-  <form [formGroup]="userForm">
-    <div class="mt-5 box">
-      <div class="form-row">
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>Add Product</label>
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <input
-                type="text"
-                formControlName="name"
-                class="form-control"
-                placeholder=""
-              />
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>Add Product Brand</label>
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <input
-                type="text"
-                formControlName="address"
-                class="form-control"
-                placeholder=""
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>Add Material</label>
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <input
-                type="text"
-                formControlName="contactNo"
-                class="form-control"
-                placeholder=""
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-12">
-          <div class="form-group">
-            <label>Add Quantity</label>
-          </div>
-          <div class="form-row">
-            <div class="col">
-              <input
-                type="text"
-                formControlName="gender"
-                class="form-control"
-                placeholder=""
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row mt-4">
-          <div class="col-md-6">
-            <button type="button" class="btn btn-primary" (click)="addItem()">
-              Add
-            </button>
-            <span style="margin-left: 10px;"></span> <!-- Adds 10px margin between the buttons -->
-            <button type="button" class="btn btn-danger" (click)="reset()">
-              Remove
-            </button>
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </form>
-
-  <div class="col-md-12 mt-4 mb-4">
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Product</th>
-          <th>Product Brand</th>
-          <th>Material</th>
-          <th>Quantity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of listData">
-          <td>
-            <span>{{ item.name }}</span>
-          </td>
-          <td>
-            <span>{{ item.address }}</span>
-          </td>
-          <td>
-            <span>{{ item.contactNo }}</span>
-          </td>
-          <td>
-            <span>{{ item.gender }}</span>
-          </td>
-          <td>
-            <button
-              class="btn btn-danger"
-              type="button"
-              (click)="removeItem(item)"
-            >
-              Remove
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
+  <section class="section">
+     <div class="container-fluid">
+        <div class="col-lg-12">
+           <div class="card">
+              <div class="card-body">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                   <div class="container-fluid">
+                     <a class="container-fluid"><strong><b><h1 class="card-title"><strong>Add Products</strong></h1></b></strong></a>
+                   </div>
+                  </nav>
+
+                 <form>
+                  <div class="row">
+                     <div class="col-xl-12">
+                         <form class="ng-pristine ng-valid">
+                         <div class="row main-form-wrapper">
+                             <div class="col-md-6"><br>
+                                                  <label>Category</label>
+                                                  <select class="form-select" aria-label="Default select example">
+                                                   <option selected>Select</option>
+                                                   <option value="1">Plastic Products</option>
+                                                   <option value="2">Plastic Bottles</option>
+                                                   <option value="3">Plastic Cutlery</option>
+                                                   <option value="4">Plastic Hangers</option>
+                                                   <option value="5">Plastic Outdoor</option>
+                                                </select>
+                                              </div>
+                                              <div class="col-md-6"><br>
+                                                  <label>Product Brand</label>
+                                                  <select class="form-select" aria-label="Default select example">
+                                                     <option selected>Select</option>
+                                                     <option value="1">PlastiWave</option>
+                                                     <option value="2">PolyGlide</option>
+                                                     <option value="3">FlexiPlast</option>
+                                                     <option value="4">DuraBlend</option>
+                                                     <option value="5">EverPlast</option>
+                                                  </select>
+                                              </div>
+                                              <div class="col-md-6"><br><br>
+                                                <label>Product</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                   <option selected>Select</option>
+                                                   <option value="1">Bottles</option>
+                                                   <option value="2">Disposable</option>
+                                                   <option value="3">Baskets</option>
+                                                   <option value="4">Water Bottles</option>
+                                                   <option value="5">Spoons</option>  
+                                                </select>
+                                            </div>
+                                              <div class="col-md-6"><br><br>
+                                                <label>Product Type</label>
+                                                <select class="form-select" aria-label="Default select example">
+                                                   <option selected>Select</option>
+                                                   <option value="1">Small</option>
+                                                   <option value="2">Normal</option>
+                                                   <option value="3">Large</option>
+                                                   <option value="4">Extra Large</option>
+                                                   <option value="5">Extra Small</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6"><br><br>
+                                              <label>Material</label>
+                                              <select class="form-select" aria-label="Default select example">
+                                                 <option selected>Select</option>
+                                                 <option value="1">Polyethylene</option>
+                                                 <option value="2">Polycarbonate</option>
+                                                 <option value="3">Nylon</option>
+                                                 <option value="4">Butadiene Styrene</option>
+                                                 <option value="5">Polyvinyl Chloride</option>
+                                              </select>
+                                            </div>
+                                            <div class="col-md-6"><br><br>
+                                              <label>Quantity</label>
+                                              <input type="number" ng-model="validity" name="plan-validity-days" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Enter Quantity" id="txtvalidity">
+                                            </div>  
+                 <div>
+
+  
+
+                  <!-- <div class="col-md-6"><br>
+                    <label for="category">Product</label>
+    <select  class="form-select" aria-label="Default select example" id="category" [(ngModel)]="selectedCategory" (ngModelChange)="onCategoryChange()">
+      <option value="">Select</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+  </div> -->
+
+  <!-- <div class="col-md-6"><br>
+    <label for="subcategory">Material</label>
+    <select  class="form-select" aria-label="Default select example"id="subcategory" [(ngModel)]="selectedSubcategory">
+      <option value="">Select subcategory</option>
+      <option *ngFor="let subcategory of subcategories" [value]="subcategory">{{ subcategory }}</option>
+    </select>
+  </div> -->
+  
+  <div>
+    <br>
+    <br><br>
+    <strong>
+    <button type="submit" class="btn btn-danger mr-md-3 mb-2 mb-md-0 ro" (click)="addProduct()">Save</button>
+    </strong>
+    <strong>
+      <button type="submit" class="btn btn-secondary mr-md-3 mb-2 mb-md-0" style="margin-left: 10px;">Reset</button>
+    </strong>
+  </div><br>
+  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
 </div>
 
-                  </div></div></div></section></main>
+<div *ngIf="successMessage" class="success-message-top">{{ successMessage }}</div></div></form></div></div></form>
+              </div></div></div></div></section></main>
