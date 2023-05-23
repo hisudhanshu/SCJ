@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { ProductService } from 'src/app/productservice.service'; 
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product',
@@ -19,17 +20,21 @@ export class ProductComponent implements OnInit {
   }
 
   fetchProducts() {
-    this.productService.getProducts().subscribe(
-      (data: any) => {
-        this.products = data;
-        console.log(this.products); // Check if the data is logged correctly
-      },
-      (error: any) => {
-        console.log(error);
-      }
-    );
-  }
-}
+    this.productService.getProducts()
+      .pipe(
+        tap((data: any) => {
+          console.log('API Response:', data);
+        })
+      )
+      .subscribe(
+        (data: any) => {
+          this.products = data;
+        },
+        (error: any) => {
+          console.log('API Error:', error);
+        }
+      );
+  }}
 
 
 //   ngOnInit() {
