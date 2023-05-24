@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { ProductService } from 'src/app/productservice.service'; 
+import { ProductService } from 'src/app/productservice.service';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -9,7 +8,7 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
-  products: any[] = [];
+  productsJson: any[] = [];
   successMessage: string = '';
 
   constructor(private productService: ProductService) { }
@@ -28,10 +27,11 @@ export class ProductComponent implements OnInit {
       )
       .subscribe(
         (data: any) => {
-          this.products = data;
+          this.productsJson = data.product as any[];
         },
         (error: any) => {
           console.log('API Error:', error);
         }
       );
-  }}
+  }
+}
