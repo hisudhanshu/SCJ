@@ -2,7 +2,7 @@ import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators, } from '@angular/forms';
 import { Route, Router } from '@angular/router';
-import { AuthServicesService } from 'src/app/auth-services.service';
+import { AuthServicesService } from 'src/app/Service/auth-services.service'; 
 
 
 @Component({

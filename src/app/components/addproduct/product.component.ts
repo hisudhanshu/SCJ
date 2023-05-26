@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
-import { ProductService } from 'src/app/productservice.service'; 
+import { ProductService } from 'src/app/Service/productservice.service'; 
 import { tap } from 'rxjs/operators';
 
 @Component({

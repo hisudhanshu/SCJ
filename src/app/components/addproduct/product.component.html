@@ -30,28 +30,28 @@
             <br>
             <div class="row">
               <div class="col-md-6">
-                <label for="name">NAME:</label>
+                <label for="name">Name</label>
                 <select id="name" class="form-select" aria-label="Default select example">
                   <option value="">Select</option>
                   <option *ngFor="let product of products" [value]="product.name">{{product["name"]}}</option>
                 </select>
               </div>
               <div class="col-md-6">
-                <label for="quantity">Quantity:</label>
+                <label for="quantity">Quantity</label>
                 <select id="quantity" class="form-select" aria-label="Default select example">
                   <option selected>Select</option>
                   <option *ngFor="let product of products" [value]="product.quantity">{{ product.quantity }}</option>
                 </select>
               </div>
-              <div class="col-md-6">
-                <label for="inStock">Price:</label>
+              <div class="col-md-6"><br>
+                <label for="inStock">Price</label>
                 <select class="form-select" aria-label="Default select example">
                   <option selected>Select</option>
                   <option *ngFor="let product of products" [value]="product.price">{{ product.price }}</option>
                 </select>
               </div>
-              <div class="col-md-6">
-                <label for="inStock">InStock:</label>
+              <div class="col-md-6"><br>
+                <label for="inStock">InStock</label>
                 <select class="form-select" aria-label="Default select example">
                   <option selected>Select</option>
                   <option *ngFor="let product of products" [value]="product.inStock">{{ product.inStock }}</option>
@@ -60,7 +60,7 @@
             </div>
             <div>
               <br>
-              <br>
+              <br><br>
               <strong>
                 <button type="submit" class="btn btn-danger mr-md-3 mb-2 mb-md-0">Save</button>
               </strong>

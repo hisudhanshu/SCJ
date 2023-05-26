@@ -1,11 +1,11 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'app-charts-chartjs',
-  templateUrl: './charts-chartjs.component.html',
-  styleUrls: ['./charts-chartjs.component.css']
+  selector: 'app-charts',
+  templateUrl: './charts.component.html',
+  styleUrls: ['./charts.component.css']
 })
-export class ChartsChartjsComponent implements OnInit {
+export class ChartsComponent implements OnInit {
 
   constructor(private elementRef: ElementRef) { }
 
