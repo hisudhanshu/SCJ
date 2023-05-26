@@ -34,6 +34,7 @@ import { ProductMasterComponent } from './components/masters/product-master/prod
 
 const routes: Routes = [
   { path: '', component: PagesLoginComponent },
+  { path: 'addproduct', component: ProductComponent},
   { path: 'reporting', component: MonthlyReportsComponent },
   { path: 'insights', component: InsightsComponent },
   { path: 'import', component: ImportComponent},
