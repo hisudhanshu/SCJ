@@ -12,7 +12,6 @@ import { UsersProfileComponent } from './pages/users-profile/users-profile.compo
 import { ProductComponent } from './components/addproduct/product.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
-import { TestingComponent } from './components/testing/testing.component';
 import { RecipeCreateComponent } from './components/Recipe/recipe-create/recipe-create.component';
 import { RecipeEditComponent } from './components/Recipe/recipe-edit/recipe-edit.component';
 import { CostComponent } from './components/cost/cost/cost.component';
@@ -50,7 +49,6 @@ const routes: Routes = [
   { path: 'price', component: PricingComponent },
   { path: 'recipe', component: RecipeCreateComponent },
   { path: 'editrecipe', component: RecipeEditComponent },
-  { path: 'testing', component: TestingComponent },
   { path: 'Inventory', component: InventoryDetailsComponent },
   { path: 'invoice', component: InvoiceComponent },
   { path: 'productmaster', component: ProductComponent },

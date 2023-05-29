@@ -1,1 +1,78 @@
-<p>raw-master works!</p>
+<main id="main" class="main">
+    <div class="pagetitle">
+    </div>
+    <section class="section">
+        <div class="container-fluid">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                            <div class="container-fluid">
+                                <a class="container-fluid">
+                                    <strong>
+
+                                        <h2 class="card-title"><strong>Raw Material</strong></h2>
+
+                                    </strong>
+                                </a>
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="#"></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                        <br>
+                        <div class="container">
+                            <form>
+                                <div class="form-group">
+                                    <label for="materialID">Material ID/Code:</label>
+                                    <input type="text" class="form-control" id="materialID" name="materialID" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="materialName">Material Name:</label>
+                                    <input type="text" class="form-control" id="materialName" name="materialName"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="materialType">Material Type:</label>
+                                    <select class="form-control" id="materialType" name="materialType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Type 1">Type 1</option>
+                                        <option value="Type 2">Type 2</option>
+                                        <option value="Type 3">Type 3</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="currentCost">Current Cost:</label>
+                                    <input type="number" class="form-control" id="currentCost" name="currentCost"
+                                        step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vendorInfo">Vendor/Supplier Information:</label>
+                                    <textarea class="form-control" id="vendorInfo" name="vendorInfo" rows="4"
+                                        required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inventoryLevel">Inventory Level:</label>
+                                    <input type="number" class="form-control" id="inventoryLevel" name="inventoryLevel">
+                                </div><br><strong>
+                                    <button type="submit" class="btn btn-danger mr-md-3 mb-2 mb-md-0">Save</button>
+                                </strong>
+                                <strong>
+                                    <button type="submit" class="btn btn-secondary mr-md-3 mb-2 mb-md-0"
+                                        style="margin-left: 10px;">Reset</button>
+                                </strong>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

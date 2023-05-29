@@ -22,7 +22,6 @@ import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TestingComponent } from './components/testing/testing.component';
 import { RecipeCreateComponent } from './components/Recipe/recipe-create/recipe-create.component';
 import { RecipeEditComponent } from './components/Recipe/recipe-edit/recipe-edit.component';
 import { CostAdjustmentComponent } from './components/cost/cost-adjustment/cost-adjustment.component';
@@ -52,7 +51,6 @@ import { ProductMaterialComponent } from './components/material/product-material
     ProductComponent,
     InvoiceComponent,
     InventoryDetailsComponent,
-    TestingComponent,
     RecipeCreateComponent,
     RecipeEditComponent,
     CostAdjustmentComponent,

@@ -30,17 +30,28 @@
                             </div>
                         </nav>
                         <form>
-                            <label for="pricing-determination">Pricing Determination:</label>
-                            <select id="pricing-determination">
-                                <option value="b2b">B2B</option>
-                                <option value="b2c">B2C</option>
-                                <option value="direct">Direct</option>
-                            </select>
-
-                            <label for="calculated-costs">Calculated Costs:</label>
-                            <input type="number" id="calculated-costs" placeholder="Enter calculated costs" />
-
-                            <button type="submit">Submit</button>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="pricing-determination">Pricing Determination:</label>
+                                    <select id="pricing-determination" class="form-select" aria-label="Default select example">
+                                        <option value="">Select</option>
+                                        <option value="b2b">B2B</option>
+                                        <option value="b2c">B2C</option>
+                                        <option value="direct">Direct</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="calculated-costs">Calculated Costs:</label>
+                                    <div class="input-group">
+                                        <input type="number" id="calculated-costs" class="form-control" placeholder="Enter calculated costs" />
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <button class="btn-primary" type="submit">Submit</button>
                         </form>
                     </div>
                 </div>
