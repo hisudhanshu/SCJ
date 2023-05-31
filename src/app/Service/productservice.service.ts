@@ -21,7 +21,7 @@ export class ProductService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
-
+    
     let url = this.urlprefix + "api/Authentication/GetProducts";
     return this.http.get(url, { headers: headers });
   }

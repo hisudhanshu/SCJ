@@ -1,26 +1,75 @@
 <aside id="sidebar" class="sidebar">
    <ul class="sidebar-nav" id="sidebar-nav">
-      <li class="nav-item">
+      <!-- <li class="nav-item">
          <a class="nav-link" routerLink="/dashboard">
             <i class="bi bi-grid"></i>
             <span>Dashboard</span>
          </a>
+      </li> -->
+      <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#material-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-menu-button-wide"></i>
+            <span>Material Master</span>
+            <i class="bi bi-chevron-down ms-auto"></i>
+         </a>
+         <ul id="material-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+               <a routerLink="/rawmaterial">
+                  <i class="bi bi-circle"></i>
+                  <span>Raw Material</span>
+               </a>
+            </li>
+            <li>
+               <a routerLink="/productmaterial">
+                  <i class="bi bi-circle"></i>
+                  <span>Product Material</span>
+               </a>
+            </li>
+         </ul>
       </li>
       <li class="nav-item">
          <a class="nav-link collapsed" data-bs-target="#products-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-plus-square"></i>
-            <span>Products</span>
+            <span>Master</span>
             <i class="bi bi-chevron-down ms-auto"></i>
          </a>
          <ul id="products-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            
             <li>
-               <a routerLink="/addproduct">
+               <a routerLink="/rawmaster">
+                  <i class="bi bi-circle"></i>
+                  <span>Raw Master</span>
+               </a>
+            </li>
+            <li>
+               <a routerLink="/productmaster">
+                  <i class="bi bi-circle"></i>
+                  <span>Products Master</span>
+               </a>
+            </li>
+            <li>
+               <a routerLink="/mapproduct">
+                  <i class="bi bi-circle"></i>
+                  <span>Map Products</span>
+               </a>
+            </li>
+         </ul>
+      </li>
+      <!-- <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#productsadd-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-plus-square"></i>
+            <span>Add Products</span>
+            <i class="bi bi-chevron-down ms-auto"></i>
+         </a>
+         <ul id="productsadd-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+               <a routerLink="/productadd">
                   <i class="bi bi-circle"></i>
                   <span>Add Products</span>
                </a>
             </li>
          </ul>
-      </li>
+      </li> -->
       <li class="nav-item">
          <a class="nav-link collapsed" data-bs-target="#cost-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-layers"></i>
@@ -44,27 +93,6 @@
                <a routerLink="/price">
                   <i class="bi bi-circle"></i>
                   <span>Pricing</span>
-               </a>
-            </li>
-         </ul>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link collapsed" data-bs-target="#material-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-menu-button-wide"></i>
-            <span>Material Managment</span>
-            <i class="bi bi-chevron-down ms-auto"></i>
-         </a>
-         <ul id="material-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            <li>
-               <a routerLink="/rawmaterial">
-                  <i class="bi bi-circle"></i>
-                  <span>Raw Material</span>
-               </a>
-            </li>
-            <li>
-               <a routerLink="/productmaterial">
-                  <i class="bi bi-circle"></i>
-                  <span>Product Material</span>
                </a>
             </li>
          </ul>
@@ -99,31 +127,19 @@
             </li>
          </ul>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
          <a class="nav-link collapsed" data-bs-target="#masters-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-cpu"></i>
             <span>Masters</span>
             <i class="bi bi-chevron-down ms-auto"></i>
          </a>
          <ul id="masters-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-            <li>
-               <a routerLink="/rawmaster">
-                  <i class="bi bi-circle"></i>
-                  <span>Raw Master</span>
-               </a>
-            </li>
-            <li>
-               <a routerLink="/productmaster">
-                  <i class="bi bi-circle"></i>
-                  <span>Products Masters</span>
-               </a>
-            </li>
          </ul>
-      </li>
+      </li> -->
       <li class="nav-item">
          <a class="nav-link collapsed" data-bs-target="#recipe-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-receipt"></i>
-            <span>Recipe Management</span>
+            <span>Recipe</span>
             <i class="bi bi-chevron-down ms-auto"></i>
          </a>
          <ul id="recipe-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
@@ -144,7 +160,7 @@
       <li class="nav-item">
          <a class="nav-link collapsed" data-bs-target="#reports-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-safe"></i>
-            <span>Reporting & Analytics</span>
+            <span>Reporting</span>
             <i class="bi bi-chevron-down ms-auto"></i>
          </a>
          <ul id="reports-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
@@ -160,15 +176,6 @@
                   <span>Insights and Analytics</span>
                </a>
             </li>
-         </ul>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link collapsed" data-bs-target="#gap-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-ui-radios-grid"></i>
-            <span>Gap Analysis</span>
-            <i class="bi bi-chevron-down ms-auto"></i>
-         </a>
-         <ul id="gap-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
                <a routerLink="/identification">
                   <i class="bi bi-circle"></i>
@@ -183,6 +190,17 @@
             </li>
          </ul>
       </li>
+      <!-- <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#gap-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-ui-radios-grid"></i>
+            <span>Gap Analysis</span>
+            <i class="bi bi-chevron-down ms-auto"></i>
+         </a>
+         <ul id="gap-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+           
+            
+         </ul>
+      </li> -->
       <li class="nav-item">
          <a class="nav-link collapsed" data-bs-target="#visualization-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-bar-chart"></i>
@@ -202,15 +220,6 @@
                   <span>Sales Charts</span>
                </a>
             </li>
-         </ul>
-      </li>
-      <li class="nav-item">
-         <a class="nav-link collapsed" data-bs-target="#reconciliation-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-speedometer2"></i>
-            <span>Data Reconciliation</span>
-            <i class="bi bi-chevron-down ms-auto"></i>
-         </a>
-         <ul id="reconciliation-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
             <li>
                <a routerLink="/import">
                   <i class="bi bi-circle"></i>
@@ -225,6 +234,16 @@
             </li>
          </ul>
       </li>
+      
+      <!-- <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#reconciliation-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-speedometer2"></i>
+            <span>Data Reconciliation</span>
+            <i class="bi bi-chevron-down ms-auto"></i>
+         </a>
+         <ul id="reconciliation-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+         </ul>
+      </li> -->
       <li class="nav-item">
          <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#"> <i
                class="bi bi-gem"></i><span>Connect us</span><i class="bi bi-chevron-down ms-auto"></i> </a>

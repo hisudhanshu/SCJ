@@ -11,7 +11,7 @@
                 <a class="container-fluid">
                   <strong>
                     <b>
-                      <h1 class="card-title"><strong>Add Products</strong></h1>
+                      <h1 class="card-title"><strong>Map Products</strong></h1>
                     </b>
                   </strong>
                 </a>
@@ -30,7 +30,7 @@
             <br>
             <div class="row">
               <div class="col-md-6">
-                <label for="name">Name</label>
+                <label for="name">Products</label>
                 <select id="name" class="form-select" aria-label="Default select example">
                   <option value="">Select</option>
                   <option *ngFor="let product of products" [value]="product.name">{{product["name"]}}</option>

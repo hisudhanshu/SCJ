@@ -9,7 +9,7 @@ import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
-import { ProductComponent } from './components/addproduct/product.component';
+import { ProductComponent } from './components/addproduct/product.component'; 
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
 import { RecipeCreateComponent } from './components/Recipe/recipe-create/recipe-create.component';
@@ -27,13 +27,15 @@ import { RawMaterialComponent } from './components/material/raw-material/raw-mat
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
 import { RawMasterComponent } from './components/masters/raw-master/raw-master.component';
 import { ProductMasterComponent } from './components/masters/product-master/product-master.component';
+import { ProdcutaddComponent } from './components/productadd/prodcutadd/prodcutadd.component';
 
 
 
 
 const routes: Routes = [
   { path: '', component: PagesLoginComponent },
-  { path: 'addproduct', component: ProductComponent},
+  { path: 'productadd', component: ProdcutaddComponent},
+  { path: 'mapproduct', component: ProductComponent},
   { path: 'reporting', component: MonthlyReportsComponent },
   { path: 'insights', component: InsightsComponent },
   { path: 'import', component: ImportComponent},

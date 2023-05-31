@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductService } from './Service/productservice.service';
-
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -17,7 +16,7 @@ import { PagesRegisterComponent } from './pages/pages-register/pages-register.co
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesError404Component } from './pages/pages-error404/pages-error404.component';
 import { PagesBlankComponent } from './pages/pages-blank/pages-blank.component';
-import { ProductComponent } from './components/addproduct/product.component';
+import { ProductComponent } from './components/addproduct/product.component'; 
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -32,6 +31,7 @@ import { RawMasterComponent } from './components/masters/raw-master/raw-master.c
 import { ProductMasterComponent } from './components/masters/product-master/product-master.component';
 import { RawMaterialComponent } from './components/material/raw-material/raw-material.component';
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
+import { ProdcutaddComponent } from './components/productadd/prodcutadd/prodcutadd.component';
 
 
 @NgModule({
@@ -62,6 +62,7 @@ import { ProductMaterialComponent } from './components/material/product-material
     ProductMasterComponent,
     RawMaterialComponent,
     ProductMaterialComponent,
+    ProdcutaddComponent,
   ],
   imports: [
     BrowserModule,

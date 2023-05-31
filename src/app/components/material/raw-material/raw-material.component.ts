@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServicesService } from 'src/app/Service/auth-services.service';
+
 
 @Component({
   selector: 'app-raw-material',
@@ -6,48 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./raw-material.component.css']
 })
 export class RawMaterialComponent implements OnInit {
-  materials: Material[] = [
-    { name: 'Material 1', supplier: 'Supplier A', quantity: 100 },
-    { name: 'Material 2', supplier: 'Supplier B', quantity: 200 },
-    { name: 'Material 3', supplier: 'Supplier C', quantity: 150 },
-    // Add more initial materials here
-  ];
+  name: string | undefined;
+  // email: string | undefined;
 
-  newMaterial: Material = {
-    name: '',
-    supplier: '',
-    quantity: 0
-  };
+  constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
-    // Initialize any necessary data or perform operations on component initialization
+    // You can remove the line below as it is throwing an error and not implemented
+    // throw new Error('Method not implemented.');
   }
 
-  addMaterial() {
-    if (this.newMaterial.name.trim() !== '' && this.newMaterial.supplier.trim() !== '') {
-      this.materials.push(this.newMaterial);
-      this.newMaterial = {
-        name: '',
-        supplier: '',
-        quantity: 0
-      };
-    }
+  insertData() {
+    const data = { name: this.name };
+    this.authService.insertData(data).subscribe(
+      (response: any) => {
+        console.log('Data inserted successfully:', response);
+        // Reset form values after successful insertion
+        this.name = '';
+        // this.email = '';
+      },
+      (error: any) => {
+        console.error('Error inserting data:', error);
+      }
+    );
   }
-
-  updateMaterial(index: number) {
-    const material = this.materials[index];
-    if (material.name.trim() !== '' && material.supplier.trim() !== '') {
-      // Perform any additional validations or updates here
-    }
-  }
-
-  removeMaterial(index: number) {
-    this.materials.splice(index, 1);
-  }
-}
-
-interface Material {
-  name: string;
-  supplier: string;
-  quantity: number;
 }
