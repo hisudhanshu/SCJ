@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-material',
@@ -7,35 +6,28 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./product-material.component.css']
 })
 export class ProductMaterialComponent implements OnInit {
-
-  userForm: FormGroup;
-  listData: any;
-
-  constructor(private fb: FormBuilder) {
-    this.listData = [];
-
-    this.userForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      contactNo: ['', Validators.required],
-      gender: ['', Validators.required],
-    });
-  }
-  
-  public addItem(): void {
-    this.listData.push(this.userForm.value);
-    this.userForm.reset();
-  }
-  reset() {
-    this.userForm.reset();
-  }
-  removeItem(element: any) {
-    this.listData.forEach((value: any, index: any) => {
-      if (value == element) {
-        this.listData.splice(index, 1);
-      }
-    });
+  ngOnInit(): void {
   }
 
-  ngOnInit() {}
+  rawMaterials: string[] = [];
+  products: { name: string, recipe: string }[] = [];
+  materialName: string = '';
+  productName: string = '';
+  recipe: string = '';
+
+  addMaterial() {
+    if (this.materialName.trim() !== '') {
+      this.rawMaterials.push(this.materialName.trim());
+      this.materialName = '';
+    }
+  }
+
+  addProduct() {
+    if (this.productName.trim() !== '' && this.recipe.trim() !== '') {
+      const product = { name: this.productName.trim(), recipe: this.recipe.trim() };
+      this.products.push(product);
+      this.productName = '';
+      this.recipe = '';
+    }
+  }
 }

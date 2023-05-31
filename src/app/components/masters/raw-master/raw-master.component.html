@@ -2,77 +2,98 @@
     <div class="pagetitle">
     </div>
     <section class="section">
-        <div class="container-fluid">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                            <div class="container-fluid">
-                                <a class="container-fluid">
-                                    <strong>
-
-                                        <h2 class="card-title"><strong>Raw Master</strong></h2>
-
-                                    </strong>
-                                </a>
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" aria-current="page" href="#"></a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </nav>
-                        <br>
-                        <div class="container">
-                            <form>
-                                <div class="form-group">
-                                    <label for="materialID">Material ID/Code:</label>
-                                    <input type="text" class="form-control" id="materialID" name="materialID" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="materialName">Material Name:</label>
-                                    <input type="text" class="form-control" id="materialName" name="materialName"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="materialType">Material Type:</label>
-                                    <select class="form-control" id="materialType" name="materialType" required>
-                                        <option value="">Select Type</option>
-                                        <option value="Type 1">Type 1</option>
-                                        <option value="Type 2">Type 2</option>
-                                        <option value="Type 3">Type 3</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="currentCost">Current Cost:</label>
-                                    <input type="number" class="form-control" id="currentCost" name="currentCost"
-                                        step="0.01" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="vendorInfo">Vendor/Supplier Information:</label>
-                                    <textarea class="form-control" id="vendorInfo" name="vendorInfo" rows="4"
-                                        required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inventoryLevel">Inventory Level:</label>
-                                    <input type="number" class="form-control" id="inventoryLevel" name="inventoryLevel">
-                                </div><br><strong>
-                                    <button type="submit" class="btn btn-danger mr-md-3 mb-2 mb-md-0">Save</button>
-                                </strong>
-                                <strong>
-                                    <button type="submit" class="btn btn-secondary mr-md-3 mb-2 mb-md-0"
-                                        style="margin-left: 10px;">Reset</button>
-                                </strong>
-                            </form>
-                        </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h1 class="card-title">Create Raw Material</h1><br>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div>
+                   <!-- Form for creating a new raw material -->
+                   <form (ngSubmit)="createRawMaterial()">
+                    <div class="row">  
+                    <div class="col-md-4">
+                        <label for="materialId">Material ID/Code:</label>
+                        <input type="text" class="form-control" id="materialId" name="materialId" [(ngModel)]="newMaterial.materialId" required><br><br>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="materialName">Material Name:</label>
+                        <input type="text" class="form-control" id="materialName" name="materialName" [(ngModel)]="newMaterial.materialName" required><br><br>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="materialType">Material Type:</label>
+                        <input type="text" class="form-control" id="materialType" name="materialType" [(ngModel)]="newMaterial.materialType" required><br><br>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="currentCost">Current Cost:</label>
+                        <input type="number" class="form-control" id="currentCost" name="currentCost" [(ngModel)]="newMaterial.currentCost" required><br><br>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="inventoryLevel">Inventory Level:</label>
+                        <input type="number" class="form-control" id="inventoryLevel" name="inventoryLevel" [(ngModel)]="newMaterial.inventoryLevel"><br><br>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="vendorInfo">Vendor/Supplier Information:</label>
+                        <textarea id="vendorInfo" class="form-control"name="vendorInfo" [(ngModel)]="newMaterial.vendorInfo" required></textarea><br><br>
+                      </div>
                     </div>
+                    <button class="btn btn-primary" type="submit">Create</button>
+                  </form>
+                <br><br>
+                    
+                    <!-- Table for displaying existing raw materials -->
+                    <h5>Raw Materials List</h5>
+                    <table>
+                      <tr>
+                        <th>Material ID/Code</th>
+                        <th>Material Name</th>
+                        <th>Material Type</th>
+                        <th>Current Cost</th>
+                        <th>Vendor/Supplier Information</th>
+                        <th>Inventory Level</th>
+                        <th>Actions</th>
+                      </tr>
+                      <tr *ngFor="let rawMaterial of rawMaterials">
+                        <td>{{ rawMaterial.materialId }}</td>
+                        <td>{{ rawMaterial.materialName }}</td>
+                        <td>{{ rawMaterial.materialType }}</td>
+                        <td>{{ rawMaterial.currentCost }}</td>
+                        <td>{{ rawMaterial.vendorInfo }}</td>
+                        <td>{{ rawMaterial.inventoryLevel }}</td>
+                        <td>
+                          <button class="btn btn-primary" (click)="editRawMaterial(rawMaterial)">Edit</button>
+                          <button class="btn btn-danger" (click)="deleteRawMaterial(rawMaterial)">Delete</button>
+                        </td>
+                      </tr>
+                    </table>
+                    
+                    <!-- Edit form -->
+                    <!-- <div *ngIf="editingMaterial">
+                      <h2>Edit Raw Material</h2>
+                      <form (ngSubmit)="updateRawMaterial()">
+                        <label for="editMaterialId">Material ID/Code:</label>
+                        <input type="text" id="editMaterialId" name="editMaterialId" [(ngModel)]="editingMaterial.materialId" required><br><br>
+                    
+                        <label for="editMaterialName">Material Name:</label>
+                        <input type="text" id="editMaterialName" name="editMaterialName" [(ngModel)]="editingMaterial.materialName" required><br><br>
+                    
+                        <label for="editMaterialType">Material Type:</label>
+                        <input type="text" id="editMaterialType" name="editMaterialType" [(ngModel)]="editingMaterial.materialType" required><br><br>
+                    
+                        <label for="editCurrentCost">Current Cost:</label>
+                        <input type="number" id="editCurrentCost" name="editCurrentCost" [(ngModel)]="editingMaterial.currentCost" required><br><br>
+                    
+                        <label for="editVendorInfo">Vendor/Supplier Information:</label>
+                        <textarea id="editVendorInfo" name="editVendorInfo" [(ngModel)]="editingMaterial.vendorInfo" required></textarea><br><br>
+                    
+                        <label for="editInventoryLevel">Inventory Level:</label>
+                        <input type="number" id="editInventoryLevel" name="editInventoryLevel" [(ngModel)]="editingMaterial.inventoryLevel"><br><br>
+                    
+                        <button type="submit">Update</button>
+                        <button type="button" (click)="cancelEdit()">Cancel</button>
+                      </form>
+                    </div> -->
+                    
                 </div>
-            </div>
-        </div>
-    </section>
-</main>
+            </div></div></div></div></div></div></section></main>
