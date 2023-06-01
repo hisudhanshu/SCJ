@@ -12,39 +12,39 @@
              
                 <form>
                   <div class="row">  
+                    <!-- <div class="col-md-4">
+                      <label for="productID">Product ID/Code</label>
+                      <input type="text" class="form-control" placeholder="Enter id" id="productID" name="productID" required [(ngModel)]="newProduct.productID"><br>
+                    </div> -->
+
                     <div class="col-md-4">
-                      <label for="productID">Product ID/Code:</label>
-                      <input type="text" class="form-control" id="productID" name="productID" required [(ngModel)]="newProduct.productID"><br>
+                      <label for="productName">Product Name</label>
+                      <input type="text" class="form-control" placeholder="Enter product" id="productName" name="productName" required [(ngModel)]="newProduct.productName"><br>
                     </div>
 
                     <div class="col-md-4">
-                      <label for="productName">Product Name:</label>
-                      <input type="text" class="form-control" id="productName" name="productName" required [(ngModel)]="newProduct.productName"><br>
+                      <label for="productCategory">Product Category</label>
+                      <input type="text" class="form-control" placeholder="Enter Category" id="productCategory" name="productCategory" required [(ngModel)]="newProduct.productCategory"><br>
                     </div>
 
                     <div class="col-md-4">
-                      <label for="productCategory">Product Category:</label>
-                      <input type="text" class="form-control" id="productCategory" name="productCategory" required [(ngModel)]="newProduct.productCategory"><br>
+                      <label for="brand">Brand</label>
+                      <input type="text" class="form-control" placeholder="Enter Brand" id="brand" name="brand" required [(ngModel)]="newProduct.brand"><br>
                     </div>
 
                     <div class="col-md-4">
-                      <label for="brand">Brand:</label>
-                      <input type="text" class="form-control" id="brand" name="brand" required [(ngModel)]="newProduct.brand"><br>
+                      <label for="customerName">Customer Name</label>
+                      <input type="text" class="form-control" placeholder="Enter Name" id="customerName" name="customerName" required [(ngModel)]="newProduct.customerName"><br>
                     </div>
 
                     <div class="col-md-4">
-                      <label for="customerName">Customer Name:</label>
-                      <input type="text" class="form-control" id="customerName" name="customerName" required [(ngModel)]="newProduct.customerName"><br>
+                      <label for="associatedRecipe">Associated Recipe</label>
+                      <input type="text" class="form-control" placeholder="Enter Recipe" id="associatedRecipe" name="associatedRecipe" required [(ngModel)]="newProduct.associatedRecipe"><br>
                     </div>
 
                     <div class="col-md-4">
-                      <label for="associatedRecipe">Associated Recipe:</label>
-                      <input type="text" class="form-control" id="associatedRecipe" name="associatedRecipe" required [(ngModel)]="newProduct.associatedRecipe"><br>
-                    </div>
-
-                    <div class="col-md-4">
-                      <label for="pricing">Pricing (B2B, B2C, Direct):</label>
-                      <input type="text" class="form-control" id="pricing" name="pricing" required [(ngModel)]="newProduct.pricing"><br>
+                      <label for="pricing">Pricing (B2B, B2C, Direct)</label>
+                      <input type="text" class="form-control" placeholder="Enter" id="pricing" name="pricing" required [(ngModel)]="newProduct.pricing"><br>
                     </div>
                   </div>
                       
@@ -53,7 +53,7 @@
                 <br>
 
                 <!-- Displaying existing products -->
-                <h5>Existing Products</h5>
+                <!-- <h5>Existing Products</h5>
                 <table>
                   <thead>
                     <tr>
@@ -64,8 +64,8 @@
                       <th>Customer Name</th>
                       <th>Associated Recipe</th>
                       <th>Pricing</th>
-                      <th>Actions</th> <!-- New column for delete and edit buttons -->
-                    </tr>
+                      <th>Actions</th> New column for delete and edit buttons -->
+                    <!-- </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let product of products">
@@ -77,16 +77,16 @@
                       <td>{{ product.associatedRecipe }}</td>
                       <td>{{ product.pricing }}</td>
                       <td>
-                        <button class="btn btn-danger" (click)="deleteProduct(product)">Delete</button>
-                        <button class="btn btn-primary" (click)="editProduct(product)">Edit</button>
-                      </td>
+                        <button class="btn btn-danger" (click)="deleteProduct(product)">Delete</button> -->
+                        <!-- <button class="btn btn-primary" (click)="editProduct(product)">Edit</button> -->
+                      <!-- </td>
                     </tr>
                   </tbody>
                 </table>
-                
+                 -->
                 <!-- Show product added message -->
-                <p *ngIf="isProductAdded">Product added successfully!</p>
-                <p *ngIf="!isProductAdded">Product already exists!</p>
+                <!-- <p *ngIf="isProductAdded">Product added successfully!</p>
+                <p *ngIf="!isProductAdded">Product already exists!</p> -->
                 
               </div>
             </div>

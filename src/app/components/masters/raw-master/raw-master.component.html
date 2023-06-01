@@ -13,29 +13,29 @@
                    <!-- Form for creating a new raw material -->
                    <form (ngSubmit)="createRawMaterial()">
                     <div class="row">  
-                    <div class="col-md-4">
-                        <label for="materialId">Material ID/Code:</label>
-                        <input type="text" class="form-control" id="materialId" name="materialId" [(ngModel)]="newMaterial.materialId" required><br><br>
+                    <!-- <div class="col-md-4">
+                        <label for="materialId">Material ID/Code</label>
+                        <input type="text" class="form-control" placeholder="Enter Material" id="materialId" name="materialId" [(ngModel)]="newMaterial.materialId" required><br><br>
+                      </div> -->
+                      <div class="col-md-4">
+                        <label for="materialName">Material Name</label>
+                        <input type="text" class="form-control" placeholder="Enter Name" id="materialName" name="materialName" [(ngModel)]="newMaterial.materialName" required><br><br>
                       </div>
                       <div class="col-md-4">
-                        <label for="materialName">Material Name:</label>
-                        <input type="text" class="form-control" id="materialName" name="materialName" [(ngModel)]="newMaterial.materialName" required><br><br>
+                        <label for="materialType">Material Type</label>
+                        <input type="text" class="form-control" placeholder="Enter Type" id="materialType" name="materialType" [(ngModel)]="newMaterial.materialType" required><br><br>
                       </div>
                       <div class="col-md-4">
-                        <label for="materialType">Material Type:</label>
-                        <input type="text" class="form-control" id="materialType" name="materialType" [(ngModel)]="newMaterial.materialType" required><br><br>
+                        <label for="currentCost">Current Cost</label>
+                        <input type="number" class="form-control" placeholder="Enter cost" id="currentCost" name="currentCost" [(ngModel)]="newMaterial.currentCost" required><br><br>
                       </div>
                       <div class="col-md-4">
-                        <label for="currentCost">Current Cost:</label>
-                        <input type="number" class="form-control" id="currentCost" name="currentCost" [(ngModel)]="newMaterial.currentCost" required><br><br>
+                        <label for="inventoryLevel">Inventory Level</label>
+                        <input type="number" class="form-control" placeholder="Enter Level" id="inventoryLevel" name="inventoryLevel" [(ngModel)]="newMaterial.inventoryLevel"><br><br>
                       </div>
                       <div class="col-md-4">
-                        <label for="inventoryLevel">Inventory Level:</label>
-                        <input type="number" class="form-control" id="inventoryLevel" name="inventoryLevel" [(ngModel)]="newMaterial.inventoryLevel"><br><br>
-                      </div>
-                      <div class="col-md-4">
-                        <label for="vendorInfo">Vendor/Supplier Information:</label>
-                        <textarea id="vendorInfo" class="form-control"name="vendorInfo" [(ngModel)]="newMaterial.vendorInfo" required></textarea><br><br>
+                        <label for="vendorInfo">Vendor/Supplier Information</label>
+                        <textarea id="vendorInfo" placeholder="Textarea" class="form-control"name="vendorInfo" [(ngModel)]="newMaterial.vendorInfo" required></textarea><br><br>
                       </div>
                     </div>
                     <button class="btn btn-primary" type="submit">Create</button>
@@ -43,7 +43,7 @@
                 <br><br>
                     
                     <!-- Table for displaying existing raw materials -->
-                    <h5>Raw Materials List</h5>
+                    <!-- <h5>Raw Materials List</h5>
                     <table>
                       <tr>
                         <th>Material ID/Code</th>
@@ -66,7 +66,7 @@
                           <button class="btn btn-danger" (click)="deleteRawMaterial(rawMaterial)">Delete</button>
                         </td>
                       </tr>
-                    </table>
+                    </table> -->
                     
                     <!-- Edit form -->
                     <!-- <div *ngIf="editingMaterial">

@@ -1,14 +1,61 @@
 <main id="main" class="main">
-    <div class="pagetitle">
-    </div>
+    <div class="pagetitle"></div>
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h1 class="card-title">Add Product</h1>
+              <h1 class="card-title">Raw Material</h1>
+              <div class="col-md-4">
+                <form class="search-form d-flex align-items-center" method="POST" action="#">
+                  <input class="form-control" id="searchKeyword" [(ngModel)]="searchKeyword" name="query" type="text"
+                    placeholder="Search.." title="Enter search keyword">
+                  <button type="submit" class="btn-primary" (click)="searchMaterials()" title="Search">
+                    <i class="bi bi-search"></i>
+                  </button>
+                </form>
+              </div>
+              <br><br>
+              <div>
+                <div class="col-md-4">
+                  <label for="materialName">Material Name</label><br><br>
+                  <input type="text" class="form-control" id="materialName" placeholder="Enter Material"
+                    [(ngModel)]="newMaterialName">
+                  <br>
+                  <button class="btn-primary" (click)="addMaterial()">Add Material</button>
+                </div>
+              </div>
               <div class="row">
                 <div class="col-lg-12">
-                  <div style="overflow-x:auto;">
-
-                  </div></div></div></div></div></div></div></section></main>
+                  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div><br><br>
+  
+                  <table>
+                    <tr>
+                      <th>Material Name</th>
+                      <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let material of filteredMaterials">
+                      <td>
+                        <span *ngIf="!material.editMode">{{ material.name }}</span>
+                        <input *ngIf="material.editMode" type="text" [(ngModel)]="material.name"
+                          (blur)="updateMaterial(material)" (keyup.enter)="updateMaterial(material)">
+                      </td>
+                      <td>
+                        <button class="btn-primary" (click)="toggleEditMode(material)">
+                          {{ material.editMode ? 'Save' : 'Edit' }}
+                        </button>
+                        <button class="btn-danger" (click)="removeMaterial(material)">Remove</button>
+                      </td>
+                    </tr>
+                  </table>
+  
+                  <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
