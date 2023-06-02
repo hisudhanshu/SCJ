@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgModule } from '@angular/core';
-import { ProductService } from 'src/app/Service/productservice.service'; 
+import { ProductService } from 'src/app/Service/productservice.service';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -10,11 +9,14 @@ import { tap } from 'rxjs/operators';
 })
 export class ProductComponent implements OnInit {
   products: any = [];
-  successMessage: string = '';
+  selectedProduct: string = '';
+  selectedQuantity: number = 0;
+  selectedPrice: number = 0;
+  selectedInStock: boolean = false;
+  savedDataList: any[] = [];
 
   constructor(private productService: ProductService) { }
 
-  
   ngOnInit() {
     // Initialize products array
     this.fetchProducts();
@@ -35,4 +37,28 @@ export class ProductComponent implements OnInit {
           console.log('API Error:', error);
         }
       );
-  }}
+  }
+
+  saveData() {
+    if (this.selectedProduct && this.selectedQuantity && this.selectedPrice && this.selectedInStock) {
+      const savedData = {
+        name: this.selectedProduct,
+        quantity: this.selectedQuantity,
+        price: this.selectedPrice,
+        inStock: this.selectedInStock
+      };
+
+      this.savedDataList.push(savedData);
+      this.resetForm();
+    } else {
+      // Handle validation error or show error message
+    }
+  }
+
+  resetForm() {
+    this.selectedProduct = '';
+    this.selectedQuantity = 0;
+    this.selectedPrice = 0;
+    this.selectedInStock = false;
+  }
+}

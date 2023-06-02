@@ -28,4 +28,10 @@ export class AuthServicesService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${baseUrl}Authentication/InsertRawMaterials`, data, { headers });
   }
+
+  insertProductData(data: any){
+    const url = `${this.apiUrl}`; // Replace with your insert API endpoint
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${baseUrl}Authentication/InsertProduct`, data, { headers });
+  }
 }

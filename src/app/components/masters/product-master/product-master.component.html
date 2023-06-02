@@ -1,6 +1,5 @@
 <main id="main" class="main">
-  <div class="pagetitle">
-  </div>
+  <div class="pagetitle"></div>
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
@@ -9,85 +8,106 @@
             <h1 class="card-title">Product Master</h1><br>
             <div class="row">
               <div class="col-lg-12">
-             
-                <form>
-                  <div class="row">  
-                    <!-- <div class="col-md-4">
-                      <label for="productID">Product ID/Code</label>
-                      <input type="text" class="form-control" placeholder="Enter id" id="productID" name="productID" required [(ngModel)]="newProduct.productID"><br>
-                    </div> -->
+                <div>
+                    <form (ngSubmit)="createProduct()" #productForm="ngForm">
+                      <div class="row">
+                      <div class="col-md-4">
+                        <label for="productName">Product:</label>
+                        <select id="productName" class="form-select" name="productName" [(ngModel)]="newProduct.name"
+                          required>
+                          <option value="">Select</option>
+                          <option value="Bottle">Bottle</option>
+                          <option value="Glass">Glass</option>
+                          <option value="Household plastic">Household plastic</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="productCategory">Product Category:</label>
+                        <select id="productCategory" class="form-select" name="productCategory"
+                          [(ngModel)]="newProduct.category" required>
+                          <option value="">Select</option>
+                          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4">
+                        <label for="productBrand">Brand:</label>
+                        <select id="productBrand" class="form-select" name="productBrand" [(ngModel)]="newProduct.brand"
+                          required>
+                          <option value="">Select</option>
+                          <option value="Tata">Tata</option>
+                          <option value="Indica">Indica</option>
+                          <option value="Govt">Govt</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4"><br>
+                        <label for="customerName">Customer Name:</label>
+                        <select id="customerName" class="form-select" name="customerName"
+                          [(ngModel)]="newProduct.customer" required>
+                          <option value="">Select</option>
+                          <option value="SCJ">SCJ</option>
+                          <option value="Clay">Clay</option>
+                          <option value="Claylogix">Claylogix</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4"><br>
+                        <label for="associatedRecipe">Associated Recipe:</label>
+                        <select id="associatedRecipe" class="form-select" name="associatedRecipe"
+                          [(ngModel)]="newProduct.recipe" required>
+                          <option value="">Select</option>
+                          <option value="Recipe 1">Recipe 1</option>
+                          <option value="Recipe 2">Recipe 2</option>
+                          <option value="Recipe 3">Recipe 3</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4"><br>
+                        <label for="pricing">Pricing:</label>
+                        <select id="pricing" class="form-select" name="pricing" [(ngModel)]="newProduct.pricing"
+                          required>
+                          <option value="">Select</option>
+                          <option value="B2B">B2B</option>
+                          <option value="B2C">B2C</option>
+                          <option value="Direct">Direct</option>
+                        </select>
+                      </div></div><br><br>
 
-                    <div class="col-md-4">
-                      <label for="productName">Product Name</label>
-                      <input type="text" class="form-control" placeholder="Enter product" id="productName" name="productName" required [(ngModel)]="newProduct.productName"><br>
-                    </div>
+                      <button type="submit" class="btn-primary"[disabled]="!productForm.form.valid">Create</button>
+                    </form><br><br>
+                  <div>
+                   <!-- ...existing code... -->
 
-                    <div class="col-md-4">
-                      <label for="productCategory">Product Category</label>
-                      <input type="text" class="form-control" placeholder="Enter Category" id="productCategory" name="productCategory" required [(ngModel)]="newProduct.productCategory"><br>
-                    </div>
+<table>
+  <thead>
+    <tr>
+      <th>Sn.</th>
+      <th>Product Name</th>
+      <th>Brand</th>
+      <th>Customer Name</th>
+      <th>Associated Recipe</th>
+      <th>Pricing</th>
+      <th>Action</th> <!-- New column for edit/remove buttons -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ product.name }}</td>
+      <td>{{ product.brand }}</td>
+      <td>{{ product.customer }}</td>
+      <td>{{ product.recipe }}</td>
+      <td>{{ product.pricing }}</td>
+      <td>
+        <button class="btn-primary" (click)="editProduct(i)">Edit</button>
+        <button class="btn-danger" (click)="removeProduct(i)">Remove</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-                    <div class="col-md-4">
-                      <label for="brand">Brand</label>
-                      <input type="text" class="form-control" placeholder="Enter Brand" id="brand" name="brand" required [(ngModel)]="newProduct.brand"><br>
-                    </div>
+<!-- ...remaining code... -->
 
-                    <div class="col-md-4">
-                      <label for="customerName">Customer Name</label>
-                      <input type="text" class="form-control" placeholder="Enter Name" id="customerName" name="customerName" required [(ngModel)]="newProduct.customerName"><br>
-                    </div>
-
-                    <div class="col-md-4">
-                      <label for="associatedRecipe">Associated Recipe</label>
-                      <input type="text" class="form-control" placeholder="Enter Recipe" id="associatedRecipe" name="associatedRecipe" required [(ngModel)]="newProduct.associatedRecipe"><br>
-                    </div>
-
-                    <div class="col-md-4">
-                      <label for="pricing">Pricing (B2B, B2C, Direct)</label>
-                      <input type="text" class="form-control" placeholder="Enter" id="pricing" name="pricing" required [(ngModel)]="newProduct.pricing"><br>
-                    </div>
                   </div>
-                      
-                  <button class="btn-primary" type="button" (click)="addProduct()">Add Product</button>
-                </form>
-                <br>
+                </div>
 
-                <!-- Displaying existing products -->
-                <!-- <h5>Existing Products</h5>
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Product ID/Code</th>
-                      <th>Product Name</th>
-                      <th>Product Category</th>
-                      <th>Brand</th>
-                      <th>Customer Name</th>
-                      <th>Associated Recipe</th>
-                      <th>Pricing</th>
-                      <th>Actions</th> New column for delete and edit buttons -->
-                    <!-- </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let product of products">
-                      <td>{{ product.productID }}</td>
-                      <td>{{ product.productName }}</td>
-                      <td>{{ product.productCategory }}</td>
-                      <td>{{ product.brand }}</td>
-                      <td>{{ product.customerName }}</td>
-                      <td>{{ product.associatedRecipe }}</td>
-                      <td>{{ product.pricing }}</td>
-                      <td>
-                        <button class="btn btn-danger" (click)="deleteProduct(product)">Delete</button> -->
-                        <!-- <button class="btn btn-primary" (click)="editProduct(product)">Edit</button> -->
-                      <!-- </td>
-                    </tr>
-                  </tbody>
-                </table>
-                 -->
-                <!-- Show product added message -->
-                <!-- <p *ngIf="isProductAdded">Product added successfully!</p>
-                <p *ngIf="!isProductAdded">Product already exists!</p> -->
-                
               </div>
             </div>
           </div>

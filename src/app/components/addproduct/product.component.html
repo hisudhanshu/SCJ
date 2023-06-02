@@ -1,6 +1,5 @@
 <main id="main" class="main">
-  <div class="pagetitle">
-  </div>
+  <div class="pagetitle"></div>
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
@@ -10,47 +9,83 @@
             <div class="row">
               <div class="col-lg-12">
                 <div>
-            <div class="row">
-              <div class="col-md-6">
-                <label for="name">Products</label>
-                <select id="name" class="form-select" aria-label="Default select example">
-                  <option value="">Select</option>
-                  <option *ngFor="let product of products" [value]="product.name">{{product["name"]}}</option>
-                </select>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="name">Products</label>
+                      <select id="name" class="form-select" aria-label="Default select example" [(ngModel)]="selectedProduct">
+                        <option value="">Select</option>
+                        <option *ngFor="let product of products" [value]="product.name">{{product["name"]}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="quantity">Quantity</label>
+                      <select id="quantity" class="form-select" aria-label="Default select example" [(ngModel)]="selectedQuantity">
+                        <option selected>Select</option>
+                        <option *ngFor="let product of products" [value]="product.quantity">{{ product.quantity }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6"><br>
+                      <label for="price">Price</label>
+                      <select id="price" class="form-select" aria-label="Default select example" [(ngModel)]="selectedPrice">
+                        <option selected>Select</option>
+                        <option *ngFor="let product of products" [value]="product.price">{{ product.price }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6"><br>
+                      <label for="inStock">InStock</label>
+                      <select id="inStock" class="form-select" aria-label="Default select example" [(ngModel)]="selectedInStock">
+                        <option selected>Select</option>
+                        <option *ngFor="let product of products" [value]="product.inStock">{{ product.inStock }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div>
+                    <br>
+                    <br><br>
+                    <strong>
+                      <button type="submit" class="btn btn-danger mr-md-3 mb-2 mb-md-0" (click)="saveData()">Save</button>
+                    </strong>
+                    <strong>
+                      <!-- <button type="submit" class="btn btn-secondary mr-md-3 mb-2 mb-md-0" style="margin-left: 10px;">Reset</button> -->
+                    </strong>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-6">
-                <label for="quantity">Quantity</label>
-                <select id="quantity" class="form-select" aria-label="Default select example">
-                  <option selected>Select</option>
-                  <option *ngFor="let product of products" [value]="product.quantity">{{ product.quantity }}</option>
-                </select>
-              </div>
-              <div class="col-md-6"><br>
-                <label for="inStock">Price</label>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Select</option>
-                  <option *ngFor="let product of products" [value]="product.price">{{ product.price }}</option>
-                </select>
-              </div>
-              <div class="col-md-6"><br>
-                <label for="inStock">InStock</label>
-                <select class="form-select" aria-label="Default select example">
-                  <option selected>Select</option>
-                  <option *ngFor="let product of products" [value]="product.inStock">{{ product.inStock }}</option>
-                </select>
-              </div>
-            </div>
-            <div>
-              <br>
-              <br><br>
-              <strong>
-                <button type="submit" class="btn btn-danger mr-md-3 mb-2 mb-md-0">Save</button>
-              </strong>
-              <strong>
-                <button type="submit" class="btn btn-secondary mr-md-3 mb-2 mb-md-0"
-                  style="margin-left: 10px;">Reset</button>
-              </strong>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  </section>
+  
+  <br><br>
+  
+  <!-- Display saved data in a table -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h1 class="card-title">Data</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>InStock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let savedData of savedDataList">
+                <td>{{ savedData.name }}</td>
+                <td>{{ savedData.quantity }}</td>
+                <td>{{ savedData.price }}</td>
+                <td>{{ savedData.inStock }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
