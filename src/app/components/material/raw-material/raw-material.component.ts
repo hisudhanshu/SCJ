@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
+interface RawMaterial {
+  id: number;
+  name: string;
+}
 
 @Component({
   selector: 'app-raw-material',
@@ -8,28 +12,80 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./raw-material.component.css']
 })
 export class RawMaterialComponent implements OnInit {
-  name: string | undefined;
-  // email: string | undefined;
+  rawMaterials: RawMaterial[] = [];
+  newRawMaterial: RawMaterial = { id: 0, name: '' };
+  isEditing: boolean[] = [];
+  searchKeyword: string = '';
+  successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
-    // You can remove the line below as it is throwing an error and not implemented
-    // throw new Error('Method not implemented.');
+    // Load the data from localStorage on component initialization
+    const savedData = localStorage.getItem('rawMaterials');
+    if (savedData) {
+      this.rawMaterials = JSON.parse(savedData);
+    }
   }
 
   insertData() {
-    const data = { name: this.name };
-    this.authService.insertData(data).subscribe(
+    const newMaterial: RawMaterial = { ...this.newRawMaterial };
+
+    // Check if the material already exists
+    const existingMaterial = this.rawMaterials.find(material => material.name.toLowerCase() === newMaterial.name.toLowerCase());
+    if (existingMaterial) {
+      this.errorMessage = 'Material already exists.';
+      this.successMessage = '';
+      return;
+    }
+
+    this.authService.insertData(newMaterial).subscribe(
       (response: any) => {
         console.log('Data inserted successfully:', response);
-        // Reset form values after successful insertion
-        this.name = '';
-        // this.email = '';
+        this.rawMaterials.push(newMaterial);
+        this.saveDataToLocalStorage(); // Save data to localStorage
+        this.newRawMaterial.name = '';
+        this.successMessage = 'Material added successfully.';
+        this.errorMessage = '';
       },
       (error: any) => {
         console.error('Error inserting data:', error);
+        this.errorMessage = 'Failed to add material.';
+        this.successMessage = '';
       }
     );
+  }
+
+  editData(index: number) {
+    this.isEditing[index] = true;
+  }
+
+  saveData(index: number) {
+    if (confirm('Are you sure you want to save this material?')) {
+      this.isEditing[index] = false;
+      this.saveDataToLocalStorage(); // Save data to localStorage after editing
+    }
+  }
+
+  removeData(index: number) {
+    if (confirm('Are you sure you want to remove this material?')) {
+      this.rawMaterials.splice(index, 1);
+      this.saveDataToLocalStorage(); // Save data to localStorage after removal
+    }
+  }
+
+  search() {
+    // Filter the rawMaterials array based on the searchKeyword
+    const filteredMaterials = this.rawMaterials.filter(material =>
+      material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
+    );
+
+    // Update the rawMaterials array with the filtered results
+    this.rawMaterials = filteredMaterials;
+  }
+
+  private saveDataToLocalStorage() {
+    localStorage.setItem('rawMaterials', JSON.stringify(this.rawMaterials));
   }
 }
