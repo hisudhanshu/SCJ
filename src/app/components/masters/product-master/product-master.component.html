@@ -9,8 +9,8 @@
             <div class="row">
               <div class="col-lg-12">
                 <div>
-                    <form (ngSubmit)="createProduct()" #productForm="ngForm">
-                      <div class="row">
+                  <form (ngSubmit)="createOrUpdateProduct()" #productForm="ngForm">
+                    <div class="row">
                       <div class="col-md-4">
                         <label for="productName">Product:</label>
                         <select id="productName" class="form-select" name="productName" [(ngModel)]="newProduct.name"
@@ -50,7 +50,7 @@
                         </select>
                       </div>
                       <div class="col-md-4"><br>
-                        <label for="associatedRecipe">Associated Recipe:</label>
+                        <label for="associatedRecipe">Associated Recipe</label>
                         <select id="associatedRecipe" class="form-select" name="associatedRecipe"
                           [(ngModel)]="newProduct.recipe" required>
                           <option value="">Select</option>
@@ -60,7 +60,7 @@
                         </select>
                       </div>
                       <div class="col-md-4"><br>
-                        <label for="pricing">Pricing:</label>
+                        <label for="pricing">Client Type</label>
                         <select id="pricing" class="form-select" name="pricing" [(ngModel)]="newProduct.pricing"
                           required>
                           <option value="">Select</option>
@@ -68,42 +68,43 @@
                           <option value="B2C">B2C</option>
                           <option value="Direct">Direct</option>
                         </select>
-                      </div></div><br><br>
+                      </div>
+                    </div><br><br>
 
-                      <button type="submit" class="btn-primary"[disabled]="!productForm.form.valid">Create</button>
-                    </form><br><br>
+                    <button type="submit" class="btn-primary" [disabled]="!productForm.form.valid">{{ isEditMode ? 'Update' : 'Create' }}</button>
+                  </form><br><br>
                   <div>
-                   <!-- ...existing code... -->
+                    <!-- ...existing code... -->
 
-<table>
-  <thead>
-    <tr>
-      <th>Sn.</th>
-      <th>Product Name</th>
-      <th>Brand</th>
-      <th>Customer Name</th>
-      <th>Associated Recipe</th>
-      <th>Pricing</th>
-      <th>Action</th> <!-- New column for edit/remove buttons -->
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products; let i = index">
-      <td>{{ i + 1 }}</td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.brand }}</td>
-      <td>{{ product.customer }}</td>
-      <td>{{ product.recipe }}</td>
-      <td>{{ product.pricing }}</td>
-      <td>
-        <button class="btn-primary" (click)="editProduct(i)">Edit</button>
-        <button class="btn-danger" (click)="removeProduct(i)">Remove</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Sn.</th>
+                          <th>Product Name</th>
+                          <th>Brand</th>
+                          <th>Customer Name</th>
+                          <th>Associated Recipe</th>
+                          <th>Client Type</th>
+                          <th>Action</th> <!-- New column for edit/remove buttons -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let product of products; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ product.name }}</td>
+                          <td>{{ product.brand }}</td>
+                          <td>{{ product.customer }}</td>
+                          <td>{{ product.recipe }}</td>
+                          <td>{{ product.pricing }}</td>
+                          <td>
+                            <button class="btn-primary" (click)="editProduct(i)">Edit</button>
+                            <button class="btn-danger" (click)="removeProduct(i)">Remove</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
 
-<!-- ...remaining code... -->
+                    <!-- ...remaining code... -->
 
                   </div>
                 </div>

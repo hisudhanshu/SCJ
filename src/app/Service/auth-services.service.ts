@@ -9,6 +9,7 @@ import { baseUrl } from 'src/environments/environment';
 export class AuthServicesService {
   apiUrl: any;
   token: string;
+  
   constructor(private http: HttpClient) {
     // Retrieve token from localStorage during initialization
     this.token = window.localStorage.getItem('myToken') || 'DEFAULT_TOKEN';
@@ -23,13 +24,13 @@ export class AuthServicesService {
     window.localStorage.setItem('myToken', token);
   }
 
-  insertData(data: any) {
+  insertData(data: any): Observable<any> {
     const url = `${this.apiUrl}`; // Replace with your insert API endpoint
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${baseUrl}Authentication/InsertRawMaterials`, data, { headers });
   }
 
-  insertProductData(data: any){
+  insertProductData(data: any): Observable<any> {
     const url = `${this.apiUrl}`; // Replace with your insert API endpoint
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${baseUrl}Authentication/InsertProduct`, data, { headers });

@@ -19,33 +19,42 @@ export class ProductMasterComponent implements OnInit {
     pricing: ''
   };
 
+  isEditMode: boolean = false; // Add a flag for edit mode
+  editIndex: number = -1; // Index of the product being edited
+
   constructor(private authService: AuthServicesService) {}
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
-  createProduct() {
-    this.products.push({ ...this.newProduct });
+  createOrUpdateProduct() {
+    if (this.isEditMode) {
+      // Update existing product
+      this.products[this.editIndex] = { ...this.newProduct };
+    } else {
+      // Create new product
+      this.products.push({ ...this.newProduct });
+    }
     this.saveProducts();
-    this.authService.insertProductData(this.newProduct)
-      .subscribe(
-        (response) => {
-          console.log('Product data inserted successfully:', response);
-        },
-        (error) => {
-          console.error('Error occurred while inserting product data:', error);
-        }
-      );
-    this.newProduct = {
-      name: '',
-      category: '',
-      brand: '',
-      customer: '',
-      recipe: '',
-      pricing: ''
-    };
+
+    if (this.isEditMode) {
+      this.isEditMode = false; // Reset edit mode
+      this.editIndex = -1; // Reset edit index
+    } else {
+      this.authService.insertProductData(this.newProduct)
+        .subscribe(
+          (response) => {
+            console.log('Product data inserted successfully:', response);
+            this.resetForm(); // Reset the form after creating a new product
+          },
+          (error) => {
+            console.error('Error occurred while inserting product data:', error);
+          }
+        );
+    }
   }
+
   removeProduct(index: number) {
     this.products.splice(index, 1);
     this.saveProducts();
@@ -54,6 +63,19 @@ export class ProductMasterComponent implements OnInit {
   editProduct(index: number) {
     const product = this.products[index];
     this.newProduct = { ...product };
+    this.isEditMode = true;
+    this.editIndex = index;
+  }
+
+  resetForm() {
+    this.newProduct = {
+      name: '',
+      category: '',
+      brand: '',
+      customer: '',
+      recipe: '',
+      pricing: ''
+    };
   }
 
   private loadProducts() {
