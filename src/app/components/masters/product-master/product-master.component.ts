@@ -16,7 +16,7 @@ export class ProductMasterComponent implements OnInit {
     brand: '',
     customer: '',
     recipe: '',
-    pricing: ''
+    clientType: ''
   };
 
   isEditMode: boolean = false; // Add a flag for edit mode
@@ -32,20 +32,17 @@ export class ProductMasterComponent implements OnInit {
     if (this.isEditMode) {
       // Update existing product
       this.products[this.editIndex] = { ...this.newProduct };
-    } else {
-      // Create new product
-      this.products.push({ ...this.newProduct });
-    }
-    this.saveProducts();
-
-    if (this.isEditMode) {
+      this.saveProducts();
       this.isEditMode = false; // Reset edit mode
       this.editIndex = -1; // Reset edit index
     } else {
+      // Create new product
       this.authService.insertProductData(this.newProduct)
         .subscribe(
           (response) => {
             console.log('Product data inserted successfully:', response);
+            this.products.push({ ...this.newProduct });
+            this.saveProducts();
             this.resetForm(); // Reset the form after creating a new product
           },
           (error) => {
@@ -74,7 +71,7 @@ export class ProductMasterComponent implements OnInit {
       brand: '',
       customer: '',
       recipe: '',
-      pricing: ''
+      clientType: ''
     };
   }
 

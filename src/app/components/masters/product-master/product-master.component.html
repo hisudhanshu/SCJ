@@ -15,7 +15,7 @@
                         <label for="productName">Product:</label>
                         <select id="productName" class="form-select" name="productName" [(ngModel)]="newProduct.name"
                           required>
-                          <option value="">Select</option>
+                          <option value="">--Select--</option>
                           <option value="Bottle">Bottle</option>
                           <option value="Glass">Glass</option>
                           <option value="Household plastic">Household plastic</option>
@@ -25,7 +25,7 @@
                         <label for="productCategory">Product Category:</label>
                         <select id="productCategory" class="form-select" name="productCategory"
                           [(ngModel)]="newProduct.category" required>
-                          <option value="">Select</option>
+                          <option value="">--Select--</option>
                           <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
                         </select>
                       </div>
@@ -33,7 +33,7 @@
                         <label for="productBrand">Brand:</label>
                         <select id="productBrand" class="form-select" name="productBrand" [(ngModel)]="newProduct.brand"
                           required>
-                          <option value="">Select</option>
+                          <option value="">--Select--</option>
                           <option value="Tata">Tata</option>
                           <option value="Indica">Indica</option>
                           <option value="Govt">Govt</option>
@@ -43,7 +43,7 @@
                         <label for="customerName">Customer Name:</label>
                         <select id="customerName" class="form-select" name="customerName"
                           [(ngModel)]="newProduct.customer" required>
-                          <option value="">Select</option>
+                          <option value="">--Select--</option>
                           <option value="SCJ">SCJ</option>
                           <option value="Clay">Clay</option>
                           <option value="Claylogix">Claylogix</option>
@@ -53,17 +53,17 @@
                         <label for="associatedRecipe">Associated Recipe</label>
                         <select id="associatedRecipe" class="form-select" name="associatedRecipe"
                           [(ngModel)]="newProduct.recipe" required>
-                          <option value="">Select</option>
+                          <option value="">--Select--</option>
                           <option value="Recipe 1">Recipe 1</option>
                           <option value="Recipe 2">Recipe 2</option>
                           <option value="Recipe 3">Recipe 3</option>
                         </select>
                       </div>
                       <div class="col-md-4"><br>
-                        <label for="pricing">Client Type</label>
-                        <select id="pricing" class="form-select" name="pricing" [(ngModel)]="newProduct.pricing"
+                        <label for="clientType">Client Type</label>
+                        <select id="clientType" class="form-select" name="clientType" [(ngModel)]="newProduct.clientType"
                           required>
-                          <option value="">Select</option>
+                          <option value="">--Select--</option>
                           <option value="B2B">B2B</option>
                           <option value="B2C">B2C</option>
                           <option value="Direct">Direct</option>
@@ -95,7 +95,7 @@
                           <td>{{ product.brand }}</td>
                           <td>{{ product.customer }}</td>
                           <td>{{ product.recipe }}</td>
-                          <td>{{ product.pricing }}</td>
+                          <td>{{ product.clientType }}</td>
                           <td>
                             <button class="btn-primary" (click)="editProduct(i)">Edit</button>
                             <button class="btn-danger" (click)="removeProduct(i)">Remove</button>
