@@ -14,7 +14,7 @@
                         <div class="col-md-4">
                           <label for="materialName">Material Name:</label>
                           <select id="materialName" class="form-select" name="materialName" [(ngModel)]="materialName" required>
-                            <option value="">Select</option>
+                            <option value="">--Select--</option>
                             <option value="Material 1">Material 1</option>
                             <option value="Material 2">Material 2</option>
                             <option value="Material 3">Material 3</option>
@@ -23,7 +23,7 @@
                         <div class="col-md-4">
                           <label for="materialType">Material Type:</label>
                           <select id="materialType" class="form-select" name="materialType" [(ngModel)]="materialType" required>
-                            <option value="">Select</option>
+                            <option value="">--Select--</option>
                             <option value="Material Type1">Type 1</option>
                             <option value="Material Type2">Type 2</option>
                             <option value="Material Type3">Type 3</option>
@@ -64,7 +64,7 @@
                           <td>{{ product.inventoryLevel }}</td>
                           <td>
                             <button type="button" class="btn btn-sm btn-primary" (click)="editProduct(i)">Edit</button>
-                            <button type="button" class="btn btn-sm btn-danger" (click)="removeProduct(i)">Remove</button>
+                            <button type="button" class="btn btn-sm btn-danger" (click)="removeProduct(i)">Delete</button>
                           </td>
                         </tr>
                       </tbody>

@@ -26,7 +26,7 @@ export class AuthServicesService {
     window.localStorage.setItem('myToken', token);
   }
 
-  //  Raw Material Fetch data API url Call here
+   // Raw material data insert API url Call here  InsertRaqMaterials 
 
   insertData(data: any): Observable<any> {
     const url = `${this.apiUrl}`; // Replace with your insert API endpoint
@@ -34,7 +34,7 @@ export class AuthServicesService {
     return this.http.post(`${baseUrl}Authentication/InsertRawMaterials`, data, { headers });
   }
   
-    // Prouct Master Insert data API url Call here  
+    // Prouct Master Insert data API url Call here   InserProductmaster
   
   insertProductData(data: any): Observable<any> {
     const url = `${this.apiUrl}InsertProductMaster`; // Replace with your insert API endpoint
@@ -43,4 +43,18 @@ export class AuthServicesService {
   }
 
 
+    // Raw Master API url Call here 
+
+  rawmasterData(data: any): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${baseUrl}Authentication/InsertRawMaterialsColumn`, data, { headers });
+  }
+ 
+   // Update Product Master data API url Call here
+ 
+//  updateProductData(data: any): Observable<any> {
+//   const url = `${this.apiUrl}UpdateProductMaster`; // Replace with your update API endpoint
+//   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+//   return this.http.put(`${baseUrl}Authentication/UpdateProductMaster`, data, { headers });
+// }
 }

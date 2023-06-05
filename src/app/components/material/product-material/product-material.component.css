@@ -1,14 +1,19 @@
-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  th, td {
-    text-align: left;
-    padding: 8px;
-    border: 1px solid black;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
+.product-material-container {
+  margin-bottom: 50px;
+}
+
+.product-material-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-material-table th,
+.product-material-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.product-material-table th {
+  background-color: #f2f2f2;
+  text-align: left;
+}

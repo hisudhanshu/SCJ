@@ -8,8 +8,8 @@
             <h1 class="card-title">Raw Material</h1><br>
             <div class="col-md-4">
               <form class="search-form d-flex align-items-center" method="POST" action="#">
-                <input class="form-control" id="searchKeyword" name="query" type="text"
-                  placeholder="Search.." title="Enter search keyword" [(ngModel)]="searchKeyword">
+                <input class="form-control" id="searchKeyword" name="query" type="text" placeholder="Search.."
+                  title="Enter search keyword" [(ngModel)]="searchKeyword">
                 <button type="submit" class="btn-primary" title="Search" (click)="search()">Search</button>
               </form>
             </div>
@@ -22,10 +22,6 @@
                       placeholder="Enter Material" id="name" [(ngModel)]="newRawMaterial.name" />
                   </div>
                 </div>
-                <!-- <div>
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" [(ngModel)]="newRawMaterial.email" />
-                </div> -->
                 <div class="col-12 mt-5 mb-4 text-right">
                   <button class="btn btn-primary" (click)="insertData()">Add</button>
                 </div>
@@ -59,7 +55,7 @@
                         <ng-container *ngIf="isEditing[i]">
                           <button class="btn btn-success btn-sm" (click)="saveData(i)">Save</button>
                         </ng-container>
-                        <button class="btn btn-danger btn-sm" (click)="removeData(i)">Remove</button>
+                        <button class="btn btn-danger btn-sm" (click)="removeData(i)">Delete</button>
                       </td>
                     </tr>
                   </tbody>

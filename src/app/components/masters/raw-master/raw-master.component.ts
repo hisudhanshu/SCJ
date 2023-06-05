@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 @Component({
   selector: 'app-raw-master',
@@ -6,7 +7,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./raw-master.component.css']
 })
 export class RawMasterComponent implements OnInit {
-
   products: any[] = [];
   materialName: string = '';
   materialType: string = '';
@@ -16,6 +16,8 @@ export class RawMasterComponent implements OnInit {
   isEditMode: boolean = false;
   editIndex: number = -1;
 
+  constructor(private authService: AuthServicesService) {}
+
   ngOnInit(): void {
     // Load previously saved data from localStorage
     if (localStorage.getItem('products')) {
@@ -24,6 +26,8 @@ export class RawMasterComponent implements OnInit {
   }
 
   handleSubmit(): void {
+    let product: any; // Declare the product variable here
+  
     if (this.isEditMode) {
       // Update existing product
       this.products[this.editIndex] = {
@@ -37,7 +41,7 @@ export class RawMasterComponent implements OnInit {
       this.editIndex = -1;
     } else {
       // Create new product
-      const product = {
+      product = {
         materialName: this.materialName,
         materialType: this.materialType,
         currentCost: this.currentCost,
@@ -50,8 +54,17 @@ export class RawMasterComponent implements OnInit {
     // Save the updated data to localStorage
     localStorage.setItem('products', JSON.stringify(this.products));
 
-    // Clear the input fields
-    this.clearFields();
+    // Save the data to the database
+    this.authService.rawmasterData(product).subscribe(
+      (response) => {
+        console.log('Data saved successfully:', response);
+        // Clear the input fields
+        this.clearFields();
+      },
+      (error) => {
+        console.error('Error saving data:', error);
+      }
+    );
   }
 
   editProduct(index: number): void {
@@ -82,5 +95,4 @@ export class RawMasterComponent implements OnInit {
     this.vendorInfo = '';
     this.inventoryLevel = 0;
   }
-
 }

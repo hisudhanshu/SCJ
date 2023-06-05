@@ -1,98 +1,45 @@
 <main id="main" class="main">
-    <div class="pagetitle">
-    </div>
+    <div class="pagetitle"></div>
     <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="card-title">Product Material</h1>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="col-md-4">
-                                    <label for="name">Raw Material</label>
-                                    <select id="name" class="form-select" aria-label="Default select example">
-                                      <option value="">Select</option>
-                                     
-                                    </select>
-                                  </div>
-                               
-                                <!-- <div>
-                                    <div class="col-md-4"><br>
-                                        <form (ngSubmit)="addMaterial()" class="d-flex">
-                                            <div class="input-group">
-                                                <input type="text"
-                                                    class="form-control ng-pristine ng-valid ng-empty ng-touched"
-                                                    placeholder="Enter Material" id="materialName"
-                                                    [(ngModel)]="materialName" name="materialName">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary ml-2" type="submit">Add
-                                                        Material</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div><br> -->
-                                <!-- <h5>Product Management</h5> -->
-                                <div class="col-lg-12">
-                                    <div class="col-md-4">
-                                        <form (ngSubmit)="addProduct()"><br>
-                                            <label for="productName">Product Name</label>
-                                            <input type="text"
-                                                class="form-control ng-pristine ng-valid ng-empty ng-touched"
-                                                placeholder="Enter Product" id="productName" [(ngModel)]="productName"
-                                                name="productName"><br><br>
-                                            <label for="recipe">Recipe</label>
-                                            <div class="input-group">
-                                                <textarea id="recipe"
-                                                    class="form-control ng-pristine ng-valid ng-empty ng-touched"
-                                                    placeholder="Enter text" [(ngModel)]="recipe"
-                                                    name="recipe"></textarea>
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="submit">Add Product</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div><br><br>
-                                <br>
-                                <!-- <strong>
-                                    <h5>Raw Materials List</h5>
-                                </strong>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Material</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let material of rawMaterials">
-                                            <td>{{ material }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table> -->
-                                <br><br><strong>
-                                    <h5>Product List</h5>
-                                </strong>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Product Name</th>
-                                            <th>Recipe</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let product of products">
-                                            <td>{{ product.name }}</td>
-                                            <td>{{ product.recipe }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h1 class="card-title">Products Material</h1><br>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="product-material-container">
+                    <div class="row" style="margin-bottom: 40px;">
+                      <div class="col-md-4">
+                        <label for="productName">Product:</label>
+                        <select id="productName" class="form-select" name="productName"
+                          [(ngModel)]="selectedProduct" (change)="onProductChange()">
+                          <option value="" selected>--Select--</option>
+                          <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+                        </select>
+                      </div>
                     </div>
+                    <table class="product-material-table">
+                      <thead>
+                        <tr>
+                          <th>Material Name</th>
+                          <th>Material Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let material of selectedProductMaterials">
+                          <td>{{ material.name }}</td>
+                          <td>{{ material.description }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
-</main>
+  </main>
+  
