@@ -9,6 +9,7 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 export class ProductMasterComponent implements OnInit {
   categories: string[] = ['Category A', 'Category B', 'Category C'];
   products: any[] = [];
+  successMessage: string = ''; // Success message variable
 
   newProduct: any = {
     name: '',
@@ -44,6 +45,7 @@ export class ProductMasterComponent implements OnInit {
             this.products.push({ ...this.newProduct });
             this.saveProducts();
             this.resetForm(); // Reset the form after creating a new product
+            this.successMessage = 'Product added successfully.'; // Set the success message
           },
           (error) => {
             console.error('Error occurred while inserting product data:', error);

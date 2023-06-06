@@ -74,7 +74,7 @@
                     <button type="submit" class="btn-primary" [disabled]="!productForm.form.valid">{{ isEditMode ? 'Update' : 'Create' }}</button>
                   </form><br><br>
                   <div>
-                    <!-- ...existing code... -->
+                    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div> <!-- New success message element -->
                     <table>
                       <thead>
                         <tr>
@@ -102,7 +102,6 @@
                         </tr>
                       </tbody>
                     </table>
-                    <!-- ...remaining code... -->
                   </div>
                 </div>
               </div>
