@@ -26,7 +26,7 @@ export class AuthServicesService {
     window.localStorage.setItem('myToken', token);
   }
 
-   // Raw material data insert API url Call here  InsertRaqMaterials 
+   // Raw material data insert API url Call here  InsertRawMaterials 
 
   insertData(data: any): Observable<any> {
     const url = `${this.apiUrl}`; // Replace with your insert API endpoint
@@ -45,9 +45,9 @@ export class AuthServicesService {
 
     // Raw Master API url Call here 
 
-  rawmasterData(data: any): Observable<any> {
+    rawmasterData(data: any): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.post(`${baseUrl}Authentication/InsertRawMaterialsColumn`, data, { headers });
+    return this.http.post(`${baseUrl}Authentication/InsertRawMaster`, data, { headers });
   }
  
    // Update Product Master data API url Call here

@@ -22,6 +22,8 @@ export class ProductService {
       'Authorization': `Bearer ${this.token}`
     });
     
+    // GetProducts API call here Show on Map Product Screen 
+    
     let url = this.urlprefix + "api/Authentication/GetProducts";
     return this.http.get(url, { headers: headers });
   }

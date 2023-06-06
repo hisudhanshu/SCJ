@@ -27,14 +27,11 @@ import { RawMaterialComponent } from './components/material/raw-material/raw-mat
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
 import { RawMasterComponent } from './components/masters/raw-master/raw-master.component';
 import { ProductMasterComponent } from './components/masters/product-master/product-master.component';
-import { ProdcutaddComponent } from './components/productadd/prodcutadd/prodcutadd.component';
-
-
 
 
 const routes: Routes = [
+
   { path: '', component: PagesLoginComponent },
-  { path: 'productadd', component: ProdcutaddComponent},
   { path: 'mapproduct', component: ProductComponent},
   { path: 'reporting', component: MonthlyReportsComponent },
   { path: 'insights', component: InsightsComponent },
