@@ -9,7 +9,7 @@ import { PagesFaqComponent } from './pages/pages-faq/pages-faq.component';
 import { PagesLoginComponent } from './pages/pages-login/pages-login.component';
 import { PagesRegisterComponent } from './pages/pages-register/pages-register.component';
 import { UsersProfileComponent } from './pages/users-profile/users-profile.component';
-import { ProductComponent } from './components/addproduct/product.component'; 
+import { ProductComponent } from './components/addproduct/product.component';
 import { InvoiceComponent } from './components/invoice/invoice.component';
 import { InventoryDetailsComponent } from './components/inventory-details/inventory-details.component';
 import { RecipeCreateComponent } from './components/Recipe/recipe-create/recipe-create.component';
@@ -27,22 +27,26 @@ import { RawMaterialComponent } from './components/material/raw-material/raw-mat
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
 import { RawMasterComponent } from './components/masters/raw-master/raw-master.component';
 import { ProductMasterComponent } from './components/masters/product-master/product-master.component';
+import { RawmaterialmanagmentComponent } from './components/material/rawmaterialmanagment/rawmaterialmanagment.component';
+import { TestComponent } from './components/test/test.component';
 
 
 const routes: Routes = [
 
   { path: '', component: PagesLoginComponent },
-  { path: 'mapproduct', component: ProductComponent},
+  { path: 'test', component: TestComponent },
+  { path: 'rawmaterialmanagment', component: RawmaterialmanagmentComponent },
+  { path: 'mapproduct', component: ProductComponent },
   { path: 'reporting', component: MonthlyReportsComponent },
   { path: 'insights', component: InsightsComponent },
-  { path: 'import', component: ImportComponent},
-  { path: 'reconciliation', component: ReconciliationComponent},
-  { path: 'identification', component: IdentificationComponent},
-  { path: 'gapreporting', component: ReportingComponent},
-  { path: 'rawmaterial', component: RawMaterialComponent},
-  { path: 'productmaterial', component: ProductMaterialComponent},
-  { path: 'rawmaster', component: RawMasterComponent},
-  { path: 'productmaster',component: ProductMasterComponent},
+  { path: 'import', component: ImportComponent },
+  { path: 'reconciliation', component: ReconciliationComponent },
+  { path: 'identification', component: IdentificationComponent },
+  { path: 'gapreporting', component: ReportingComponent },
+  { path: 'rawmaterial', component: RawMaterialComponent },
+  { path: 'productmaterial', component: ProductMaterialComponent },
+  { path: 'rawmaster', component: RawMasterComponent },
+  { path: 'productmaster', component: ProductMasterComponent },
   { path: 'cost', component: CostComponent },
   { path: 'costadjustment', component: CostAdjustmentComponent },
   { path: 'price', component: PricingComponent },
@@ -53,7 +57,7 @@ const routes: Routes = [
   { path: 'productmaster', component: ProductComponent },
   { path: 'product', component: ProductComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'charts',component:ChartsComponent },
+  { path: 'charts', component: ChartsComponent },
   { path: 'pages-contact', component: PagesContactComponent },
   { path: 'pages-error404', component: PagesError404Component },
   { path: 'pages-faq', component: PagesFaqComponent },

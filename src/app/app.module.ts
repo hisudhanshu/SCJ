@@ -31,6 +31,8 @@ import { RawMasterComponent } from './components/masters/raw-master/raw-master.c
 import { ProductMasterComponent } from './components/masters/product-master/product-master.component';
 import { RawMaterialComponent } from './components/material/raw-material/raw-material.component';
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
+import { RawmaterialmanagmentComponent } from './components/material/rawmaterialmanagment/rawmaterialmanagment.component';
+import { TestComponent } from './components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { ProductMaterialComponent } from './components/material/product-material
     ProductMasterComponent,
     RawMaterialComponent,
     ProductMaterialComponent,
+    RawmaterialmanagmentComponent,
+    TestComponent,
   ],
   imports: [
     BrowserModule,

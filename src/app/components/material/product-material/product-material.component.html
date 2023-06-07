@@ -1,87 +1,87 @@
 <main id="main" class="main">
     <div class="pagetitle"></div>
     <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h1 class="card-title">Products Material</h1><br>
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="product-material-container">
-                    <div class="row" style="margin-bottom: 40px;">
-                      <div class="col-md-4">
-                        <label for="productName">Product:</label>
-                        <select id="productName" class="form-select" name="productName"
-                          [(ngModel)]="selectedProduct" (change)="onProductChange()">
-                          <option value="" selected>--Select--</option>
-                          <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
-                        </select>
-                      </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body" style="margin-bottom: 50px;">
+                        <h1 class="card-title">Product Material</h1><br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div>
+                                    <div class="row">
+                                        <div class="col-md-12"><br>
+                                            <label for="productName" style="margin-bottom: 10px;">Product
+                                                Material</label>
+                                            <input type="text" id="productName" class="form-control"
+                                                placeholder="Enter Material" name="productName"
+                                                [(ngModel)]="newProduct.name">
+                                        </div>
+                                        <div class="col-md-12"><br><br>
+                                            <label for="recipe" style="margin-bottom: 10px;">Product Recipe</label>
+                                            <input type="text" id="recipe" class="form-control"
+                                                placeholder="Enter recipe" [(ngModel)]="newProduct.recipe">
+                                        </div>
+                                    </div><br><br>
+                                    <button class="btn btn-primary" (click)="addProduct()">Add Product</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="table-responsive">
-                      <table class="product-material-table">
-                        <thead>
-                          <tr>
-                            <th>Material Name</th>
-                            <th>Material Description</th>
-                            <th>Column 1</th>
-                            <th>Column 2</th>
-                            <th>Column 3</th>
-                            <th>Column 4</th>
-                            <th>Column 5</th>
-                            <th>Column 6</th>
-                            <th>Column 7</th>
-                            <th>Column 8</th>
-                            <th>Column 9</th>
-                            <th>Column 10</th>
-                            <th>Column 11</th>
-                            <th>Column 12</th>
-                            <th>Column 13</th>
-                            <th>Column 14</th>
-                            <th>Column 15</th>
-                            <th>Column 16</th>
-                            <th>Column 17</th>
-                            <th>Column 18</th>
-                            <th>Column 19</th>
-                            <th>Column 20</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let material of selectedProductMaterials">
-                            <td>{{ material.name }}</td>
-                            <td>{{ material.description }}</td>
-                            <td>{{ material.column1 }}</td>
-                            <td>{{ material.column2 }}</td>
-                            <td>{{ material.column3 }}</td>
-                            <td>{{ material.column4 }}</td>
-                            <td>{{ material.column5 }}</td>
-                            <td>{{ material.column6 }}</td>
-                            <td>{{ material.column7 }}</td>
-                            <td>{{ material.column8 }}</td>
-                            <td>{{ material.column9 }}</td>
-                            <td>{{ material.column10 }}</td>
-                            <td>{{ material.column11 }}</td>
-                            <td>{{ material.column12 }}</td>
-                            <td>{{ material.column13 }}</td>
-                            <td>{{ material.column14 }}</td>
-                            <td>{{ material.column15 }}</td>
-                            <td>{{ material.column16 }}</td>
-                            <td>{{ material.column17 }}</td>
-                            <td>{{ material.column18 }}</td>
-                            <td>{{ material.column19 }}</td>
-                            <td>{{ material.column20 }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title">Added Products Recipe</h1><br>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Material</th>
+                                    <th scope="col">Recipe</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of products; let i = index">
+                                    <td>
+                                        <ng-container *ngIf="!product.isEditing">
+                                            <strong>{{ product.name }}</strong>
+                                        </ng-container>
+                                        <ng-container *ngIf="product.isEditing">
+                                            <input type="text" class="form-control" [(ngModel)]="product.name">
+                                        </ng-container>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="!product.isEditing">
+                                            {{ product.recipe }}
+                                        </ng-container>
+                                        <ng-container *ngIf="product.isEditing">
+                                            <input type="text" class="form-control" [(ngModel)]="product.recipe">
+                                        </ng-container>
+                                    </td>
+                                    <td>
+                                        <div class="col-md-4 text-right">
+                                            <ng-container *ngIf="!product.isEditing">
+                                                <button class="btn btn-primary ml-2" (click)="editProduct(i)"
+                                                    style="margin-bottom: 5px;padding-inline: 20px;">Edit</button>
+                                                <button class="btn btn-danger ml-2"
+                                                    (click)="deleteProduct(i)">Delete</button>
+                                            </ng-container>
+                                            <ng-container *ngIf="product.isEditing">
+                                                <button class="btn btn-success ml-2" (click)="saveProduct(i)"
+                                                    style="margin-bottom: 5px;padding-inline: 20px;">Save</button>
+                                                <button class="btn btn-secondary ml-2"
+                                                    (click)="cancelEdit(i)">Cancel</button>
+                                            </ng-container>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
-  </main>
-  
+</main>
