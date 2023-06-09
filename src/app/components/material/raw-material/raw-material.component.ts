@@ -48,6 +48,9 @@ export class RawMaterialComponent implements OnInit {
         this.newRawMaterial.name = '';
         this.successMessage = 'Material added successfully.';
         this.errorMessage = '';
+
+        // Display alert message
+        alert('Data saved successfully!');
       },
       (error: any) => {
         console.error('Error inserting data:', error);

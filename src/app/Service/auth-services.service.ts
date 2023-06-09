@@ -50,11 +50,22 @@ export class AuthServicesService {
     return this.http.post(`${baseUrl}Authentication/InsertRawMaster`, data, { headers });
   }
  
-   // Update Product Master data API url Call here
+
+   // Raw Material Element Data Insert API url Call here 
+   
+   
+  // saveElementData(data: any): Observable<any> {
+  //   const url = `${this.apiUrl}`; // Replace with your insert API endpoint
+  //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+  //   return this.http.post(`${baseUrl}Authentication/InsertRawMaterials`, data, { headers });
+  // }
+   
+  // Update Product Master data API url Call here
  
 //  updateProductData(data: any): Observable<any> {
 //   const url = `${this.apiUrl}UpdateProductMaster`; // Replace with your update API endpoint
 //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
 //   return this.http.put(`${baseUrl}Authentication/UpdateProductMaster`, data, { headers });
 // }
+
 }

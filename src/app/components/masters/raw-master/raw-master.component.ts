@@ -54,17 +54,17 @@ export class RawMasterComponent implements OnInit {
     // Save the updated data to localStorage
     localStorage.setItem('products', JSON.stringify(this.products));
 
-    // Save the data to the database
-    this.authService.rawmasterData(product).subscribe(
-      (response) => {
-        console.log('Data saved successfully:', response);
-        // Clear the input fields
-        this.clearFields();
-      },
-      (error) => {
-        console.error('Error saving data:', error);
-      }
-    );
+   // Save the data to the database
+   this.authService.rawmasterData(product).subscribe(
+    (response) => {
+      console.log('Data saved successfully:', response);
+      // Clear the input fields
+      this.clearFields();
+    },
+    (error) => {
+      console.error('Error saving data:', error);
+    }
+  );
   }
 
   editProduct(index: number): void {

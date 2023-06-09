@@ -46,6 +46,7 @@ export class ProductMasterComponent implements OnInit {
             this.saveProducts();
             this.resetForm(); // Reset the form after creating a new product
             this.successMessage = 'Product added successfully.'; // Set the success message
+            alert('Data saved successfully.'); // Show the alert message
           },
           (error) => {
             console.error('Error occurred while inserting product data:', error);
