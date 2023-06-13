@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { baseUrl } from 'src/environments/environment';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { baseUrl } from 'src/environments/environment';
 export class AuthServicesService {
   apiUrl: any;
   token: string;
+  baseUrl: any;
   
   constructor(private http: HttpClient) {
     // Retrieve token from localStorage during initialization
@@ -46,19 +47,24 @@ export class AuthServicesService {
     // Raw Master API url Call here 
 
     rawmasterData(data: any): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.post(`${baseUrl}Authentication/InsertRawMaster`, data, { headers });
-  }
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+      return this.http.post(`${baseUrl}Authentication/InsertRawMaster`, data, { headers })
+        .pipe(
+          catchError((error) => {
+            console.error('Error saving data:', error);
+            return throwError(error);
+          })
+        );
+    }
  
-
    // Raw Material Element Data Insert API url Call here 
    
    
-  // saveElementData(data: any): Observable<any> {
-  //   const url = `${this.apiUrl}`; // Replace with your insert API endpoint
-  //   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-  //   return this.http.post(`${baseUrl}Authentication/InsertRawMaterials`, data, { headers });
-  // }
+  saveElementData(data: any): Observable<any> {
+    const url = `${this.apiUrl}`; // Replace with your insert API endpoint
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${this.baseUrl}Authentication/`, data, { headers });
+  }
    
   // Update Product Master data API url Call here
  

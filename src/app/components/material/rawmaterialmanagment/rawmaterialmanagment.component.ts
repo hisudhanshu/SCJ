@@ -45,15 +45,15 @@ export class RawmaterialmanagmentComponent implements OnInit {
       elements: this.elements
     };
 
-    // this.authService.saveElementData(dataToSave).subscribe(
-    //   (response) => {
-    //     console.log('Save successful:', response);
-    //     alert('Data saved successfully!');
-    //   },
-    //   (error) => {
-    //     console.error('Save failed:', error);
-    //     alert('Failed to save data.');
-    //   }
-    // );
+    this.authService.saveElementData(dataToSave).subscribe(
+      (response) => {
+        console.log('Save successful:', response);
+        alert('Data saved successfully!');
+      },
+      (error) => {
+        console.error('Save failed:', error);
+        alert('Failed to save data.');
+      }
+    );
   }
 }
