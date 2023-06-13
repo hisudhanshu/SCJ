@@ -1,9 +1,7 @@
-import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, } from '@angular/forms';
-import { Route, Router } from '@angular/router';
-import { AuthServicesService } from 'src/app/Service/auth-services.service'; 
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 @Component({
   selector: 'app-pages-login',
@@ -11,12 +9,14 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./pages-login.component.css']
 })
 export class PagesLoginComponent implements OnInit {
-
   formGroup!: FormGroup;
+
   constructor(private router: Router, private authServices: AuthServicesService) { }
+
   ngOnInit(): void {
     this.initForm();
   }
+
   initForm() {
     this.formGroup = new FormGroup({
       userName: new FormControl("", [Validators.required]),
@@ -25,7 +25,6 @@ export class PagesLoginComponent implements OnInit {
   }
 
   loginProcess() {
-
     if (this.formGroup.valid) {
       this.authServices.login(this.formGroup.value).subscribe(result => {
         if (result.message == 'Login Successful') {
@@ -34,18 +33,14 @@ export class PagesLoginComponent implements OnInit {
           window.localStorage.setItem("myToken", JSON.stringify(myToken));
           myToken = JSON.parse(localStorage.getItem('myToken') || '{}');
 
-
           this.authServices.setToken(myToken);
-
 
           this.router.navigateByUrl('/dashboard');
           alert(result.message);
-        }
-        else {
+        } else {
           alert(result.message);
         }
-      })
+      });
     }
   }
-
 }

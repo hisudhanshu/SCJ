@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common'
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -12,9 +12,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  sidebarToggle()
-  {
-    //toggle sidebar function
+
+  sidebarToggle() {
+    // toggle sidebar function
     this.document.body.classList.toggle('toggle-sidebar');
+  }
+
+  signOut() {
+    // Clear data in localStorage when signing out
+    localStorage.clear();
   }
 }

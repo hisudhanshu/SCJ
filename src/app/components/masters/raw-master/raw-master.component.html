@@ -15,9 +15,7 @@
                           <label for="materialName">Material Name</label>
                           <select id="materialName" class="form-select" name="materialName" [(ngModel)]="materialName" required>
                             <option value="">-- Select --</option>
-                            <option value="Material 1">Material 1</option>
-                            <option value="Material 2">Material 2</option>
-                            <option value="Material 3">Material 3</option>
+                            <option *ngFor="let material of materials" [value]="material.name">{{ material.name }}</option>
                           </select>
                         </div>
                         <div class="col-md-4">

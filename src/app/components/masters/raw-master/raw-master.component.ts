@@ -7,6 +7,9 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./raw-master.component.css']
 })
 export class RawMasterComponent implements OnInit {
+  materials: any[] | undefined; // Array to hold the materials data from the API response
+  selectedMaterial: string | undefined; // Variable to store the selected material
+
   products: any[] = [];
   materialName: string = '';
   materialType: string = '';
@@ -18,13 +21,16 @@ export class RawMasterComponent implements OnInit {
 
   constructor(private authService: AuthServicesService) {}
 
-  ngOnInit(): void {
-    // Load previously saved data from localStorage
-    if (localStorage.getItem('products')) {
-      this.products = JSON.parse(localStorage.getItem('products') as string);
+ //  Raw Material Management API data Get here
+ ngOnInit() {
+  this.authService.getMaterials().subscribe((response: any) => {
+    if (response.isSuccess) {
+      this.materials = response.matdata;
+    } else {
+      console.log('API request failed');
     }
-  }
-
+  });
+}
   handleSubmit(): void {
     let product: any; // Declare the product variable here
   
