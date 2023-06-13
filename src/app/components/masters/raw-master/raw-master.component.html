@@ -12,33 +12,33 @@
                     <form (ngSubmit)="handleSubmit()" #productForm="ngForm">
                       <div class="row">
                         <div class="col-md-4">
-                          <label for="materialName">Material Name:</label>
+                          <label for="materialName">Material Name</label>
                           <select id="materialName" class="form-select" name="materialName" [(ngModel)]="materialName" required>
-                            <option value="">--Select--</option>
+                            <option value="">-- Select --</option>
                             <option value="Material 1">Material 1</option>
                             <option value="Material 2">Material 2</option>
                             <option value="Material 3">Material 3</option>
                           </select>
                         </div>
                         <div class="col-md-4">
-                          <label for="materialType">Material Type:</label>
+                          <label for="materialType">Material Type</label>
                           <select id="materialType" class="form-select" name="materialType" [(ngModel)]="materialType" required>
-                            <option value="">--Select--</option>
+                            <option value="">-- Select --</option>
                             <option value="Material Type1">Type 1</option>
                             <option value="Material Type2">Type 2</option>
                             <option value="Material Type3">Type 3</option>
                           </select>
                         </div>
                         <div class="col-md-4">
-                          <label for="currentCost">Current Cost:</label>
+                          <label for="currentCost">Current Cost</label>
                           <input type="number" id="currentCost" class="form-control" placeholder="Enter Cost" name="currentCost" [(ngModel)]="currentCost" required>
                         </div>
                         <div class="col-md-4"><br>
-                          <label for="vendorInfo">Vendor/Supplier Information:</label>
+                          <label for="vendorInfo">Vendor/Supplier Information</label>
                           <input type="text" id="vendorInfo" class="form-control" placeholder="Enter Info" name="vendorInfo" [(ngModel)]="vendorInfo" required>
                         </div>
                         <div class="col-md-4"><br>
-                          <label for="inventoryLevel">Inventory Level:</label>
+                          <label for="inventoryLevel">Inventory Level</label>
                           <input type="number" id="inventoryLevel" class="form-control" placeholder="Enter here" name="inventoryLevel" [(ngModel)]="inventoryLevel" required>
                         </div>
                       </div><br><br>
