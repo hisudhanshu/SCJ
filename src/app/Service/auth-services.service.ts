@@ -60,10 +60,10 @@ export class AuthServicesService {
  
    // Raw Material Element Data Insert API url Call here 
    
-  saveElementData(data: any): Observable<any> {
+   saveElementData(data: any): Observable<any> {
     const url = `${this.apiUrl}`; // Replace with your insert API endpoint
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.post(`${this.baseUrl}Authentication/GetMaterials`, data, { headers });
+    return this.http.post(`${baseUrl}Authentication/InsertRawMaterials`, data, { headers });
   }
    
   // Raw Material Management Get data API url Call here
