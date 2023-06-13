@@ -10,6 +10,7 @@ export class AuthServicesService {
   apiUrl: any;
   token: string;
   baseUrl: any;
+  urlprefix: any = "https://localhost:44384/";
   
   constructor(private http: HttpClient) {
     // Retrieve token from localStorage during initialization
@@ -59,13 +60,28 @@ export class AuthServicesService {
  
    // Raw Material Element Data Insert API url Call here 
    
-   
   saveElementData(data: any): Observable<any> {
     const url = `${this.apiUrl}`; // Replace with your insert API endpoint
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.post(`${this.baseUrl}Authentication/`, data, { headers });
+    return this.http.post(`${this.baseUrl}Authentication/GetMaterials`, data, { headers });
   }
    
+  // Raw Material Management Get data API url Call here
+
+  getMaterials(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    
+    // GetProducts API call here Show on Map Product Screen 
+    
+    let url = this.urlprefix + "api/Authentication/GetMaterials";
+    return this.http.get(url, { headers: headers });
+  }
+
+
+
   // Update Product Master data API url Call here
  
 //  updateProductData(data: any): Observable<any> {

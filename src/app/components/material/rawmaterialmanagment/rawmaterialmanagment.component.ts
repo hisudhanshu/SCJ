@@ -12,12 +12,23 @@ interface Element {
   styleUrls: ['./rawmaterialmanagment.component.css']
 })
 export class RawmaterialmanagmentComponent implements OnInit {
-  selectedMaterial: string = '';
+  materials: any[] | undefined; // Array to hold the materials data from the API response
+  selectedMaterial: string | undefined; // Variable to store the selected material
   elements: Element[] = [];
 
   constructor(private authService: AuthServicesService) {}
 
-  ngOnInit(): void {}
+
+  //  Raw Material Management API data Get here
+  ngOnInit() {
+    this.authService.getMaterials().subscribe((response: any) => {
+      if (response.isSuccess) {
+        this.materials = response.matdata;
+      } else {
+        console.log('API request failed');
+      }
+    });
+  }
 
   onMaterialChange() {
     this.elements = [];
