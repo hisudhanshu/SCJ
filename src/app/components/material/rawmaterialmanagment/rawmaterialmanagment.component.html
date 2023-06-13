@@ -10,9 +10,10 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-4">
-                    <label for="materialDropdown" style="margin-bottom: 10px;">Select Material</label>
-                    <select id="materialDropdown" class="form-select" aria-label="Default select example"
-                      [(ngModel)]="selectedMaterial" (change)="onMaterialChange()">
+                    <label for="selectedMaterial">Select Material</label>
+                          <select id="selectedMaterial" class="form-select" name="selectedMaterial"
+                      [(ngModel)]="selectedMaterial" (change)="onMaterialChange()"><br>
+                      <option value="">-- Select --</option>
                       <option *ngFor="let material of materials" [value]="material.name">{{ material.name }}</option>
                     </select>
                   </div>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthServicesService } from 'src/app/Service/auth-services.service'; 
+import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 interface Element {
   id: number;
@@ -13,13 +13,12 @@ interface Element {
 })
 export class RawmaterialmanagmentComponent implements OnInit {
   materials: any[] | undefined; // Array to hold the materials data from the API response
-  selectedMaterial: string | undefined; // Variable to store the selected material
+  selectedMaterial: string = ''; // Variable to store the selected material
   elements: Element[] = [];
 
   constructor(private authService: AuthServicesService) {}
 
-
-  //  Raw Material Management API data Get here
+  // Raw Material Management API data Get here
   ngOnInit() {
     this.authService.getMaterials().subscribe((response: any) => {
       if (response.isSuccess) {
@@ -31,10 +30,14 @@ export class RawmaterialmanagmentComponent implements OnInit {
   }
 
   onMaterialChange() {
-    this.elements = [];
-    for (let i = 1; i <= 6; i++) {
-      this.elements.push({ id: i, data: '' });
-    }
+    this.elements = [
+      { id: 1, data: 'Ethylene' },
+      { id: 2, data: 'Catalysts' },
+      { id: 3, data: 'Co-monomers' },
+      { id: 4, data: 'Antioxidants' },
+      { id: 5, data: 'Stabilizers' },
+      { id: 6, data: 'Anti-block-agent' }
+    ];
   }
 
   addElement() {
@@ -50,6 +53,14 @@ export class RawmaterialmanagmentComponent implements OnInit {
     console.log('Save button clicked!');
     console.log('Selected Material:', this.selectedMaterial);
     console.log('Elements:', this.elements);
+
+    // Check if any element data is empty
+    const hasEmptyElement = this.elements.some((element) => element.data === '');
+
+    if (this.selectedMaterial === '' || hasEmptyElement) {
+      alert('Please enter all element data');
+      return;
+    }
 
     const dataToSave = {
       selectedMaterial: this.selectedMaterial,
