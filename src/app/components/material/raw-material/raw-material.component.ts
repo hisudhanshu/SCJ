@@ -32,13 +32,19 @@ export class RawMaterialComponent implements OnInit {
   insertData() {
     const newMaterial: RawMaterial = { ...this.newRawMaterial };
 
-    // Check if the material already exists
-    const existingMaterial = this.rawMaterials.find(material => material.name.toLowerCase() === newMaterial.name.toLowerCase());
-    if (existingMaterial) {
-      this.errorMessage = 'Material already exists.';
-      this.successMessage = '';
-      return;
-    }
+   // Check if the material already exists
+const existingMaterial = this.rawMaterials.find(material => material.name.toLowerCase() === newMaterial.name.toLowerCase());
+if (existingMaterial) {
+  this.errorMessage = 'Material already exists.';
+  this.successMessage = '';
+
+  // Hide success message after 2 seconds
+  setTimeout(() => {
+    this.successMessage = '';
+  }, 2000);
+
+  return;
+}
 
     this.authService.insertData(newMaterial).subscribe(
       (response: any) => {
@@ -51,6 +57,11 @@ export class RawMaterialComponent implements OnInit {
 
         // Display alert message
         alert('Data saved successfully!');
+
+        // Hide success message after 2 seconds
+        setTimeout(() => {
+          this.successMessage = '';
+        }, 2000);
       },
       (error: any) => {
         console.error('Error inserting data:', error);
@@ -79,11 +90,20 @@ export class RawMaterialComponent implements OnInit {
   }
 
   search() {
+    // If searchKeyword is empty, show all the data
+    if (this.searchKeyword.trim() === '') {
+      const savedData = localStorage.getItem('rawMaterials');
+      if (savedData) {
+        this.rawMaterials = JSON.parse(savedData);
+      }
+      return;
+    }
+  
     // Filter the rawMaterials array based on the searchKeyword
     const filteredMaterials = this.rawMaterials.filter(material =>
       material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
     );
-
+  
     // Update the rawMaterials array with the filtered results
     this.rawMaterials = filteredMaterials;
   }

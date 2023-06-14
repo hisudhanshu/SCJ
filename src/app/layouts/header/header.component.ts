@@ -7,6 +7,7 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  searchKeyword: string = '';
 
   constructor(@Inject(DOCUMENT) private document: Document) { }
 
@@ -21,5 +22,13 @@ export class HeaderComponent implements OnInit {
   signOut() {
     // Clear data in localStorage when signing out
     localStorage.clear();
+  }
+
+  search() {
+    // Perform search functionality here
+    // You can access the searchKeyword property and perform the necessary search operations
+    // For example:
+    console.log('Search keyword:', this.searchKeyword);
+    // Perform search logic here
   }
 }

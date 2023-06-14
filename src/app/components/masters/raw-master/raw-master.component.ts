@@ -21,56 +21,59 @@ export class RawMasterComponent implements OnInit {
 
   constructor(private authService: AuthServicesService) {}
 
- //  Raw Material Management API data Get here
- ngOnInit() {
-  this.authService.getMaterials().subscribe((response: any) => {
-    if (response.isSuccess) {
-      this.materials = response.matdata;
-    } else {
-      console.log('API request failed');
-    }
-  });
-}
+  // Raw Material Management API data Get here
+  ngOnInit() {
+    this.authService.getMaterials().subscribe((response: any) => {
+      if (response.isSuccess) {
+        this.materials = response.matdata;
+      } else {
+        console.log('API request failed');
+      }
+    });
+  }
+
   handleSubmit(): void {
-    let product: any; // Declare the product variable here
-  
+    const product: any = {
+      materialName: this.materialName,
+      materialType: this.materialType,
+      currentCost: this.currentCost,
+      vendorInfo: this.vendorInfo,
+      inventoryLevel: this.inventoryLevel
+    };
+
+    // Check if the selected material already exists in the products array
+    const existingProductIndex = this.products.findIndex(
+      (p: any) => p.materialName === product.materialName
+    );
+    if (existingProductIndex > -1) {
+      alert('Material already exists!');
+      return; // Stop execution if the material already exists
+    }
+
     if (this.isEditMode) {
       // Update existing product
-      this.products[this.editIndex] = {
-        materialName: this.materialName,
-        materialType: this.materialType,
-        currentCost: this.currentCost,
-        vendorInfo: this.vendorInfo,
-        inventoryLevel: this.inventoryLevel
-      };
+      this.products[this.editIndex] = product;
       this.isEditMode = false;
       this.editIndex = -1;
     } else {
       // Create new product
-      product = {
-        materialName: this.materialName,
-        materialType: this.materialType,
-        currentCost: this.currentCost,
-        vendorInfo: this.vendorInfo,
-        inventoryLevel: this.inventoryLevel
-      };
       this.products.push(product);
     }
 
     // Save the updated data to localStorage
     localStorage.setItem('products', JSON.stringify(this.products));
 
-   // Save the data to the database
-   this.authService.rawmasterData(product).subscribe(
-    (response) => {
-      console.log('Data saved successfully:', response);
-      // Clear the input fields
-      this.clearFields();
-    },
-    (error) => {
-      console.error('Error saving data:', error);
-    }
-  );
+    // Save the data to the database
+    this.authService.rawmasterData(product).subscribe(
+      (response) => {
+        console.log('Data saved successfully:', response);
+        // Clear the input fields
+        this.clearFields();
+      },
+      (error) => {
+        console.error('Error saving data:', error);
+      }
+    );
   }
 
   editProduct(index: number): void {

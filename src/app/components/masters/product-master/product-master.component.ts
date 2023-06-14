@@ -37,21 +37,33 @@ export class ProductMasterComponent implements OnInit {
       this.isEditMode = false; // Reset edit mode
       this.editIndex = -1; // Reset edit index
     } else {
-      // Create new product
-      this.authService.insertProductData(this.newProduct)
-        .subscribe(
-          (response) => {
-            console.log('Product data inserted successfully:', response);
-            this.products.push({ ...this.newProduct });
-            this.saveProducts();
-            this.resetForm(); // Reset the form after creating a new product
-            this.successMessage = 'Product added successfully.'; // Set the success message
-            alert('Data saved successfully.'); // Show the alert message
-          },
-          (error) => {
-            console.error('Error occurred while inserting product data:', error);
-          }
-        );
+      // Check if all dropdown options are selected
+      if (
+        !this.newProduct.name ||
+        !this.newProduct.category ||
+        !this.newProduct.brand ||
+        !this.newProduct.customer ||
+        !this.newProduct.recipe ||
+        !this.newProduct.clientType
+      ) {
+        alert('Please select all dropdown options.');
+      } else {
+        // Create new product
+        this.authService.insertProductData(this.newProduct)
+          .subscribe(
+            (response) => {
+              console.log('Product data inserted successfully:', response);
+              this.products.push({ ...this.newProduct });
+              this.saveProducts();
+              this.resetForm(); // Reset the form after creating a new product
+              this.successMessage = 'Product added successfully.'; // Set the success message
+              alert('Data saved successfully.'); // Show the alert message
+            },
+            (error) => {
+              console.error('Error occurred while inserting product data:', error);
+            }
+          );
+      }
     }
   }
 
