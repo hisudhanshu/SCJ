@@ -68,6 +68,16 @@ export class AuthServicesService {
     return this.http.post(`${baseUrl}Authentication/UpdateRawMaterials`, data, { headers });
   }
    
+  getRawElements(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+  
+    const url = this.urlprefix + 'api/Authentication/GetMaterials';
+    return this.http.get(url, { headers: headers });
+  }
+
   // Raw Material Management Get data API url Call here
 
   getMaterials(): Observable<any> {
@@ -81,8 +91,6 @@ export class AuthServicesService {
     let url = this.urlprefix + "api/Authentication/GetMaterials";
     return this.http.get(url, { headers: headers });
   }
-
-
 
   // Update Product Master data API url Call here
  
