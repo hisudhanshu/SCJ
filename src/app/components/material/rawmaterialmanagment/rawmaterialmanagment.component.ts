@@ -30,10 +30,10 @@ export class RawmaterialmanagmentComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getMaterials().subscribe((response: any) => {
-      if (response.isSuccess && response.matdata) {
+      if (response.isSuccess && response.matdata !== null) {
         this.materials = response.matdata;
       } else {
-        console.log('API request failed');
+        console.log('API request failed or no data received');
       }
     });
   }
