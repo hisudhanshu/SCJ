@@ -9,41 +9,41 @@
               <div class="row">
                 <div class="container">
                   <div class="row">
-                    <!-- <div class="col-md-4">
+                    <div class="col-md-4">
                       <select [(ngModel)]="selectedItemId" (ngModelChange)="onMaterialChange()">
                         <option *ngFor="let item of rawElements" [value]="item.id">
                           {{ item.name }}
                         </option>
                       </select>
-                    </div> -->
-                    <!-- <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
                       <h5>Selected Material: {{ selectedMaterialName }}</h5>
                       <select>
                         <option *ngFor="let data of materialData">{{ data }}</option>
                       </select>
-                    </div> -->
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <h5>All Data:</h5>
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th *ngFor="let column of materialData">{{ column }}</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let item of rawElements">
-                            <td>{{ item.id }}</td>
-                            <td>{{ item.name }}</td>
-                            <td *ngFor="let column of materialData">{{ item[column] }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
                     </div>
                   </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <h5>All Data:</h5>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th *ngFor="let column of columnData">{{ column }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of rawElements">
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td *ngFor="let column of columnData">{{ item[column] }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

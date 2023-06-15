@@ -11,6 +11,7 @@ export class TestComponent implements OnInit {
   selectedItemId: number | undefined;
   materialData: string[] = [];
   selectedMaterialName: string | undefined;
+  columnData: string[] = [];
 
   constructor(private authService: AuthServicesService) {}
 
@@ -18,6 +19,9 @@ export class TestComponent implements OnInit {
     this.authService.getRawElements().subscribe(
       (data: any) => {
         this.rawElements = data.matdata.filter((item: any) => item.name !== "");
+        if (this.rawElements.length > 0) {
+          this.columnData = Object.keys(this.rawElements[0]).filter((key) => key !== 'id' && key !== 'name') as string[];
+        }
       },
       (error: any) => {
         console.error('Failed to fetch raw elements:', error);
@@ -28,7 +32,7 @@ export class TestComponent implements OnInit {
   onMaterialChange() {
     const selectedItem = this.rawElements.find((item: any) => item.id === this.selectedItemId);
     if (selectedItem) {
-      this.materialData = Object.values(selectedItem).slice(2).filter((value: any) => typeof value === 'string') as string[];
+      this.materialData = Object.values(selectedItem).slice(2).filter((value: any) => typeof value === 'string' && value !== '') as string[];
       this.selectedMaterialName = selectedItem.name;
     } else {
       this.materialData = [];
