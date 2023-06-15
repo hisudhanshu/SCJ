@@ -11,6 +11,8 @@ export class AuthServicesService {
   token: string;
   baseUrl: any;
   urlprefix: any = "https://localhost:44384/";
+  getElements: any;
+  InsertRawMaterials: any;
   
   constructor(private http: HttpClient) {
     // Retrieve token from localStorage during initialization
@@ -33,7 +35,7 @@ export class AuthServicesService {
   insertData(data: any): Observable<any> {
     const url = `${this.apiUrl}`; // Replace with your insert API endpoint
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.post(`${baseUrl}Authentication/InsertRawMaterials`, data, { headers });
+    return this.http.post(`${baseUrl}Authentication/InsertRawMaterialName`, data, { headers });
   }
   
     // Prouct Master Insert data API url Call here   InserProductmaster
@@ -63,7 +65,7 @@ export class AuthServicesService {
    saveElementData(data: any): Observable<any> {
     const url = `${this.apiUrl}`; // Replace with your insert API endpoint
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.post(`${baseUrl}Authentication/InsertRawMaterials`, data, { headers });
+    return this.http.post(`${baseUrl}Authentication/UpdateRawMaterials`, data, { headers });
   }
    
   // Raw Material Management Get data API url Call here
