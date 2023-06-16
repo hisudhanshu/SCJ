@@ -1,55 +1,41 @@
 <main id="main" class="main">
-    <div class="pagetitle"></div>
-    <section class="section">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h1 class="card-title">Raw Material Management</h1><br>
-              <div class="row">
-                <div class="container">
-                  <div class="row">
-                    <div class="col-md-4">
-                      <select [(ngModel)]="selectedItemId" (ngModelChange)="onMaterialChange()">
-                        <option *ngFor="let item of rawElements" [value]="item.id">
-                          {{ item.name }}
-                        </option>
-                      </select>
-                    </div>
-                    <div class="col-md-4">
-                      <h5>Selected Material: {{ selectedMaterialName }}</h5>
-                      <select>
-                        <option *ngFor="let data of materialData">{{ data }}</option>
-                      </select>
-                    </div>
+  <div class="pagetitle"></div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">Raw Material Management</h1><br>
+            <div class="row">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-4">
+                    <select [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)">
+                      <option disabled selected>-- Select Name --</option>
+                      <option *ngFor="let item of rawElements" [value]="item.name">
+                        {{ item.name }}
+                      </option>
+                    </select>
                   </div>
                 </div>
               </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <h5>All Data:</h5>
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th *ngFor="let column of columnData">{{ column }}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let item of rawElements">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.name }}</td>
-                        <td *ngFor="let column of columnData">{{ item[column] }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            </div>
+            <div class="row" *ngIf="selectedMaterialName">
+              <div class="col-md-12">
+                <h5>Filtered Data:</h5>
+                <select [(ngModel)]="selectedFilteredItem">
+                  <option disabled selected>-- Select Item --</option>
+                  <ng-container *ngFor="let item of filteredData">
+                    <option *ngFor="let column of columnData" [value]="item[column]">
+                     {{ item[column] }}
+                    </option>
+                  </ng-container>
+                </select>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
-  
+    </div>
+  </section>
+</main>

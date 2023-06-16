@@ -8,10 +8,11 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 })
 export class TestComponent implements OnInit {
   rawElements: any[] = [];
-  selectedItemId: number | undefined;
-  materialData: string[] = [];
   selectedMaterialName: string | undefined;
   columnData: string[] = [];
+  filteredData: any[] = [];
+  materialDropdownData: string[] = [];
+  selectedFilteredItem: any;
 
   constructor(private authService: AuthServicesService) {}
 
@@ -29,14 +30,20 @@ export class TestComponent implements OnInit {
     );
   }
 
-  onMaterialChange() {
-    const selectedItem = this.rawElements.find((item: any) => item.id === this.selectedItemId);
+  onNameSelected(name: string) {
+    this.selectedMaterialName = name;
+    const selectedItem = this.rawElements.find((item: any) => item.name === name);
     if (selectedItem) {
-      this.materialData = Object.values(selectedItem).slice(2).filter((value: any) => typeof value === 'string' && value !== '') as string[];
-      this.selectedMaterialName = selectedItem.name;
+      this.filteredData = [selectedItem];
+      this.materialDropdownData = Object.values(selectedItem).slice(2).filter((value: any, index: number) => typeof value === 'string' && value !== '' && index > 15) as string[];
     } else {
-      this.materialData = [];
-      this.selectedMaterialName = undefined;
+      this.filteredData = [];
+      this.materialDropdownData = [];
     }
+    this.selectedFilteredItem = undefined; // Reset the selected item
+  }
+
+  getItemLabel(item: any): string {
+    return this.columnData.map(column => item[column]).join(' | ');
   }
 }
