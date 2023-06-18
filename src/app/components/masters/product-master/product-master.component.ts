@@ -9,7 +9,7 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 export class ProductMasterComponent implements OnInit {
   categories: string[] = ['Category A', 'Category B', 'Category C'];
   products: any[] = [];
-  successMessage: string = ''; // Success message variable
+  successMessage: string = '';
 
   newProduct: any = {
     name: '',
@@ -17,53 +17,58 @@ export class ProductMasterComponent implements OnInit {
     brand: '',
     customer: '',
     recipe: '',
-    clientType: ''
+    clientType: '',
+    rawMaterial: '',
+    rawElement: ''
   };
 
-  isEditMode: boolean = false; // Add a flag for edit mode
-  editIndex: number = -1; // Index of the product being edited
+  isEditMode: boolean = false;
+  editIndex: number = -1;
+
+  rawElements: any[] = [];
+  selectedMaterialName: string | undefined;
+  columnData: string[] = [];
+  filteredData: any[] = [];
+  materialDropdownData: string[] = [];
+  selectedFilteredItem: any;
 
   constructor(private authService: AuthServicesService) {}
 
   ngOnInit(): void {
     this.loadProducts();
+    this.authService.getRawElements().subscribe(
+      (data: any) => {
+        this.rawElements = data.matdata.filter((item: any) => item.name !== '');
+        if (this.rawElements.length > 0) {
+          this.columnData = Object.keys(this.rawElements[0]).filter((key) => key !== 'id' && key !== 'name') as string[];
+        }
+      },
+      (error: any) => {
+        console.error('Failed to fetch raw elements:', error);
+      }
+    );
   }
 
   createOrUpdateProduct() {
     if (this.isEditMode) {
-      // Update existing product
       this.products[this.editIndex] = { ...this.newProduct };
       this.saveProducts();
-      this.isEditMode = false; // Reset edit mode
-      this.editIndex = -1; // Reset edit index
+      this.isEditMode = false;
+      this.editIndex = -1;
     } else {
-      // Check if all dropdown options are selected
-      if (
-        !this.newProduct.name ||
-        !this.newProduct.category ||
-        !this.newProduct.brand ||
-        !this.newProduct.customer ||
-        !this.newProduct.recipe ||
-        !this.newProduct.clientType
-      ) {
-        alert('Please select all dropdown options.');
-      } else {
-        // Create new product
-        this.authService.insertProductData(this.newProduct)
-          .subscribe(
-            (response) => {
-              console.log('Product data inserted successfully:', response);
-              this.products.push({ ...this.newProduct });
-              this.saveProducts();
-              this.resetForm(); // Reset the form after creating a new product
-              this.successMessage = 'Product added successfully.'; // Set the success message
-              alert('Data saved successfully.'); // Show the alert message
-            },
-            (error) => {
-              console.error('Error occurred while inserting product data:', error);
-            }
-          );
-      }
+      this.authService.insertProductData(this.newProduct).subscribe(
+        (response) => {
+          console.log('Product data inserted successfully:', response);
+          this.products.push({ ...this.newProduct });
+          this.saveProducts();
+          this.resetForm();
+          this.successMessage = 'Product added successfully.';
+          alert('Data saved successfully.');
+        },
+        (error) => {
+          console.error('Error occurred while inserting product data:', error);
+        }
+      );
     }
   }
 
@@ -86,7 +91,9 @@ export class ProductMasterComponent implements OnInit {
       brand: '',
       customer: '',
       recipe: '',
-      clientType: ''
+      clientType: '',
+      rawMaterial: '',
+      rawElement: ''
     };
   }
 
@@ -99,5 +106,24 @@ export class ProductMasterComponent implements OnInit {
 
   private saveProducts() {
     localStorage.setItem('products', JSON.stringify(this.products));
+  }
+
+  onNameSelected(name: string) {
+    this.selectedMaterialName = name;
+    const selectedItem = this.rawElements.find((item: any) => item.name === name);
+    if (selectedItem) {
+      this.filteredData = [selectedItem];
+      this.materialDropdownData = Object.values(selectedItem)
+        .slice(2)
+        .filter((value: any, index: number) => typeof value === 'string' && value !== '' && index > 15) as string[];
+    } else {
+      this.filteredData = [];
+      this.materialDropdownData = [];
+    }
+    this.selectedFilteredItem = undefined;
+  }
+
+  getItemLabel(item: any): string {
+    return this.columnData.map((column) => item[column]).join(' | ');
   }
 }

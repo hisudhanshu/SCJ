@@ -61,20 +61,47 @@
                       </div>
                       <div class="col-md-4"><br>
                         <label for="clientType">Client Type</label>
-                        <select id="clientType" class="form-select" name="clientType" [(ngModel)]="newProduct.clientType"
-                          required>
+                        <select id="clientType" class="form-select" name="clientType"
+                          [(ngModel)]="newProduct.clientType" required>
                           <option value="">--Select--</option>
                           <option value="B2B">B2B</option>
                           <option value="B2C">B2C</option>
                           <option value="Direct">Direct</option>
                         </select>
                       </div>
+                      <div class="col-md-4"><br>
+                        <label for="rawMaterialdata">Raw Material</label>
+                        <select id="rawMaterialdata" class="form-select" name="rawMaterialdata"
+                          [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)" required>
+                          <option value="">-- Select --</option>
+                          <option *ngFor="let item of rawElements" [value]="item.name">
+                            {{ item.name }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-4"><br>
+                        <label for="rawElementdata">Raw Element</label>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <select id="rawElementdata" class="form-select" name="rawElementdata"
+                              [(ngModel)]="selectedFilteredItem" required>
+                              <option value="">-- Select --</option>
+                              <ng-container *ngFor="let item of filteredData">
+                                <option *ngFor="let column of columnData" [value]="item[column]">
+                                  {{ item[column] }}
+                                </option>
+                              </ng-container>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
                     </div><br><br>
-
-                    <button type="submit" class="btn-primary" [disabled]="!productForm.form.valid">{{ isEditMode ? 'Update' : 'Create' }}</button>
+                    <button type="submit" class="btn-primary" [disabled]="!productForm.form.valid">{{
+                      isEditMode ? 'Update' : 'Create' }}</button>
                   </form><br><br>
                   <div>
-                    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div> <!-- New success message element -->
+                    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+                    <!-- New success message element -->
                     <table>
                       <thead>
                         <tr>
@@ -84,6 +111,8 @@
                           <th>Customer Name</th>
                           <th>Associated Recipe</th>
                           <th>Client Type</th>
+                          <th>Raw Material</th>
+                          <th>Raw Element</th>
                           <th>Action</th> <!-- New column for edit/remove buttons -->
                         </tr>
                       </thead>
@@ -95,6 +124,8 @@
                           <td>{{ product.customer }}</td>
                           <td>{{ product.recipe }}</td>
                           <td>{{ product.clientType }}</td>
+                          <td>{{ product.rawMaterial }}</td>
+                          <td>{{ product.rawElement }}</td>
                           <td>
                             <button class="btn-primary" (click)="editProduct(i)">Edit</button>
                             <button class="btn-danger" (click)="removeProduct(i)">Delete</button>
