@@ -14,7 +14,7 @@
                         <div class="form-group">
                           <label for="product-name">Product</label>
                           <select class="form-control" id="productselect" [(ngModel)]="recipeData.product" name="product">
-                            <option value="" disabled selected>-- Select --</option>
+                            <option value="">-- Select --</option>
                             <option>Bottle</option>
                             <option>Household</option>
                             <option>Polythiene</option>
@@ -25,7 +25,7 @@
                         <div class="form-group">
                           <label for="product-category">Product Category</label>
                           <select class="form-control" id="product-category" [(ngModel)]="recipeData.productCategory" name="productCategory">
-                            <option value="" disabled selected>-- Select --</option>
+                            <option value="">-- Select --</option>
                             <option>Category A</option>
                             <option>Category B</option>
                             <option>Category C</option>
@@ -36,7 +36,7 @@
                         <div class="form-group">
                           <label for="brand-name">Brand</label>
                           <select class="form-control" id="brand-name" [(ngModel)]="recipeData.brand" name="brand">
-                            <option value="" disabled selected>-- Select --</option>
+                            <option value="">-- Select --</option>
                             <option>Brand A</option>
                             <option>Brand B</option>
                             <option>Brand C</option>
@@ -47,35 +47,31 @@
                         <div class="form-group">
                           <label for="customer-name">Customer Name</label>
                           <select class="form-control" id="customer-name" [(ngModel)]="recipeData.customerName" name="customerName">
-                            <option value="" disabled selected>-- Select --</option>
+                            <option value="">-- Select --</option>
                             <option>Clay</option>
                             <option>Claylogix</option>
                             <option>SCJ</option>
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-6"><br>
+                      <div class="col-md-6">
+                        <br>
                         <div class="form-group">
                           <label for="raw-material-polymer">Type of Polymer</label>
-                          <select id="raw-material-polymer" class="form-control" name="raw-material-polymer" [(ngModel)]="recipeData.polymerType">
-                            <option value="" disabled selected>-- Select --</option>
-                            <option>Small Type</option>
-                            <option>Large Type</option>
-                            <option>Normal Type</option>
-                          </select>
+                          <input id="raw-material-polymer" class="form-control" type="text" placeholder="Enter polymer" name="raw-material-polymer" [(ngModel)]="recipeData.polymerType">
                         </div>
                       </div>
                       <div class="col-md-6">
                         <br>
                         <div class="form-group">
                           <label for="raw-material">Raw Materials</label>
-                          <select id="raw-material" class="form-control" name="raw-material" [(ngModel)]="recipeData.rawMaterials">
-                            <option value="" disabled selected>-- Select --</option>
-                            <option *ngFor="let material of rawMaterialsData" [value]="material.id">{{ material.name }}</option>
-                          </select>
+                            <select class="form-control" [(ngModel)]="recipeData.rawMaterials" [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)">
+                              <option>-- Select --</option>
+                              <option *ngFor="let item of rawElements" [value]="item.name">{{ item.name }}</option>
+                            </select>
+                          </div>
                         </div>
                       </div>
-                    </div>
                     <br>
                     <br>
                     <button type="submit" class="btn btn-primary">Save Recipe</button>
@@ -99,6 +95,7 @@
             <table class="table table-bordered">
               <thead>
                 <tr>
+                  <th>ID</th>
                   <th>Product</th>
                   <th>Product Category</th>
                   <th>Brand</th>
@@ -110,6 +107,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let recipe of savedRecipes; let i = index">
+                  <td>{{ recipe.id }}</td>
                   <td>{{ recipe.product }}</td>
                   <td>{{ recipe.productCategory }}</td>
                   <td>{{ recipe.brand }}</td>

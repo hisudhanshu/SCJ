@@ -27,20 +27,19 @@
                             <option value="Material Type3">Type 3</option>
                           </select>
                         </div>
-                        <!-- <div class="col-md-4">
-                          <label for="materialElement">Material Element</label>
+                        <div class="col-md-4">
+                          <label for="materialElement">Quantity</label>
                           <select id="materialElement" class="form-select" name="materialElement">
                             <option value="">-- Select --</option>
-                            <option value="Material Type1">Ethylene</option>
-                            <option value="Material Type2">Catalysts</option>
-                            <option value="Material Type3">Co-monomers</option>
-                            <option value="Material Type1">Antioxidants</option>
-                            <option value="Material Type2">Stabilizers</option>
-                            <option value="Material Type3">Anti-block-agent</option>
+                            <option value="Material Type1">100/g</option>
+                            <option value="Material Type2">1/kg</option>
+                            <option value="Material Type3">2/kg</option>
+                            <option value="Material Type1">5/kg</option>
+                            <option value="Material Type2">10/kg</option>
                           </select>
-                        </div> -->
-                        <div class="col-md-4">
-                          <label for="currentCost">Current Cost</label>
+                        </div>
+                        <div class="col-md-4"><br>
+                          <label for="currentCost">Price</label>
                           <input type="number" id="currentCost" class="form-control" placeholder="Enter Cost" name="currentCost" [(ngModel)]="currentCost" required>
                         </div>
                         <div class="col-md-4"><br>
@@ -59,7 +58,7 @@
                         <tr>
                           <th>Material Name</th>
                           <th>Material Type</th>
-                          <th>Current Cost</th>
+                          <th>Price</th>
                           <th>Vendor Info</th>
                           <th>Inventory Level</th>
                           <th>Actions</th>
