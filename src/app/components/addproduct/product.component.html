@@ -18,21 +18,21 @@
                       </select>
                     </div>
                     <div class="col-md-6">
-                      <label for="quantity">Quantity</label>
+                      <label for="quantity">Material Type</label>
                       <select id="quantity" class="form-select" aria-label="Default select example" [(ngModel)]="selectedQuantity">
                         <option selected>Select</option>
                         <option *ngFor="let product of products" [value]="product.quantity">{{ product.quantity }}</option>
                       </select>
                     </div>
                     <div class="col-md-6"><br>
-                      <label for="price">Price</label>
+                      <label for="price">Raw Material</label>
                       <select id="price" class="form-select" aria-label="Default select example" [(ngModel)]="selectedPrice">
                         <option selected>Select</option>
                         <option *ngFor="let product of products" [value]="product.price">{{ product.price }}</option>
                       </select>
                     </div>
                     <div class="col-md-6"><br>
-                      <label for="inStock">InStock</label>
+                      <label for="inStock">Raw Element</label>
                       <select id="inStock" class="form-select" aria-label="Default select example" [(ngModel)]="selectedInStock">
                         <option selected>Select</option>
                         <option *ngFor="let product of products" [value]="product.inStock">{{ product.inStock }}</option>
@@ -70,9 +70,10 @@
             <thead>
               <tr>
                 <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>InStock</th>
+                <th>Material Type</th>
+                <th>Raw Material</th>
+                <th>Raw Element</th>
+                <!-- <th>Action</th> -->
               </tr>
             </thead>
             <tbody>

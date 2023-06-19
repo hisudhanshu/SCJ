@@ -111,9 +111,10 @@
                           <th>Customer Name</th>
                           <th>Associated Recipe</th>
                           <th>Client Type</th>
-                          <th>Raw Material</th>
-                          <th>Raw Element</th>
-                          <th>Action</th> <!-- New column for edit/remove buttons -->
+                          <!-- <th>Raw Material</th>
+                          <th>Raw Element</th> -->
+                          <th>Action</th>
+                           <!-- New column for edit/remove buttons -->
                         </tr>
                       </thead>
                       <tbody>
@@ -124,8 +125,8 @@
                           <td>{{ product.customer }}</td>
                           <td>{{ product.recipe }}</td>
                           <td>{{ product.clientType }}</td>
-                          <td>{{ product.rawMaterial }}</td>
-                          <td>{{ product.rawElement }}</td>
+                          <!-- <td>{{ product.rawMaterial }}</td>
+                          <td>{{ product.rawElement }}</td> -->
                           <td>
                             <button class="btn-primary" (click)="editProduct(i)">Edit</button>
                             <button class="btn-danger" (click)="removeProduct(i)">Delete</button>
