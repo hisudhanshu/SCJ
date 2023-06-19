@@ -1,9 +1,4 @@
 <main id="main" class="main">
-  <div class="alert alert-success" role="alert" *ngIf="showSuccessMessage">
-    Recipe created successfully!
-  </div>
-  <div class="pagetitle">
-  </div>
   <section class="section">
     <div class="container-fluid">
       <div class="col-lg-12">
@@ -18,8 +13,8 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="product-name">Product</label>
-                          <select class="form-control" id="productselect">
-                            <option>--Select--</option>
+                          <select class="form-control" id="productselect" [(ngModel)]="recipeData.product" name="product">
+                            <option value="" disabled selected>-- Select --</option>
                             <option>Bottle</option>
                             <option>Household</option>
                             <option>Polythiene</option>
@@ -29,8 +24,8 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="product-category">Product Category</label>
-                          <select class="form-control" id="product-category">
-                            <option>--Select--</option>
+                          <select class="form-control" id="product-category" [(ngModel)]="recipeData.productCategory" name="productCategory">
+                            <option value="" disabled selected>-- Select --</option>
                             <option>Category A</option>
                             <option>Category B</option>
                             <option>Category C</option>
@@ -40,8 +35,8 @@
                       <div class="col-md-6"><br>
                         <div class="form-group">
                           <label for="brand-name">Brand</label>
-                          <select class="form-control" id="brand-name">
-                            <option>--Select--</option>
+                          <select class="form-control" id="brand-name" [(ngModel)]="recipeData.brand" name="brand">
+                            <option value="" disabled selected>-- Select --</option>
                             <option>Brand A</option>
                             <option>Brand B</option>
                             <option>Brand C</option>
@@ -51,8 +46,8 @@
                       <div class="col-md-6"><br>
                         <div class="form-group">
                           <label for="customer-name">Customer Name</label>
-                          <select class="form-control" id="customer-name">
-                            <option>--Select--</option>
+                          <select class="form-control" id="customer-name" [(ngModel)]="recipeData.customerName" name="customerName">
+                            <option value="" disabled selected>-- Select --</option>
                             <option>Clay</option>
                             <option>Claylogix</option>
                             <option>SCJ</option>
@@ -62,37 +57,72 @@
                       <div class="col-md-6"><br>
                         <div class="form-group">
                           <label for="raw-material-polymer">Type of Polymer</label>
-                          <select id="raw-material-polymer" class="form-control" name="raw-material-polymer">
-                      
-                            <option>--Select--</option>
-                            <option value="Type 1">Small Type</option>
-                            <option value="Type 2">Large Type</option>
-                            <option value="Type 3">Normal Type</option>
-                   
+                          <select id="raw-material-polymer" class="form-control" name="raw-material-polymer" [(ngModel)]="recipeData.polymerType">
+                            <option value="" disabled selected>-- Select --</option>
+                            <option>Small Type</option>
+                            <option>Large Type</option>
+                            <option>Normal Type</option>
                           </select>
                         </div>
                       </div>
-                      <div class="col-md-6"><br>
+                      <div class="col-md-6">
+                        <br>
                         <div class="form-group">
                           <label for="raw-material">Raw Materials</label>
-                          <select id="raw-material" class="form-control" name="raw-material">
-                            <!-- <select id="raw-material" class="form-control" name="raw-material" multiple> -->
-                            <option>--Select--</option>
-                            <option value="material1">Material 1</option>
-                            <option value="material2">Material 2</option>
-                            <option value="material3">Material 3</option>
-                            <!-- Add more options from the predefined list -->
+                          <select id="raw-material" class="form-control" name="raw-material" [(ngModel)]="recipeData.rawMaterials">
+                            <option value="" disabled selected>-- Select --</option>
+                            <option *ngFor="let material of rawMaterialsData" [value]="material.id">{{ material.name }}</option>
                           </select>
                         </div>
                       </div>
                     </div>
                     <br>
                     <br>
-                    <button type="submit" class="btn btn-primary">Create Recipe</button>
+                    <button type="submit" class="btn btn-primary">Save Recipe</button>
+                    <button type="button" class="btn btn-success" *ngIf="isEditing" (click)="onSubmit()">Update Recipe</button>
                   </form>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container-fluid">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">Saved Recipes</h1>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Product Category</th>
+                  <th>Brand</th>
+                  <th>Customer Name</th>
+                  <th>Type of Polymer</th>
+                  <th>Raw Materials</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let recipe of savedRecipes; let i = index">
+                  <td>{{ recipe.product }}</td>
+                  <td>{{ recipe.productCategory }}</td>
+                  <td>{{ recipe.brand }}</td>
+                  <td>{{ recipe.customerName }}</td>
+                  <td>{{ recipe.polymerType }}</td>
+                  <td>{{ recipe.rawMaterials }}</td>
+                  <td>
+                    <button type="button" class="btn btn-primary" (click)="editRecipe(i)">Edit</button>
+                    <button type="button" class="btn btn-danger" (click)="deleteRecipe(i)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

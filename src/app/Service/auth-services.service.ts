@@ -92,6 +92,19 @@ export class AuthServicesService {
     return this.http.get(url, { headers: headers });
   }
 
+
+  // Recipe Screen API call here for Raw Material 
+
+  getRawMaterialsrecipe(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+       
+    let url = this.urlprefix + 'api/Authentication/GetMaterials';
+    return this.http.get(url, { headers: headers });
+  }
+
   // Update Product Master data API url Call here
  
 //  updateProductData(data: any): Observable<any> {
