@@ -8,61 +8,68 @@
             <h1 class="card-title">Create Recipe</h1><br>
             <div class="container">
               <div class="row">
-                <ng-container *ngIf="!addingRecipe">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="product-name">Select Product</label>
-                      <select class="form-control" id="productselect" name="product" [(ngModel)]="selectedProduct">
-                        <option value="">-- Select --</option>
-                        <option>Bottle</option>
-                        <option>Household</option>
-                        <option>Polythiene</option>
-                      </select>
-                    </div>
-                  </div>
-                </ng-container>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group">
-                    <label for="material-name">Select Material</label>
-                    <select class="form-control" id="materialselect" name="material" [(ngModel)]="selectedMaterial">
+                    <label for="product-name">Select Product</label>
+                    <select class="form-control" id="productselect" [(ngModel)]="selectedProduct"
+                      (change)="openRecipeScreen()">
                       <option value="">-- Select --</option>
-                      <option>Polymer</option>
-                      <option>Nylon</option>
-                      <option>Ethyline</option>
+                      <option value="Bottle">Bottle</option>
+                      <option value="Household">Household</option>
+                      <option value="Polythiene">Polythiene</option>
                     </select>
                   </div>
-                </div>
-                <div class="col-md-6"><br>
-                  <div class="form-group">
-                    <label for="element-name">Select Element</label>
-                    <select class="form-control" id="elementselect" name="element" [(ngModel)]="selectedElement">
-                      <option value="">-- Select --</option>
-                      <option>Monomers</option>
-                      <option>Chloride</option>
-                      <option>Agent</option>
-                    </select>
+                </div><br>
+                <div class="row col-lg-12" *ngIf="selectedProduct">
+                  <div class="row">
+                    <ng-container *ngFor="let recipe of recipes; let i = index">
+                      <div class="col-md-4"><br>
+                        <div class="description">
+                          <div *ngIf="selectedProductDisplay">
+                            <h6>Create Recipe {{ i + 1 }} for {{ selectedProductDisplay }} Product</h6>
+                          </div>
+                          <div class="form-group"><br>
+                            <label for="recipeName{{ i }}">Recipe Name</label>
+                            <input type="text" class="form-control" placeholder="Enter here" id="recipeName{{ i }}" [(ngModel)]="recipe.name">
+                          </div>
+                          <div class="form-group">
+                            <label for="typeOfPolymer">Type of Polymer</label>
+                            <select class="form-control" id="typeOfPolymer" [(ngModel)]="selectedTypeOfPolymer">
+                              <option value="">-- Select --</option>
+                              <option *ngFor="let polymer of typesOfPolymers" [value]="polymer">{{ polymer }}</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="customerName">Customer Name</label>
+                            <select class="form-control" id="customerName" [(ngModel)]="selectedCustomerName">
+                              <option value="">-- Select --</option>
+                              <option *ngFor="let customer of customerNames" [value]="customer">{{ customer }}</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="rawElement">Raw Element</label>
+                            <select class="form-control" id="rawElement" [(ngModel)]="selectedRawElement">
+                              <option value="">-- Select --</option>
+                              <option *ngFor="let element of rawElements" [value]="element">{{ element }}</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="recipeRawMaterial{{ i }}">Raw Material</label>
+                            <select class="form-control" id="recipeRawMaterial{{ i }}"
+                              [(ngModel)]="recipe.selectedRawMaterial">
+                              <option value="">-- Select --</option>
+                              <option *ngFor="let material of rawMaterials" [value]="material.id">{{ material.name }}</option>
+                            </select>
+                          </div><br>
+                          <button class="btn btn-primary" style="margin-inline: 5px;" (click)="addRecipe()">Add Recipe</button>
+                          <button class="btn btn-danger" style="margin-inline: 5px;"  (click)="removeRecipe(i)">Remove Recipe</button>
+                        </div>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
-                <div class="col-md-6"><br>
-                  <div class="form-group">
-                    <label for="quantity">Add Quantity</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity"
-                      [(ngModel)]="quantity">
-                  </div>
-                </div>
-                <div class="col-md-6"><br>
-                  <div class="form-group">
-                    <label for="priceper">Price Per/unit</label>
-                    <input type="text" class="form-control" id="price" name="price" placeholder="Enter price per unit"
-                      [(ngModel)]="price">
-                  </div>
-                </div>
-                <div class="col-md-12"><br><br>
-                  <div class="form-group">
-                    <button class="btn btn-primary mr-2" style="margin-inline: 5px;"
-                      (click)="saveRecipe()">Save</button>
-                    <button class="btn btn-secondary" id="cancelButton">Cancel</button>
-                  </div>
+                <div class="col-md-4"><br>
+                  <button class="btn btn-primary" (click)="createProduct()">Create</button>
                 </div>
               </div>
             </div>
@@ -70,70 +77,35 @@
         </div>
       </div>
     </div>
-    <br>
-    <div class="container" *ngIf="recipes.length > 0">
-      <h4><strong>Recipe Table</strong></h4>
-      <table class="table table-bordered">
+  </section>
+  <section class="section">
+    <div class="container"><br>
+      <h4>Created Recipes</h4><br>
+      <table>
         <thead>
           <tr>
-            <th>Recipe ID</th>
-            <th>Product</th>
-            <th>Material</th>
-            <th>Element</th>
-            <th>Quantity</th>
-            <th>Price per Unit</th>
-            <th>Action</th>
+            <!-- <th>Product</th> -->
+            <th>Recipe Name</th>
+            <th>Raw Material</th>
+            <th>Type of Polymer</th>
+            <th>Customer Name</th>
+            <th>Raw Element</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <ng-container *ngFor="let recipe of recipes; let i = index">
-            <tr>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" [(ngModel)]="recipe.recipeId" placeholder="Enter recipe ID">
-                </div>
-              </td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" [(ngModel)]="recipe.product" placeholder="Enter product name">
-                </div>
-              </td>
-              <td>
-                <div class="form-group">
-                  <select class="form-control" [(ngModel)]="recipe.material">
-                    <option value="">-- Select --</option>
-                    <option>Polymer</option>
-                    <option>Nylon</option>
-                    <option>Ethyline</option>
-                  </select>
-                </div>
-              </td>
-              <td>
-                <div class="form-group">
-                  <select class="form-control" [(ngModel)]="recipe.element">
-                    <option value="">-- Select --</option>
-                    <option>Monomers</option>
-                    <option>Chloride</option>
-                    <option>Agent</option>
-                  </select>
-                </div>
-              </td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" [(ngModel)]="recipe.quantity" placeholder="Enter quantity">
-                </div>
-              </td>
-              <td>
-                <div class="form-group">
-                  <input type="text" class="form-control" [(ngModel)]="recipe.price" placeholder="Enter price per unit">
-                </div>
-              </td>
-              <td>
-                <button class="btn btn-primary" style="padding: 5px 10px;"
-                  (click)="addAnotherRecipe(recipe.product)">Add Recipe</button>
-              </td>
-            </tr>
-          </ng-container>
+          <tr *ngFor="let recipe of createdRecipes; let i = index">
+            <!-- <td>{{ recipe }}</td> -->
+            <td>{{ recipe.name }} Recipe</td>
+            <td>{{ recipe.selectedRawMaterial }}</td>
+            <td>{{ recipe.selectedTypeOfPolymer }}</td>
+            <td>{{ recipe.selectedCustomerName }}</td>
+            <td>{{ recipe.selectedRawElement }}</td>
+            <td>
+              <button type="button" class="btn btn-primary" style="margin-inline: 5px;" (click)="editRecipe(i)">Edit</button>
+              <button type="button" class="btn btn-danger" (click)="deleteRecipe(i)">Delete</button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
