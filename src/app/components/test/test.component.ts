@@ -1,49 +1,95 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthServicesService } from 'src/app/Service/auth-services.service';
+import { Component } from '@angular/core';
+
+interface Recipe {
+  recipeId: string;
+  product: string;
+  material: string;
+  element: string;
+  quantity: string;
+  price: string;
+}
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent implements OnInit {
-  rawElements: any[] = [];
-  selectedMaterialName: string | undefined;
-  columnData: string[] = [];
-  filteredData: any[] = [];
-  materialDropdownData: string[] = [];
-  selectedFilteredItem: any;
+export class TestComponent {
+  addingRecipe: boolean = false;
+  selectedProduct: string = '';
+  selectedMaterial: string = '';
+  selectedElement: string = '';
+  quantity: string = '';
+  price: string = '';
+  recipes: Recipe[] = [];
 
-  constructor(private authService: AuthServicesService) {}
+  saveRecipe() {
+    if (
+      this.selectedProduct &&
+      this.selectedMaterial &&
+      this.selectedElement &&
+      this.quantity &&
+      this.price
+    ) {
+      if (!this.addingRecipe) {
+        const newRecipe: Recipe = {
+          recipeId: '',
+          product: this.selectedProduct,
+          material: this.selectedMaterial,
+          element: this.selectedElement,
+          quantity: this.quantity,
+          price: this.price
+        };
 
-  ngOnInit() {
-    this.authService.getRawElements().subscribe(
-      (data: any) => {
-        this.rawElements = data.matdata.filter((item: any) => item.name !== "");
-        if (this.rawElements.length > 0) {
-          this.columnData = Object.keys(this.rawElements[0]).filter((key) => key !== 'id' && key !== 'name') as string[];
+        this.recipes.push(newRecipe);
+
+        // Show success alert message or perform any desired action here
+
+        // Reset form values
+        this.resetForm();
+      } else {
+        // Update existing recipe
+        const updatedRecipe = this.recipes.find(
+          recipe =>
+            recipe.product === this.selectedProduct &&
+            recipe.recipeId === ''
+        );
+
+        if (updatedRecipe) {
+          updatedRecipe.material = this.selectedMaterial;
+          updatedRecipe.element = this.selectedElement;
+          updatedRecipe.quantity = this.quantity;
+          updatedRecipe.price = this.price;
+
+          // Show success alert message or perform any desired action here
+
+          // Reset form values
+          this.resetForm();
+          this.addingRecipe = false;
         }
-      },
-      (error: any) => {
-        console.error('Failed to fetch raw elements:', error);
       }
-    );
-  }
-
-  onNameSelected(name: string) {
-    this.selectedMaterialName = name;
-    const selectedItem = this.rawElements.find((item: any) => item.name === name);
-    if (selectedItem) {
-      this.filteredData = [selectedItem];
-      this.materialDropdownData = Object.values(selectedItem).slice(2).filter((value: any, index: number) => typeof value === 'string' && value !== '' && index > 15) as string[];
-    } else {
-      this.filteredData = [];
-      this.materialDropdownData = [];
     }
-    this.selectedFilteredItem = undefined; // Reset the selected item
   }
 
-  getItemLabel(item: any): string {
-    return this.columnData.map(column => item[column]).join(' | ');
+  addAnotherRecipe(product: string) {
+    const newRecipe: Recipe = {
+      recipeId: '',
+      product: product,
+      material: '',
+      element: '',
+      quantity: '',
+      price: ''
+    };
+    this.recipes.push(newRecipe);
+    this.addingRecipe = true;
+    this.selectedProduct = product;
+  }
+
+  resetForm() {
+    this.selectedProduct = '';
+    this.selectedMaterial = '';
+    this.selectedElement = '';
+    this.quantity = '';
+    this.price = '';
   }
 }

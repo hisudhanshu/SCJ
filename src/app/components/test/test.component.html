@@ -5,37 +5,137 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h1 class="card-title">Raw Material Management</h1><br>
-            <div class="row">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <select [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)">
-                      <option disabled selected>-- Select Name --</option>
-                      <option *ngFor="let item of rawElements" [value]="item.name">
-                        {{ item.name }}
-                      </option>
+            <h1 class="card-title">Create Recipe</h1><br>
+            <div class="container">
+              <div class="row">
+                <ng-container *ngIf="!addingRecipe">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="product-name">Select Product</label>
+                      <select class="form-control" id="productselect" name="product" [(ngModel)]="selectedProduct">
+                        <option value="">-- Select --</option>
+                        <option>Bottle</option>
+                        <option>Household</option>
+                        <option>Polythiene</option>
+                      </select>
+                    </div>
+                  </div>
+                </ng-container>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="material-name">Select Material</label>
+                    <select class="form-control" id="materialselect" name="material" [(ngModel)]="selectedMaterial">
+                      <option value="">-- Select --</option>
+                      <option>Polymer</option>
+                      <option>Nylon</option>
+                      <option>Ethyline</option>
                     </select>
+                  </div>
+                </div>
+                <div class="col-md-6"><br>
+                  <div class="form-group">
+                    <label for="element-name">Select Element</label>
+                    <select class="form-control" id="elementselect" name="element" [(ngModel)]="selectedElement">
+                      <option value="">-- Select --</option>
+                      <option>Monomers</option>
+                      <option>Chloride</option>
+                      <option>Agent</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6"><br>
+                  <div class="form-group">
+                    <label for="quantity">Add Quantity</label>
+                    <input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity"
+                      [(ngModel)]="quantity">
+                  </div>
+                </div>
+                <div class="col-md-6"><br>
+                  <div class="form-group">
+                    <label for="priceper">Price Per/unit</label>
+                    <input type="text" class="form-control" id="price" name="price" placeholder="Enter price per unit"
+                      [(ngModel)]="price">
+                  </div>
+                </div>
+                <div class="col-md-12"><br><br>
+                  <div class="form-group">
+                    <button class="btn btn-primary mr-2" style="margin-inline: 5px;"
+                      (click)="saveRecipe()">Save</button>
+                    <button class="btn btn-secondary" id="cancelButton">Cancel</button>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- <div class="row" *ngIf="selectedMaterialName">
-              <div class="col-md-12">
-                <h5>Filtered Data:</h5>
-                <select [(ngModel)]="selectedFilteredItem">
-                  <option disabled selected>-- Select Item --</option>
-                  <ng-container *ngFor="let item of filteredData">
-                    <option *ngFor="let column of columnData" [value]="item[column]">
-                     {{ item[column] }}
-                    </option>
-                  </ng-container>
-                </select>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
+    </div>
+    <br>
+    <div class="container" *ngIf="recipes.length > 0">
+      <h4><strong>Recipe Table</strong></h4>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Recipe ID</th>
+            <th>Product</th>
+            <th>Material</th>
+            <th>Element</th>
+            <th>Quantity</th>
+            <th>Price per Unit</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let recipe of recipes; let i = index">
+            <tr>
+              <td>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="recipe.recipeId" placeholder="Enter recipe ID">
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="recipe.product" placeholder="Enter product name">
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <select class="form-control" [(ngModel)]="recipe.material">
+                    <option value="">-- Select --</option>
+                    <option>Polymer</option>
+                    <option>Nylon</option>
+                    <option>Ethyline</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <select class="form-control" [(ngModel)]="recipe.element">
+                    <option value="">-- Select --</option>
+                    <option>Monomers</option>
+                    <option>Chloride</option>
+                    <option>Agent</option>
+                  </select>
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="recipe.quantity" placeholder="Enter quantity">
+                </div>
+              </td>
+              <td>
+                <div class="form-group">
+                  <input type="text" class="form-control" [(ngModel)]="recipe.price" placeholder="Enter price per unit">
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-primary" style="padding: 5px 10px;"
+                  (click)="addAnotherRecipe(recipe.product)">Add Recipe</button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
   </section>
 </main>
