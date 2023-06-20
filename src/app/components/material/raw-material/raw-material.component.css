@@ -19,4 +19,15 @@ table {
   .error-message {
     color: red;
   }
+  tr:hover {
+    background-color: #e6e6e6;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  button:active {
+    background-color: #3e8e41;
+  }
   

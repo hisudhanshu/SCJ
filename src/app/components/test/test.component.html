@@ -96,7 +96,7 @@
         <tbody>
           <tr *ngFor="let recipe of createdRecipes; let i = index">
             <!-- <td>{{ recipe }}</td> -->
-            <td>{{ recipe.name }} Recipe</td>
+            <td>{{ recipe.name }} Recipe {{ i + 1 }}</td>
             <td>{{ recipe.selectedRawMaterial }}</td>
             <td>{{ recipe.selectedTypeOfPolymer }}</td>
             <td>{{ recipe.selectedCustomerName }}</td>
