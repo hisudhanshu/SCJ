@@ -11,9 +11,6 @@ interface Recipe {
 }
 
 interface CreatedRecipe extends Recipe {
-  selectedTypeOfPolymer: string | undefined;
-  selectedCustomerName: string | undefined;
-  selectedRawElement: string | undefined;
 }
 
 @Component({
@@ -34,12 +31,6 @@ export class TestComponent {
   ];
   recipes: Recipe[] = [];
   createdRecipes: CreatedRecipe[] = [];
-  selectedTypeOfPolymer: string | undefined;
-  selectedCustomerName: string | undefined;
-  selectedRawElement: string | undefined;
-  typesOfPolymers: string[] = ['Polymer 1', 'Polymer 2', 'Polymer 3'];
-  customerNames: string[] = ['Customer 1', 'Customer 2', 'Customer 3'];
-  rawElements: string[] = ['Element 1', 'Element 2', 'Element 3'];
   editIndex: number | undefined;
 
   openRecipeScreen() {
@@ -72,9 +63,6 @@ export class TestComponent {
       selectedRawMaterial: undefined
     };
     this.recipes.push(newRecipe);
-    this.selectedTypeOfPolymer = ''; // Reset the selected type of polymer
-    this.selectedCustomerName = ''; // Reset the selected customer name
-    this.selectedRawElement = ''; // Reset the selected raw element
   }
 
   removeRecipe(index: number) {
@@ -89,9 +77,6 @@ export class TestComponent {
   createProduct() {
     if (
       !this.selectedProduct ||
-      !this.selectedTypeOfPolymer ||
-      !this.selectedCustomerName ||
-      !this.selectedRawElement ||
       this.recipes.length === 0 ||
       this.recipes.some(recipe => recipe.selectedRawMaterial === undefined)
     ) {
@@ -102,9 +87,6 @@ export class TestComponent {
     const createdRecipe: CreatedRecipe = {
       name: this.recipes[0].name,
       selectedRawMaterial: this.recipes[0].selectedRawMaterial,
-      selectedTypeOfPolymer: this.selectedTypeOfPolymer,
-      selectedCustomerName: this.selectedCustomerName,
-      selectedRawElement: this.selectedRawElement
     };
     this.createdRecipes.push(createdRecipe);
     this.saveRecipesToLocalStorage();
@@ -115,9 +97,6 @@ export class TestComponent {
   editRecipe(index: number) {
     const recipe = this.createdRecipes[index];
     this.selectedProduct = recipe.name;
-    this.selectedTypeOfPolymer = recipe.selectedTypeOfPolymer;
-    this.selectedCustomerName = recipe.selectedCustomerName;
-    this.selectedRawElement = recipe.selectedRawElement;
     this.recipes = [{ name: recipe.name, selectedRawMaterial: recipe.selectedRawMaterial }];
     this.addedRawMaterials = [];
     this.selectedProductDisplay = undefined;
@@ -150,8 +129,5 @@ export class TestComponent {
     this.selectedRawMaterial = undefined;
     this.addedRawMaterials = [];
     this.recipes = [];
-    this.selectedTypeOfPolymer = undefined;
-    this.selectedCustomerName = undefined;
-    this.selectedRawElement = undefined;
   }
 }
