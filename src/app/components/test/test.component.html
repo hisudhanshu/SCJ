@@ -11,8 +11,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="product-name">Select Product</label>
-                    <select class="form-control" id="productselect" [(ngModel)]="selectedProduct"
-                      (change)="openRecipeScreen()">
+                    <select class="form-control" id="productselect" [(ngModel)]="selectedProduct" (change)="openRecipeScreen()">
                       <option value="">-- Select --</option>
                       <option value="Bottle">Bottle</option>
                       <option value="Household">Household</option>
@@ -33,16 +32,59 @@
                             <input type="text" class="form-control" placeholder="Enter here" id="recipeName{{ i }}" [(ngModel)]="recipe.name">
                           </div>
                           <div class="form-group">
+                            <label for="Customer">Customer Name</label>
+                            <select class="form-control" id="Customer">
+                              <option value="">-- Select --</option>
+                              <option value="">SCJ</option>
+                              <option value="">Clay</option>
+                              <option value="">Claylogix</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="polymer">Types of Polymer</label>
+                            <select class="form-control" id="polymer">
+                              <option value="">-- Select --</option>
+                              <option value="">Oxidation</option>
+                              <option value="">SOft Rubber</option>
+                              <option value="">Agent-high</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="Category">Category</label>
+                            <select class="form-control" id="polymer">
+                              <option value="">-- Select --</option>
+                              <option value="">Category A</option>
+                              <option value="">Category B</option>
+                              <option value="">Category C</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="Brand">Brand</label>
+                            <select class="form-control" id="polymer">
+                              <option value="">-- Select --</option>
+                              <option value="">Brand A</option>
+                              <option value="">Brand B</option>
+                              <option value="">Brand C</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
                             <label for="recipeRawMaterial{{ i }}">Raw Material</label>
-                            <select class="form-control" id="recipeRawMaterial{{ i }}"
-                              [(ngModel)]="recipe.selectedRawMaterial">
+                            <select class="form-control" id="recipeRawMaterial{{ i }}" [(ngModel)]="recipe.selectedRawMaterial">
                               <option value="">-- Select --</option>
                               <option *ngFor="let material of rawMaterials" [value]="material.id">{{ material.name }}</option>
                             </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="recipeElement{{ i }}">Raw Element</label>
+                            <select class="form-control" id="recipeElement{{ i }}" [(ngModel)]="recipe.selectedElement">
+                              <option value="">-- Select --</option>
+                              <option value="">Nylon</option>
+                              <option *ngFor="let element of addedElements" [value]="element.id">{{ element.name }}</option>
+                            </select>
                           </div><br>
                           <button class="btn btn-primary" style="margin-inline: 5px;" (click)="addRecipe()" [disabled]="isRecipeUpdated">Add</button>
-                          <button class="btn btn-danger" style="margin-inline: 5px;"  (click)="removeRecipe(i)" [disabled]="isRecipeUpdated">Remove</button>
-                          <button class="btn btn-success" style="margin-inline: 5px;"  (click)="updateRecipe()" *ngIf="isRecipeUpdated">Update</button>
+                          <button class="btn btn-danger" style="margin-inline: 5px;" (click)="removeRecipe(i)" [disabled]="isRecipeUpdated">Remove</button>
+                          <button class="btn btn-success" style="margin-inline: 5px;" (click)="updateRecipe()" *ngIf="isRecipeUpdated">Update</button>
                         </div>
                       </div>
                     </ng-container>
@@ -59,29 +101,51 @@
     </div>
   </section>
   <section class="section">
-    <div class="container"><br>
-      <h4>Created Recipes</h4><br>
-      <table>
-        <thead>
-          <tr>
-            <!-- <th>Product</th> -->
-            <th>Recipe Name</th>
-            <th>Raw Material</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let recipe of createdRecipes; let i = index">
-            <!-- <td>{{ recipe }}</td> -->
-            <td>{{ recipe.name }} Recipe</td>
-            <td>{{ (recipe.selectedRawMaterial) }}</td>
-            <td>
-              <button type="button" class="btn btn-primary" style="margin-inline: 5px;" (click)="editRecipe(i)" [disabled]="isRecipeUpdated">Edit</button>
-              <button type="button" class="btn btn-danger" (click)="deleteRecipe(i)" [disabled]="isRecipeUpdated">Delete</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title">Manage Recipes</h1><br>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Product Name</th>
+                        <th>Customer Name</th>
+                        <th>Types of Polymer</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th>Raw Material</th>
+                        <th>Raw Element</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let recipe of createdRecipes; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ recipe.name }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{ (recipe.selectedRawMaterial) }}</td>
+                        <td>{{ (recipe.selectedElement) }}</td>
+                        <td>
+                          <button class="btn btn-primary" style="margin-inline: 5px;" (click)="editRecipe(i)">Edit</button>
+                          <button class="btn btn-danger" style="margin-inline: 5px;" (click)="deleteRecipe(i)">Delete</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </main>

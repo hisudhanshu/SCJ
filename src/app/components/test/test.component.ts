@@ -8,6 +8,7 @@ interface RawMaterial {
 interface Recipe {
   name: string;
   selectedRawMaterial: number | undefined;
+  selectedElement: number | undefined; // New property for element dropdown
 }
 
 interface CreatedRecipe extends Recipe {
@@ -23,11 +24,18 @@ export class TestComponent {
   selectedProduct: string | undefined;
   selectedProductDisplay: string | undefined;
   selectedRawMaterial: number | undefined;
+  selectedElement: number | undefined; // New property for element dropdown
   addedRawMaterials: RawMaterial[] = [];
+  addedElements: RawMaterial[] = []; // New array for added elements
   rawMaterials: RawMaterial[] = [
     { id: 1, name: 'Material 1' },
     { id: 2, name: 'Material 2' },
     { id: 3, name: 'Material 3' }
+  ];
+  elements: RawMaterial[] = [ // New array for elements dropdown
+    { id: 1, name: 'Element 1' },
+    { id: 2, name: 'Element 2' },
+    { id: 3, name: 'Element 3' }
   ];
   recipes: Recipe[] = [];
   createdRecipes: CreatedRecipe[] = [];
@@ -41,7 +49,8 @@ export class TestComponent {
       if (matchingRecipes.length > 0) {
         this.recipes = matchingRecipes.map((recipe) => ({
           name: recipe.name,
-          selectedRawMaterial: recipe.selectedRawMaterial
+          selectedRawMaterial: recipe.selectedRawMaterial,
+          selectedElement: recipe.selectedElement
         }));
       } else {
         this.recipes = [];
@@ -59,10 +68,19 @@ export class TestComponent {
     }
   }
 
+  addElement() { // New method for adding elements
+    const selectedElement = this.elements.find(el => el.id === this.selectedElement);
+    if (selectedElement) {
+      this.addedElements.push(selectedElement);
+      this.selectedElement = undefined;
+    }
+  }
+
   addRecipe() {
     const newRecipe: Recipe = {
       name: this.selectedProduct || '',
-      selectedRawMaterial: undefined
+      selectedRawMaterial: undefined,
+      selectedElement: undefined // Initialize element dropdown value as undefined
     };
     this.recipes.push(newRecipe);
   }
@@ -77,11 +95,16 @@ export class TestComponent {
     return material ? material.name : '';
   }
 
+  getElementName(elementId: number | undefined): string { // New method to get element name
+    const element = this.elements.find(el => el.id === elementId);
+    return element ? element.name : '';
+  }
+
   createProduct() {
     if (
       !this.selectedProduct ||
       this.recipes.length === 0 ||
-      this.recipes.some(recipe => recipe.selectedRawMaterial === undefined)
+      this.recipes.some(recipe => recipe.selectedRawMaterial === undefined || recipe.selectedElement === undefined) // Check for undefined element selection
     ) {
       alert('Please fill in all fields.');
       return;
@@ -90,9 +113,10 @@ export class TestComponent {
     const createdRecipe: CreatedRecipe = {
       name: this.recipes[0].name,
       selectedRawMaterial: this.recipes[0].selectedRawMaterial,
+      selectedElement: this.recipes[0].selectedElement // Add selectedElement property to createdRecipe
     };
 
-    const isRecipeExists = this.createdRecipes.some((recipe) => recipe.name === createdRecipe.name && recipe.selectedRawMaterial === createdRecipe.selectedRawMaterial);
+    const isRecipeExists = this.createdRecipes.some((recipe) => recipe.name === createdRecipe.name && recipe.selectedRawMaterial === createdRecipe.selectedRawMaterial && recipe.selectedElement === createdRecipe.selectedElement); // Check for matching recipe including element selection
     if (isRecipeExists) {
       alert('Recipe already exists.');
       return;
@@ -112,8 +136,9 @@ export class TestComponent {
   editRecipe(index: number) {
     const recipe = this.createdRecipes[index];
     this.selectedProduct = recipe.name;
-    this.recipes = [{ name: recipe.name, selectedRawMaterial: recipe.selectedRawMaterial }];
+    this.recipes = [{ name: recipe.name, selectedRawMaterial: recipe.selectedRawMaterial, selectedElement: recipe.selectedElement }];
     this.addedRawMaterials = [];
+    this.addedElements = []; // Reset addedElements array
     this.selectedProductDisplay = undefined;
     this.isEditing = true;
     this.editIndex = index;
@@ -129,7 +154,7 @@ export class TestComponent {
     if (
       !this.selectedProduct ||
       this.recipes.length === 0 ||
-      this.recipes.some(recipe => recipe.selectedRawMaterial === undefined)
+      this.recipes.some(recipe => recipe.selectedRawMaterial === undefined || recipe.selectedElement === undefined) // Check for undefined element selection
     ) {
       alert('Please fill in all fields.');
       return;
@@ -138,9 +163,10 @@ export class TestComponent {
     const updatedRecipe: CreatedRecipe = {
       name: this.recipes[0].name,
       selectedRawMaterial: this.recipes[0].selectedRawMaterial,
+      selectedElement: this.recipes[0].selectedElement // Add selectedElement property to updatedRecipe
     };
 
-    const isRecipeExists = this.createdRecipes.some((recipe, index) => index !== this.editIndex && recipe.name === updatedRecipe.name && recipe.selectedRawMaterial === updatedRecipe.selectedRawMaterial);
+    const isRecipeExists = this.createdRecipes.some((recipe, index) => index !== this.editIndex && recipe.name === updatedRecipe.name && recipe.selectedRawMaterial === updatedRecipe.selectedRawMaterial && recipe.selectedElement === updatedRecipe.selectedElement); // Check for matching recipe including element selection
     if (isRecipeExists) {
       alert('Recipe already exists.');
       return;
@@ -173,7 +199,9 @@ export class TestComponent {
     this.selectedProduct = undefined;
     this.selectedProductDisplay = undefined;
     this.selectedRawMaterial = undefined;
+    this.selectedElement = undefined; // Reset selectedElement
     this.addedRawMaterials = [];
+    this.addedElements = []; // Reset addedElements array
     this.recipes = [];
     this.isEditing = false;
     this.editIndex = undefined;
