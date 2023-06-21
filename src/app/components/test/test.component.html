@@ -40,15 +40,16 @@
                               <option *ngFor="let material of rawMaterials" [value]="material.id">{{ material.name }}</option>
                             </select>
                           </div><br>
-                          <button class="btn btn-primary" style="margin-inline: 5px;" (click)="addRecipe()">Add Recipe</button>
-                          <button class="btn btn-danger" style="margin-inline: 5px;"  (click)="removeRecipe(i)">Remove Recipe</button>
+                          <button class="btn btn-primary" style="margin-inline: 5px;" (click)="addRecipe()" [disabled]="isRecipeUpdated">Add</button>
+                          <button class="btn btn-danger" style="margin-inline: 5px;"  (click)="removeRecipe(i)" [disabled]="isRecipeUpdated">Remove</button>
+                          <button class="btn btn-success" style="margin-inline: 5px;"  (click)="updateRecipe()" *ngIf="isRecipeUpdated">Update</button>
                         </div>
                       </div>
                     </ng-container>
                   </div>
                 </div>
                 <div class="col-md-4"><br>
-                  <button class="btn btn-primary" (click)="createProduct()">Create</button>
+                  <button class="btn btn-primary" (click)="createProduct()" [disabled]="isRecipeUpdated">Create</button>
                 </div>
               </div>
             </div>
@@ -72,11 +73,11 @@
         <tbody>
           <tr *ngFor="let recipe of createdRecipes; let i = index">
             <!-- <td>{{ recipe }}</td> -->
-            <td>{{ recipe.name }} Recipe {{ i + 1 }}</td>
-            <td>{{ recipe.selectedRawMaterial }}</td>
+            <td>{{ recipe.name }} Recipe</td>
+            <td>{{ (recipe.selectedRawMaterial) }}</td>
             <td>
-              <button type="button" class="btn btn-primary" style="margin-inline: 5px;" (click)="editRecipe(i)">Edit</button>
-              <button type="button" class="btn btn-danger" (click)="deleteRecipe(i)">Delete</button>
+              <button type="button" class="btn btn-primary" style="margin-inline: 5px;" (click)="editRecipe(i)" [disabled]="isRecipeUpdated">Edit</button>
+              <button type="button" class="btn btn-danger" (click)="deleteRecipe(i)" [disabled]="isRecipeUpdated">Delete</button>
             </td>
           </tr>
         </tbody>

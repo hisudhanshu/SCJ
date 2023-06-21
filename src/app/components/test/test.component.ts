@@ -32,6 +32,7 @@ export class TestComponent {
   recipes: Recipe[] = [];
   createdRecipes: CreatedRecipe[] = [];
   editIndex: number | undefined;
+  isRecipeUpdated: boolean = false;
 
   openRecipeScreen() {
     this.selectedProductDisplay = this.selectedProduct;
@@ -46,6 +47,7 @@ export class TestComponent {
         this.recipes = [];
         this.addRecipe();
       }
+      this.isRecipeUpdated = false;
     }
   }
 
@@ -67,6 +69,7 @@ export class TestComponent {
 
   removeRecipe(index: number) {
     this.recipes.splice(index, 1);
+    this.isRecipeUpdated = false;
   }
 
   getRawMaterialName(rawMaterialId: number | undefined): string {
@@ -88,7 +91,19 @@ export class TestComponent {
       name: this.recipes[0].name,
       selectedRawMaterial: this.recipes[0].selectedRawMaterial,
     };
-    this.createdRecipes.push(createdRecipe);
+
+    const isRecipeExists = this.createdRecipes.some((recipe) => recipe.name === createdRecipe.name && recipe.selectedRawMaterial === createdRecipe.selectedRawMaterial);
+    if (isRecipeExists) {
+      alert('Recipe already exists.');
+      return;
+    }
+
+    if (this.isEditing && this.editIndex !== undefined) {
+      this.createdRecipes[this.editIndex] = createdRecipe;
+    } else {
+      this.createdRecipes.push(createdRecipe);
+    }
+
     this.saveRecipesToLocalStorage();
 
     this.resetForm();
@@ -100,12 +115,43 @@ export class TestComponent {
     this.recipes = [{ name: recipe.name, selectedRawMaterial: recipe.selectedRawMaterial }];
     this.addedRawMaterials = [];
     this.selectedProductDisplay = undefined;
+    this.isEditing = true;
     this.editIndex = index;
+    this.isRecipeUpdated = true;
   }
 
   deleteRecipe(index: number) {
     this.createdRecipes.splice(index, 1);
     this.saveRecipesToLocalStorage();
+  }
+
+  updateRecipe() {
+    if (
+      !this.selectedProduct ||
+      this.recipes.length === 0 ||
+      this.recipes.some(recipe => recipe.selectedRawMaterial === undefined)
+    ) {
+      alert('Please fill in all fields.');
+      return;
+    }
+
+    const updatedRecipe: CreatedRecipe = {
+      name: this.recipes[0].name,
+      selectedRawMaterial: this.recipes[0].selectedRawMaterial,
+    };
+
+    const isRecipeExists = this.createdRecipes.some((recipe, index) => index !== this.editIndex && recipe.name === updatedRecipe.name && recipe.selectedRawMaterial === updatedRecipe.selectedRawMaterial);
+    if (isRecipeExists) {
+      alert('Recipe already exists.');
+      return;
+    }
+
+    this.createdRecipes[this.editIndex!] = updatedRecipe;
+
+    this.saveRecipesToLocalStorage();
+
+    this.resetForm();
+    this.isRecipeUpdated = false;
   }
 
   ngOnInit() {
@@ -129,5 +175,7 @@ export class TestComponent {
     this.selectedRawMaterial = undefined;
     this.addedRawMaterials = [];
     this.recipes = [];
+    this.isEditing = false;
+    this.editIndex = undefined;
   }
 }
