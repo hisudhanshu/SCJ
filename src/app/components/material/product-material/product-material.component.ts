@@ -14,6 +14,8 @@ export class ProductMaterialComponent {
       this.recipeData = {
         material: 'Hard Plastic',
         element: 'Nylon',
+        category: 'category A',
+        brand: 'Indica',
         customerName: 'SCJ',
         polymer: 'Polymer 1'
       };
@@ -21,6 +23,8 @@ export class ProductMaterialComponent {
       this.recipeData = {
         material: 'Oxidation',
         element: 'Polytheine',
+        category: 'category B',
+        brand: 'Kent',
         customerName: 'Clay',
         polymer: 'Polymer 2'
       };
@@ -28,6 +32,8 @@ export class ProductMaterialComponent {
       this.recipeData = {
         material: 'Ethyliene',
         element: 'Element',
+        category: 'category C',
+        brand: 'TATA',
         customerName: 'Claylogix',
         polymer: 'Polymer 3'
       };

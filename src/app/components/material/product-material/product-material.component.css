@@ -28,4 +28,34 @@ tr:hover {
   .recipe-table td:first-child {
     font-weight: bold;
   }
+  /*  */
+  .recipe-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .recipe-list li {
+    flex: 1 0 50%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    padding: 10px;
+  }
+  
+  .recipe-list li:nth-child(odd) {
+    border-right: none;
+  }
+  
+  .recipe-list li:nth-child(even) {
+    border-left: none;
+  }
+  
+  .recipe-list li strong {
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
   
