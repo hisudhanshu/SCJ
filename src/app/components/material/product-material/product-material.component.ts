@@ -12,23 +12,23 @@ export class ProductMaterialComponent {
   openRecipeScreen(): void {
     if (this.selectedProduct === 'household') {
       this.recipeData = {
-        material: 'Material 1',
-        element: 'Element 1',
-        customerName: 'Customer 1',
+        material: 'Hard Plastic',
+        element: 'Nylon',
+        customerName: 'SCJ',
         polymer: 'Polymer 1'
       };
     } else if (this.selectedProduct === 'bottle') {
       this.recipeData = {
-        material: 'Material 2',
-        element: 'Element 2',
-        customerName: 'Customer 2',
+        material: 'Oxidation',
+        element: 'Polytheine',
+        customerName: 'Clay',
         polymer: 'Polymer 2'
       };
     } else if (this.selectedProduct === 'plastic') {
       this.recipeData = {
-        material: 'Material 3',
-        element: 'Element 3',
-        customerName: 'Customer 3',
+        material: 'Ethyliene',
+        element: 'Element',
+        customerName: 'Claylogix',
         polymer: 'Polymer 3'
       };
     } else {
