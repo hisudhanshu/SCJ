@@ -1,48 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-
-interface Product {
-  name: string;
-  recipe: string;
-  isEditing: boolean;
-}
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-product-material',
   templateUrl: './product-material.component.html',
   styleUrls: ['./product-material.component.css']
 })
-export class ProductMaterialComponent implements OnInit {
-  products: Product[] = [];
-  newProduct: Product = { name: '', recipe: '', isEditing: false };
+export class ProductMaterialComponent {
+  selectedProduct: string = '';
+  recipeData: any = {}; // Initialize empty recipe data
 
-  ngOnInit() {
-    // You can add any initial data or API call here
-  }
-
-  addProduct() {
-    if (this.newProduct.name.trim() !== '' && this.newProduct.recipe.trim() !== '') {
-      this.products.push({ ...this.newProduct, isEditing: false });
-      this.newProduct = { name: '', recipe: '', isEditing: false };
+  openRecipeScreen(): void {
+    if (this.selectedProduct === 'household') {
+      this.recipeData = {
+        material: 'Material 1',
+        element: 'Element 1',
+        customerName: 'Customer 1',
+        polymer: 'Polymer 1'
+      };
+    } else if (this.selectedProduct === 'bottle') {
+      this.recipeData = {
+        material: 'Material 2',
+        element: 'Element 2',
+        customerName: 'Customer 2',
+        polymer: 'Polymer 2'
+      };
+    } else if (this.selectedProduct === 'plastic') {
+      this.recipeData = {
+        material: 'Material 3',
+        element: 'Element 3',
+        customerName: 'Customer 3',
+        polymer: 'Polymer 3'
+      };
+    } else {
+      // No product selected, reset the recipe data
+      this.recipeData = {};
     }
-  }
-
-  deleteProduct(index: number) {
-    this.products.splice(index, 1);
-  }
-
-  editProduct(index: number) {
-    this.products[index].isEditing = true;
-  }
-
-  saveProduct(index: number) {
-    this.products[index].isEditing = false;
-  }
-
-  cancelEdit(index: number) {
-    this.products[index].isEditing = false;
-  }
-
-  trackByIndex(index: number, item: any) {
-    return index;
   }
 }
