@@ -32,19 +32,19 @@ export class RawMaterialComponent implements OnInit {
   insertData() {
     const newMaterial: RawMaterial = { ...this.newRawMaterial };
 
-   // Check if the material already exists
-const existingMaterial = this.rawMaterials.find(material => material.name.toLowerCase() === newMaterial.name.toLowerCase());
-if (existingMaterial) {
-  this.errorMessage = 'Material already exists.';
-  this.successMessage = '';
+    // Check if the material already exists
+    const existingMaterial = this.rawMaterials.find(material => material.name.toLowerCase() === newMaterial.name.toLowerCase());
+    if (existingMaterial) {
+      this.errorMessage = 'Material already exists.';
+      this.successMessage = '';
 
-  // Hide success message after 2 seconds
-  setTimeout(() => {
-    this.successMessage = '';
-  }, 2000);
+      // Hide success message after 2 seconds
+      setTimeout(() => {
+        this.successMessage = '';
+      }, 2000);
 
-  return;
-}
+      return;
+    }
 
     this.authService.insertData(newMaterial).subscribe(
       (response: any) => {
@@ -98,12 +98,12 @@ if (existingMaterial) {
       }
       return;
     }
-  
+
     // Filter the rawMaterials array based on the searchKeyword
     const filteredMaterials = this.rawMaterials.filter(material =>
       material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
     );
-  
+
     // Update the rawMaterials array with the filtered results
     this.rawMaterials = filteredMaterials;
   }

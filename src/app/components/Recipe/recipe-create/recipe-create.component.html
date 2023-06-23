@@ -13,8 +13,8 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="product-name">Product</label>
-                          <select class="form-control" id="productselect" [(ngModel)]="recipeData.product" name="product">
-                            <option value="">-- Select --</option>
+                          <select class="form-select" id="productselect" [(ngModel)]="recipeData.product" name="product">
+                            <option value="" selected>-- Select --</option>
                             <option>Bottle</option>
                             <option>Household</option>
                             <option>Polythiene</option>
@@ -24,8 +24,8 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="product-category">Product Category</label>
-                          <select class="form-control" id="product-category" [(ngModel)]="recipeData.productCategory" name="productCategory">
-                            <option value="">-- Select --</option>
+                          <select class="form-select" id="product-category" [(ngModel)]="recipeData.productCategory" name="productCategory">
+                            <option value="" selected>-- Select --</option>
                             <option>Category A</option>
                             <option>Category B</option>
                             <option>Category C</option>
@@ -35,8 +35,8 @@
                       <div class="col-md-6"><br>
                         <div class="form-group">
                           <label for="brand-name">Brand</label>
-                          <select class="form-control" id="brand-name" [(ngModel)]="recipeData.brand" name="brand">
-                            <option value="">-- Select --</option>
+                          <select class="form-select" id="brand-name" [(ngModel)]="recipeData.brand" name="brand">
+                            <option value="" selected>-- Select --</option>
                             <option>Brand A</option>
                             <option>Brand B</option>
                             <option>Brand C</option>
@@ -46,8 +46,8 @@
                       <div class="col-md-6"><br>
                         <div class="form-group">
                           <label for="customer-name">Customer Name</label>
-                          <select class="form-control" id="customer-name" [(ngModel)]="recipeData.customerName" name="customerName">
-                            <option value="">-- Select --</option>
+                          <select class="form-select" id="customer-name" [(ngModel)]="recipeData.customerName" name="customerName">
+                            <option value="" selected>-- Select --</option>
                             <option>Clay</option>
                             <option>Claylogix</option>
                             <option>SCJ</option>
@@ -61,17 +61,27 @@
                           <input id="raw-material-polymer" class="form-control" type="text" placeholder="Enter polymer" name="raw-material-polymer" [(ngModel)]="recipeData.polymerType">
                         </div>
                       </div>
-                      <div class="col-md-6">
-                        <br>
-                        <div class="form-group">
-                          <label for="raw-material">Raw Materials</label>
-                            <select class="form-control" [(ngModel)]="recipeData.rawMaterials" [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)">
-                              <option>-- Select --</option>
-                              <option *ngFor="let item of rawElements" [value]="item.name">{{ item.name }}</option>
+                      <div class="col-md-6"><br>
+                        <label for="rawMaterialdata">Raw Material</label>
+                        <select id="rawMaterialdata" class="form-select" name="rawMaterialdata" [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)" required>
+                          <option value="" selected>-- Select --</option>
+                          <option *ngFor="let item of rawElements" [value]="item.name">{{ item.name }}</option>
+                        </select>
+                      </div>
+                      <!-- <div class="col-md-6"><br>
+                        <label for="rawElementdata">Raw Element</label>
+                        <div class="row">
+                          <div class="col-md-12">
+                            <select id="rawElementdata" class="form-select" name="rawElementdata" [(ngModel)]="selectedFilteredItem" required>
+                              <option value="" selected>-- Select --</option>
+                              <ng-container *ngFor="let item of filteredData">
+                                <option *ngFor="let column of columnData" [value]="item[column]">{{ item[column] }}</option>
+                              </ng-container>
                             </select>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
+                    </div>
                     <br>
                     <br>
                     <button type="submit" class="btn btn-primary">Save</button>

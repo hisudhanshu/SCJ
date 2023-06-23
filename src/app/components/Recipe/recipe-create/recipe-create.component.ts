@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
+import { Component, OnInit } from '@angular/core';
+
+interface Recipe {
+  recipeName: string;
+  recipeCode: string;
+  rawMaterial: string;
+  rawMaterialElement: string;
+  rawMaterialRequired: number;
+}
 
 @Component({
   selector: 'app-recipe-create',
@@ -18,9 +26,11 @@ export class RecipeCreateComponent implements OnInit {
   columnData: string[] = [];
   filteredData: any[] = [];
   materialDropdownData: string[] = [];
+  selectedRawMaterial: string | undefined;
+  selectedRawElement: string | undefined;
   selectedFilteredItem: any;
 
-  constructor(private authService: AuthServicesService) {}
+  constructor(private authService: AuthServicesService) { }
 
   ngOnInit() {
     this.authService.getRawElements().subscribe(
@@ -46,7 +56,8 @@ export class RecipeCreateComponent implements OnInit {
       this.filteredData = [];
       this.materialDropdownData = [];
     }
-    this.selectedFilteredItem = undefined; // Reset the selected item
+    this.selectedRawMaterial = undefined; // Reset the selected raw material
+    this.selectedRawElement = undefined; // Reset the selected raw element
   }
 
   getItemLabel(item: any): string {
@@ -70,6 +81,8 @@ export class RecipeCreateComponent implements OnInit {
         if (confirm("Are you sure you want to save the recipe?")) {
           // Add new recipe to the savedRecipes array with an ID
           this.recipeData.id = this.nextId;
+          this.recipeData.rawMaterials = this.selectedRawMaterial; // Include the selected raw material
+          this.recipeData.rawElements = this.selectedRawElement; // Include the selected raw element
           this.savedRecipes.push({ ...this.recipeData });
           this.nextId++;
           alert("Recipe created successfully!");
@@ -78,11 +91,15 @@ export class RecipeCreateComponent implements OnInit {
     }
 
     this.recipeData = {}; // Reset the form data
+    this.selectedRawMaterial = undefined; // Reset the selected raw material
+    this.selectedRawElement = undefined; // Reset the selected raw element
   }
 
   editRecipe(index: number) {
     if (!this.isEditing || confirm("Are you sure you want to discard the changes and edit this recipe?")) {
       this.recipeData = { ...this.savedRecipes[index] };
+      this.selectedRawMaterial = this.recipeData.rawMaterials; // Set the selected raw material
+      this.selectedRawElement = this.recipeData.rawElements; // Set the selected raw element
       this.isEditing = true;
       this.editingIndex = index;
     }
