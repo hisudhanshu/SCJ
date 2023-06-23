@@ -12,30 +12,36 @@
                   <div class="row">
                     <div class="col-md-6">
                       <label for="name">Products</label>
-                      <select id="name" class="form-select" aria-label="Default select example" [(ngModel)]="selectedProduct">
+                      <select id="name" class="form-select" aria-label="Default select example"
+                        [(ngModel)]="selectedProduct">
                         <option value="">Select</option>
                         <option *ngFor="let product of products" [value]="product.name">{{product["name"]}}</option>
                       </select>
                     </div>
                     <div class="col-md-6">
                       <label for="quantity">Material Type</label>
-                      <select id="quantity" class="form-select" aria-label="Default select example" [(ngModel)]="selectedQuantity">
+                      <select id="quantity" class="form-select" aria-label="Default select example"
+                        [(ngModel)]="selectedQuantity">
                         <option selected>Select</option>
-                        <option *ngFor="let product of products" [value]="product.quantity">{{ product.quantity }}</option>
+                        <option *ngFor="let product of products" [value]="product.quantity">{{ product.quantity }}
+                        </option>
                       </select>
                     </div>
                     <div class="col-md-6"><br>
                       <label for="price">Raw Material</label>
-                      <select id="price" class="form-select" aria-label="Default select example" [(ngModel)]="selectedPrice">
+                      <select id="price" class="form-select" aria-label="Default select example"
+                        [(ngModel)]="selectedPrice">
                         <option selected>Select</option>
                         <option *ngFor="let product of products" [value]="product.price">{{ product.price }}</option>
                       </select>
                     </div>
                     <div class="col-md-6"><br>
                       <label for="inStock">Raw Element</label>
-                      <select id="inStock" class="form-select" aria-label="Default select example" [(ngModel)]="selectedInStock">
+                      <select id="inStock" class="form-select" aria-label="Default select example"
+                        [(ngModel)]="selectedInStock">
                         <option selected>Select</option>
-                        <option *ngFor="let product of products" [value]="product.inStock">{{ product.inStock }}</option>
+                        <option *ngFor="let product of products" [value]="product.inStock">{{ product.inStock }}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -43,7 +49,8 @@
                     <br>
                     <br><br>
                     <strong>
-                      <button type="submit" class="btn btn-primary mr-md-3 mb-2 mb-md-0" (click)="saveData()">Save</button>
+                      <button type="submit" class="btn btn-primary mr-md-3 mb-2 mb-md-0"
+                        (click)="saveData()">Save</button>
                     </strong>
                     <strong>
                       <!-- <button type="submit" class="btn btn-secondary mr-md-3 mb-2 mb-md-0" style="margin-left: 10px;">Reset</button> -->
@@ -57,9 +64,9 @@
       </div>
     </div>
   </section>
-  
+
   <br><br>
-  
+
   <!-- Display saved data in a table -->
   <div class="row">
     <div class="col-lg-12">
