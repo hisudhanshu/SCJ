@@ -83,16 +83,34 @@ export class RecipeCreateComponent implements OnInit {
           this.recipeData.id = this.nextId;
           this.recipeData.rawMaterials = this.selectedRawMaterial; // Include the selected raw material
           this.recipeData.rawElements = this.selectedRawElement; // Include the selected raw element
+
+          // Insert recipe data using the AuthServicesService
+          this.authService.insertRecipe(this.recipeData).subscribe(
+            (response: any) => {
+              // Handle successful insertion
+              console.log(response);
+              alert("Recipe created successfully!");
+
+              // Reset form data and dropdown options
+              this.recipeData = {};
+              this.selectedMaterialName = undefined;
+              this.filteredData = [];
+              this.materialDropdownData = [];
+              this.selectedRawMaterial = undefined;
+              this.selectedRawElement = undefined;
+            },
+            (error: any) => {
+              // Handle error
+              console.error('Failed to insert recipe:', error);
+              alert("Failed to create recipe!");
+            }
+          );
+
           this.savedRecipes.push({ ...this.recipeData });
           this.nextId++;
-          alert("Recipe created successfully!");
         }
       }
     }
-
-    this.recipeData = {}; // Reset the form data
-    this.selectedRawMaterial = undefined; // Reset the selected raw material
-    this.selectedRawElement = undefined; // Reset the selected raw element
   }
 
   editRecipe(index: number) {
@@ -102,6 +120,16 @@ export class RecipeCreateComponent implements OnInit {
       this.selectedRawElement = this.recipeData.rawElements; // Set the selected raw element
       this.isEditing = true;
       this.editingIndex = index;
+
+      // Update dropdown options based on selected raw material
+      const selectedItem = this.rawElements.find((item: any) => item.name === this.selectedRawMaterial);
+      if (selectedItem) {
+        this.filteredData = [selectedItem];
+        this.materialDropdownData = Object.values(selectedItem).slice(2).filter((value: any, index: number) => typeof value === 'string' && value !== '' && index > 15) as string[];
+      } else {
+        this.filteredData = [];
+        this.materialDropdownData = [];
+      }
     }
   }
 

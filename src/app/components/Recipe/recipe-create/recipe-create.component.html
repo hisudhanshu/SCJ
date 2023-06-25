@@ -65,10 +65,10 @@
                             name="raw-material-polymer" [(ngModel)]="recipeData.polymerType">
                         </div>
                       </div>
-                      <div class="col-md-6"><br>
+                      <div class="col-md-6">
+                        <br>
                         <label for="rawMaterialdata">Raw Material</label>
-                        <select id="rawMaterialdata" class="form-select" name="rawMaterialdata"
-                          [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)" required>
+                        <select id="rawMaterialdata" class="form-select" name="rawMaterialdata" [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)" required>
                           <option value="" selected>-- Select --</option>
                           <option *ngFor="let item of rawElements" [value]="item.name">{{ item.name }}</option>
                         </select>
