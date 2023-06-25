@@ -105,6 +105,12 @@ export class AuthServicesService {
     return this.http.get(url, { headers: headers });
   }
 
+  insertRecipe(data: any): Observable<any> {
+    const url = `${this.apiUrl}`; // Replace with your insert API endpoint
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
+    return this.http.post(`${baseUrl}Authentication/InsertRecipe`, data, { headers });
+  }
+
   // Update Product Master data API url Call here
  
 //  updateProductData(data: any): Observable<any> {
