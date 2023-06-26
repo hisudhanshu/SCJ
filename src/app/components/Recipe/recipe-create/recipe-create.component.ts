@@ -29,6 +29,7 @@ export class RecipeCreateComponent implements OnInit {
   selectedRawMaterial: string | undefined;
   selectedRawElement: string | undefined;
   selectedFilteredItem: any;
+  managementDropdownData: string[] = ['Management A', 'Management B', 'Management C']; // Dropdown data for Management
 
   constructor(private authService: AuthServicesService) { }
 
