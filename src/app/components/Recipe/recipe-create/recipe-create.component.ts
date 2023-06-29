@@ -34,6 +34,7 @@ export class RecipeCreateComponent implements OnInit {
 
   selectedMaterialId: number = 0;
   selectedMaterialData: Material | undefined;
+  isEditing: boolean = false;
 
   selectedMaterial: string = '';
   elements: Element[] = [];
@@ -96,8 +97,8 @@ export class RecipeCreateComponent implements OnInit {
     if (this.isEditMode) {
       this.products[this.editIndex] = { ...this.newProduct };
       this.saveProducts();
-      this.isEditMode = false;
-      this.editIndex = -1;
+      // this.isEditMode = false;
+      // this.editIndex = -1;
     } else {
       const confirmCreate = confirm("Are you sure you want to create this product?");
       if (confirmCreate) {
@@ -178,5 +179,9 @@ export class RecipeCreateComponent implements OnInit {
     // Perform the necessary logic to delete the material
     // e.g., call an API or update the data in your service
     console.log('Deleting material:', material);
+  }
+  
+  toggleEditing() {
+    this.isEditing = !this.isEditing;
   }
 }
