@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-interface RawMaterial {
+interface Material {
   id: number;
   name: string;
 }
 
-interface Recipe {
-  name: string;
-  selectedRawMaterial: number | undefined;
-  selectedElement: number | undefined; // New property for element dropdown
+interface Element {
+  id: number;
+  data: string;
 }
 
-interface CreatedRecipe extends Recipe {
+interface RequestData {
+  id: number;
+  [key: string]: string | number;
 }
 
 @Component({
@@ -19,191 +20,86 @@ interface CreatedRecipe extends Recipe {
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent {
-  isEditing: boolean = false;
-  selectedProduct: string | undefined;
-  selectedProductDisplay: string | undefined;
-  selectedRawMaterial: number | undefined;
-  selectedElement: number | undefined; // New property for element dropdown
-  addedRawMaterials: RawMaterial[] = [];
-  addedElements: RawMaterial[] = []; // New array for added elements
-  rawMaterials: RawMaterial[] = [
+export class TestComponent implements OnInit {
+  materials: Material[] = [
     { id: 1, name: 'Material 1' },
     { id: 2, name: 'Material 2' },
     { id: 3, name: 'Material 3' }
   ];
-  elements: RawMaterial[] = [ // New array for elements dropdown
-    { id: 1, name: 'Element 1' },
-    { id: 2, name: 'Element 2' },
-    { id: 3, name: 'Element 3' }
-  ];
-  recipes: Recipe[] = [];
-  createdRecipes: CreatedRecipe[] = [];
-  editIndex: number | undefined;
-  isRecipeUpdated: boolean = false;
+  selectedMaterial: string = '';
+  elements: Element[] = [];
 
-  openRecipeScreen() {
-    this.selectedProductDisplay = this.selectedProduct;
-    if (this.selectedProduct) {
-      const matchingRecipes = this.createdRecipes.filter((recipe) => recipe.name === this.selectedProduct);
-      if (matchingRecipes.length > 0) {
-        this.recipes = matchingRecipes.map((recipe) => ({
-          name: recipe.name,
-          selectedRawMaterial: recipe.selectedRawMaterial,
-          selectedElement: recipe.selectedElement
-        }));
-      } else {
-        this.recipes = [];
-        this.addRecipe();
-      }
-      this.isRecipeUpdated = false;
-    }
-  }
+  constructor() {}
 
-  addRawMaterial() {
-    const selectedMaterial = this.rawMaterials.find(mat => mat.id === this.selectedRawMaterial);
+  ngOnInit() {}
+
+  onMaterialChange() {
+    const selectedMaterial = this.materials.find((material) => material.id.toString() === this.selectedMaterial);
+    this.elements = [];
+
     if (selectedMaterial) {
-      this.addedRawMaterials.push(selectedMaterial);
-      this.selectedRawMaterial = undefined;
+      const existingElementData = this.getElementDataFromDatabase(selectedMaterial.id);
+      if (existingElementData) {
+        this.elements = existingElementData;
+      } else {
+        for (let i = 1; i <= 5; i++) {
+          this.elements.push({ id: selectedMaterial.id, data: '' });
+        }
+      }
     }
   }
 
-  addElement() { // New method for adding elements
-    const selectedElement = this.elements.find(el => el.id === this.selectedElement);
-    if (selectedElement) {
-      this.addedElements.push(selectedElement);
-      this.selectedElement = undefined;
-    }
+  getElementDataFromDatabase(materialId: number): Element[] | null {
+    // Here you can implement the logic to fetch the element data from the database using the materialId.
+    // If data is available, return it as an array of Element objects.
+    // If data is not available, return null.
+    // Example:
+    // Call a service method to fetch the data from the database and return the response.
+    // return this.authService.getElementData(materialId);
+    return null; // Replace this with your implementation
   }
 
-  addRecipe() {
-    const newRecipe: Recipe = {
-      name: this.selectedProduct || '',
-      selectedRawMaterial: undefined,
-      selectedElement: undefined // Initialize element dropdown value as undefined
-    };
-    this.recipes.push(newRecipe);
+  saveElementDataToDatabase(materialId: number, elements: Element[]): void {
+    const requestData: RequestData = { id: materialId };
+
+    elements.forEach((element, index) => {
+      requestData[String.fromCharCode(65 + index)] = element.data;
+    });
+
+    // Simulating a save operation with a delay
+    setTimeout(() => {
+      console.log('Save successful:', requestData);
+      alert('Data saved successfully!');
+    }, 2000);
   }
 
-  removeRecipe(index: number) {
-    this.recipes.splice(index, 1);
-    this.isRecipeUpdated = false;
+  addElement() {
+    const newElementId = this.elements.length + 1;
+    this.elements.push({ id: Number(this.selectedMaterial), data: '' });
   }
 
-  getRawMaterialName(rawMaterialId: number | undefined): string {
-    const material = this.rawMaterials.find(mat => mat.id === rawMaterialId);
-    return material ? material.name : '';
+  removeElement(index: number) {
+    this.elements.splice(index, 1);
   }
 
-  getElementName(elementId: number | undefined): string { // New method to get element name
-    const element = this.elements.find(el => el.id === elementId);
-    return element ? element.name : '';
-  }
+  save() {
+    console.log('Save button clicked!');
+    console.log('Selected Material:', this.selectedMaterial);
+    console.log('Elements:', this.elements);
 
-  createProduct() {
-    if (
-      !this.selectedProduct ||
-      this.recipes.length === 0 ||
-      this.recipes.some(recipe => recipe.selectedRawMaterial === undefined || recipe.selectedElement === undefined) // Check for undefined element selection
-    ) {
-      alert('Please fill in all fields.');
+    const hasEmptyElement = this.elements.some((element) => element.data === '');
+
+    if (this.selectedMaterial === '' || hasEmptyElement) {
+      alert('Please enter all element data');
       return;
     }
 
-    const createdRecipe: CreatedRecipe = {
-      name: this.recipes[0].name,
-      selectedRawMaterial: this.recipes[0].selectedRawMaterial,
-      selectedElement: this.recipes[0].selectedElement // Add selectedElement property to createdRecipe
-    };
-
-    const isRecipeExists = this.createdRecipes.some((recipe) => recipe.name === createdRecipe.name && recipe.selectedRawMaterial === createdRecipe.selectedRawMaterial && recipe.selectedElement === createdRecipe.selectedElement); // Check for matching recipe including element selection
-    if (isRecipeExists) {
-      alert('Recipe already exists.');
-      return;
-    }
-
-    if (this.isEditing && this.editIndex !== undefined) {
-      this.createdRecipes[this.editIndex] = createdRecipe;
-    } else {
-      this.createdRecipes.push(createdRecipe);
-    }
-
-    this.saveRecipesToLocalStorage();
-
-    this.resetForm();
-  }
-
-  editRecipe(index: number) {
-    const recipe = this.createdRecipes[index];
-    this.selectedProduct = recipe.name;
-    this.recipes = [{ name: recipe.name, selectedRawMaterial: recipe.selectedRawMaterial, selectedElement: recipe.selectedElement }];
-    this.addedRawMaterials = [];
-    this.addedElements = []; // Reset addedElements array
-    this.selectedProductDisplay = undefined;
-    this.isEditing = true;
-    this.editIndex = index;
-    this.isRecipeUpdated = true;
-  }
-
-  deleteRecipe(index: number) {
-    this.createdRecipes.splice(index, 1);
-    this.saveRecipesToLocalStorage();
-  }
-
-  updateRecipe() {
-    if (
-      !this.selectedProduct ||
-      this.recipes.length === 0 ||
-      this.recipes.some(recipe => recipe.selectedRawMaterial === undefined || recipe.selectedElement === undefined) // Check for undefined element selection
-    ) {
-      alert('Please fill in all fields.');
-      return;
-    }
-
-    const updatedRecipe: CreatedRecipe = {
-      name: this.recipes[0].name,
-      selectedRawMaterial: this.recipes[0].selectedRawMaterial,
-      selectedElement: this.recipes[0].selectedElement // Add selectedElement property to updatedRecipe
+    const dataToSave = {
+      selectedMaterial: this.selectedMaterial,
+      elements: this.elements
     };
 
-    const isRecipeExists = this.createdRecipes.some((recipe, index) => index !== this.editIndex && recipe.name === updatedRecipe.name && recipe.selectedRawMaterial === updatedRecipe.selectedRawMaterial && recipe.selectedElement === updatedRecipe.selectedElement); // Check for matching recipe including element selection
-    if (isRecipeExists) {
-      alert('Recipe already exists.');
-      return;
-    }
-
-    this.createdRecipes[this.editIndex!] = updatedRecipe;
-
-    this.saveRecipesToLocalStorage();
-
-    this.resetForm();
-    this.isRecipeUpdated = false;
-  }
-
-  ngOnInit() {
-    this.loadRecipesFromLocalStorage();
-  }
-
-  private loadRecipesFromLocalStorage() {
-    const storedRecipes = localStorage.getItem('createdRecipes');
-    if (storedRecipes) {
-      this.createdRecipes = JSON.parse(storedRecipes);
-    }
-  }
-
-  private saveRecipesToLocalStorage() {
-    localStorage.setItem('createdRecipes', JSON.stringify(this.createdRecipes));
-  }
-
-  private resetForm() {
-    this.selectedProduct = undefined;
-    this.selectedProductDisplay = undefined;
-    this.selectedRawMaterial = undefined;
-    this.selectedElement = undefined; // Reset selectedElement
-    this.addedRawMaterials = [];
-    this.addedElements = []; // Reset addedElements array
-    this.recipes = [];
-    this.isEditing = false;
-    this.editIndex = undefined;
+    // Save the element data to the database
+    this.saveElementDataToDatabase(Number(this.selectedMaterial), this.elements);
   }
 }

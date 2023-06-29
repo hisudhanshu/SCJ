@@ -1,27 +1,89 @@
-body {
-    font-family: Arial, sans-serif;
-}
-
-h1 {
-    margin-top: 0;
-}
-
-table {
-    border-collapse: collapse;
+/* CSS for the main section */
+.main {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  /* CSS for the card */
+  .card {
+    margin-top: 20px;
+  }
+  
+  /* CSS for the card body */
+  .card-body {
+    padding: 20px;
+  }
+  
+  /* CSS for the navbar */
+  .navbar {
+    background-color: #f8f9fa; /* Change this to your desired background color */
+  }
+  
+  /* CSS for the navbar links */
+  .navbar-nav .nav-link {
+    color: #333; /* Change this to your desired link color */
+  }
+  
+  /* CSS for the table */
+  table {
     width: 100%;
-}
-
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  /* CSS for the table header */
+  thead th {
+    background-color: #f8f9fa; /* Change this to your desired background color */
     text-align: left;
-}
-
-table th {
-    background-color: #f2f2f2;
-    font-weight: normal;
-}
-
-.total {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Change this to your desired border color */
+  }
+  
+  /* CSS for the table body */
+  tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Change this to your desired border color */
+  }
+  
+  /* CSS for the table footer */
+  tfoot .total {
     font-weight: bold;
-}
+  }
+  
+  /* CSS for the footer */
+  footer {
+    margin-top: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  /* CSS for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    border: 1px solid #ddd; /* Add border style and color */
+  }
+  
+  /* CSS for the table header */
+  thead th {
+    background-color: #f8f9fa; /* Change this to your desired background color */
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Change this to your desired border color */
+  }
+  
+  /* CSS for the table body */
+  tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Change this to your desired border color */
+  }
+  
+  /* CSS for the table footer */
+  tfoot .total {
+    font-weight: bold;
+  }
+  
+  /* CSS for the footer */
+  footer {
+    margin-top: 20px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  

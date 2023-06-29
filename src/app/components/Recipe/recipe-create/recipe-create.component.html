@@ -1,158 +1,197 @@
-<main id="main" class="main">
+<main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+  <div class="pagetitle"></div>
   <section class="section">
-    <div class="container-fluid">
+    <div class="row">
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">Recipe Create</h1><br>
+            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Create
+                Recipe</strong></h1>
             <div class="row">
               <div class="col-lg-12">
                 <div>
-                  <form (submit)="onSubmit()">
-                    <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="product-name">Product</label>
-                          <select class="form-select" id="productselect" [(ngModel)]="recipeData.product"
-                            name="product">
-                            <option value="" selected>-- Select --</option>
-                            <option>Bottle</option>
-                            <option>Household</option>
-                            <option>Polythiene</option>
-                          </select>
-                        </div>
+                  <form (ngSubmit)="createOrUpdateProduct()" #productForm="ngForm">
+                    <!--  Changes WF -->
+                    <div class="row">
+                      <div class="col-md-4">
+                        <label for="productCategory">Product Category</label>
+                        <select id="productCategory" class="form-select" name="productCategory"
+                          [(ngModel)]="newProduct.category" required>
+                          <option value="">--Select--</option>
+                          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                        </select>
                       </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label for="product-category">Product Category</label>
-                          <select class="form-select" id="product-category" [(ngModel)]="recipeData.productCategory"
-                            name="productCategory">
-                            <option value="" selected>-- Select --</option>
-                            <option>Category A</option>
-                            <option>Category B</option>
-                            <option>Category C</option>
-                          </select>
-                        </div>
+                      <div class="col-md-4">
+                        <label for="productBrand">Brand</label>
+                        <select id="productBrand" class="form-select" name="productBrand" [(ngModel)]="newProduct.brand"
+                          required>
+                          <option value="">--Select--</option>
+                          <option value="Tata">Tata</option>
+                          <option value="Indica">Indica</option>
+                          <option value="Govt">Govt</option>
+                        </select>
                       </div>
-                      <div class="col-md-6"><br>
-                        <div class="form-group">
-                          <label for="brand-name">Brand</label>
-                          <select class="form-select" id="brand-name" [(ngModel)]="recipeData.brand" name="brand">
-                            <option value="" selected>-- Select --</option>
-                            <option>Brand A</option>
-                            <option>Brand B</option>
-                            <option>Brand C</option>
-                          </select>
-                        </div>
+                      <div class="col-md-4">
+                        <label for="productName">Product Name</label>
+                        <input type="text" placeholder="Enter here" id="productName" class="form-control"
+                          name="productName" [(ngModel)]="newProduct.name" required>
                       </div>
-                      <div class="col-md-6"><br>
-                        <div class="form-group">
-                          <label for="customer-name">Customer Name</label>
-                          <select class="form-select" id="customer-name" [(ngModel)]="recipeData.customerName"
-                            name="customerName">
-                            <option value="" selected>-- Select --</option>
-                            <option>Clay</option>
-                            <option>Claylogix</option>
-                            <option>SCJ</option>
-                          </select>
-                        </div>
+                      <div class="col-md-4"><br>
+                        <label for="customerName">Customer Name</label>
+                        <select id="customerName" class="form-select" name="customerName"
+                          [(ngModel)]="newProduct.customer" required>
+                          <option value="">--Select--</option>
+                          <option value="SCJ">SCJ</option>
+                          <option value="Clay">Clay</option>
+                          <option value="Claylogix">Claylogix</option>
+                        </select>
                       </div>
-                      <div class="col-md-6">
-                        <br>
-                        <div class="form-group">
-                          <label for="raw-material-polymer">Type of Polymer</label>
-                          <input id="raw-material-polymer" class="form-control" type="text" placeholder="Enter polymer"
-                            name="raw-material-polymer" [(ngModel)]="recipeData.polymerType">
-                        </div>
+                      <div class="col-md-4"><br>
+                        <label for="clientType">Client Type</label>
+                        <select id="clientType" class="form-select" name="clientType"
+                          [(ngModel)]="newProduct.clientType" required>
+                          <option value="">--Select--</option>
+                          <option value="B2B">B2B</option>
+                          <option value="B2C">B2C</option>
+                          <option value="Direct">Direct</option>
+                        </select>
                       </div>
-                      <div class="col-md-6"><br>
-                        <div class="form-group">
-                          <label for="management-name">Raw Material</label>
-                          <select class="form-select" id="management-name" [(ngModel)]="recipeData.managementName"
-                            name="managementName">
-                            <option value="" selected>-- Select --</option>
-                            <option>Fluoride</option>
-                            <option>Polyethylene (PE)</option>
-                            <option>Polypropylene (PP)</option>
-                            <option>Polyvinyl chloride (PVC)</option>
-                            <option>Acrylonitrile</option>
-                            <option>Oxidation</option>
-                          </select>
-                        </div>
-                      </div>
-                      <!-- <div class="col-md-6">
-                        <br>
-                        <label for="rawMaterialdata">Raw Material</label>
-                        <select id="rawMaterialdata" class="form-select" name="rawMaterialdata" [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)" required>
-                          <option value="" selected>-- Select --</option>
-                          <option *ngFor="let item of rawElements" [value]="item.name">{{ item.name }}</option>
+                      <br>
+                      <!-- <div class="col-md-4"><br>
+                        <label for="recipe">Recipe</label>
+                        <select id="recipe" class="form-select" name="recipe"
+                          [(ngModel)]="newProduct.recipe" required>
+                          <option value="">--Select--</option>
+                          <option value="B2B">B2B</option>
+                          <option value="B2C">B2C</option>
+                          <option value="Direct">Direct</option>
                         </select>
                       </div> -->
-                      <!-- <div class="col-md-6"><br>
-                        <label for="rawElementdata">Raw Element</label>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <select id="rawElementdata" class="form-select" name="rawElementdata" [(ngModel)]="selectedFilteredItem" required>
-                              <option value="" selected>-- Select --</option>
-                              <ng-container *ngFor="let item of filteredData">
-                                <option *ngFor="let column of columnData" [value]="item[column]">{{ item[column] }}</option>
-                              </ng-container>
-                            </select>
-                          </div>
-                        </div>
-                      </div> -->
+                      <div class="col-md-4"><br>
+                        <label for="selectedMaterial">Select Material</label>
+                        <select id="selectedMaterial" class="form-select" name="selectedMaterial"
+                          (change)="onMaterialChange($event)" [(ngModel)]="newProduct.material" required>
+                          <option value="">-- Select --</option>
+                          <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
+                        </select>
+                      </div>
+
+                      <!-- Hide these dropdowns by default -->
+                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                        <label for="code">M_code</label>
+                        <select id="code" class="form-select" name="code" [(ngModel)]="newProduct.mcode" required>
+                          <option value="">-- Select --</option>
+                          <option *ngFor="let material of materials" [value]="material.m_code">{{ material.m_code }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                        <label for="type">M_type</label>
+                        <select id="type" class="form-select" name="type" [(ngModel)]="newProduct.mtype" required>
+                          <option value="">-- Select --</option>
+                          <option *ngFor="let material of materials" [value]="material.m_type">{{ material.m_type }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                        <label for="cost">M_cost</label>
+                        <select id="cost" class="form-select" name="cost"[(ngModel)]="newProduct.mcost" required>
+                          <option value="">-- Select --</option>
+                          <option *ngFor="let material of materials" [value]="material.m_cost">{{ material.m_cost }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                        <label for="vendor">M_Vendor</label>
+                        <select id="vendor" class="form-select" name="vendor"[(ngModel)]="newProduct.mvendor" required>
+                          <option value="">-- Select --</option>
+                          <option *ngFor="let material of materials" [value]="material.m_Vendor">{{ material.m_Vendor }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                        <label for="M_inventory">M_inventory</label>
+                        <select id="M_inventory" class="form-select" name="M_inventory"[(ngModel)]="newProduct.minventory" required>
+                          <option value="">-- Select --</option>
+                          <option *ngFor="let material of materials" [value]="material.m_inventory">{{
+                            material.m_inventory }}</option>
+                        </select>
+                      </div>
+                      <!-- Display selected material's data in a table -->
+                      <div *ngIf="selectedMaterialData"><br><br>
+                        <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Raw Material Data</h5>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>M_code</th>
+                              <th>M_type</th>
+                              <th>M_cost</th>
+                              <th>M_Vendor</th>
+                              <th>M_inventory</th>
+                              <th>Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>{{ selectedMaterialData.id }}</td>
+                              <td>{{ selectedMaterialData.name }}</td>
+                              <td>{{ selectedMaterialData.m_code }}</td>
+                              <td>{{ selectedMaterialData.m_type }}</td>
+                              <td>{{ selectedMaterialData.m_cost }}</td>
+                              <td>{{ selectedMaterialData.m_Vendor }}</td>
+                              <td>{{ selectedMaterialData.m_inventory }}</td>
+                              <td>
+                                <button class="btn btn-primary" style="margin-inline: 4px;">Edit</button>
+                                <button class="btn btn-danger">Delete</button>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
-                    <br>
-                    <br>
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <button type="button" class="btn btn-success" *ngIf="isEditing" (click)="onSubmit()">Update
-                      Recipe</button>
-                  </form>
+                    <br><br>
+                    <button type="submit" class="btn-primary" [disabled]="!productForm.form.valid">{{
+                      isEditMode ? 'Update' : 'Create' }}</button>
+                  </form><br><br>
+                  <div>
+                    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+                    <!-- New success message element -->
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Id</th>
+                          <th>Product Name</th>
+                          <th>Product Category</th>
+                          <th>Raw Material</th>
+                          <th>Brand</th>
+                          <th>Client Type</th>
+                          <th>Customer Name</th>
+                          <th>Action</th>
+                          <!-- New column for edit/remove buttons -->
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let product of products; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ product.name }}</td>
+                          <td>{{ product.category }}</td>
+                          <td>{{ product.material }}</td> 
+                          <td>{{ product.brand }}</td>
+                          <td>{{ product.clientType }}</td>
+                          <td>{{ product.customer }}</td>
+                          <td>
+                            <button class="btn-primary" (click)="editProduct(i)">Edit</button>
+                            <button class="btn-danger" (click)="removeProduct(i)">Delete</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="section" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-    <div class="container-fluid">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <h1 class="card-title">Saved Recipes</h1>
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Product</th>
-                  <th>Product Category</th>
-                  <th>Brand</th>
-                  <th>Customer Name</th>
-                  <th>Type of Polymer</th>
-                  <th>Raw Material</th>
-                  <!-- <th>Raw Materials</th> -->
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let recipe of savedRecipes; let i = index">
-                  <td>{{ recipe.id }}</td>
-                  <td>{{ recipe.product }}</td>
-                  <td>{{ recipe.productCategory }}</td>
-                  <td>{{ recipe.brand }}</td>
-                  <td>{{ recipe.customerName }}</td>
-                  <td>{{ recipe.polymerType }}</td>
-                  <td>{{ recipe.managementName}}</td>
-                  <!-- <td>{{ recipe.rawMaterials }}</td> -->
-                  <td>
-                    <button type="button" class="btn btn-primary" (click)="editRecipe(i)">Edit</button>
-                    <button type="button" class="btn btn-danger" (click)="deleteRecipe(i)">Delete</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>

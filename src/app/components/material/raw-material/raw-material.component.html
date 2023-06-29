@@ -11,13 +11,13 @@
             <div *ngIf="errorMessage" class="alert alert-danger">
               {{ errorMessage }}
             </div>
-            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">Raw Material</h1><br>
+            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Create Raw Material</strong></h1><br>
             <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-              <form class="search-form d-flex align-items-center" method="POST" action="#">
+              <form class="search-form d-flex align-items-center" (submit)="search()">
                 <div class="input-group">
                   <input class="form-control" id="searchKeyword" name="query" type="text" placeholder="Search.."
-                    title="Enter search keyword" [(ngModel)]="searchKeyword" (input)="search()" />
-                  <button type="submit" class="btn btn-primary" title="Search" (click)="search()">
+                    title="Enter search keyword" [(ngModel)]="searchKeyword" />
+                  <button type="submit" class="btn btn-primary" title="Search">
                     Search
                   </button>
                 </div>
@@ -25,11 +25,35 @@
             </div>
             <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif;">
               <div class="col-lg-12">
-                <div>
-                  <div class="col-md-4"><br><br>
-                    <label for="name">Add Material</label><br><br>
-                    <input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched"
-                      placeholder="Enter Material" id="name" [(ngModel)]="newRawMaterial.name" />
+                <div class="row">
+                  <div class="col-md-4" style="margin-top: 30px;">
+                    <label for="name">Add Material</label>
+                    <input type="text" class="form-control" placeholder="Enter Material" id="name"
+                      [(ngModel)]="newRawMaterial.name" />
+                  </div>
+                  <div class="col-md-4" style="margin-top: 30px;">
+                    <label for="nametype">Add Material Type</label>
+                    <input type="text" class="form-control" placeholder="Enter Material" id="nametype"
+                      [(ngModel)]="newRawMaterial.MaterialType" />
+                  </div>
+                  <div class="col-md-4" style="margin-top: 30px;">
+                    <label for="namecost">Add Current Cost</label>
+                    <input type="number" class="form-control" placeholder="Enter Material Cost" id="namecost"
+                      [(ngModel)]="newRawMaterial.CurrentCost" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-md-4" style="margin-top: 30px;">
+                    <label for="namevendor">Add Vendor</label>
+                    <input type="text" class="form-control" placeholder="Enter Vendor" id="namevendor"
+                      [(ngModel)]="newRawMaterial.VendorInfo" />
+                  </div>
+                  <div class="col-md-4"style="margin-top: 30px;">
+                    <label for="namelevel">Add Inventory Level</label>
+                    <input type="text" class="form-control" placeholder="Enter Inventory Level" id="namelevel"
+                      [(ngModel)]="newRawMaterial.InventoryLevel" />
                   </div>
                 </div>
                 <div class="col-12 mt-5 mb-4 text-right">
@@ -39,23 +63,59 @@
             </div>
             <div class="row mt-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
               <div class="col-lg-12">
-                <table class="table">
+                <!-- <table class="table">
                   <thead>
                     <tr>
-                      <th>Sn.</th>
+                      <th>Id</th>
                       <th>Material Name</th>
+                      <th>Material Type</th>
+                      <th>Current Cost</th>
+                      <th>Vendor Info</th>
+                      <th>Inventory Level</th>
                       <th>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr *ngFor="let material of rawMaterials; let i = index">
-                      <td>{{ i + 1 }}</td>
+                      <td>{{ material.id }}</td>
                       <td>
                         <ng-container *ngIf="!isEditing[i]">
                           {{ material.name }}
                         </ng-container>
                         <ng-container *ngIf="isEditing[i]">
                           <input type="text" class="form-control" [(ngModel)]="material.name">
+                        </ng-container>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing[i]">
+                          {{ material.MaterialType }}
+                        </ng-container>
+                        <ng-container *ngIf="isEditing[i]">
+                          <input type="text" class="form-control" [(ngModel)]="material.MaterialType">
+                        </ng-container>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing[i]">
+                          {{ material.CurrentCost }}
+                        </ng-container>
+                        <ng-container *ngIf="isEditing[i]">
+                          <input type="number" class="form-control" [(ngModel)]="material.CurrentCost">
+                        </ng-container>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing[i]">
+                          {{ material.VendorInfo }}
+                        </ng-container>
+                        <ng-container *ngIf="isEditing[i]">
+                          <input type="text" class="form-control" [(ngModel)]="material.VendorInfo">
+                        </ng-container>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing[i]">
+                          {{ material.InventoryLevel }}
+                        </ng-container>
+                        <ng-container *ngIf="isEditing[i]">
+                          <input type="text" class="form-control" [(ngModel)]="material.InventoryLevel">
                         </ng-container>
                       </td>
                       <td>
@@ -69,7 +129,7 @@
                       </td>
                     </tr>
                   </tbody>
-                </table>
+                </table> -->
               </div>
             </div>
           </div>

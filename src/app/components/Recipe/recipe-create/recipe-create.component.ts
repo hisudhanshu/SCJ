@@ -1,12 +1,24 @@
-import { AuthServicesService } from 'src/app/Service/auth-services.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
-interface Recipe {
-  recipeName: string;
-  recipeCode: string;
-  rawMaterial: string;
-  rawMaterialElement: string;
-  rawMaterialRequired: number;
+interface Material {
+  id: number;
+  name: string;
+  m_code: string;
+  m_type: string;
+  m_cost: string;
+  m_Vendor: string;
+  m_inventory: string;
+}
+
+interface Element {
+  id: number;
+  data: string;
+}
+
+interface RequestData {
+  id: number;
+  [key: string]: string | number;
 }
 
 @Component({
@@ -15,30 +27,63 @@ interface Recipe {
   styleUrls: ['./recipe-create.component.css']
 })
 export class RecipeCreateComponent implements OnInit {
-  recipeData: any = {};
-  savedRecipes: any[] = [];
-  isEditing: boolean = false;
-  editingIndex: number = -1;
-  rawMaterialsData: any[] = []; // Variable to store the raw materials data
-  nextId: number = 1; // Variable to track the next recipe ID
+  materials: Material[] = [];
+  showMaterialDropdowns = false;
+
+  // Existing code...
+
+  selectedMaterialId: number = 0;
+  selectedMaterialData: Material | undefined;
+
+  selectedMaterial: string = '';
+  elements: Element[] = [];
+
+  categories: string[] = ['Category A', 'Category B', 'Category C'];
+  products: any[] = [];
+  successMessage: string = '';
+
+  newProduct: any = {
+    name: '',
+    category: '',
+    brand: '',
+    customer: '',
+    material: '',
+    clientType: '',
+    rawMaterial: '',
+    mcode:'',
+    mtype:'',
+    mcost:'',
+    mvendor:'',
+    minventory:'',
+    rawElement: ''
+  };
+
+  isEditMode: boolean = false;
+  editIndex: number = -1;
+
   rawElements: any[] = [];
   selectedMaterialName: string | undefined;
   columnData: string[] = [];
   filteredData: any[] = [];
   materialDropdownData: string[] = [];
-  selectedRawMaterial: string | undefined;
-  selectedRawElement: string | undefined;
   selectedFilteredItem: any;
-  managementDropdownData: string[] = ['Management A', 'Management B', 'Management C']; // Dropdown data for Management
 
   constructor(private authService: AuthServicesService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.authService.getMaterials().subscribe((response: any) => {
+      if (response.isSuccess && response.matdata !== null) {
+        this.materials = response.matdata;
+      } else {
+        console.log('API request failed or no data received');
+      }
+    });
+    this.loadProducts();
     this.authService.getRawElements().subscribe(
       (data: any) => {
-        this.rawElements = data.matdata.filter((item: any) => item.name !== "");
+        this.rawElements = data.matdata.filter((item: any) => item.name !== '');
         if (this.rawElements.length > 0) {
-          this.columnData = Object.keys(this.rawElements[0]).filter((key) => key !== 'id' && key !== 'name') as string[];
+          this.columnData = Object.keys(this.rawElements[0]).filter((key)=> key !== 'id' && key !== 'name') as string[];
         }
       },
       (error: any) => {
@@ -47,97 +92,91 @@ export class RecipeCreateComponent implements OnInit {
     );
   }
 
-  onNameSelected(name: string) {
-    this.selectedMaterialName = name;
-    const selectedItem = this.rawElements.find((item: any) => item.name === name);
-    if (selectedItem) {
-      this.filteredData = [selectedItem];
-      this.materialDropdownData = Object.values(selectedItem).slice(2).filter((value: any, index: number) => typeof value === 'string' && value !== '' && index > 15) as string[];
+  createOrUpdateProduct() {
+    if (this.isEditMode) {
+      this.products[this.editIndex] = { ...this.newProduct };
+      this.saveProducts();
+      this.isEditMode = false;
+      this.editIndex = -1;
     } else {
-      this.filteredData = [];
-      this.materialDropdownData = [];
+      const confirmCreate = confirm("Are you sure you want to create this product?");
+      if (confirmCreate) {
+        this.authService.insertProductData(this.newProduct).subscribe(
+          (response) => {
+            console.log('Product data inserted successfully:', response);
+            this.products.push({ ...this.newProduct });
+            this.saveProducts();
+            this.resetForm();
+            this.successMessage = 'Product added successfully.';
+            alert('Data saved successfully.');
+          },
+          (error) => {
+            console.error('Error occurred while inserting product data:', error);
+          }
+        );
+      }
     }
-    this.selectedRawMaterial = undefined; // Reset the selected raw material
-    this.selectedRawElement = undefined; // Reset the selected raw element
+  }
+
+  removeProduct(index: number) {
+    this.products.splice(index, 1);
+    this.saveProducts();
+  }
+
+  editProduct(index: number) {
+    const product = this.products[index];
+    this.newProduct = { ...product };
+    this.isEditMode = true;
+    this.editIndex = index;
+  }
+
+  resetForm() {
+    this.newProduct = {
+      name: '',
+      category: '',
+      brand: '',
+      customer: '',
+      recipe: '',
+      clientType: '',
+      rawMaterial: '',
+      rawElement: ''
+    };
+  }
+
+  private loadProducts() {
+    const savedProducts = localStorage.getItem('products');
+    if (savedProducts) {
+      this.products = JSON.parse(savedProducts);
+    }
+  }
+
+  private saveProducts() {
+    localStorage.setItem('products', JSON.stringify(this.products));
   }
 
   getItemLabel(item: any): string {
-    return this.columnData.map(column => item[column]).join(' | ');
+    return this.columnData.map((column) => item[column]).join(' | ');
   }
 
-  onSubmit() {
-    if (this.isEditing) {
-      if (confirm("Are you sure you want to update the recipe?")) {
-        // Update recipe in the savedRecipes array
-        this.savedRecipes[this.editingIndex] = { ...this.recipeData };
-        this.isEditing = false;
-        this.editingIndex = -1;
-        alert("Recipe updated successfully!");
-      }
+  onMaterialChange(event: any): void {
+    const selectedMaterialId = parseInt(event.target.value, 10);
+
+    if (selectedMaterialId !== 0) {
+      this.selectedMaterialId = selectedMaterialId;
+      this.selectedMaterialData = this.getMaterialDataById(selectedMaterialId);
     } else {
-      const existingRecipe = this.savedRecipes.find(recipe => recipe.product === this.recipeData.product);
-      if (existingRecipe) {
-        alert("Recipe already exists!");
-      } else {
-        if (confirm("Are you sure you want to save the recipe?")) {
-          // Add new recipe to the savedRecipes array with an ID
-          this.recipeData.id = this.nextId;
-          this.recipeData.rawMaterials = this.selectedRawMaterial; // Include the selected raw material
-          this.recipeData.rawElements = this.selectedRawElement; // Include the selected raw element
-
-          // Insert recipe data using the AuthServicesService
-          this.authService.insertRecipe(this.recipeData).subscribe(
-            (response: any) => {
-              // Handle successful insertion
-              console.log(response);
-              alert("Recipe created successfully!");
-
-              // Reset form data and dropdown options
-              this.recipeData = {};
-              this.selectedMaterialName = undefined;
-              this.filteredData = [];
-              this.materialDropdownData = [];
-              this.selectedRawMaterial = undefined;
-              this.selectedRawElement = undefined;
-            },
-            (error: any) => {
-              // Handle error
-              console.error('Failed to insert recipe:', error);
-              alert("Failed to create recipe!");
-            }
-          );
-
-          this.savedRecipes.push({ ...this.recipeData });
-          this.nextId++;
-        }
-      }
+      this.selectedMaterialId = 0;
+      this.selectedMaterialData = undefined;
     }
   }
 
-  editRecipe(index: number) {
-    if (!this.isEditing || confirm("Are you sure you want to discard the changes and edit this recipe?")) {
-      this.recipeData = { ...this.savedRecipes[index] };
-      this.selectedRawMaterial = this.recipeData.rawMaterials; // Set the selected raw material
-      this.selectedRawElement = this.recipeData.rawElements; // Set the selected raw element
-      this.isEditing = true;
-      this.editingIndex = index;
-
-      // Update dropdown options based on selected raw material
-      const selectedItem = this.rawElements.find((item: any) => item.name === this.selectedRawMaterial);
-      if (selectedItem) {
-        this.filteredData = [selectedItem];
-        this.materialDropdownData = Object.values(selectedItem).slice(2).filter((value: any, index: number) => typeof value === 'string' && value !== '' && index > 15) as string[];
-      } else {
-        this.filteredData = [];
-        this.materialDropdownData = [];
-      }
-    }
+  getMaterialDataById(id: number): Material | undefined {
+    return this.materials.find(material => material.id === id);
   }
 
-  deleteRecipe(index: number) {
-    if (confirm("Are you sure you want to delete the recipe?")) {
-      this.savedRecipes.splice(index, 1);
-      alert("Recipe deleted successfully!");
-    }
+  deleteMaterial(material: Material) {
+    // Perform the necessary logic to delete the material
+    // e.g., call an API or update the data in your service
+    console.log('Deleting material:', material);
   }
 }

@@ -7,6 +7,9 @@ import { baseUrl } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthServicesService {
+  getData() {
+    throw new Error('Method not implemented.');
+  }
  
   apiUrl: any;
   token: string;

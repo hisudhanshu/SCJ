@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 interface RawMaterial {
-  id: number;
+ 
   name: string;
+  MaterialType: string;
+  CurrentCost: string;
+  VendorInfo: string;
+  InventoryLevel: string;
 }
 
 @Component({
@@ -13,7 +17,7 @@ interface RawMaterial {
 })
 export class RawMaterialComponent implements OnInit {
   rawMaterials: RawMaterial[] = [];
-  newRawMaterial: RawMaterial = { id: 0, name: '' };
+  newRawMaterial: RawMaterial = { name: '', MaterialType: '', CurrentCost: '', VendorInfo: '', InventoryLevel: '' };
   isEditing: boolean[] = [];
   searchKeyword: string = '';
   successMessage: string = '';
@@ -49,9 +53,10 @@ export class RawMaterialComponent implements OnInit {
     this.authService.insertData(newMaterial).subscribe(
       (response: any) => {
         console.log('Data inserted successfully:', response);
+      
         this.rawMaterials.push(newMaterial);
-        this.saveDataToLocalStorage(); // Save data to localStorage
-        this.newRawMaterial.name = '';
+        // this.saveDataToLocalStorage(); // Save data to localStorage
+        this.newRawMaterial = {  name: '', MaterialType: '', CurrentCost: '', VendorInfo: '', InventoryLevel: '' };
         this.successMessage = 'Material added successfully.';
         this.errorMessage = '';
 
@@ -78,14 +83,14 @@ export class RawMaterialComponent implements OnInit {
   saveData(index: number) {
     if (confirm('Are you sure you want to save this material?')) {
       this.isEditing[index] = false;
-      this.saveDataToLocalStorage(); // Save data to localStorage after editing
+     // this.saveDataToLocalStorage(); // Save data to localStorage after editing
     }
   }
 
   removeData(index: number) {
     if (confirm('Are you sure you want to remove this material?')) {
       this.rawMaterials.splice(index, 1);
-      this.saveDataToLocalStorage(); // Save data to localStorage after removal
+     // this.saveDataToLocalStorage(); // Save data to localStorage after removal
     }
   }
 
@@ -100,12 +105,9 @@ export class RawMaterialComponent implements OnInit {
     }
 
     // Filter the rawMaterials array based on the searchKeyword
-    const filteredMaterials = this.rawMaterials.filter(material =>
+    this.rawMaterials = this.rawMaterials.filter(material =>
       material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
     );
-
-    // Update the rawMaterials array with the filtered results
-    this.rawMaterials = filteredMaterials;
   }
 
   private saveDataToLocalStorage() {

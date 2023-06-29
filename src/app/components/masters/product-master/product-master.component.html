@@ -1,28 +1,21 @@
-<main id="main" class="main"  style="font-family: Georgia, 'Times New Roman', Times, serif;">
+<main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
   <div class="pagetitle"></div>
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">Create Product</h1><br>
+            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Create Customer</strong></h1>
+            <br>
             <div class="row">
               <div class="col-lg-12">
                 <div>
                   <form (ngSubmit)="createOrUpdateProduct()" #productForm="ngForm">
+
+                    <!--  Changes WF -->
                     <div class="row">
-                      <div class="col-md-4">
-                        <label for="productName">Product:</label>
-                        <select id="productName" class="form-select" name="productName" [(ngModel)]="newProduct.name"
-                          required>
-                          <option value="">--Select--</option>
-                          <option value="Bottle">Bottle</option>
-                          <option value="Glass">Glass</option>
-                          <option value="Household plastic">Household plastic</option>
-                        </select>
-                      </div>
-                      <div class="col-md-4">
-                        <label for="productCategory">Product Category:</label>
+                      <!-- <div class="col-md-4">
+                        <label for="productCategory">Product Category</label>
                         <select id="productCategory" class="form-select" name="productCategory"
                           [(ngModel)]="newProduct.category" required>
                           <option value="">--Select--</option>
@@ -30,7 +23,7 @@
                         </select>
                       </div>
                       <div class="col-md-4">
-                        <label for="productBrand">Brand:</label>
+                        <label for="productBrand">Brand</label>
                         <select id="productBrand" class="form-select" name="productBrand" [(ngModel)]="newProduct.brand"
                           required>
                           <option value="">--Select--</option>
@@ -39,17 +32,14 @@
                           <option value="Govt">Govt</option>
                         </select>
                       </div>
-                      <div class="col-md-4"><br>
-                        <label for="customerName">Customer Name:</label>
-                        <select id="customerName" class="form-select" name="customerName"
-                          [(ngModel)]="newProduct.customer" required>
-                          <option value="">--Select--</option>
-                          <option value="SCJ">SCJ</option>
-                          <option value="Clay">Clay</option>
-                          <option value="Claylogix">Claylogix</option>
-                        </select>
-                      </div>
-                      <div class="col-md-4"><br>
+                      <div class="col-md-4">
+                        <label for="productName">Product</label>
+                        <input type="text" placeholder="Enter here" id="productName" class="form-control"
+                          name="productName" [(ngModel)]="newProduct.name" required>
+                      </div> -->
+                      <!--  End WF -->
+                      <!-- Change WF -->
+                      <!-- <div class="col-md-4"><br>
                         <label for="associatedRecipe">Associated Recipe</label>
                         <select id="associatedRecipe" class="form-select" name="associatedRecipe"
                           [(ngModel)]="newProduct.recipe" required>
@@ -58,18 +48,22 @@
                           <option value="Recipe 2">Recipe 2</option>
                           <option value="Recipe 3">Recipe 3</option>
                         </select>
-                      </div>
-                      <div class="col-md-4"><br>
+                      </div> -->
+                      <!-- End WF -->
+                      <div class="col-md-4">
                         <label for="clientType">Client Type</label>
-                        <select id="clientType" class="form-select" name="clientType"
-                          [(ngModel)]="newProduct.clientType" required>
-                          <option value="">--Select--</option>
-                          <option value="B2B">B2B</option>
-                          <option value="B2C">B2C</option>
-                          <option value="Direct">Direct</option>
-                        </select>
+                        <div>
+                          <input id="clientType" class="form-control" type="text" name="clientType" placeholder="Enter Type" [(ngModel)]="newProduct.clientType" required>
+                        </div>
                       </div>
-                      <div class="col-md-4"><br>
+                      <div class="col-md-4">
+                        <label for="customerName">Customer Name</label>
+                        <div>
+                          <input id="customerName" class="form-control" type="text" placeholder="Enter Name" name="customerName" [(ngModel)]="newProduct.customer" required>
+                        </div>
+                      </div>
+                      <!--  Change WF  -->
+                      <!-- <div class="col-md-4"><br>
                         <label for="rawMaterialdata">Raw Material</label>
                         <select id="rawMaterialdata" class="form-select" name="rawMaterialdata"
                           [(ngModel)]="selectedMaterialName" (ngModelChange)="onNameSelected($event)" required>
@@ -78,8 +72,8 @@
                             {{ item.name }}
                           </option>
                         </select>
-                      </div>
-                      <div class="col-md-4"><br>
+                      </div> -->
+                      <!-- <div class="col-md-4"><br>
                         <label for="rawElementdata">Raw Element</label>
                         <div class="row">
                           <div class="col-md-12">
@@ -94,7 +88,10 @@
                             </select>
                           </div>
                         </div>
-                      </div>
+                      </div> -->
+
+                      <!--  End WF -->
+
                     </div><br><br>
                     <button type="submit" class="btn-primary" [disabled]="!productForm.form.valid">{{
                       isEditMode ? 'Update' : 'Create' }}</button>
@@ -105,12 +102,12 @@
                     <table>
                       <thead>
                         <tr>
-                          <th>Sn.</th>
-                          <th>Product Name</th>
-                          <th>Brand</th>
-                          <th>Customer Name</th>
-                          <th>Associated Recipe</th>
+                          <th>Id</th>
+                          <!-- <th>Product Name</th>
+                          <th>Brand</th> -->
                           <th>Client Type</th>
+                          <th>Customer Name</th>
+                          <!-- <th>Product Category</th> -->
                           <!-- <th>Raw Material</th>
                           <th>Raw Element</th> -->
                           <th>Action</th>
@@ -120,11 +117,11 @@
                       <tbody>
                         <tr *ngFor="let product of products; let i = index">
                           <td>{{ i + 1 }}</td>
-                          <td>{{ product.name }}</td>
-                          <td>{{ product.brand }}</td>
-                          <td>{{ product.customer }}</td>
-                          <td>{{ product.recipe }}</td>
+                          <!-- <td>{{ product.name }}</td>
+                          <td>{{ product.brand }}</td> -->
+                          <!-- <td>{{ product.category }}</td> -->
                           <td>{{ product.clientType }}</td>
+                          <td>{{ product.customer }}</td>
                           <!-- <td>{{ product.rawMaterial }}</td>
                           <td>{{ product.rawElement }}</td> -->
                           <td>

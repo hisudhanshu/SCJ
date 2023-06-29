@@ -56,13 +56,15 @@ export class ProductMasterComponent implements OnInit {
       this.isEditMode = false;
       this.editIndex = -1;
     } else {
+      const confirmCreate = confirm("Are you sure you want to create this customer?");
+      if (confirmCreate)
       this.authService.insertProductData(this.newProduct).subscribe(
         (response) => {
-          console.log('Product data inserted successfully:', response);
+          console.log('Customer data inserted successfully:', response);
           this.products.push({ ...this.newProduct });
           this.saveProducts();
           this.resetForm();
-          this.successMessage = 'Product added successfully.';
+          this.successMessage = 'Customer added successfully.';
           alert('Data saved successfully.');
         },
         (error) => {

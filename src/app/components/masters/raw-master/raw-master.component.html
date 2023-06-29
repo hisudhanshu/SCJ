@@ -11,6 +11,21 @@
                   <div>
                     <form (ngSubmit)="handleSubmit()" #productForm="ngForm">
                       <div class="row">
+                        
+                      <!--  Change WF -->
+
+                      <div class="col-md-4">
+                        <label for="Product">Product</label>
+                        <select id="Product" class="form-select" name="Product">
+                          <option value="">-- Select --</option>
+                          <option value="ProductType1">Bottle</option>
+                          <option value="ProductType2">Glass</option>
+                          <option value="ProductType3">Polytheine</option>
+                        </select>
+                      </div>
+
+                      <!-- End WF -->
+
                         <div class="col-md-4">
                           <label for="materialName">Material Name</label>
                           <select id="materialName" class="form-select" name="materialName" [(ngModel)]="materialName" required>
@@ -27,7 +42,7 @@
                             <option value="Material Type3">Type 3</option>
                           </select>
                         </div>
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4"><br>
                           <label for="materialElement">Quantity</label>
                           <select id="materialElement" class="form-select" name="materialElement">
                             <option value="">-- Select --</option>
@@ -37,11 +52,11 @@
                             <option value="Material Type1">5/kg</option>
                             <option value="Material Type2">10/kg</option>
                           </select>
-                        </div>
-                        <div class="col-md-4"><br>
+                        </div> -->
+                        <!-- <div class="col-md-4"><br>
                           <label for="currentCost">Price</label>
                           <input type="number" id="currentCost" class="form-control" placeholder="Enter Cost" name="currentCost" [(ngModel)]="currentCost" required>
-                        </div>
+                        </div> -->
                         <div class="col-md-4"><br>
                           <label for="vendorInfo">Vendor/Supplier Information</label>
                           <input type="text" id="vendorInfo" class="form-control" placeholder="Enter Info" name="vendorInfo" [(ngModel)]="vendorInfo" required>
@@ -58,7 +73,7 @@
                         <tr>
                           <th>Material Name</th>
                           <th>Material Type</th>
-                          <th>Price</th>
+                          <!-- <th>Price</th> -->
                           <th>Vendor Info</th>
                           <th>Inventory Level</th>
                           <th>Actions</th>
@@ -68,7 +83,7 @@
                         <tr *ngFor="let product of products; let i = index">
                           <td>{{ product.materialName }}</td>
                           <td>{{ product.materialType }}</td>
-                          <td>{{ product.currentCost }}</td>
+                          <!-- <td>{{ product.currentCost }}</td> -->
                           <td>{{ product.vendorInfo }}</td>
                           <td>{{ product.inventoryLevel }}</td>
                           <td>
