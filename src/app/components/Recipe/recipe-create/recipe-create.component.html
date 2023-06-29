@@ -75,48 +75,50 @@
                           <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
                         </select>
                       </div>
-
                       <!-- Hide these dropdowns by default -->
-                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                      <div class="col-md-4" *ngIf="selectedMaterialData"><br>
                         <label for="code">M_code</label>
                         <select id="code" class="form-select" name="code" [(ngModel)]="newProduct.mcode" required>
                           <option value="">-- Select --</option>
-                          <option *ngFor="let material of materials" [value]="material.m_code">{{ material.m_code }}
-                          </option>
+                          <option [value]="selectedMaterialData.m_code">{{ selectedMaterialData.m_code }}</option>
                         </select>
-                      </div>
-                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                      </div>     
+                      <div class="col-md-4" *ngIf="selectedMaterialData">
+                        <br>
                         <label for="type">M_type</label>
                         <select id="type" class="form-select" name="type" [(ngModel)]="newProduct.mtype" required>
                           <option value="">-- Select --</option>
-                          <option *ngFor="let material of materials" [value]="material.m_type">{{ material.m_type }}
-                          </option>
+                          <option [value]="selectedMaterialData.m_type">{{ selectedMaterialData.m_type }}</option>
                         </select>
                       </div>
-                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                      
+                      <div class="col-md-4" *ngIf="selectedMaterialData">
+                        <br>
                         <label for="cost">M_cost</label>
-                        <select id="cost" class="form-select" name="cost"[(ngModel)]="newProduct.mcost" required>
+                        <select id="cost" class="form-select" name="cost" [(ngModel)]="newProduct.mcost" required>
                           <option value="">-- Select --</option>
-                          <option *ngFor="let material of materials" [value]="material.m_cost">{{ material.m_cost }}
-                          </option>
+                          <option [value]="selectedMaterialData.m_cost">{{ selectedMaterialData.m_cost }}</option>
                         </select>
                       </div>
-                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                      
+                      <div class="col-md-4" *ngIf="selectedMaterialData">
+                        <br>
                         <label for="vendor">M_Vendor</label>
-                        <select id="vendor" class="form-select" name="vendor"[(ngModel)]="newProduct.mvendor" required>
+                        <select id="vendor" class="form-select" name="vendor" [(ngModel)]="newProduct.mvendor" required>
                           <option value="">-- Select --</option>
-                          <option *ngFor="let material of materials" [value]="material.m_Vendor">{{ material.m_Vendor }}
-                          </option>
+                          <option [value]="selectedMaterialData.m_Vendor">{{ selectedMaterialData.m_Vendor }}</option>
                         </select>
                       </div>
-                      <div class="col-md-4" *ngIf="showMaterialDropdowns"><br>
+                      
+                      <div class="col-md-4" *ngIf="selectedMaterialData">
+                        <br>
                         <label for="M_inventory">M_inventory</label>
-                        <select id="M_inventory" class="form-select" name="M_inventory"[(ngModel)]="newProduct.minventory" required>
+                        <select id="M_inventory" class="form-select" name="M_inventory" [(ngModel)]="newProduct.minventory" required>
                           <option value="">-- Select --</option>
-                          <option *ngFor="let material of materials" [value]="material.m_inventory">{{
-                            material.m_inventory }}</option>
+                          <option [value]="selectedMaterialData.m_inventory">{{ selectedMaterialData.m_inventory }}</option>
                         </select>
                       </div>
+
                       <!-- Display selected material's data in a table -->
                       <div *ngIf="selectedMaterialData"><br><br>
                         <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Raw Material Data</h5>
