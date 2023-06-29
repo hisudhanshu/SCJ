@@ -5,8 +5,9 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Create
-                Recipe</strong></h1>
+            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+              <strong>Create Recipe</strong>
+            </h1>
             <div class="row">
               <div class="col-lg-12">
                 <div>
@@ -57,16 +58,6 @@
                         </select>
                       </div>
                       <br>
-                      <!-- <div class="col-md-4"><br>
-                        <label for="recipe">Recipe</label>
-                        <select id="recipe" class="form-select" name="recipe"
-                          [(ngModel)]="newProduct.recipe" required>
-                          <option value="">--Select--</option>
-                          <option value="B2B">B2B</option>
-                          <option value="B2C">B2C</option>
-                          <option value="Direct">Direct</option>
-                        </select>
-                      </div> -->
                       <div class="col-md-4">
                         <br>
                         <label for="selectedMaterial">Select Material</label>
@@ -76,72 +67,118 @@
                           <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
                         </select>
                       </div>
-                      
                       <!-- Edit button and editable dropdowns -->
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="code">M_code</label>
                         <div *ngIf="!isEditing">
-                          <select id="code" class="form-select" name="code" [(ngModel)]="selectedMaterialData.m_code" required>
+                          <select id="code" class="form-select" name="code" [(ngModel)]="selectedMaterialData.m_code"
+                            required>
                             <option [value]="selectedMaterialData.m_code">{{ selectedMaterialData.m_code }}</option>
                           </select>
                         </div>
                         <div *ngIf="isEditing">
-                          <input type="text" id="code" class="form-control" name="code" [(ngModel)]="selectedMaterialData.m_code" required>
+                          <input type="text" id="code" class="form-control" name="code"
+                            [(ngModel)]="selectedMaterialData.m_code" required>
                         </div>
                       </div>
-                      
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="type">M_type</label>
                         <div *ngIf="!isEditing">
-                          <select id="type" class="form-select" name="type" [(ngModel)]="selectedMaterialData.m_type" required>
+                          <select id="type" class="form-select" name="type" [(ngModel)]="selectedMaterialData.m_type"
+                            required>
                             <option [value]="selectedMaterialData.m_type">{{ selectedMaterialData.m_type }}</option>
                           </select>
                         </div>
                         <div *ngIf="isEditing">
-                          <input type="text" id="type" class="form-control" name="type" [(ngModel)]="selectedMaterialData.m_type" required>
+                          <input type="text" id="type" class="form-control" name="type"
+                            [(ngModel)]="selectedMaterialData.m_type" required>
                         </div>
                       </div>
-                      
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="cost">M_cost</label>
                         <div *ngIf="!isEditing">
-                          <select id="cost" class="form-select" name="cost" [(ngModel)]="selectedMaterialData.m_cost" required>
+                          <select id="cost" class="form-select" name="cost" [(ngModel)]="selectedMaterialData.m_cost"
+                            required>
                             <option [value]="selectedMaterialData.m_cost">{{ selectedMaterialData.m_cost }}</option>
                           </select>
                         </div>
                         <div *ngIf="isEditing">
-                          <input type="text" id="cost" class="form-control" name="cost" [(ngModel)]="selectedMaterialData.m_cost" required>
+                          <input type="text" id="cost" class="form-control" name="cost"
+                            [(ngModel)]="selectedMaterialData.m_cost" required>
                         </div>
                       </div>
-                      
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="vendor">M_Vendor</label>
                         <div *ngIf="!isEditing">
-                          <select id="vendor" class="form-select" name="vendor" [(ngModel)]="selectedMaterialData.m_Vendor" required>
+                          <select id="vendor" class="form-select" name="vendor"
+                            [(ngModel)]="selectedMaterialData.m_Vendor" required>
                             <option [value]="selectedMaterialData.m_Vendor">{{ selectedMaterialData.m_Vendor }}</option>
                           </select>
                         </div>
                         <div *ngIf="isEditing">
-                          <input type="text" id="vendor" class="form-control" name="vendor" [(ngModel)]="selectedMaterialData.m_Vendor" required>
+                          <input type="text" id="vendor" class="form-control" name="vendor"
+                            [(ngModel)]="selectedMaterialData.m_Vendor" required>
                         </div>
                       </div>
-                      
+
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="M_inventory">M_inventory</label>
                         <div *ngIf="!isEditing">
-                          <select id="M_inventory" class="form-select" name="M_inventory" [(ngModel)]="selectedMaterialData.m_inventory" required>
-                            <option [value]="selectedMaterialData.m_inventory">{{ selectedMaterialData.m_inventory }}</option>
+                          <select id="M_inventory" class="form-select" name="M_inventory"
+                            [(ngModel)]="selectedMaterialData.m_inventory" required>
+                            <option [value]="selectedMaterialData.m_inventory">{{ selectedMaterialData.m_inventory }}
+                            </option>
                           </select>
                         </div>
                         <div *ngIf="isEditing">
-                          <input type="text" id="M_inventory" class="form-control" name="M_inventory" [(ngModel)]="selectedMaterialData.m_inventory" required>
+                          <input type="text" id="M_inventory" class="form-control" name="M_inventory"
+                            [(ngModel)]="selectedMaterialData.m_inventory" required>
                         </div>
                       </div>
+                      <!-- Add Material button dropdown box show here -->
+                      <div class="row">
+                        <div *ngIf="showDropdowns" class="col-md-12">
+                          <div class="row">
+                            <div class="col-md-4">
+                              <br>
+                              <label for="newmaterial">Material Name</label>
+                              <input type="text" placeholder="Enter here" id="newmaterial" class="form-control" name="newmaterial">
+                            </div>
+                            <div class="col-md-4">
+                              <br>
+                              <label for="newmcode">M_code</label>
+                              <input type="text" placeholder="Enter here" id="newmcode" class="form-control" name="newmcode">
+                            </div>
+                            <div class="col-md-4">
+                              <br>
+                              <label for="newmtype">M_type</label>
+                              <input type="text" placeholder="Enter here" id="newmtype" class="form-control" name="newmtype">
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <br>
+                              <label for="newmcost">M_cost</label>
+                              <input type="text" placeholder="Enter here" id="newmcost" class="form-control" name="newmcost">
+                            </div>
+                            <div class="col-md-4">
+                              <br>
+                              <label for="newmvendor">M_vendor</label>
+                              <input type="text" placeholder="Enter here" id="newmvendor" class="form-control" name="newmvendor">
+                            </div>
+                            <div class="col-md-4">
+                              <br>
+                              <label for="M_inventory">M_inventory</label>
+                              <input type="text" placeholder="Enter here" id="M_inventory" class="form-control" name="M_inventory">
+                            </div>
+                          </div>
+                        </div></div>
+                      <!-- </div> -->
                       <!-- Display selected material's data in a table -->
                       <!-- <div *ngIf="selectedMaterialData"><br><br>
                         <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Raw Material Data</h5>
@@ -155,8 +192,8 @@
                               <th>M_cost</th>
                               <th>M_Vendor</th>
                               <th>M_inventory</th> -->
-                              <!-- <th>Actions</th> -->
-                            <!-- </tr>
+                      <!-- <th>Actions</th> -->
+                      <!-- </tr>
                           </thead>
                           <tbody>
                             <tr>
@@ -167,18 +204,20 @@
                               <td>{{ selectedMaterialData.m_cost }}</td>
                               <td>{{ selectedMaterialData.m_Vendor }}</td>
                               <td>{{ selectedMaterialData.m_inventory }}</td> -->
-                              <!-- <td>
+                      <!-- <td>
                                 <button class="btn btn-primary" style="margin-inline: 4px;">Edit</button>
                                 <button class="btn btn-danger">Delete</button>
                               </td> -->
-                            <!-- </tr>
+                      <!-- </tr>
                           </tbody>
                         </table> -->
                       <!-- </div> -->
                     </div>
                     <br><br>
-                    <button type="submit" class="btn-primary" [disabled]="!productForm.form.valid">{{
-                      isEditMode ? 'Update' : 'Create' }}</button>
+                    <div>
+                      <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">{{
+                        isEditMode ? 'Update' : 'Create' }}</button>
+                    </div>
                   </form><br><br>
                   <div>
                     <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
@@ -206,6 +245,8 @@
                           <td>{{ product.customer }}</td>
                           <td>
                             <button class="btn-primary" (click)="editProduct(i)" (click)="toggleEditing()">Edit</button>
+                            <button class="btn-secondary" style="margin-inline: 7px;" (click)="onAddButtonClick()">Add
+                              Material</button>
                             <button class="btn-danger" (click)="removeProduct(i)">Delete</button>
                           </td>
                         </tr>

@@ -51,11 +51,11 @@ export class RecipeCreateComponent implements OnInit {
     material: '',
     clientType: '',
     rawMaterial: '',
-    mcode:'',
-    mtype:'',
-    mcost:'',
-    mvendor:'',
-    minventory:'',
+    mcode: '',
+    mtype: '',
+    mcost: '',
+    mvendor: '',
+    minventory: '',
     rawElement: ''
   };
 
@@ -68,6 +68,7 @@ export class RecipeCreateComponent implements OnInit {
   filteredData: any[] = [];
   materialDropdownData: string[] = [];
   selectedFilteredItem: any;
+  showDropdowns: boolean | undefined;
 
   constructor(private authService: AuthServicesService) { }
 
@@ -84,7 +85,7 @@ export class RecipeCreateComponent implements OnInit {
       (data: any) => {
         this.rawElements = data.matdata.filter((item: any) => item.name !== '');
         if (this.rawElements.length > 0) {
-          this.columnData = Object.keys(this.rawElements[0]).filter((key)=> key !== 'id' && key !== 'name') as string[];
+          this.columnData = Object.keys(this.rawElements[0]).filter((key) => key !== 'id' && key !== 'name') as string[];
         }
       },
       (error: any) => {
@@ -180,8 +181,21 @@ export class RecipeCreateComponent implements OnInit {
     // e.g., call an API or update the data in your service
     console.log('Deleting material:', material);
   }
-  
+
   toggleEditing() {
     this.isEditing = !this.isEditing;
   }
+  addMaterial() {
+    this.newProduct.materials.push({
+      m_code: '',
+      m_type: '',
+      m_cost: '',
+      m_Vendor: '',
+      m_inventory: ''
+    });
+  }
+  onAddButtonClick(): void {
+    this.showDropdowns = true;
+  }
+
 }

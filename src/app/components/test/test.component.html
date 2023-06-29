@@ -1,0 +1,30 @@
+<main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+  <div class="pagetitle"></div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Add</strong>
+            </h1>
+            <div class="row">
+              <div class="col-lg-12">
+                <div>
+                  <button id="addButton" (click)="onAddButtonClick()">Add</button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="showDropdowns">
+              <input type="text" placeholder="Dropdown 1">
+              <input type="text" placeholder="Dropdown 2">
+              <input type="text" placeholder="Dropdown 3">
+              <input type="text" placeholder="Dropdown 4">
+              <input type="text" placeholder="Dropdown 5">
+              <input type="text" placeholder="Dropdown 6">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
