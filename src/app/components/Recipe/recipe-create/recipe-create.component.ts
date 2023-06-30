@@ -60,13 +60,11 @@ export class RecipeCreateComponent implements OnInit {
     Ematerial:'',
     Emcode:'',
     Emtype:'',
-    // Emquantity:'',
-    // Emcost:'',
+    Emquantity:'',
+    Emcost:'',
     Emvendor:'',
     Eminventory:'',
     rawElement: '',
-    Emquantity: 0,
-    Emcost: 0
   };
 
   isEditMode: boolean = false;
@@ -212,5 +210,4 @@ export class RecipeCreateComponent implements OnInit {
       this.newProduct.Emcost = this.newProduct.Emquantity * 10;
     }
   }
-
 }

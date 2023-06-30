@@ -264,6 +264,7 @@
                           <th>Raw Material</th>
                           <th>Client Type</th>
                           <th>Customer Name</th>
+                          <th>Details</th>
                           <th>Action</th>
                           <!-- New column for edit/remove buttons -->
                         </tr>
@@ -277,6 +278,7 @@
                           <td>{{ product.name }} </td>
                           <td>{{ product.clientType }}</td>
                           <td>{{ product.customer }}</td>
+                          <td><i class="bi bi-info-circle"></i></td>
                           <td>
                             <button class="btn-primary" (click)="editProduct(i)" (click)="toggleEditing()"
                               style="margin-inline: 2px;">Edit</button>
