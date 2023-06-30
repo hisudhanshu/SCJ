@@ -9,18 +9,21 @@
             </h1>
             <div class="row">
               <div class="col-lg-12">
-                <div>
-                  <button id="addButton" (click)="onAddButtonClick()">Add</button>
+                <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Modal 1</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        Show a second modal and hide this one with the button below.
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Open first modal</button>                
               </div>
-            </div>
-            <div *ngIf="showDropdowns">
-              <input type="text" placeholder="Dropdown 1">
-              <input type="text" placeholder="Dropdown 2">
-              <input type="text" placeholder="Dropdown 3">
-              <input type="text" placeholder="Dropdown 4">
-              <input type="text" placeholder="Dropdown 5">
-              <input type="text" placeholder="Dropdown 6">
             </div>
           </div>
         </div>
