@@ -124,7 +124,6 @@
                             [(ngModel)]="selectedMaterialData.m_Vendor" required>
                         </div>
                       </div>
-
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="M_inventory">M_inventory</label>
@@ -147,37 +146,44 @@
                             <div class="col-md-4">
                               <br>
                               <label for="newmaterial">Material Name</label>
-                              <input type="text" placeholder="Enter here" id="newmaterial" class="form-control" name="newmaterial">
+                              <input type="text" placeholder="Enter here" id="newmaterial" class="form-control"
+                                name="newmaterial">
                             </div>
                             <div class="col-md-4">
                               <br>
                               <label for="newmcode">M_code</label>
-                              <input type="text" placeholder="Enter here" id="newmcode" class="form-control" name="newmcode">
+                              <input type="text" placeholder="Enter here" id="newmcode" class="form-control"
+                                name="newmcode">
                             </div>
                             <div class="col-md-4">
                               <br>
                               <label for="newmtype">M_type</label>
-                              <input type="text" placeholder="Enter here" id="newmtype" class="form-control" name="newmtype">
+                              <input type="text" placeholder="Enter here" id="newmtype" class="form-control"
+                                name="newmtype">
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-md-4">
                               <br>
                               <label for="newmcost">M_cost</label>
-                              <input type="text" placeholder="Enter here" id="newmcost" class="form-control" name="newmcost">
+                              <input type="text" placeholder="Enter here" id="newmcost" class="form-control"
+                                name="newmcost">
                             </div>
                             <div class="col-md-4">
                               <br>
                               <label for="newmvendor">M_vendor</label>
-                              <input type="text" placeholder="Enter here" id="newmvendor" class="form-control" name="newmvendor">
+                              <input type="text" placeholder="Enter here" id="newmvendor" class="form-control"
+                                name="newmvendor">
                             </div>
                             <div class="col-md-4">
                               <br>
                               <label for="M_inventory">M_inventory</label>
-                              <input type="text" placeholder="Enter here" id="M_inventory" class="form-control" name="M_inventory">
+                              <input type="text" placeholder="Enter here" id="M_inventory" class="form-control"
+                                name="M_inventory">
                             </div>
                           </div>
-                        </div></div>
+                        </div>
+                      </div>
                       <!-- </div> -->
                       <!-- Display selected material's data in a table -->
                       <!-- <div *ngIf="selectedMaterialData"><br><br>
@@ -218,7 +224,11 @@
                       <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">{{
                         isEditMode ? 'Update' : 'Create' }}</button>
                     </div>
-                  </form><br><br>
+                  </form><br>
+                  <div>
+                    <button class="btn-secondary"(click)="onAddButtonClick()">Add
+                      Material</button>
+                  </div><br><br>
                   <div>
                     <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
                     <!-- New success message element -->
