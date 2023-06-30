@@ -56,6 +56,12 @@ export class RecipeCreateComponent implements OnInit {
     mcost: '',
     mvendor: '',
     minventory: '',
+    Ematerial:'',
+    Emcode:'',
+    Emtype:'',
+    Emcost:'',
+    Emvendor:'',
+    Eminventory:'',
     rawElement: ''
   };
 

@@ -72,7 +72,7 @@
                         <br>
                         <label for="code">M_code</label>
                         <div *ngIf="!isEditing">
-                          <select id="code" class="form-select" name="code" [(ngModel)]="selectedMaterialData.m_code"
+                          <select id="code" class="form-select" name="code"  [(ngModel)]="newProduct.mcode" required
                             required>
                             <option [value]="selectedMaterialData.m_code">{{ selectedMaterialData.m_code }}</option>
                           </select>
@@ -86,7 +86,7 @@
                         <br>
                         <label for="type">M_type</label>
                         <div *ngIf="!isEditing">
-                          <select id="type" class="form-select" name="type" [(ngModel)]="selectedMaterialData.m_type"
+                          <select id="type" class="form-select" name="type" [(ngModel)]="newProduct.mtype"
                             required>
                             <option [value]="selectedMaterialData.m_type">{{ selectedMaterialData.m_type }}</option>
                           </select>
@@ -100,7 +100,7 @@
                         <br>
                         <label for="cost">M_cost</label>
                         <div *ngIf="!isEditing">
-                          <select id="cost" class="form-select" name="cost" [(ngModel)]="selectedMaterialData.m_cost"
+                          <select id="cost" class="form-select" name="cost" [(ngModel)]="newProduct.mcost"
                             required>
                             <option [value]="selectedMaterialData.m_cost">{{ selectedMaterialData.m_cost }}</option>
                           </select>
@@ -115,7 +115,7 @@
                         <label for="vendor">M_Vendor</label>
                         <div *ngIf="!isEditing">
                           <select id="vendor" class="form-select" name="vendor"
-                            [(ngModel)]="selectedMaterialData.m_Vendor" required>
+                            [(ngModel)]="selectedMaterialData.m_Vendor" required [(ngModel)]="newProduct.mvendor"> 
                             <option [value]="selectedMaterialData.m_Vendor">{{ selectedMaterialData.m_Vendor }}</option>
                           </select>
                         </div>
@@ -129,7 +129,7 @@
                         <label for="M_inventory">M_inventory</label>
                         <div *ngIf="!isEditing">
                           <select id="M_inventory" class="form-select" name="M_inventory"
-                            [(ngModel)]="selectedMaterialData.m_inventory" required>
+                            [(ngModel)]="selectedMaterialData.m_inventory" required [(ngModel)]="newProduct.minventory">
                             <option [value]="selectedMaterialData.m_inventory">{{ selectedMaterialData.m_inventory }}
                             </option>
                           </select>
@@ -147,19 +147,19 @@
                               <br>
                               <label for="newmaterial">Material Name</label>
                               <input type="text" placeholder="Enter here" id="newmaterial" class="form-control"
-                                name="newmaterial">
+                                name="newmaterial" [(ngModel)]="newProduct.Ematerial" required>
                             </div>
                             <div class="col-md-4">
                               <br>
                               <label for="newmcode">M_code</label>
                               <input type="text" placeholder="Enter here" id="newmcode" class="form-control"
-                                name="newmcode">
+                                name="newmcode" [(ngModel)]="newProduct.Emcode" required>
                             </div>
                             <div class="col-md-4">
                               <br>
                               <label for="newmtype">M_type</label>
                               <input type="text" placeholder="Enter here" id="newmtype" class="form-control"
-                                name="newmtype">
+                                name="newmtype" [(ngModel)]="newProduct.Emtype" required>
                             </div>
                           </div>
                           <div class="row">
@@ -167,19 +167,19 @@
                               <br>
                               <label for="newmcost">M_cost</label>
                               <input type="text" placeholder="Enter here" id="newmcost" class="form-control"
-                                name="newmcost">
+                                name="newmcost"[(ngModel)]="newProduct.Emcost" required>
                             </div>
                             <div class="col-md-4">
                               <br>
                               <label for="newmvendor">M_vendor</label>
                               <input type="text" placeholder="Enter here" id="newmvendor" class="form-control"
-                                name="newmvendor">
+                                name="newmvendor" [(ngModel)]="newProduct.Emvendor" required>
                             </div>
                             <div class="col-md-4">
                               <br>
                               <label for="M_inventory">M_inventory</label>
                               <input type="text" placeholder="Enter here" id="M_inventory" class="form-control"
-                                name="M_inventory">
+                                name="M_inventory" [(ngModel)]="newProduct.Eminventory" required>
                             </div>
                           </div>
                         </div>
