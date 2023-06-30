@@ -153,6 +153,7 @@
                             [(ngModel)]="selectedMaterialData.m_cost" required>
                         </div>
                       </div>
+                      
                       <!-- Add Material button dropdown box show here -->
                       <div class="row">
                         <div *ngIf="showDropdowns" class="col-md-12">
@@ -245,11 +246,12 @@
                       <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">{{
                         isEditMode ? 'Update' : 'Create' }}</button>
                     </div>
-                  </form><br>
+                  </form> <br>
                   <div>
                     <button class="btn-secondary" (click)="onAddButtonClick()">Add
                       Material</button>
-                  </div><br><br>
+                  </div><br>
+                 
                   <div>
                     <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
                     <!-- New success message element -->
