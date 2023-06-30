@@ -51,6 +51,7 @@ export class RecipeCreateComponent implements OnInit {
     material: '',
     clientType: '',
     rawMaterial: '',
+    mquantity:'',
     mcode: '',
     mtype: '',
     mcost: '',
@@ -59,10 +60,13 @@ export class RecipeCreateComponent implements OnInit {
     Ematerial:'',
     Emcode:'',
     Emtype:'',
-    Emcost:'',
+    // Emquantity:'',
+    // Emcost:'',
     Emvendor:'',
     Eminventory:'',
-    rawElement: ''
+    rawElement: '',
+    Emquantity: 0,
+    Emcost: 0
   };
 
   isEditMode: boolean = false;
@@ -202,6 +206,11 @@ export class RecipeCreateComponent implements OnInit {
   }
   onAddButtonClick(): void {
     this.showDropdowns = true;
+  }
+  calculatePrice() {
+    if (this.newProduct.Emquantity) {
+      this.newProduct.Emcost = this.newProduct.Emquantity * 10;
+    }
   }
 
 }
