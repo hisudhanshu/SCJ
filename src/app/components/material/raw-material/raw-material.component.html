@@ -34,7 +34,7 @@
                   <div class="col-md-4" style="margin-top: 30px;">
                     <label for="nametype">Add Material Type</label>
                     <input type="text" class="form-control" placeholder="Enter Material" id="nametype"
-                      [(ngModel)]="newRawMaterial.MaterialType" />
+                      [(ngModel)]="newRawMaterial.M_type" />
                   </div>
                   <div class="col-md-4" style="margin-top: 30px;">
                     <label for="namecost">Add Current Cost</label>
@@ -88,10 +88,10 @@
                       </td>
                       <td>
                         <ng-container *ngIf="!isEditing[i]">
-                          {{ material.MaterialType }}
+                          {{ material.M_type }}
                         </ng-container>
                         <ng-container *ngIf="isEditing[i]">
-                          <input type="text" class="form-control" [(ngModel)]="material.MaterialType">
+                          <input type="text" class="form-control" [(ngModel)]="material.M_type">
                         </ng-container>
                       </td>
                       <td>

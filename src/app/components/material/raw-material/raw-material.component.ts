@@ -4,7 +4,7 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 interface RawMaterial {
  
   name: string;
-  MaterialType: string;
+  M_type: string;
   CurrentCost: string;
   VendorInfo: string;
   InventoryLevel: string;
@@ -17,7 +17,7 @@ interface RawMaterial {
 })
 export class RawMaterialComponent implements OnInit {
   rawMaterials: RawMaterial[] = [];
-  newRawMaterial: RawMaterial = { name: '', MaterialType: '', CurrentCost: '', VendorInfo: '', InventoryLevel: '' };
+  newRawMaterial: RawMaterial = { name: '', M_type: '', CurrentCost: '', VendorInfo: '', InventoryLevel: '' };
   isEditing: boolean[] = [];
   searchKeyword: string = '';
   successMessage: string = '';
@@ -56,7 +56,7 @@ export class RawMaterialComponent implements OnInit {
       
         this.rawMaterials.push(newMaterial);
         // this.saveDataToLocalStorage(); // Save data to localStorage
-        this.newRawMaterial = {  name: '', MaterialType: '', CurrentCost: '', VendorInfo: '', InventoryLevel: '' };
+        this.newRawMaterial = {  name: '', M_type: '', CurrentCost: '', VendorInfo: '', InventoryLevel: '' };
         this.successMessage = 'Material added successfully.';
         this.errorMessage = '';
 

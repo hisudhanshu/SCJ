@@ -29,11 +29,13 @@ import { RawMasterComponent } from './components/masters/raw-master/raw-master.c
 import { ProductMasterComponent } from './components/masters/product-master/product-master.component';
 import { RawmaterialmanagmentComponent } from './components/material/rawmaterialmanagment/rawmaterialmanagment.component';
 import { TestComponent } from './components/test/test.component';
+import { CreateMaterialComponent } from './components/material/create-material/create-material.component';
 
 
 const routes: Routes = [
 
   { path: '', component: PagesLoginComponent },
+  { path: 'creatematerial', component:CreateMaterialComponent},
   { path: 'test', component: TestComponent },
   { path: 'rawmaterialmanagment', component: RawmaterialmanagmentComponent },
   { path: 'mapproduct', component: ProductComponent },
