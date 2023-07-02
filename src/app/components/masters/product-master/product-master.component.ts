@@ -17,9 +17,9 @@ export class ProductMasterComponent implements OnInit {
     brand: '',
     customer: '',
     recipe: '',
-    clientType: '',
-    rawMaterial: '',
-    rawElement: ''
+    clientType: ''
+    // rawMaterial: '',
+    // rawElement: ''
   };
 
   isEditMode: boolean = false;
@@ -93,9 +93,9 @@ export class ProductMasterComponent implements OnInit {
       brand: '',
       customer: '',
       recipe: '',
-      clientType: '',
-      rawMaterial: '',
-      rawElement: ''
+      clientType: ''
+      // rawMaterial: '',
+      // rawElement: ''
     };
   }
 

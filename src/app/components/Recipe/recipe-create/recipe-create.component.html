@@ -153,7 +153,7 @@
                             [(ngModel)]="selectedMaterialData.m_cost" required>
                         </div>
                       </div>
-                      
+
                       <!-- Add Material button dropdown box show here -->
                       <div class="row">
                         <div *ngIf="showDropdowns" class="col-md-12">
@@ -206,52 +206,17 @@
                           </div>
                         </div>
                       </div>
-                      <!-- </div> -->
-                      <!-- Display selected material's data in a table -->
-                      <!-- <div *ngIf="selectedMaterialData"><br><br>
-                        <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Raw Material Data</h5>
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th>ID</th>
-                              <th>Name</th>
-                              <th>M_code</th>
-                              <th>M_type</th>
-                              <th>M_cost</th>
-                              <th>M_Vendor</th>
-                              <th>M_inventory</th> -->
-                      <!-- <th>Actions</th> -->
-                      <!-- </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>{{ selectedMaterialData.id }}</td>
-                              <td>{{ selectedMaterialData.name }}</td>
-                              <td>{{ selectedMaterialData.m_code }}</td>
-                              <td>{{ selectedMaterialData.m_type }}</td>
-                              <td>{{ selectedMaterialData.m_cost }}</td>
-                              <td>{{ selectedMaterialData.m_Vendor }}</td>
-                              <td>{{ selectedMaterialData.m_inventory }}</td> -->
-                      <!-- <td>
-                                <button class="btn btn-primary" style="margin-inline: 4px;">Edit</button>
-                                <button class="btn btn-danger">Delete</button>
-                              </td> -->
-                      <!-- </tr>
-                          </tbody>
-                        </table> -->
-                      <!-- </div> -->
-                    </div>
-                    <br><br>
+                    </div><br><br>
                     <div>
                       <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">{{
-                        isEditMode ? 'Update' : 'Create' }}</button>
+                        isEditMode ? 'Update' : 'Submit' }}</button>
                     </div>
-                  </form> <br>
-                  <div>
+                  </form>
+                  <div class="col-md-4" style="margin-inline: 1000px;" *ngIf="selectedMaterialData">
                     <button class="btn-secondary" (click)="onAddButtonClick()">Add
                       Material</button>
                   </div><br>
-                 
+
                   <div>
                     <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
                     <!-- New success message element -->
@@ -265,7 +230,8 @@
                           <th>Raw Material</th>
                           <th>Client Type</th>
                           <th>Customer Name</th>
-                          <th>Details</th>
+                          <th>Details <button class="bi bi-info-circle" data-bs-target="#exampleModalToggle"
+                              data-bs-toggle="modal"></button></th>
                           <th>Action</th>
                           <!-- New column for edit/remove buttons -->
                         </tr>
@@ -279,8 +245,10 @@
                           <td>{{ product.name }} </td>
                           <td>{{ product.clientType }}</td>
                           <td>{{ product.customer }}</td>
-                          <td> 
-                            <button class="bi bi-info-circle" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button></td>
+                          <td>
+                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
+                              data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>
+                          </td>
                           <td>
                             <button class="btn-primary" (click)="editProduct(i)" (click)="toggleEditing()"
                               style="margin-inline: 2px;">Edit</button>
@@ -299,71 +267,85 @@
     </div>
   </section>
 </main>
-<!--  Details Modal Code here -->
+<!-- Details Modal Code here -->
 <div class="row">
   <div class="col-lg-12">
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+      tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-fullscreen">
         <div class="modal-content">
           <div class="modal-header">
-            <h2 class="modal-title fs-5" id="exampleModalToggleLabel" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 600px;"><strong>Product Details</strong></h2>
+            <h2 class="modal-title fs-5" id="exampleModalToggleLabel"
+              style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 600px;"><strong>Product
+                Details</strong></h2>
           </div>
-          <div class="modal-body" style="font-family: Georgia, 'Times New Roman', Times, serif">
-            <!-- Enter Text here --><br><br>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Product Name</li>
-              <li class="list-group-item col-md-6">Bottle</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Product Category</li>
-              <li class="list-group-item col-md-6">Extra Large</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Product Brand</li>
-              <li class="list-group-item col-md-6">Clay Techsystems</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Customer Name</li>
-              <li class="list-group-item col-md-6">SCJ Plastic</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Customer Type</li>
-              <li class="list-group-item col-md-6">corporate</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Material Code</li>
-              <li class="list-group-item col-md-6">P21822J</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Material Name</li>
-              <li class="list-group-item col-md-6">Polyvinyl Chloride, Nylon, Polymer</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Material Type</li>
-              <li class="list-group-item col-md-6">Type A</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Material Quantity</li>
-              <li class="list-group-item col-md-6">500gm</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Material Cost</li>
-              <li class="list-group-item col-md-6">1000</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Vendor Name</li>
-              <li class="list-group-item col-md-6">Vendor XYZ</li>
-            </ul>
-            <ul class="list-group list-group-horizontal">
-              <li class="list-group-item col-md-6">Inventory</li>
-              <li class="list-group-item col-md-6">AC+BC Invetory Level</li>
-            </ul>
+          <table>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Product Name</th>
+                <th>Product Category</th>
+                <th>Brand</th>
+                <th>Client Type</th>
+                <th>Customer Name</th>
+                <!-- New column for edit/remove buttons -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of products; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.brand }}</td>
+                <td>{{ product.clientType }}</td>
+                <td>{{ product.customer }}</td>
+                <!-- <td> 
+                  <button class="bi bi-info-circle" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button></td> -->
+                <!-- <td>
+                  <button class="btn-primary" (click)="editProduct(i)" (click)="toggleEditing()"
+                    style="margin-inline: 2px;">Edit</button>
+                  <button class="btn-danger" (click)="removeProduct(i)">Delete</button>
+                </td> -->
+              </tr>
+            </tbody>
+          </table><br><br><br><br><br><br>
+          <div style="font-family: Georgia, 'Times New Roman', Times, serif;">
+            <h5 style="margin-inline: 600px; font-family:Georgia, 'Times New Roman', Times, serif;"><strong>Raw Materail
+                Details</strong></h5><br>
+            <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
+            <!-- New success message element -->
+            <table>
+              <thead>
+                <tr>
+                  <th>Material Id</th>
+                  <th>Material Name</th>
+                  <th>Material code</th>
+                  <th>Material Type</th>
+                  <th>Material Cost</th>
+                  <th>Material Vendor</th>
+                  <th>Material Inventory</th>        
+                  <!-- <th>Action</th> -->
+                  <!-- New column for edit/remove buttons -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products; let i = index">
+                  <td>{{ i + 1 }}<br>{{ i + 2 }}</td>
+                  <td>{{ product.name }}<br>{{ product.Ematerial }}</td>
+                  <td>{{ product.mcode }}<br>{{ product.Emcode }}</td>
+                  <td>{{ product.mtype }}<br>{{ product.Emtype }}</td>
+                  <td>{{ product.mcost }}<br>{{ product.Emcost }}</td>
+                  <td>{{ product.mvendor }}<br>{{ product.Emvendor }}</td>
+                  <td>{{ product.minventory }}<br>{{ product.Eminventory }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
           </div>
         </div>
       </div>
-    </div>              
+    </div>
   </div>
 </div>
