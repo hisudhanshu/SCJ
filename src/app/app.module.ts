@@ -29,7 +29,6 @@ import { MonthlyReportsComponent } from './components/reporting/monthly-reports/
 import { InsightsComponent } from './components/reporting/insights/insights.component';
 import { RawMasterComponent } from './components/masters/raw-master/raw-master.component';
 import { ProductMasterComponent } from './components/masters/product-master/product-master.component';
-import { RawMaterialComponent } from './components/material/raw-material/raw-material.component';
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
 import { RawmaterialmanagmentComponent } from './components/material/rawmaterialmanagment/rawmaterialmanagment.component';
 import { TestComponent } from './components/test/test.component';
@@ -61,7 +60,6 @@ import { CreateMaterialComponent } from './components/material/create-material/c
     ChartsComponent,
     RawMasterComponent,
     ProductMasterComponent,
-    RawMaterialComponent,
     ProductMaterialComponent,
     RawmaterialmanagmentComponent,
     TestComponent,

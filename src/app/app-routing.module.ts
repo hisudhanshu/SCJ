@@ -23,7 +23,6 @@ import { ImportComponent } from './components/Data/import/import.component';
 import { ReconciliationComponent } from './components/Data/reconciliation/reconciliation.component';
 import { IdentificationComponent } from './components/Gap/identification/identification.component';
 import { ReportingComponent } from './components/Gap/reporting/reporting.component';
-import { RawMaterialComponent } from './components/material/raw-material/raw-material.component';
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
 import { RawMasterComponent } from './components/masters/raw-master/raw-master.component';
 import { ProductMasterComponent } from './components/masters/product-master/product-master.component';
@@ -45,7 +44,6 @@ const routes: Routes = [
   { path: 'reconciliation', component: ReconciliationComponent },
   { path: 'identification', component: IdentificationComponent },
   { path: 'gapreporting', component: ReportingComponent },
-  { path: 'rawmaterial', component: RawMaterialComponent },
   { path: 'productmaterial', component: ProductMaterialComponent },
   { path: 'rawmaster', component: RawMasterComponent },
   { path: 'productmaster', component: ProductMasterComponent },
