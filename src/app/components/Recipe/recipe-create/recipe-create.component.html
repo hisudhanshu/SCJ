@@ -67,95 +67,52 @@
                           <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
                         </select>
                       </div>
-
                       <!-- Edit button and editable dropdowns -->
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="code">M_code</label>
-                        <div *ngIf="!isEditing">
-                          <select id="code" class="form-select" name="code" [(ngModel)]="newProduct.mcode" required>
-                            <option value="">-- Select --</option>
-                            <option [value]="selectedMaterialData.m_code">{{ selectedMaterialData.m_code }}</option>
-                          </select>
-                        </div>
-                        <div *ngIf="isEditing">
-                          <input type="text" id="code" class="form-control" name="code"
-                            [(ngModel)]="selectedMaterialData.m_code" required>
+                        <div>
+                          <input type="text" id="code" class="form-control" name="code" [(ngModel)]="selectedMaterialData.m_code" readonly>
                         </div>
                       </div>
-
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="type">M_type</label>
-                        <div *ngIf="!isEditing">
-                          <select id="type" class="form-select" name="type" [(ngModel)]="newProduct.mtype" required>
-                            <option value="">-- Select --</option>
-                            <option [value]="selectedMaterialData.m_type">{{ selectedMaterialData.m_type }}</option>
-                          </select>
-                        </div>
-                        <div *ngIf="isEditing">
-                          <input type="text" id="type" class="form-control" name="type"
-                            [(ngModel)]="selectedMaterialData.m_type" required>
+                        <div>
+                          <input type="text" id="type" class="form-control" name="type" [(ngModel)]="selectedMaterialData.m_type" readonly>
                         </div>
                       </div>
-
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="vendor">M_Vendor</label>
-                        <div *ngIf="!isEditing">
-                          <select id="vendor" class="form-select" name="vendor"
-                            [(ngModel)]="selectedMaterialData.m_Vendor" required [(ngModel)]="newProduct.mvendor">
-                            <option value="">-- Select --</option>
-                            <option [value]="selectedMaterialData.m_Vendor">{{ selectedMaterialData.m_Vendor }}</option>
-                          </select>
-                        </div>
-                        <div *ngIf="isEditing">
-                          <input type="text" id="vendor" class="form-control" name="vendor"
-                            [(ngModel)]="selectedMaterialData.m_Vendor" required>
+                        <div>
+                          <input type="text" id="vendor" class="form-control" name="vendor" [(ngModel)]="selectedMaterialData.m_Vendor" readonly>
                         </div>
                       </div>
-
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="M_inventory">M_inventory</label>
-                        <div *ngIf="!isEditing">
-                          <select id="M_inventory" class="form-select" name="M_inventory"
-                            [(ngModel)]="selectedMaterialData.m_inventory" required [(ngModel)]="newProduct.minventory">
-                            <option value="">-- Select --</option>
-                            <option [value]="selectedMaterialData.m_inventory">{{ selectedMaterialData.m_inventory }}
-                            </option>
-                          </select>
-                        </div>
-                        <div *ngIf="isEditing">
-                          <input type="text" id="M_inventory" class="form-control" name="M_inventory"
-                            [(ngModel)]="selectedMaterialData.m_inventory" required>
+                        <div>
+                          <input type="text" id="M_inventory" class="form-control" name="M_inventory" [(ngModel)]="selectedMaterialData.m_inventory" readonly>
                         </div>
                       </div>
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="newmquantityperkg">Quantity/Per/kg</label>
-                        <div *ngIf="!isEditing">
+                        <div>
                           <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
-                            name="newmquantityperkg" [(ngModel)]="newProduct.mquantity" required>
+                            name="newmquantityperkg" [(ngModel)]="newProduct.mquantity" (input)="calculatePrice()" required>
                         </div>
                       </div>
                       <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="cost">M_cost/per/kg</label>
-                        <div *ngIf="!isEditing">
-                          <select id="cost" class="form-select" name="cost" [(ngModel)]="newProduct.mcost" required>
-                            <option value="">-- Select --</option>
-                            <option [value]="selectedMaterialData.m_cost">{{ selectedMaterialData.m_cost }}</option>
-                          </select>
-                        </div>
-                        <div *ngIf="isEditing">
-                          <input type="text" id="cost" class="form-control" name="cost"
-                            [(ngModel)]="selectedMaterialData.m_cost" required>
+                        <div>
+                          <input type="text" id="cost" class="form-control" name="cost" [(ngModel)]="selectedMaterialData.m_cost" readonly>
                         </div>
                       </div>
-
                       <!-- Add Material button dropdown box show here -->
-                      <div class="row">
+                      <!-- <div class="row">
                         <div *ngIf="showDropdowns" class="col-md-12">
                           <div class="row">
                             <div class="col-md-4">
@@ -206,58 +163,16 @@
                           </div>
                         </div>
                       </div>
+                    </div><br><br> -->
                     </div><br><br>
                     <div>
                       <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">{{
                         isEditMode ? 'Update' : 'Submit' }}</button>
                     </div>
                   </form>
-                  <div class="col-md-4" style="margin-inline: 1000px;" *ngIf="selectedMaterialData">
-                    <button class="btn-secondary" (click)="onAddButtonClick()">Add
-                      Material</button>
-                  </div><br>
-
-                  <div>
-                    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
-                    <!-- New success message element -->
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Id</th>
-                          <th>Product Name</th>
-                          <th>Product Category</th>
-                          <th>Brand</th>
-                          <th>Raw Material</th>
-                          <th>Client Type</th>
-                          <th>Customer Name</th>
-                          <th>Details <button class="bi bi-info-circle" data-bs-target="#exampleModalToggle"
-                              data-bs-toggle="modal"></button></th>
-                          <th>Action</th>
-                          <!-- New column for edit/remove buttons -->
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let product of products; let i = index">
-                          <td>{{ i + 1 }}</td>
-                          <td>{{ product.name }}</td>
-                          <td>{{ product.category }}</td>
-                          <td>{{ product.brand }}</td>
-                          <td>{{ product.name }} </td>
-                          <td>{{ product.clientType }}</td>
-                          <td>{{ product.customer }}</td>
-                          <td>
-                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                              data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>
-                          </td>
-                          <td>
-                            <button class="btn-primary" (click)="editProduct(i)" (click)="toggleEditing()"
-                              style="margin-inline: 2px;">Edit</button>
-                            <button class="btn-danger" (click)="removeProduct(i)">Delete</button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                  <!-- <div class="col-md-4" style="margin-inline: 1000px;" *ngIf="selectedMaterialData">
+                    <button class="btn-secondary" (click)="onAddButtonClick()">AddMaterial</button>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -267,85 +182,3 @@
     </div>
   </section>
 </main>
-<!-- Details Modal Code here -->
-<div class="row">
-  <div class="col-lg-12">
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-      tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2 class="modal-title fs-5" id="exampleModalToggleLabel"
-              style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 600px;"><strong>Product
-                Details</strong></h2>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Product Name</th>
-                <th>Product Category</th>
-                <th>Brand</th>
-                <th>Client Type</th>
-                <th>Customer Name</th>
-                <!-- New column for edit/remove buttons -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let product of products; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.category }}</td>
-                <td>{{ product.brand }}</td>
-                <td>{{ product.clientType }}</td>
-                <td>{{ product.customer }}</td>
-                <!-- <td> 
-                  <button class="bi bi-info-circle" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button></td> -->
-                <!-- <td>
-                  <button class="btn-primary" (click)="editProduct(i)" (click)="toggleEditing()"
-                    style="margin-inline: 2px;">Edit</button>
-                  <button class="btn-danger" (click)="removeProduct(i)">Delete</button>
-                </td> -->
-              </tr>
-            </tbody>
-          </table><br><br><br><br><br><br>
-          <div style="font-family: Georgia, 'Times New Roman', Times, serif;">
-            <h5 style="margin-inline: 600px; font-family:Georgia, 'Times New Roman', Times, serif;"><strong>Raw Materail
-                Details</strong></h5><br>
-            <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
-            <!-- New success message element -->
-            <table>
-              <thead>
-                <tr>
-                  <th>Material Id</th>
-                  <th>Material Name</th>
-                  <th>Material code</th>
-                  <th>Material Type</th>
-                  <th>Material Cost</th>
-                  <th>Material Vendor</th>
-                  <th>Material Inventory</th>        
-                  <!-- <th>Action</th> -->
-                  <!-- New column for edit/remove buttons -->
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let product of products; let i = index">
-                  <td>{{ i + 1 }}<br>{{ i + 2 }}</td>
-                  <td>{{ product.name }}<br>{{ product.Ematerial }}</td>
-                  <td>{{ product.mcode }}<br>{{ product.Emcode }}</td>
-                  <td>{{ product.mtype }}<br>{{ product.Emtype }}</td>
-                  <td>{{ product.mcost }}<br>{{ product.Emcost }}</td>
-                  <td>{{ product.mvendor }}<br>{{ product.Emvendor }}</td>
-                  <td>{{ product.minventory }}<br>{{ product.Eminventory }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
