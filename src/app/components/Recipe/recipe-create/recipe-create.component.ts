@@ -57,21 +57,12 @@ export class RecipeCreateComponent implements OnInit {
     customer: '',
     material: '',
     clientType: '',
-    rawMaterial: '',
     mquantity: '',
     mcode: '',
     mtype: '',
     mcost: '',
     mvendor: '',
     minventory: '',
-    Ematerial: '',
-    Emcode: '',
-    Emtype: '',
-    Emquantity: '',
-    Emcost: '',
-    Emvendor: '',
-    Eminventory: '',
-    rawElement: '',
   };
 
   isEditMode: boolean = false;
