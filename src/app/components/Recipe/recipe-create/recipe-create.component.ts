@@ -215,7 +215,7 @@ export class RecipeCreateComponent implements OnInit {
   calculatePrice(): void {
     if (this.newProduct.mquantity && this.selectedMaterialData) {
       const quantity = parseFloat(this.newProduct.mquantity);
-      this.selectedMaterialData.m_cost = (quantity * 10).toString();
+      this.selectedMaterialData.m_cost = (quantity * 100).toString();
     }
   }
 }
