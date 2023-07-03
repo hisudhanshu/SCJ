@@ -27,6 +27,12 @@ interface RequestData {
   styleUrls: ['./recipe-create.component.css']
 })
 export class RecipeCreateComponent implements OnInit {
+
+  // Declare flag variables
+  isFlag1Selected: boolean = false;
+  isFlag2Selected: boolean = false;
+
+
   materials: Material[] = [];
   showMaterialDropdowns = false;
 
@@ -44,6 +50,7 @@ export class RecipeCreateComponent implements OnInit {
   successMessage: string = '';
 
   newProduct: any = {
+    flag:2,
     name: '',
     category: '',
     brand: '',
@@ -51,19 +58,19 @@ export class RecipeCreateComponent implements OnInit {
     material: '',
     clientType: '',
     rawMaterial: '',
-    mquantity:'',
+    mquantity: '',
     mcode: '',
     mtype: '',
     mcost: '',
     mvendor: '',
     minventory: '',
-    Ematerial:'',
-    Emcode:'',
-    Emtype:'',
-    Emquantity:'',
-    Emcost:'',
-    Emvendor:'',
-    Eminventory:'',
+    Ematerial: '',
+    Emcode: '',
+    Emtype: '',
+    Emquantity: '',
+    Emcost: '',
+    Emvendor: '',
+    Eminventory: '',
     rawElement: '',
   };
 
@@ -170,7 +177,7 @@ export class RecipeCreateComponent implements OnInit {
 
   onMaterialChange(event: any): void {
     const selectedMaterialId = parseInt(event.target.value, 10);
-
+  
     if (selectedMaterialId !== 0) {
       this.selectedMaterialId = selectedMaterialId;
       this.selectedMaterialData = this.getMaterialDataById(selectedMaterialId);
@@ -205,9 +212,10 @@ export class RecipeCreateComponent implements OnInit {
   onAddButtonClick(): void {
     this.showDropdowns = true;
   }
-  calculatePrice() {
-    if (this.newProduct.Emquantity) {
-      this.newProduct.Emcost = this.newProduct.Emquantity * 10;
+  calculatePrice(): void {
+    if (this.newProduct.mquantity && this.selectedMaterialData) {
+      const quantity = parseFloat(this.newProduct.mquantity);
+      this.selectedMaterialData.m_cost = (quantity * 10).toString();
     }
   }
 }
