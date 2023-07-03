@@ -33,6 +33,7 @@ import { ProductMaterialComponent } from './components/material/product-material
 import { RawmaterialmanagmentComponent } from './components/material/rawmaterialmanagment/rawmaterialmanagment.component';
 import { TestComponent } from './components/test/test.component';
 import { CreateMaterialComponent } from './components/material/create-material/create-material.component';
+import { MaterialViewComponent } from './components/material/material-view/material-view.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { CreateMaterialComponent } from './components/material/create-material/c
     RawmaterialmanagmentComponent,
     TestComponent,
     CreateMaterialComponent,
+    MaterialViewComponent,
   ],
   imports: [
     BrowserModule,
