@@ -118,7 +118,7 @@
                         </div>
                       </div>
                       <!-- Add Material button dropdown box show here -->
-                      <div *ngIf="showDropdowns" class="col-md-12">
+                      <!-- <div *ngIf="showDropdowns" class="col-md-12">
                         <br><br>
                         <h4 style="font-family: Georgia, 'Times New Roman', Times, serif;">Add New Material here</h4>
                         <div class="row">
@@ -130,9 +130,9 @@
                               <option value="">-- Select --</option>
                               <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
                             </select>
-                          </div>
+                          </div> -->
                           <!-- Edit button and editable dropdowns -->
-                          <div class="col-md-4" *ngIf="selectedMaterialData">
+                          <!-- <div class="col-md-4" *ngIf="selectedMaterialData">
                             <br>
                             <label for="code">M_code</label>
                             <div>
@@ -176,18 +176,17 @@
                             </div>
                           </div>
                         </div>
+                      </div> -->
                       </div>
-                      </div>
-                    <br><br>
                     <br><br>
                     <div>
                       <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">{{
                         isEditMode ? 'Update' : 'Submit' }}</button>
                     </div>
                   </form>
-                  <div class="col-md-4" style="margin-inline: 1000px;" *ngIf="selectedMaterialData">
+                  <!-- <div class="col-md-4" style="margin-inline: 1000px;" *ngIf="selectedMaterialData">
                     <button class="btn-secondary" (click)="onAddButtonClick()">AddMaterial</button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

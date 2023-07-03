@@ -208,5 +208,5 @@ export class RecipeCreateComponent implements OnInit {
       const quantity = parseFloat(this.newProduct.mquantity);
       this.selectedMaterialData.m_cost = (quantity * 100).toString();
     }
-  }
+  }  
 }
