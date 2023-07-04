@@ -52,12 +52,12 @@ export class RecipeCreateComponent implements OnInit {
   successMessage: string = '';
 
   newProduct: any = {
-    flag: 2,
-    name: '',
-    category: '',
-    brand: '',
-    customer: '',
-    clientType: '',
+    // flag: 2,
+    // name: '',
+    // category: '',
+    // brand: '',
+    // customer: '',
+    // clientType: '',
 
     SelectedMaterial: this.selectedMaterial,
 
