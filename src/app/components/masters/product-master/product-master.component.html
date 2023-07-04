@@ -5,7 +5,8 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Create Customer</strong></h1>
+            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Create
+                Customer</strong></h1>
             <br>
             <div class="row">
               <div class="col-lg-12">
@@ -53,13 +54,15 @@
                       <div class="col-md-4">
                         <label for="clientType">Client Type</label>
                         <div>
-                          <input id="clientType" class="form-control" type="text" name="clientType" placeholder="Enter Type" [(ngModel)]="newProduct.clientType" required>
+                          <input id="clientType" class="form-control" type="text" name="clientType"
+                            placeholder="Enter Type" [(ngModel)]="newProduct.clientType" required>
                         </div>
                       </div>
                       <div class="col-md-4">
                         <label for="customerName">Customer Name</label>
                         <div>
-                          <input id="customerName" class="form-control" type="text" placeholder="Enter Name" name="customerName" [(ngModel)]="newProduct.customer" required>
+                          <input id="customerName" class="form-control" type="text" placeholder="Enter Name"
+                            name="customerName" [(ngModel)]="newProduct.customer" required>
                         </div>
                       </div>
                       <!--  Change WF  -->
@@ -96,42 +99,6 @@
                     <button type="submit" class="btn-primary" [disabled]="!productForm.form.valid">{{
                       isEditMode ? 'Update' : 'Create' }}</button>
                   </form><br><br>
-                  <div>
-                    <div class="success-message" *ngIf="successMessage">{{ successMessage }}</div>
-                    <!-- New success message element -->
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>Id</th>
-                          <!-- <th>Product Name</th>
-                          <th>Brand</th> -->
-                          <th>Client Type</th>
-                          <th>Customer Name</th>
-                          <!-- <th>Product Category</th> -->
-                          <!-- <th>Raw Material</th>
-                          <th>Raw Element</th> -->
-                          <th>Action</th>
-                          <!-- New column for edit/remove buttons -->
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let product of products; let i = index">
-                          <td>{{ i + 1 }}</td>
-                          <!-- <td>{{ product.name }}</td>
-                          <td>{{ product.brand }}</td> -->
-                          <!-- <td>{{ product.category }}</td> -->
-                          <td>{{ product.clientType }}</td>
-                          <td>{{ product.customer }}</td>
-                          <!-- <td>{{ product.rawMaterial }}</td>
-                          <td>{{ product.rawElement }}</td> -->
-                          <td>
-                            <button class="btn-primary" (click)="editProduct(i)">Edit</button>
-                            <button class="btn-danger" (click)="removeProduct(i)">Delete</button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
                 </div>
               </div>
             </div>
