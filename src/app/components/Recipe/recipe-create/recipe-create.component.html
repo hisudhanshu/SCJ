@@ -68,7 +68,6 @@
                         </select>
                       </div>
                       <!-- Edit button and editable dropdowns -->
-
                       <!-- <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="code">M_code</label>
@@ -80,7 +79,7 @@
                         <label for="code">M_code</label>
                         <div>
                           <input type="text" id="code" class="form-control" name="code"
-                            [(ngModel)]="selectedMaterialData.m_code" readonly >
+                            [(ngModel)]="selectedMaterialData.m_code" readonly>
                         </div>
                       </div>
                       <div class="col-md-4" *ngIf="selectedMaterialData">
@@ -132,10 +131,11 @@
                           <div class="col-md-4">
                             <br>
                             <label for="selectedMaterial">Select Material</label>
-                            <select id="selectedMaterial" class="form-select" name="selectedMaterial" (change)="onMaterialChange($event)"
-                              [(ngModel)]="newProduct.material" required>
+                            <select id="selectedMaterial" class="form-select" name="selectedMaterial"
+                              (change)="onMaterialChange($event)" [(ngModel)]="newProduct.material" required>
                               <option value="">-- Select --</option>
-                              <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
+                              <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}
+                              </option>
                             </select>
                           </div>
                           <!-- Edit button and editable dropdowns -->
@@ -143,48 +143,54 @@
                             <br>
                             <label for="code">M_code</label>
                             <div>
-                              <input type="text" id="code" class="form-control" name="code" [(ngModel)]="selectedMaterialData.m_code" readonly>
+                              <input type="text" id="code" class="form-control" name="code"
+                                [(ngModel)]="selectedMaterialData.m_code" readonly>
                             </div>
                           </div>
                           <div class="col-md-4" *ngIf="selectedMaterialData">
                             <br>
                             <label for="type">M_type</label>
                             <div>
-                              <input type="text" id="type" class="form-control" name="type" [(ngModel)]="selectedMaterialData.m_type" readonly>
+                              <input type="text" id="type" class="form-control" name="type"
+                                [(ngModel)]="selectedMaterialData.m_type" readonly>
                             </div>
                           </div>
                           <div class="col-md-4" *ngIf="selectedMaterialData">
                             <br>
                             <label for="vendor">M_Vendor</label>
                             <div>
-                              <input type="text" id="vendor" class="form-control" name="vendor" [(ngModel)]="selectedMaterialData.m_Vendor" readonly>
+                              <input type="text" id="vendor" class="form-control" name="vendor"
+                                [(ngModel)]="selectedMaterialData.m_Vendor" readonly>
                             </div>
                           </div>
                           <div class="col-md-4" *ngIf="selectedMaterialData">
                             <br>
                             <label for="M_inventory">M_inventory</label>
                             <div>
-                              <input type="text" id="M_inventory" class="form-control" name="M_inventory" [(ngModel)]="selectedMaterialData.m_inventory" readonly>
+                              <input type="text" id="M_inventory" class="form-control" name="M_inventory"
+                                [(ngModel)]="selectedMaterialData.m_inventory" readonly>
                             </div>
                           </div>
                           <div class="col-md-4" *ngIf="selectedMaterialData">
                             <br>
                             <label for="newmquantityperkg">Quantity/Per/kg</label>
                             <div>
-                              <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control" name="newmquantityperkg"
-                                [(ngModel)]="newProduct.mquantity" (input)="calculatePrice()" required>
+                              <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
+                                name="newmquantityperkg" [(ngModel)]="newProduct.mquantity" (input)="calculatePrice()"
+                                required>
                             </div>
                           </div>
                           <div class="col-md-4" *ngIf="selectedMaterialData">
                             <br>
                             <label for="cost">M_cost/per/kg</label>
                             <div>
-                              <input type="text" id="cost" class="form-control" name="cost" [(ngModel)]="selectedMaterialData.m_cost" readonly>
+                              <input type="text" id="cost" class="form-control" name="cost"
+                                [(ngModel)]="selectedMaterialData.m_cost" readonly>
                             </div>
                           </div>
                         </div>
                       </div>
-                      </div>
+                    </div>
                     <br><br>
                     <div>
                       <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">{{
