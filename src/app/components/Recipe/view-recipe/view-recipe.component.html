@@ -1,0 +1,43 @@
+<main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+    <section class="section">
+        <div class="container-fluid">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Product
+                            Recipe</strong></h1><br>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="form-group col-md-4">
+                                        <label for="selectproduct">Select Product</label>
+                                        <select class="form-select" id="selectproduct" [(ngModel)]="selectedProduct"
+                                            (change)="openRecipeScreen()">
+                                            <option value="">-- Select --</option>
+                                            <option value="household">Household</option>
+                                            <option value="bottle">Bottle</option>
+                                            <option value="plastic">Plastic</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="selectedProduct"><br><br>
+                            <h5 style="font-family: 'Times New Roman', Times, serif;">Recipe of {{ selectedProduct }}
+                            </h5><br>
+                            <ul class="recipe-list" style="font-family: 'Times New Roman', Times, serif;"><br>
+                                <li><strong>Product -</strong> {{ selectedProduct }}</li>
+                                <li><strong>Customer -</strong> {{ recipeData.customerName }}</li>
+                                <li><strong>Polymer -</strong> {{ recipeData.polymer }}</li>
+                                <li><strong>Category -</strong> {{ recipeData.category }}</li>
+                                <li><strong>Brand - </strong> {{ recipeData.brand }}</li>
+                                <li><strong>Material -</strong> {{ recipeData.material }}</li>
+                                <li><strong>Element -</strong> {{ recipeData.element }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
