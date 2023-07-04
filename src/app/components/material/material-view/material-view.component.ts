@@ -8,6 +8,8 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 })
 export class MaterialViewComponent implements OnInit {
   materials: any[] | undefined;
+  filteredMaterials: any[] | undefined;
+  searchQuery: string = '';
 
   constructor(private authService: AuthServicesService) { }
 
@@ -20,6 +22,7 @@ export class MaterialViewComponent implements OnInit {
       (response: any) => {
         if (response.isSuccess && response.matdata !== null) {
           this.materials = response.matdata;
+          this.filteredMaterials = response.matdata; // Initialize filteredMaterials with all materials
         } else {
           console.log('API request failed or no data received');
         }
@@ -28,5 +31,17 @@ export class MaterialViewComponent implements OnInit {
         console.log('Error fetching materials:', error);
       }
     );
+  }
+
+  searchMaterials() {
+    if (!this.searchQuery) {
+      // If searchQuery is empty, reset filteredMaterials to show all materials
+      this.filteredMaterials = this.materials;
+    } else {
+      // Perform the search operation on materials based on the search query
+      this.filteredMaterials = this.materials?.filter(material =>
+        material?.name?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
   }
 }

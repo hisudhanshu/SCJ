@@ -62,7 +62,7 @@
                         <br>
                         <label for="selectedMaterial">Select Material</label>
                         <select id="selectedMaterial" class="form-select" name="selectedMaterial"
-                          (change)="onMaterialChange($event)"  required>
+                          (change)="onMaterialChange($event)" required>
                           <option value="">-- Select --</option>
                           <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
                         </select>
@@ -111,8 +111,8 @@
                         <label for="newmquantityperkg">Quantity/Per/kg</label>
                         <div>
                           <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
-                            name="newmquantityperkg" [(ngModel)]="selectedMaterialData.mquantity" (input)="calculatePrice()"
-                            required>
+                            name="newmquantityperkg" [(ngModel)]="selectedMaterialData.mquantity"
+                            (input)="calculatePrice()" required>
                         </div>
                       </div>
                       <div class="col-md-4" *ngIf="selectedMaterialData">
@@ -134,40 +134,37 @@
                   </form>
                   <div class="col-md-4" style="margin-inline: 1000px;" *ngIf="selectedMaterialData">
                     <button class="btn-secondary" (click)="onAddButtonClick()">AddMaterial</button>
-                  </div>
-               
-               
-               <table><tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-              <tr *ngFor="let y of selectedMaterial">
-                <td>
-{{y.id}} 
-
-
-                </td>
-                <td>
-                  {{y.name}}
-                </td>
-                <td>
-                  {{y.m_Vendor}} 
-                </td>
-                <td>
-                  {{y.m_cost}}
-                </td>
-                <td>
-                  {{y.m_inventory}}
-                </td>
-                <td>
-                  {{y.mquantity}}
-                </td>
-              </tr>
-               </table>
-               
+                  </div><br>
+                  <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                    <tr>
+                      <th>Id</th>
+                      <th>Name</th>
+                      <th>Vendor</th>
+                      <th>Cost</th>
+                      <th>Inventory</th>
+                      <th>Quantity</th>
+                    </tr>
+                    <tr *ngFor="let y of selectedMaterial">
+                      <td>
+                        {{y.id}}
+                      </td>
+                      <td>
+                        {{y.name}}
+                      </td>
+                      <td>
+                        {{y.m_Vendor}}
+                      </td>
+                      <td>
+                        {{y.m_cost}}
+                      </td>
+                      <td>
+                        {{y.m_inventory}}
+                      </td>
+                      <td>
+                        {{y.mquantity}}
+                      </td>
+                    </tr>
+                  </table>
                 </div>
               </div>
             </div>
