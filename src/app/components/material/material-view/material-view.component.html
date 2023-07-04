@@ -12,9 +12,10 @@
             <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
               <form class="search-form d-flex align-items-center">
                 <div class="input-group">
-                  <input class="form-control" id="searchKeyword" [(ngModel)]="searchQuery" name="query" type="text" placeholder="Search.."
-                    title="Enter search keyword" (input)="searchMaterials()" />
-                  <button type="submit" class="btn btn-primary" title="Search" (click)="searchMaterials()">Search</button>
+                  <input class="form-control" id="searchKeyword" [(ngModel)]="searchQuery" name="query" type="text"
+                    placeholder="Search here.." title="Enter search keyword" (input)="searchMaterials()" />
+                  <button type="submit" class="btn btn-primary" title="Search"
+                    (click)="searchMaterials()">Search</button>
                 </div>
               </form>
             </div>
@@ -45,6 +46,8 @@
                 </tr>
               </tbody>
             </table>
+            <br>
+            <br>
           </div>
         </div>
       </div>
