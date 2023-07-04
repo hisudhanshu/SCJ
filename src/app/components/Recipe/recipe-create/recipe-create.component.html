@@ -62,7 +62,7 @@
                         <br>
                         <label for="selectedMaterial">Select Material</label>
                         <select id="selectedMaterial" class="form-select" name="selectedMaterial"
-                          (change)="onMaterialChange($event)" [(ngModel)]="newProduct.material" required>
+                          (change)="onMaterialChange($event)"  required>
                           <option value="">-- Select --</option>
                           <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
                         </select>
@@ -111,7 +111,7 @@
                         <label for="newmquantityperkg">Quantity/Per/kg</label>
                         <div>
                           <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
-                            name="newmquantityperkg" [(ngModel)]="newProduct.mquantity" (input)="calculatePrice()"
+                            name="newmquantityperkg" [(ngModel)]="selectedMaterialData.mquantity" (input)="calculatePrice()"
                             required>
                         </div>
                       </div>
@@ -125,72 +125,6 @@
                       </div>
 
 
-                      <!-- Add Material button dropdown box show here -->
-                      <div *ngIf="showDropdowns" class="col-md-12">
-                        <br><br>
-                        <h4 style="font-family: Georgia, 'Times New Roman', Times, serif;">Add New Material here</h4>
-                        <div class="row">
-                          <div class="col-md-4">
-                            <br>
-                            <label for="selectedMaterial">Select Material</label>
-                            <select id="selectedMaterial" class="form-select" name="selectedMaterial">
-                              <option value="">-- Select --</option>
-                              <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}
-                              </option>
-                            </select>
-                          </div>
-                          <!-- Edit button and editable dropdowns -->
-                          <div class="col-md-4" *ngIf="selectedMaterialData">
-                            <br>
-                            <label for="code">M_code</label>
-                            <div>
-                              <input type="text" id="code" class="form-control" name="code"
-                                [(ngModel)]="selectedMaterialData.m_code" readonly>
-                            </div>
-                          </div>
-                          <div class="col-md-4" *ngIf="selectedMaterialData">
-                            <br>
-                            <label for="type">M_type</label>
-                            <div>
-                              <input type="text" id="type" class="form-control" name="type"
-                                [(ngModel)]="selectedMaterialData.m_type" readonly>
-                            </div>
-                          </div>
-                          <div class="col-md-4" *ngIf="selectedMaterialData">
-                            <br>
-                            <label for="vendor">M_Vendor</label>
-                            <div>
-                              <input type="text" id="vendor" class="form-control" name="vendor"
-                                [(ngModel)]="selectedMaterialData.m_Vendor" readonly>
-                            </div>
-                          </div>
-                          <div class="col-md-4" *ngIf="selectedMaterialData">
-                            <br>
-                            <label for="M_inventory">M_inventory</label>
-                            <div>
-                              <input type="text" id="M_inventory" class="form-control" name="M_inventory"
-                                [(ngModel)]="selectedMaterialData.m_inventory" readonly>
-                            </div>
-                          </div>
-                          <div class="col-md-4" *ngIf="selectedMaterialData">
-                            <br>
-                            <label for="newmquantityperkg">Quantity/Per/kg</label>
-                            <div>
-                              <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
-                                name="newmquantityperkg" [(ngModel)]="newProduct.mquantity" (input)="calculatePrice()"
-                                required>
-                            </div>
-                          </div>
-                          <div class="col-md-4" *ngIf="selectedMaterialData">
-                            <br>
-                            <label for="cost">M_cost/per/kg</label>
-                            <div>
-                              <input type="text" id="cost" class="form-control" name="cost"
-                                [(ngModel)]="selectedMaterialData.m_cost" readonly>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                     <br><br>
                     <div>
@@ -201,6 +135,39 @@
                   <div class="col-md-4" style="margin-inline: 1000px;" *ngIf="selectedMaterialData">
                     <button class="btn-secondary" (click)="onAddButtonClick()">AddMaterial</button>
                   </div>
+               
+               
+               <table><tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+              <tr *ngFor="let y of selectedMaterial">
+                <td>
+{{y.id}} 
+
+
+                </td>
+                <td>
+                  {{y.name}}
+                </td>
+                <td>
+                  {{y.m_Vendor}} 
+                </td>
+                <td>
+                  {{y.m_cost}}
+                </td>
+                <td>
+                  {{y.m_inventory}}
+                </td>
+                <td>
+                  {{y.mquantity}}
+                </td>
+              </tr>
+               </table>
+               
                 </div>
               </div>
             </div>

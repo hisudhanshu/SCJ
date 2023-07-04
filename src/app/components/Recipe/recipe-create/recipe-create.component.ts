@@ -9,6 +9,7 @@ interface Material {
   m_cost: string;
   m_Vendor: string;
   m_inventory: string;
+  mquantity: string;
 }
 
 interface Element {
@@ -27,6 +28,7 @@ interface RequestData {
   styleUrls: ['./recipe-create.component.css']
 })
 export class RecipeCreateComponent implements OnInit {
+  SelectedMaterial: string[] = [];
 
   // Declare flag variables
   isFlag1Selected: boolean = false;
@@ -42,7 +44,7 @@ export class RecipeCreateComponent implements OnInit {
   selectedMaterialData: Material | undefined;
   isEditing: boolean = false;
 
-  selectedMaterial: string = '';
+  selectedMaterial: any = [];
   elements: Element[] = [];
 
   categories: string[] = ['Category A', 'Category B', 'Category C'];
@@ -50,19 +52,15 @@ export class RecipeCreateComponent implements OnInit {
   successMessage: string = '';
 
   newProduct: any = {
-    flag:2,
+    flag: 2,
     name: '',
     category: '',
     brand: '',
     customer: '',
-    material: '',
     clientType: '',
-    mquantity: '',
-    mcode: '',
-    mtype: '',
-    mcost: '',
-    mvendor: '',
-    minventory: '',
+
+    SelectedMaterial: this.selectedMaterial,
+
   };
 
   isEditMode: boolean = false;
@@ -99,8 +97,14 @@ export class RecipeCreateComponent implements OnInit {
       }
     );
   }
-
   createOrUpdateProduct() {
+    this.authService.insertProductData(this.newProduct).subscribe(
+      (response) => {
+      }
+    )
+
+  }
+  createOrUpdateProduct2() {
     if (this.isEditMode) {
       this.products[this.editIndex] = { ...this.newProduct };
       this.saveProducts();
@@ -114,7 +118,7 @@ export class RecipeCreateComponent implements OnInit {
             console.log('Product data inserted successfully:', response);
             this.products.push({ ...this.newProduct });
             this.saveProducts();
-            this.resetForm();
+
             this.successMessage = 'Product added successfully.';
             alert('Data saved successfully.');
           },
@@ -131,25 +135,9 @@ export class RecipeCreateComponent implements OnInit {
     this.saveProducts();
   }
 
-  editProduct(index: number) {
-    const product = this.products[index];
-    this.newProduct = { ...product };
-    this.isEditMode = true;
-    this.editIndex = index;
-  }
 
-  resetForm() {
-    this.newProduct = {
-      name: '',
-      category: '',
-      brand: '',
-      customer: '',
-      recipe: '',
-      clientType: '',
-      rawMaterial: '',
-      rawElement: ''
-    };
-  }
+
+
 
   private loadProducts() {
     const savedProducts = localStorage.getItem('products');
@@ -159,7 +147,7 @@ export class RecipeCreateComponent implements OnInit {
   }
 
   private saveProducts() {
-    localStorage.setItem('products', JSON.stringify(this.products));
+    // localStorage.setItem('products', JSON.stringify(this.products));
   }
 
   getItemLabel(item: any): string {
@@ -167,8 +155,8 @@ export class RecipeCreateComponent implements OnInit {
   }
 
   onMaterialChange(event: any): void {
-    const selectedMaterialId = parseInt(event.target.value, 10);
-  
+    const selectedMaterialId = parseInt(event.target.value);
+
     if (selectedMaterialId !== 0) {
       this.selectedMaterialId = selectedMaterialId;
       this.selectedMaterialData = this.getMaterialDataById(selectedMaterialId);
@@ -191,22 +179,14 @@ export class RecipeCreateComponent implements OnInit {
   toggleEditing() {
     this.isEditing = !this.isEditing;
   }
-  addMaterial() {
-    this.newProduct.materials.push({
-      m_code: '',
-      m_type: '',
-      m_cost: '',
-      m_Vendor: '',
-      m_inventory: ''
-    });
-  }
+
   onAddButtonClick(): void {
-    this.showDropdowns = true;
+    this.selectedMaterial.push(this.selectedMaterialData)
   }
   calculatePrice(): void {
     if (this.newProduct.mquantity && this.selectedMaterialData) {
       const quantity = parseFloat(this.newProduct.mquantity);
       this.selectedMaterialData.m_cost = (quantity * 100).toString();
     }
-  }  
+  }
 }
