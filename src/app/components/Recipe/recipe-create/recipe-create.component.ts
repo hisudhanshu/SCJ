@@ -3,6 +3,7 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 interface Material {
   id: number;
+  p_id: number;
   name: string;
   m_code: string;
   m_type: string;
@@ -53,13 +54,12 @@ export class RecipeCreateComponent implements OnInit {
   successMessage: string = '';
 
   newProduct: any = {
-    // flag: 2,
-    // name: '',
-    // category: '',
-    // brand: '',
-    // customer: '',
-    // clientType: '',
-
+    flag: 2,
+    name: '',
+    category: '',
+    brand: '',
+    customer: '',
+    clientType: '',
     SelectedMaterial: this.selectedMaterial,
 
   };
