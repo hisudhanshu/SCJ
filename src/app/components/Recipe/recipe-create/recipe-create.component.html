@@ -62,7 +62,7 @@
                         <br>
                         <label for="selectedMaterial">Select Material</label>
                         <select id="selectedMaterial" class="form-select" name="selectedMaterial"
-                          (change)="onMaterialChange($event)" required>
+                          (change)="onMaterialChange($event)"[(ngModel)]="newProduct.material" required>
                           <option value="">-- Select --</option>
                           <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
                         </select>
