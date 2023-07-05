@@ -123,8 +123,6 @@
                             [(ngModel)]="selectedMaterialData.m_cost" readonly>
                         </div>
                       </div>
-
-
                     </div>
                     <br><br>
                     <div>
@@ -140,9 +138,9 @@
                       <th>Id</th>
                       <th>Name</th>
                       <th>Vendor</th>
+                      <th>Quantity</th>
                       <th>Cost</th>
                       <th>Inventory</th>
-                      <th>Quantity</th>
                     </tr>
                     <tr *ngFor="let y of selectedMaterial">
                       <td>
@@ -155,13 +153,13 @@
                         {{y.m_Vendor}}
                       </td>
                       <td>
+                        {{y.mquantity}}
+                      </td>
+                      <td>
                         {{y.m_cost}}
                       </td>
                       <td>
                         {{y.m_inventory}}
-                      </td>
-                      <td>
-                        {{y.mquantity}}
                       </td>
                     </tr>
                   </table>

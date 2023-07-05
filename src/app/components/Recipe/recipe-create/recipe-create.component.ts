@@ -134,11 +134,6 @@ export class RecipeCreateComponent implements OnInit {
     this.products.splice(index, 1);
     this.saveProducts();
   }
-
-
-
-
-
   private loadProducts() {
     const savedProducts = localStorage.getItem('products');
     if (savedProducts) {
@@ -184,9 +179,16 @@ export class RecipeCreateComponent implements OnInit {
     this.selectedMaterial.push(this.selectedMaterialData)
   }
   calculatePrice(): void {
-    if (this.newProduct.mquantity && this.selectedMaterialData) {
-      const quantity = parseFloat(this.newProduct.mquantity);
+    if (this.selectedMaterialData && this.selectedMaterialData.mquantity) {
+      const quantity = parseFloat(this.selectedMaterialData.mquantity);
       this.selectedMaterialData.m_cost = (quantity * 100).toString();
     }
-  }
+  }  
+  // calculatePrice(): void {
+  //   if (this.newProduct.mquantity && this.selectedMaterialData) {
+  //     const quantity = parseFloat(this.newProduct.mquantity);
+  //     this.selectedMaterialData.m_cost = (quantity * 100).toString();
+  //   }
+  // }
+
 }

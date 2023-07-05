@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 @Component({
   selector: 'app-view-recipe',
@@ -6,42 +7,41 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./view-recipe.component.css']
 })
 export class ViewRecipeComponent implements OnInit {
-  ngOnInit(): void {
-  }
-  selectedProduct: string = '';
-  recipeData: any = {}; // Initialize empty recipe data
+  materials: any[] | undefined;
+  filteredMaterials: any[] | undefined;
+  searchQuery: string = '';
 
-  openRecipeScreen(): void {
-    if (this.selectedProduct === 'household') {
-      this.recipeData = {
-        material: 'Hard Plastic',
-        element: 'Nylon',
-        category: 'category A',
-        brand: 'Indica',
-        customerName: 'SCJ',
-        polymer: 'Polymer 1'
-      };
-    } else if (this.selectedProduct === 'bottle') {
-      this.recipeData = {
-        material: 'Oxidation',
-        element: 'Polytheine',
-        category: 'category B',
-        brand: 'Kent',
-        customerName: 'Clay',
-        polymer: 'Polymer 2'
-      };
-    } else if (this.selectedProduct === 'plastic') {
-      this.recipeData = {
-        material: 'Ethyliene',
-        element: 'Element',
-        category: 'category C',
-        brand: 'TATA',
-        customerName: 'Claylogix',
-        polymer: 'Polymer 3'
-      };
+  constructor(private authService: AuthServicesService) { }
+
+  ngOnInit() {
+    this.getMaterials();
+  }
+
+  getMaterials() {
+    this.authService.getMaterials().subscribe(
+      (response: any) => {
+        if (response.isSuccess && response.matdata !== null) {
+          this.materials = response.matdata;
+          this.filteredMaterials = response.matdata; // Initialize filteredMaterials with all materials
+        } else {
+          console.log('API request failed or no data received');
+        }
+      },
+      (error: any) => {
+        console.log('Error fetching materials:', error);
+      }
+    );
+  }
+
+  searchMaterials() {
+    if (!this.searchQuery) {
+      // If searchQuery is empty, reset filteredMaterials to show all materials
+      this.filteredMaterials = this.materials;
     } else {
-      // No product selected, reset the recipe data
-      this.recipeData = {};
+      // Perform the search operation on materials based on the search query
+      this.filteredMaterials = this.materials?.filter(material =>
+        material?.name?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     }
   }
 }
