@@ -96,6 +96,17 @@ export class AuthServicesService {
     return this.http.get(url, { headers: headers });
   }
 
+  // FUll Recipe API Call here
+  getRecipes(): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    
+    let url = this.urlprefix + "api/Authentication/GetFullRecipe";
+    return this.http.get<any[]>(url, { headers: headers });
+  }
+  
   getRawMaterialsrecipe(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -113,13 +124,17 @@ export class AuthServicesService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${baseUrl}Authentication/InsertRecipe`, data, { headers });
   }
-
-  // Update Product Master data API url Call here
- 
-//  updateProductData(data: any): Observable<any> {
-//   const url = `${this.apiUrl}UpdateProductMaster`; // Replace with your update API endpoint
-//   const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-//   return this.http.put(`${baseUrl}Authentication/UpdateProductMaster`, data, { headers });
-// }
-
+  
+  // Full Recipe API Call here 
+  getrecipe(): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    
+    // GetProducts API call here Show on Map Product Screen 
+    
+    let url = this.urlprefix + "api/Authentication/GetFullRecipe";
+    return this.http.get(url, { headers: headers });
+  }
 }
