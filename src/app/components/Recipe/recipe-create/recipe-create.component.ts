@@ -101,10 +101,40 @@ export class RecipeCreateComponent implements OnInit {
   createOrUpdateProduct() {
     this.authService.insertProductData(this.newProduct).subscribe(
       (response) => {
-      }
-    )
+        if (response.isSuccess) {
+          // Product added successfully
+          this.successMessage = 'Product added successfully.';
+          alert('Product added successfully.');
+        } else {
+          // Product addition failed
+          console.error('Failed to add product:', response.errorMessage);
+          alert('Failed to add product. Please try again.');
+        }
+        // Reset the dropdown values
+        this.selectedMaterialId = 0;
+        this.selectedMaterialData = undefined;
 
+        // Clear the input fields
+        this.newProduct = {
+          flag: 2,
+          name: '',
+          category: '',
+          brand: '',
+          customer: '',
+          clientType: '',
+          SelectedMaterial: [],
+        };
+
+        // Reset the table
+        this.loadProducts();
+      },
+      (error) => {
+        console.error('Error occurred while inserting product data:', error);
+        alert('An error occurred while adding the product. Please try again.');
+      }
+    );
   }
+
   createOrUpdateProduct2() {
     if (this.isEditMode) {
       this.products[this.editIndex] = { ...this.newProduct };
@@ -184,7 +214,7 @@ export class RecipeCreateComponent implements OnInit {
       const quantity = parseFloat(this.selectedMaterialData.mquantity);
       this.selectedMaterialData.m_cost = (quantity * 100).toString();
     }
-  }  
+  }
   // calculatePrice(): void {
   //   if (this.newProduct.mquantity && this.selectedMaterialData) {
   //     const quantity = parseFloat(this.newProduct.mquantity);
