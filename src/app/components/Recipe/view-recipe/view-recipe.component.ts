@@ -7,41 +7,43 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./view-recipe.component.css']
 })
 export class ViewRecipeComponent implements OnInit {
-  materials: any[] | undefined;
-  filteredMaterials: any[] | undefined;
-  searchQuery: string = '';
+  selectedProduct: string | null = null;
+  recipes: Recipe[] = [];
 
-  constructor(private authService: AuthServicesService) { }
+  constructor(private authService: AuthServicesService) {}
 
-  ngOnInit() {
-    this.getMaterials();
+  ngOnInit(): void {}
+
+  selectProduct(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    const product = target.value;
+    this.selectedProduct = product;
+    this.loadRecipes();
   }
 
-  getMaterials() {
-    this.authService.getMaterials().subscribe(
-      (response: any) => {
-        if (response.isSuccess && response.matdata !== null) {
-          this.materials = response.matdata;
-          this.filteredMaterials = response.matdata; // Initialize filteredMaterials with all materials
-        } else {
-          console.log('API request failed or no data received');
-        }
-      },
-      (error: any) => {
-        console.log('Error fetching materials:', error);
-      }
-    );
-  }
-
-  searchMaterials() {
-    if (!this.searchQuery) {
-      // If searchQuery is empty, reset filteredMaterials to show all materials
-      this.filteredMaterials = this.materials;
+  loadRecipes() {
+    if (this.selectedProduct === 'Bottle') {
+      this.recipes = [
+        { name: 'Recipe 1', ingredients: 'Ingredient 1, Ingredient 2' },
+        { name: 'Recipe 2', ingredients: 'Ingredient 3, Ingredient 4' }
+      ];
+    } else if (this.selectedProduct === 'Glass') {
+      this.recipes = [
+        { name: 'Recipe 1', ingredients: 'Ingredient 5, Ingredient 6' },
+        { name: 'Recipe 2', ingredients: 'Ingredient 7, Ingredient 8' }
+      ];
+    } else if (this.selectedProduct === 'Household') {
+      this.recipes = [
+        { name: 'Recipe 1', ingredients: 'Ingredient 9, Ingredient 10' },
+        { name: 'Recipe 2', ingredients: 'Ingredient 11, Ingredient 12' }
+      ];
     } else {
-      // Perform the search operation on materials based on the search query
-      this.filteredMaterials = this.materials?.filter(material =>
-        material?.name?.toLowerCase().includes(this.searchQuery.toLowerCase())
-      );
+      this.recipes = [];
     }
   }
+}
+
+interface Recipe {
+  name: string;
+  ingredients: string;
 }

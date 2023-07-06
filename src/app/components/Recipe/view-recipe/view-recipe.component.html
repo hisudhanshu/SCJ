@@ -1,56 +1,49 @@
-<main id="main" class="main">
-    <div class="pagetitle"></div>
-    <section class="section">
+<main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+  <div class="pagetitle"></div>
+  <section class="section">
       <div class="row">
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">List Of Products Recipe</strong>
-              </h1>
-              <br>
-              <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                <form class="search-form d-flex align-items-center">
-                  <div class="input-group">
-                    <input class="form-control" id="searchKeyword" [(ngModel)]="searchQuery" name="query" type="text"
-                      placeholder="Search here.." title="Enter search keyword" (input)="searchMaterials()" />
-                    <button type="submit" class="btn btn-primary" title="Search"
-                      (click)="searchMaterials()">Search</button>
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="card-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                      <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <strong>View Recipe</strong>
+                      </h1>
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="row">
+                                  <div class="col-md-4">
+                                      <label for="name">Products</label>
+                                      <select id="name" class="form-select" aria-label="Default select example" (change)="selectProduct($event)">
+                                          <option value="">Select</option>
+                                          <option value="Bottle">Bottle</option>
+                                          <option value="Glass">Glass</option>
+                                          <option value="Household">Household</option>
+                                      </select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div *ngIf="selectedProduct"><br><br>
+                          <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Recipes of {{ selectedProduct }}</h5><br>
+                          <table>
+                              <thead>
+                                  <tr>
+                                      <th>Recipe Name</th>
+                                      <th>Ingredients</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr *ngFor="let recipe of recipes">
+                                      <td>{{ recipe.name }}</td>
+                                      <td>{{ recipe.ingredients }}</td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          <br>
+                      </div>
                   </div>
-                </form>
               </div>
-              <br>
-              <br>
-              <br>
-              <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Material Code</th>
-                    <th>Material Type</th>
-                    <th>Material Cost</th>
-                    <th>Vendor</th>
-                    <th>Inventory</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let material of filteredMaterials">
-                    <td>{{ material?.id }}</td>
-                    <td>{{ material?.name }}</td>
-                    <td>{{ material?.m_code }}</td>
-                    <td>{{ material?.m_type }}</td>
-                    <td>{{ material?.m_cost }}</td>
-                    <td>{{ material?.m_Vendor }}</td>
-                    <td>{{ material?.m_inventory }}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <br>
-              <br>
-            </div>
           </div>
-        </div>
       </div>
-    </section>
-  </main>
+  </section>
+</main>
