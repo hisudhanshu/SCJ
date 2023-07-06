@@ -10,7 +10,7 @@
             </h1>
             <div class="row">
               <div class="col-lg-12">
-                <div>
+                
                   <form (ngSubmit)="createOrUpdateProduct()" #productForm="ngForm">
                     <!--  Changes WF -->
                     <div class="row">
@@ -128,49 +128,37 @@
                     </div>
                     <br><br>
                     <div>
-                      <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid">{{
+                      <div *ngIf="selectedMaterialData">
+                        <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
+                          <th>Id</th>
+                          <th>Name</th>
+                          <th>Vendor</th>
+                          <th>Quantity</th>
+                          <th>Cost</th>
+                          <th>Inventory</th>
+                        </tr>
+                        <tr *ngFor="let y of selectedMaterial">
+                          <td>{{y.id}}</td>
+                          <td>{{y.name}}</td>
+                          <td>{{y.m_Vendor}}</td>
+                          <td>{{y.mquantity}}</td>
+                          <td>{{y.m_cost}}</td>
+                          <td>{{y.m_inventory}}</td>
+                        </tr>
+                      </table>
+                    </div><br>
+                      <button type="submit" class="btn btn-primary" style="margin-inline: 1040px;" [disabled]="!productForm.form.valid">{{
                         isEditMode ? 'Update' : 'Submit' }}</button>
-                    </div>
-                  </form>
-                  <div class="col-md-4" style="margin-inline: 1000px;" *ngIf="selectedMaterialData">
-                    <button class="btn-secondary" (click)="onAddButtonClick()">AddMaterial</button>
+                    </div></form>
+                  <div class="col-md-4" *ngIf="selectedMaterialData">
+                    <button class="btn-secondary" (click)="onAddButtonClick()">Add Material</button>
                   </div><br>
-                  <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                    <tr>
-                      <th>Id</th>
-                      <th>Name</th>
-                      <th>Vendor</th>
-                      <th>Quantity</th>
-                      <th>Cost</th>
-                      <th>Inventory</th>
-                    </tr>
-                    <tr *ngFor="let y of selectedMaterial">
-                      <td>
-                        {{y.id}}
-                      </td>
-                      <td>
-                        {{y.name}}
-                      </td>
-                      <td>
-                        {{y.m_Vendor}}
-                      </td>
-                      <td>
-                        {{y.mquantity}}
-                      </td>
-                      <td>
-                        {{y.m_cost}}
-                      </td>
-                      <td>
-                        {{y.m_inventory}}
-                      </td>
-                    </tr>
-                  </table>
-                </div>
+              </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
