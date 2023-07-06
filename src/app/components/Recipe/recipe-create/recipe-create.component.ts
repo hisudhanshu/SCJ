@@ -106,11 +106,11 @@ export class RecipeCreateComponent implements OnInit {
           // Product added successfully
           this.successMessage = 'Product added successfully.';
           alert('Product added successfully.');
-  
+
           // Reset the dropdown values
           this.selectedMaterialId = 0;
           this.selectedMaterialData = undefined;
-  
+
           // Clear the input fields
           this.newProduct = {
             flag: 2,
@@ -121,10 +121,10 @@ export class RecipeCreateComponent implements OnInit {
             clientType: '',
             SelectedMaterial: [],
           };
-  
+
           // Remove the table data
           this.selectedMaterial = [];
-  
+
         } else {
           // Product addition failed
           console.error('Failed to add product:', response.errorMessage);
@@ -136,7 +136,7 @@ export class RecipeCreateComponent implements OnInit {
         alert('An error occurred while adding the product. Please try again.');
       }
     );
-  }  
+  }
 
   createOrUpdateProduct2() {
     if (this.isEditMode) {

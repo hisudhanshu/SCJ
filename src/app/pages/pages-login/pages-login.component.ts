@@ -10,6 +10,8 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 })
 export class PagesLoginComponent implements OnInit {
   formGroup!: FormGroup;
+  successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private router: Router, private authServices: AuthServicesService) { }
 
@@ -32,15 +34,32 @@ export class PagesLoginComponent implements OnInit {
           var myToken = result.token;
           window.localStorage.setItem("myToken", JSON.stringify(myToken));
           myToken = JSON.parse(localStorage.getItem('myToken') || '{}');
-
+  
           this.authServices.setToken(myToken);
-
+  
           this.router.navigateByUrl('/dashboard');
-          alert(result.message);
         } else {
-          alert(result.message);
+          this.errorMessage = result.message;
+          this.successMessage = '';
+          setTimeout(() => {
+            this.errorMessage = '';
+          }, 3000);
         }
+      }, error => {
+        this.errorMessage = 'An error occurred during login. Please try again.';
+        this.successMessage = '';
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 3000);
       });
     }
+  }
+
+  dismissSuccess() {
+    this.successMessage = '';
+  }
+
+  dismissError() {
+    this.errorMessage = '';
   }
 }

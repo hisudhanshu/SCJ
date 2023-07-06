@@ -10,127 +10,127 @@
             </h1>
             <div class="row">
               <div class="col-lg-12">
-                
-                  <form (ngSubmit)="createOrUpdateProduct()" #productForm="ngForm">
-                    <!--  Changes WF -->
-                    <div class="row">
-                      <div class="col-md-4">
-                        <label for="productCategory">Product Category</label>
-                        <select id="productCategory" class="form-select" name="productCategory"
-                          [(ngModel)]="newProduct.category" required>
-                          <option value="">--Select--</option>
-                          <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-                        </select>
-                      </div>
-                      <div class="col-md-4">
-                        <label for="productBrand">Brand</label>
-                        <select id="productBrand" class="form-select" name="productBrand" [(ngModel)]="newProduct.brand"
-                          required>
-                          <option value="">--Select--</option>
-                          <option value="Tata">Tata</option>
-                          <option value="Indica">Indica</option>
-                          <option value="Govt">Govt</option>
-                        </select>
-                      </div>
-                      <div class="col-md-4">
-                        <label for="productName">Product Name</label>
-                        <input type="text" placeholder="Enter here" id="productName" class="form-control"
-                          name="productName" [(ngModel)]="newProduct.name" required>
-                      </div>
-                      <div class="col-md-4"><br>
-                        <label for="customerName">Customer Name</label>
-                        <select id="customerName" class="form-select" name="customerName"
-                          [(ngModel)]="newProduct.customer" required>
-                          <option value="">--Select--</option>
-                          <option value="SCJ">SCJ</option>
-                          <option value="Clay">Clay</option>
-                          <option value="Claylogix">Claylogix</option>
-                        </select>
-                      </div>
-                      <div class="col-md-4"><br>
-                        <label for="clientType">Client Type</label>
-                        <select id="clientType" class="form-select" name="clientType"
-                          [(ngModel)]="newProduct.clientType" required>
-                          <option value="">--Select--</option>
-                          <option value="B2B">B2B</option>
-                          <option value="B2C">B2C</option>
-                          <option value="Direct">Direct</option>
-                        </select>
-                      </div>
+
+                <form (ngSubmit)="createOrUpdateProduct()" #productForm="ngForm">
+                  <!--  Changes WF -->
+                  <div class="row">
+                    <div class="col-md-4">
+                      <label for="productCategory">Product Category</label>
+                      <select id="productCategory" class="form-select" name="productCategory"
+                        [(ngModel)]="newProduct.category" required>
+                        <option value="">--Select--</option>
+                        <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="productBrand">Brand</label>
+                      <select id="productBrand" class="form-select" name="productBrand" [(ngModel)]="newProduct.brand"
+                        required>
+                        <option value="">--Select--</option>
+                        <option value="Tata">Tata</option>
+                        <option value="Indica">Indica</option>
+                        <option value="Govt">Govt</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="productName">Product Name</label>
+                      <input type="text" placeholder="Enter here" id="productName" class="form-control"
+                        name="productName" [(ngModel)]="newProduct.name" required>
+                    </div>
+                    <div class="col-md-4"><br>
+                      <label for="customerName">Customer Name</label>
+                      <select id="customerName" class="form-select" name="customerName"
+                        [(ngModel)]="newProduct.customer" required>
+                        <option value="">--Select--</option>
+                        <option value="SCJ">SCJ</option>
+                        <option value="Clay">Clay</option>
+                        <option value="Claylogix">Claylogix</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4"><br>
+                      <label for="clientType">Client Type</label>
+                      <select id="clientType" class="form-select" name="clientType" [(ngModel)]="newProduct.clientType"
+                        required>
+                        <option value="">--Select--</option>
+                        <option value="B2B">B2B</option>
+                        <option value="B2C">B2C</option>
+                        <option value="Direct">Direct</option>
+                      </select>
+                    </div>
+                    <br>
+                    <div class="col-md-4">
                       <br>
-                      <div class="col-md-4">
-                        <br>
-                        <label for="selectedMaterial">Select Material</label>
-                        <select id="selectedMaterial" class="form-select" name="selectedMaterial"
-                          (change)="onMaterialChange($event)"[(ngModel)]="newProduct.material" required>
-                          <option value="">-- Select --</option>
-                          <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
-                        </select>
-                      </div>
-                      <!-- Edit button and editable dropdowns -->
-                      <!-- <div class="col-md-4" *ngIf="selectedMaterialData">
+                      <label for="selectedMaterial">Select Material</label>
+                      <select id="selectedMaterial" class="form-select" name="selectedMaterial"
+                        (change)="onMaterialChange($event)" [(ngModel)]="newProduct.material" required>
+                        <option value="">-- Select --</option>
+                        <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
+                      </select>
+                    </div>
+                    <!-- Edit button and editable dropdowns -->
+                    <!-- <div class="col-md-4" *ngIf="selectedMaterialData">
                         <br>
                         <label for="code">M_code</label>
                         <select id="code" class="form-select" name="code"  [(ngModel)]="newProduct.mcode" required>
                           <option [value]="selectedMaterialData.m_code">{{ selectedMaterialData.m_code }}</option>
                         </select></div> -->
-                      <div class="col-md-4" *ngIf="selectedMaterialData">
-                        <br>
-                        <label for="code">M_code</label>
-                        <div>
-                          <input type="text" id="code" class="form-control" name="code"
-                            [(ngModel)]="selectedMaterialData.m_code" readonly>
-                            <input type="hidden" value="0" id="p_id" class="form-control" name="p_id"
-                            [(ngModel)]="selectedMaterialData.p_id" readonly>
-                        </div>
-                      </div>
-                      <div class="col-md-4" *ngIf="selectedMaterialData">
-                        <br>
-                        <label for="type">M_type</label>
-                        <div>
-                          <input type="text" id="type" class="form-control" name="type"
-                            [(ngModel)]="selectedMaterialData.m_type" readonly>
-                        </div>
-                      </div>
-                      <div class="col-md-4" *ngIf="selectedMaterialData">
-                        <br>
-                        <label for="vendor">M_Vendor</label>
-                        <div>
-                          <input type="text" id="vendor" class="form-control" name="vendor"
-                            [(ngModel)]="selectedMaterialData.m_Vendor" readonly>
-                        </div>
-                      </div>
-                      <div class="col-md-4" *ngIf="selectedMaterialData">
-                        <br>
-                        <label for="M_inventory">M_inventory</label>
-                        <div>
-                          <input type="text" id="M_inventory" class="form-control" name="M_inventory"
-                            [(ngModel)]="selectedMaterialData.m_inventory" readonly>
-                        </div>
-                      </div>
-                      <div class="col-md-4" *ngIf="selectedMaterialData">
-                        <br>
-                        <label for="newmquantityperkg">Quantity/Per/kg</label>
-                        <div>
-                          <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
-                            name="newmquantityperkg" [(ngModel)]="selectedMaterialData.mquantity"
-                            (input)="calculatePrice()" required>
-                        </div>
-                      </div>
-                      <div class="col-md-4" *ngIf="selectedMaterialData">
-                        <br>
-                        <label for="cost">M_cost/per/kg</label>
-                        <div>
-                          <input type="text" id="cost" class="form-control" name="cost"
-                            [(ngModel)]="selectedMaterialData.m_cost" readonly>
-                        </div>
+                    <div class="col-md-4" *ngIf="selectedMaterialData">
+                      <br>
+                      <label for="code">M_code</label>
+                      <div>
+                        <input type="text" id="code" class="form-control" name="code"
+                          [(ngModel)]="selectedMaterialData.m_code" readonly>
+                        <input type="hidden" value="0" id="p_id" class="form-control" name="p_id"
+                          [(ngModel)]="selectedMaterialData.p_id" readonly>
                       </div>
                     </div>
-                    <br><br>
-                    <div>
-                      <div *ngIf="selectedMaterialData">
-                        <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                          <tr>
+                    <div class="col-md-4" *ngIf="selectedMaterialData">
+                      <br>
+                      <label for="type">M_type</label>
+                      <div>
+                        <input type="text" id="type" class="form-control" name="type"
+                          [(ngModel)]="selectedMaterialData.m_type" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="selectedMaterialData">
+                      <br>
+                      <label for="vendor">M_Vendor</label>
+                      <div>
+                        <input type="text" id="vendor" class="form-control" name="vendor"
+                          [(ngModel)]="selectedMaterialData.m_Vendor" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="selectedMaterialData">
+                      <br>
+                      <label for="M_inventory">M_inventory</label>
+                      <div>
+                        <input type="text" id="M_inventory" class="form-control" name="M_inventory"
+                          [(ngModel)]="selectedMaterialData.m_inventory" readonly>
+                      </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="selectedMaterialData">
+                      <br>
+                      <label for="newmquantityperkg">Quantity/Per/kg</label>
+                      <div>
+                        <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
+                          name="newmquantityperkg" [(ngModel)]="selectedMaterialData.mquantity"
+                          (input)="calculatePrice()" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4" *ngIf="selectedMaterialData">
+                      <br>
+                      <label for="cost">M_cost/per/kg</label>
+                      <div>
+                        <input type="text" id="cost" class="form-control" name="cost"
+                          [(ngModel)]="selectedMaterialData.m_cost" readonly>
+                      </div>
+                    </div>
+                  </div>
+                  <br><br>
+                  <div>
+                    <div *ngIf="selectedMaterialData">
+                      <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                        <tr>
                           <th>Id</th>
                           <th>Name</th>
                           <th>Vendor</th>
@@ -148,17 +148,19 @@
                         </tr>
                       </table>
                     </div><br>
-                      <button type="submit" class="btn btn-primary" style="margin-inline: 1040px;" [disabled]="!productForm.form.valid">{{
-                        isEditMode ? 'Update' : 'Submit' }}</button>
-                    </div></form>
-                  <div class="col-md-4" *ngIf="selectedMaterialData">
-                    <button class="btn-secondary" (click)="onAddButtonClick()">Add Material</button>
-                  </div><br>
-              </div>
+                    <button type="submit" class="btn btn-primary" style="margin-inline: 1040px;"
+                      [disabled]="!productForm.form.valid">{{
+                      isEditMode ? 'Update' : 'Submit' }}</button>
+                  </div>
+                </form>
+                <div class="col-md-4" *ngIf="selectedMaterialData">
+                  <button class="btn-secondary" (click)="onAddButtonClick()">Add Material</button>
+                </div><br>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
