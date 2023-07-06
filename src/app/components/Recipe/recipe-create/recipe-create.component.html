@@ -10,7 +10,6 @@
             </h1>
             <div class="row">
               <div class="col-lg-12">
-
                 <form (ngSubmit)="createOrUpdateProduct()" #productForm="ngForm">
                   <!--  Changes WF -->
                   <div class="row">
@@ -68,12 +67,6 @@
                       </select>
                     </div>
                     <!-- Edit button and editable dropdowns -->
-                    <!-- <div class="col-md-4" *ngIf="selectedMaterialData">
-                        <br>
-                        <label for="code">M_code</label>
-                        <select id="code" class="form-select" name="code"  [(ngModel)]="newProduct.mcode" required>
-                          <option [value]="selectedMaterialData.m_code">{{ selectedMaterialData.m_code }}</option>
-                        </select></div> -->
                     <div class="col-md-4" *ngIf="selectedMaterialData">
                       <br>
                       <label for="code">M_code</label>
