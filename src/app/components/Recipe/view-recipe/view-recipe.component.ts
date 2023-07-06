@@ -7,7 +7,18 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./view-recipe.component.css']
 })
 export class ViewRecipeComponent implements OnInit {
+  recipes: any[] = []; // Array to store the recipes data
 
-ngOnInit(): void {
-  
-}}
+  constructor(private authService: AuthServicesService) { }
+
+  ngOnInit(): void {
+    this.authService.getRecipes().subscribe(
+      (response: any[]) => {
+        this.recipes = response; // Assign the API response to the recipes array
+      },
+      (error) => {
+        console.error('Error fetching recipes:', error);
+      }
+    );
+  }
+}
