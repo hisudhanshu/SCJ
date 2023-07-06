@@ -80,6 +80,8 @@
                         <div>
                           <input type="text" id="code" class="form-control" name="code"
                             [(ngModel)]="selectedMaterialData.m_code" readonly>
+                            <input type="hidden" value="0" id="p_id" class="form-control" name="p_id"
+                            [(ngModel)]="selectedMaterialData.p_id" readonly>
                         </div>
                       </div>
                       <div class="col-md-4" *ngIf="selectedMaterialData">

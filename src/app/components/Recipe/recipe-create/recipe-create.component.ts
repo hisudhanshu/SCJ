@@ -54,6 +54,7 @@ export class RecipeCreateComponent implements OnInit {
   successMessage: string = '';
 
   newProduct: any = {
+    // p_id: 0,
     flag: 2,
     name: '',
     category: '',
