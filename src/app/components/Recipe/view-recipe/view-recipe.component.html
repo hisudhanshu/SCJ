@@ -9,10 +9,10 @@
                 <strong>View Recipe</strong>
               </h1><br>
               <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                <form class="search-form d-flex align-items-center" (ngSubmit)="searchRecipes()">
+                <form class="search-form d-flex align-items-center">
                   <div class="input-group">
                     <input class="form-control" [(ngModel)]="searchKeyword" id="searchKeyword" name="query" type="text"
-                      placeholder="Search here.." title="Enter search keyword" />
+                      placeholder="Search here.." title="Enter search keyword" (input)="searchRecipes()" />
                     <button type="submit" class="btn btn-primary" title="Search">Search</button>
                   </div>
                 </form>
