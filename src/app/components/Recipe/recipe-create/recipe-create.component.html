@@ -63,7 +63,7 @@
                       <select id="selectedMaterial" class="form-select" name="selectedMaterial"
                         (change)="onMaterialChange($event)" [(ngModel)]="newProduct.material" required>
                         <option value="">-- Select --</option>
-                        <option *ngFor="let material of materials" [value]="material.id">{{ material.name }}</option>
+                        <option *ngFor="let material of materials" [value]="material.name">{{ material.name }}</option>
                       </select>
                     </div>
                     <!-- Edit button and editable dropdowns -->
@@ -146,9 +146,7 @@
                       isEditMode ? 'Update' : 'Submit' }}</button>
                   </div>
                 </form>
-                <div class="col-md-4" *ngIf="selectedMaterialData">
-                  <button class="btn-secondary" (click)="onAddButtonClick()">Add Material</button>
-                </div><br>
+             <br>
               </div>
             </div>
           </div>

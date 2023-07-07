@@ -183,21 +183,21 @@ export class RecipeCreateComponent implements OnInit {
     return this.columnData.map((column) => item[column]).join(' | ');
   }
 
-  onMaterialChange(event: any): void {
-    const selectedMaterialId = parseInt(event.target.value);
+// Assuming you have defined the Material interface
 
-    if (selectedMaterialId !== 0) {
-      this.selectedMaterialId = selectedMaterialId;
-      this.selectedMaterialData = this.getMaterialDataById(selectedMaterialId);
-    } else {
-      this.selectedMaterialId = 0;
-      this.selectedMaterialData = undefined;
-    }
-  }
+onMaterialChange(event: any): void {
+  const selectedMaterialName = event.target.value;
 
-  getMaterialDataById(id: number): Material | undefined {
-    return this.materials.find(material => material.id === id);
+  if (selectedMaterialName) {
+    this.selectedMaterialData = this.getMaterialDataByName(selectedMaterialName);
+  } else {
+    this.selectedMaterialData = undefined;
   }
+}
+
+getMaterialDataByName(name: string): Material | undefined {
+  return this.materials.find((material: Material) => material.name === name);
+}
 
   deleteMaterial(material: Material) {
     // Perform the necessary logic to delete the material
