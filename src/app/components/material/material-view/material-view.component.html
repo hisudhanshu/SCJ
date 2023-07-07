@@ -25,13 +25,13 @@
             <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Material Code</th>
-                  <th>Material Type</th>
-                  <th>Material Cost</th>
-                  <th>Vendor</th>
-                  <th>Inventory</th>
+                  <th (click)="sortTable('id')">Id  <i class="bi bi-arrow-down-up"></i></th>
+                  <th (click)="sortTable('name')">Name  <i class="bi bi-arrow-down-up"></i></th>
+                  <th (click)="sortTable('m_code')">Material Code  <i class="bi bi-arrow-down-up"></i></th>
+                  <th (click)="sortTable('m_type')">Material Type  <i class="bi bi-arrow-down-up"></i></th>
+                  <th (click)="sortTable('m_cost')">Material Cost  <i class="bi bi-arrow-down-up"></i></th>
+                  <th (click)="sortTable('m_Vendor')">Vendor  <i class="bi bi-arrow-down-up"></i></th>
+                  <th (click)="sortTable('m_inventory')">Inventory  <i class="bi bi-arrow-down-up"></i></th>
                 </tr>
               </thead>
               <tbody>
