@@ -120,6 +120,12 @@
                     </div>
                   </div>
                   <br><br>
+                  <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid">{{
+                    isEditMode ? 'Update' : 'Submit' }}</button>
+                  <br><br>
+                  <div class="col-md-4" *ngIf="selectedMaterialData">
+                    <button class="btn btn-dark" (click)="onAddButtonClick()">Add Material</button>
+                  </div><br><br>
                   <div>
                     <div *ngIf="selectedMaterialData">
                       <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
@@ -140,13 +146,9 @@
                           <td>{{y.m_inventory}}</td>
                         </tr>
                       </table>
-                    </div><br>
-                    <button type="submit" class="btn btn-primary" style="margin-inline: 1040px;"
-                      [disabled]="!productForm.form.valid">{{
-                      isEditMode ? 'Update' : 'Submit' }}</button>
+                    </div>
                   </div>
                 </form>
-             <br>
               </div>
             </div>
           </div>
