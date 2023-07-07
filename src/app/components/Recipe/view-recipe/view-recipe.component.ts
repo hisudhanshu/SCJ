@@ -12,12 +12,17 @@ export class ViewRecipeComponent implements OnInit {
   constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
+  
     this.authService.getRecipes().subscribe(
-      (response: any[]) => {
-        this.recipes = response; // Assign the API response to the recipes array
+      (response: any) => {
+        if (response.isSuccess && response.jsonData !== null) {
+          this.recipes = response.jsonData;
+        } else {
+          console.log('API request failed or no data received');
+        }
       },
-      (error) => {
-        console.error('Error fetching recipes:', error);
+      (error: any) => {
+        console.log('Error fetching materials:', error);
       }
     );
   }
