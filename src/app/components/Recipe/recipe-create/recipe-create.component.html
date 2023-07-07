@@ -122,33 +122,34 @@
                   <br><br>
                   <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid">{{
                     isEditMode ? 'Update' : 'Submit' }}</button>
-                  <br><br>
-                  <div class="col-md-4" *ngIf="selectedMaterialData">
-                    <button class="btn btn-dark" (click)="onAddButtonClick()">Add Material</button>
-                  </div><br><br>
-                  <div>
-                    <div *ngIf="selectedMaterialData">
-                      <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <tr>
-                          <th>Id</th>
-                          <th>Name</th>
-                          <th>Vendor</th>
-                          <th>Quantity</th>
-                          <th>Cost</th>
-                          <th>Inventory</th>
-                        </tr>
-                        <tr *ngFor="let y of selectedMaterial">
-                          <td>{{y.id}}</td>
-                          <td>{{y.name}}</td>
-                          <td>{{y.m_Vendor}}</td>
-                          <td>{{y.mquantity}}</td>
-                          <td>{{y.m_cost}}</td>
-                          <td>{{y.m_inventory}}</td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
+                  <br>
                 </form>
+                <br>
+                <div class="col-md-4" *ngIf="selectedMaterialData">
+                  <button class="btn btn-secondary" (click)="onAddButtonClick()">Add Material</button>
+                </div><br>
+                <div>
+                  <div *ngIf="selectedMaterialData">
+                    <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                      <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Vendor</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                        <th>Inventory</th>
+                      </tr>
+                      <tr *ngFor="let y of selectedMaterial">
+                        <td>{{y.id}}</td>
+                        <td>{{y.name}}</td>
+                        <td>{{y.m_Vendor}}</td>
+                        <td>{{y.mquantity}}</td>
+                        <td>{{y.m_cost}}</td>
+                        <td>{{y.m_inventory}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
