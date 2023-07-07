@@ -36,6 +36,6 @@ export class ViewRecipeComponent implements OnInit {
       this.filteredRecipes = this.recipes.filter(recipe =>
         recipe.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
       );
-    }
-  }
+    }  
+}
 }
