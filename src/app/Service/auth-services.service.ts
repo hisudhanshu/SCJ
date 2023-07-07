@@ -125,16 +125,4 @@ export class AuthServicesService {
     return this.http.post(`${baseUrl}Authentication/InsertRecipe`, data, { headers });
   }
   
-  // Full Recipe API Call here 
-  // getrecipe(): Observable<any> {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     'Authorization': `Bearer ${this.token}`
-  //   });
-    
-  //   // GetProducts API call here Show on Map Product Screen 
-    
-  //   let url = this.urlprefix + "api/Authentication/GetFullRecipe";
-  //   return this.http.get(url, { headers: headers });
-  // }
 }
