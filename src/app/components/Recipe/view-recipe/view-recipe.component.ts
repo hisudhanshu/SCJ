@@ -36,6 +36,26 @@ export class ViewRecipeComponent implements OnInit {
       this.filteredRecipes = this.recipes.filter(recipe =>
         recipe.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
       );
-    }  
-}
+    }
+  }
+
+  editRecipe(recipe: any): void {
+    recipe.isEditing = true; // Set 'isEditing' property to true for the selected recipe
+  }
+
+  updateRecipe(recipe: any): void {
+    // Implement your logic for updating a recipe
+    console.log('Update recipe:', recipe);
+    recipe.isEditing = false; // Set 'isEditing' property back to false after updating
+  }
+
+  deleteRecipe(recipe: any): void {
+    // Implement your logic for deleting a recipe
+    console.log('Delete recipe:', recipe);
+  }
+
+  saveRecipe(recipe: any): void {
+    // Implement your logic for saving the edited recipe
+    console.log('Save recipe:', recipe);
+  }
 }
