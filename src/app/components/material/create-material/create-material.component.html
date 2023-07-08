@@ -1,160 +1,162 @@
 <main id="main" class="main">
     <div class="pagetitle"></div>
     <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <strong>Create Raw Material</strong>
-                        </h1><br>
-                        <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <form class="search-form d-flex align-items-center">
-                                <div class="input-group">
-                                    <input class="form-control" id="searchKeyword" name="query" type="text"
-                                        placeholder="Search.." title="Enter search keyword" [(ngModel)]="searchKeyword"
-                                        (input)="filterMaterials()" />
-                                    <button type="submit" class="btn btn-primary" title="Search"
-                                        (click)="searchMaterials()">Search</button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-md-4" style="margin-top: 30px;">
-                                        <label for="name">Add Material</label>
-                                        <input type="text" class="form-control" placeholder="Enter Material" id="name"
-                                            [(ngModel)]="material.name" />
-                                    </div>
-                                    <div class="col-md-4" style="margin-top: 30px;">
-                                        <label for="nametype">Add Material Type</label>
-                                        <input type="text" class="form-control" placeholder="Enter Material"
-                                            id="nametype" [(ngModel)]="material.M_type" />
-                                    </div>
-                                    <div class="col-md-4" style="margin-top: 30px;">
-                                        <label for="namecode">Add Material Code</label>
-                                        <input type="number" class="form-control" placeholder="Enter Material Code"
-                                            id="namecode" [(ngModel)]="material.code" />
-                                    </div>
-                                    <div class="col-md-4" style="margin-top: 30px;">
-                                        <label for="namecost">Add Current Cost</label>
-                                        <input type="number" class="form-control" placeholder="Enter Material Cost"
-                                            id="namecost" [(ngModel)]="material.M_cost" />
-                                    </div>
-                                    <div class="col-md-4" style="margin-top: 30px;">
-                                        <label for="namevendor">Add Vendor</label>
-                                        <input type="text" class="form-control" placeholder="Enter Vendor"
-                                            id="namevendor" [(ngModel)]="material.M_Vendor" />
-                                    </div>
-                                    <div class="col-md-4" style="margin-top: 30px;">
-                                        <label for="namelevel">Inventory Level</label>
-                                        <input type="text" class="form-control" placeholder="Enter Inventory Level"
-                                            id="namelevel" [(ngModel)]="material.M_inventory" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 mt-5 mb-4 text-right">
-                            <button class="btn btn-primary" *ngIf="editIndex === -1"
-                                (click)="addMaterial()">Add</button>
-                            <button class="btn btn-primary" *ngIf="editIndex !== -1"
-                                (click)="updateMaterial()">Update</button>
-                        </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                <strong>Create Raw Material</strong>
+              </h1><br>
+              <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                <form class="search-form d-flex align-items-center">
+                  <div class="input-group">
+                    <input class="form-control" id="searchKeyword" name="query" type="text"
+                      placeholder="Search.." title="Enter search keyword" [(ngModel)]="searchKeyword"
+                      (input)="filterMaterials()" />
+                    <button type="submit" class="btn btn-primary" title="Search" (click)="searchMaterials()">Search</button>
+                  </div>
+                </form>
+              </div>
+              <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                <div class="col-lg-12">
+                  <div class="row">
+                    <div class="col-md-4" style="margin-top: 30px;">
+                      <label for="name">Add Material</label>
+                      <input type="text" class="form-control" placeholder="Enter Material" id="name"
+                        [(ngModel)]="material.name" />
                     </div>
-                    <!-- <div class="row mt-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <div class="col-lg-12">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Material Name</th>
-                                        <th>Material Type</th>
-                                        <th>Material Code</th>
-                                        <th>Material Cost</th>
-                                        <th>Vendor</th>
-                                        <th>Inventory</th>
-                                        <th>Details 
-                                        </th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let material of materialsList; let i = index;">
-                                        <td>{{ i + 1 }}</td>
-                                        <td>{{ material.name }}</td>
-                                        <td>{{ material.M_type }}</td>
-                                        <td>{{ material.code }}</td>
-                                        <td>{{ material.M_cost }}</td>
-                                        <td>{{ material.M_Vendor }}</td>
-                                        <td>{{ material.M_inventory }}</td>
-                                        <td> <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                                                data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
-                                                (click)="editMaterial(i)">Edit</button>
-                                            <button class="btn btn-sm btn-danger"
-                                                (click)="deleteMaterial(i)">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> -->
-                    <!-- </div> -->
+                    <div class="col-md-4" style="margin-top: 30px;">
+                      <label for="nametype">Add Material Type</label>
+                      <input type="text" class="form-control" placeholder="Enter Material" id="nametype"
+                        [(ngModel)]="material.M_type" />
+                    </div>
+                    <div class="col-md-4" style="margin-top: 30px;">
+                      <label for="namecode">Add Material Code</label>
+                      <input type="number" class="form-control" placeholder="Enter Material Code" id="namecode"
+                        [(ngModel)]="material.code" />
+                    </div>
+                    <div class="col-md-4" style="margin-top: 30px;">
+                      <label for="namecost">Add Current Cost</label>
+                      <input type="number" class="form-control" placeholder="Enter Material Cost" id="namecost"
+                        [(ngModel)]="material.M_cost" />
+                    </div>
+                    <div class="col-md-4" style="margin-top: 30px;">
+                      <label for="namevendor">Add Vendor</label>
+                      <input type="text" class="form-control" placeholder="Enter Vendor" id="namevendor"
+                        [(ngModel)]="material.M_Vendor" />
+                    </div>
+                    <div class="col-md-4" style="margin-top: 30px;">
+                      <label for="namelevel">Inventory Level</label>
+                      <input type="text" class="form-control" placeholder="Enter Inventory Level" id="namelevel"
+                        [(ngModel)]="material.M_inventory" />
+                    </div>
+                  </div>
                 </div>
+              </div>
+              <div class="col-12 mt-5 mb-4 text-right">
+                <button class="btn btn-primary" style="padding-inline: 30px;" *ngIf="editIndex === -1"
+                  (click)="addMaterial()">Add</button>
+                <button class="btn btn-primary" *ngIf="editIndex !== -1" (click)="updateMaterial()">Update</button>
+              </div>
             </div>
+            <div class="row mt-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+              <div class="col-lg-12">
+                <table class="table" *ngIf="materialsList.length > 0">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Material Name</th>
+                      <th>Material Type</th>
+                      <th>Material Code</th>
+                      <th>Material Cost</th>
+                      <th>Vendor</th>
+                      <th>Inventory</th>
+                      <th>Details</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let material of materialsList; let i = index;">
+                      <td>{{ i + 1 }}</td>
+                      <td>{{ material.name }}</td>
+                      <td>{{ material.M_type }}</td>
+                      <td>{{ material.code }}</td>
+                      <td>{{ material.M_cost }}</td>
+                      <td>{{ material.M_Vendor }}</td>
+                      <td>{{ material.M_inventory }}</td>
+                      <td>
+                        <button class="bi bi-info-circle" style="margin-inline-start: 40px;" data-bs-target="#exampleModalToggle"
+                          data-bs-toggle="modal"></button>
+                      </td>
+                      <td>
+                        <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="editMaterial(i)">Edit</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteMaterial(i)">Delete</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p *ngIf="materialsList.length === 0"></p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-</main>
-
-<!-- Details Modal Code here -->
-<!-- <div class="row">
+  </main>
+  
+  <!-- Details Modal Code here -->
+  <div class="row">
     <div class="col-lg-12">
-        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-            tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 class="modal-title fs-5" id="mexampleModalToggleLabel"
-                            style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 600px;">
-                            <strong>Material Details</strong>
-                        </h2>
-                    </div>
-                    <div class="row mt-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <div class="col-lg-12">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Material Name</th>
-                                        <th>Material Type</th>
-                                        <th>Material Code</th>
-                                        <th>Material Cost</th>
-                                        <th>Vendor</th>
-                                        <th>Inventory</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let material of materialsList; let i = index;">
-                                        <td>{{ i + 1 }}</td>
-                                        <td>{{ material.name }}</td>
-                                        <td>{{ material.M_type }}</td>
-                                        <td>{{ material.code }}</td>
-                                        <td>{{ material.M_cost }}</td>
-                                        <td>{{ material.M_Vendor }}</td>
-                                        <td>{{ material.M_inventory }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn-danger" data-bs-dismiss="modal"
-                            aria-label="Close">Close</button>
-                    </div>
-                </div>
+      <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h2 class="modal-title fs-5" id="mexampleModalToggleLabel"
+                style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 600px;">
+                <strong>Created Material Details</strong>
+              </h2>
             </div>
+            <div class="row mt-4" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+              <div class="col-lg-12">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Sn.</th>
+                      <th>Material Name</th>
+                      <th>Material Type</th>
+                      <th>Material Code</th>
+                      <th>Material Cost</th>
+                      <th>Vendor</th>
+                      <th>Inventory</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let material of filteredMaterials let i = index;">
+                        <td>{{ material?.id }}</td>
+                        <td>{{ material?.name }}</td>
+                        <td>{{ material?.m_code }}</td>
+                        <td>{{ material?.m_type }}</td>
+                        <td>{{ material?.m_cost }}</td>
+                        <td>{{ material?.m_Vendor }}</td>
+                        <td>{{ material?.m_inventory }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <p *ngIf="materialsList.length === 0"></p>
+                <br>
+                <br>
+                <br>
+                <br>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn-danger" data-bs-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div> -->
+  </div>
+  

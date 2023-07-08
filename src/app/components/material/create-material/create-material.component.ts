@@ -7,6 +7,8 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./create-material.component.css']
 })
 export class CreateMaterialComponent implements OnInit {
+  materials: any[] | undefined;
+  filteredMaterials: any[] | undefined;
   searchKeyword: string = '';
   material: any = {
     name: '',
@@ -22,12 +24,29 @@ export class CreateMaterialComponent implements OnInit {
   constructor(private authService: AuthServicesService) {}
 
   ngOnInit(): void {
+    this.getMaterials1();
     // Retrieve materials from local storage if available
     const storedMaterials = localStorage.getItem('materials');
     if (storedMaterials) {
       this.materialsList = JSON.parse(storedMaterials);
     }
   }
+    getMaterials1() {
+      this.authService.getMaterials().subscribe(
+        (response: any) => {
+          if (response.isSuccess && response.matdata !== null) {
+            this.materials = response.matdata;
+            this.filteredMaterials = response.matdata; // Initialize filteredMaterials with all materials
+          } else {
+            console.log('API request failed or no data received');
+          }
+        },
+        (error: any) => {
+          console.log('Error fetching materials:', error);
+        }
+      );
+    }
+
 
   addMaterial(): void {
     const confirmAdd = confirm('Are you sure you want to add this material?');
@@ -92,6 +111,7 @@ export class CreateMaterialComponent implements OnInit {
       this.saveMaterials(); // Save updated materials to local storage
     }
   }
+
   filterMaterials(): void {
     if (this.searchKeyword.trim() === '') {
       // Reset the materials list to show all materials when search keyword is empty
@@ -103,17 +123,16 @@ export class CreateMaterialComponent implements OnInit {
       );
     }
   }
-  // Search button code 
-  searchMaterials(): void {
-  if (this.searchKeyword.trim() === '') {
-    // Reset the materials list to show all materials when search keyword is empty
-    this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]');
-  } else {
-    // Filter the materials list based on the search keyword
-    this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]').filter((material: any) =>
-      material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
-    );
-  }
-}
 
+  searchMaterials(): void {
+    if (this.searchKeyword.trim() === '') {
+      // Reset the materials list to show all materials when search keyword is empty
+      this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]');
+    } else {
+      // Filter the materials list based on the search keyword
+      this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]').filter((material: any) =>
+        material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
+      );
+    }
+  }
 }
