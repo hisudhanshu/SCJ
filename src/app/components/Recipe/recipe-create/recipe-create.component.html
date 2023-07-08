@@ -10,7 +10,7 @@
             </h1>
             <div class="row">
               <div class="col-lg-12">
-                <form (ngSubmit)="createOrUpdateProduct()" #productForm="ngForm">
+                <form (ngSubmit)="createOrUpdateProduct()">
                   <!--  Changes WF -->
                   <div class="row">
                     <div class="col-md-4">
@@ -119,10 +119,7 @@
                       </div>
                     </div>
                   </div>
-                  <br><br>
-                  <button type="submit" class="btn btn-primary" [disabled]="!productForm.form.valid">{{
-                    isEditMode ? 'Update' : 'Submit' }}</button>
-                  <div><br>
+                  <div><br><br>
                     <div *ngIf="selectedMaterialData">
                       <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
                         <tr>
@@ -143,12 +140,14 @@
                         </tr>
                       </table>
                     </div>
-                  </div>
+                  </div><br>
+                  <button style="margin-inline: 1000px; height: 40px; width: 120px;"  class="btn btn-primary">Submit</button>
                 </form>
-                <br>
                 <div class="col-md-4" *ngIf="selectedMaterialData">
-                  <button class="btn btn-secondary" style="margin-inline: 1000px; height: 40px; width: 120px;" (click)="onAddButtonClick()">Add Material</button>
-                </div><br>
+                  <button class="btn btn-sm btn-danger"style="margin-inline: 2px;" (click)="onAddButtonClick()">Add Material</button>
+                  <button class="btn btn-sm btn-primary"style="margin-inline: 2px;" >Edit</button>
+                  <button class="btn btn-sm btn-secondary"style="margin-inline: 2px;" >Delete</button>
+                </div>
               </div>
             </div>
           </div>
