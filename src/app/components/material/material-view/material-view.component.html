@@ -30,6 +30,7 @@
                   <th (click)="sortTable('m_cost')">Material Cost  <i class="bi bi-arrow-down-up"></i></th>
                   <th (click)="sortTable('m_Vendor')">Vendor  <i class="bi bi-arrow-down-up"></i></th>
                   <th (click)="sortTable('m_inventory')">Inventory  <i class="bi bi-arrow-down-up"></i></th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -41,6 +42,10 @@
                   <td>{{ material?.m_cost }}</td>
                   <td>{{ material?.m_Vendor }}</td>
                   <td>{{ material?.m_inventory }}</td>
+                  <td>
+                    <button class="btn btn-sm btn-primary" style="margin-inline: 2px;">Edit</button>
+                    <button class="btn btn-sm btn-secondary">Delete</button>
+                  </td>
                 </tr>
               </tbody>
             </table>
