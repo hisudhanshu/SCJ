@@ -10,6 +10,7 @@ export class ViewRecipeComponent implements OnInit {
   recipes: any[] = []; // Array to store all recipes data
   filteredRecipes: any[] = []; // Array to store filtered recipes data
   searchKeyword: string = ''; // Variable to store the search keyword
+  selectedRecipe: any;
 
   constructor(private authService: AuthServicesService) { }
 
@@ -49,10 +50,20 @@ export class ViewRecipeComponent implements OnInit {
     recipe.isEditing = false; // Set 'isEditing' property back to false after updating
   }
 
-  deleteRecipe(recipe: any): void {
-    // Implement your logic for deleting a recipe
-    console.log('Delete recipe:', recipe);
+// Component logic
+deleteRecipe(material: any) {
+  // Find the index of the material in the selectedMaterial array
+  const index = this.selectedRecipe.indexOf(material);
+  
+  if (index !== -1) {
+    // Remove the material from the selectedMaterial array
+    this.selectedRecipe.splice(index, 1);
+    
+    // Optionally, you can perform additional logic such as sending an HTTP request to delete the material from the server
+    
+    console.log('Deleted material:', material);
   }
+}
 
   saveRecipe(recipe: any): void {
     // Implement your logic for saving the edited recipe

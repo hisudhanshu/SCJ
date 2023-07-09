@@ -111,7 +111,7 @@ export class RecipeCreateComponent implements OnInit {
             console.log('Product data inserted successfully:', response);
             this.products.push({ ...this.newProduct });
             this.saveProducts();
-  
+
             this.successMessage = 'Product added successfully.';
             alert('Data saved successfully.');
           },
@@ -122,7 +122,7 @@ export class RecipeCreateComponent implements OnInit {
       }
     }
   }
-  
+
 
   removeProduct(index: number) {
     this.products.splice(index, 1);
@@ -143,27 +143,27 @@ export class RecipeCreateComponent implements OnInit {
     return this.columnData.map((column) => item[column]).join(' | ');
   }
 
-// Assuming you have defined the Material interface
+  // Assuming you have defined the Material interface
 
-onMaterialChange(event: any): void {
-  const selectedMaterialName = event.target.value;
+  onMaterialChange(event: any): void {
+    const selectedMaterialName = event.target.value;
 
-  if (selectedMaterialName) {
-    this.selectedMaterialData = this.getMaterialDataByName(selectedMaterialName);
-  } else {
-    this.selectedMaterialData = undefined;
+    if (selectedMaterialName) {
+      this.selectedMaterialData = this.getMaterialDataByName(selectedMaterialName);
+    } else {
+      this.selectedMaterialData = undefined;
+    }
   }
-}
 
-getMaterialDataByName(name: string): Material | undefined {
-  return this.materials.find((material: Material) => material.name === name);
-}
-
-  deleteMaterial(material: Material) {
-    // Perform the necessary logic to delete the material
-    // e.g., call an API or update the data in your service
-    console.log('Deleting material:', material);
+  getMaterialDataByName(name: string): Material | undefined {
+    return this.materials.find((material: Material) => material.name === name);
   }
+
+  // deleteMaterial(material: Material) {
+  //   // Perform the necessary logic to delete the material
+  //   // e.g., call an API or update the data in your service
+  //   console.log('Deleting material:', material);
+  // }
 
   toggleEditing() {
     this.isEditing = !this.isEditing;
@@ -174,12 +174,41 @@ getMaterialDataByName(name: string): Material | undefined {
       this.selectedMaterial.push(this.selectedMaterialData);
     }
   }
-  
+
   calculatePrice(): void {
     if (this.selectedMaterialData && this.selectedMaterialData.mquantity) {
       const quantity = parseFloat(this.selectedMaterialData.mquantity);
       this.selectedMaterialData.m_cost = (quantity * 100).toString();
     }
   }
+  // Edit function
+  editMaterial(material: any) {
+    material.isEditing = true; // Set 'isEditing' property to true for the selected recipe
+  }
 
+  updateMaterial(material: any): void {
+    // Implement your logic for updating a recipe
+    console.log('Update material:', material);
+    material.isEditing = false; // Set 'isEditing' property back to false after updating
+  }
+
+// Component logic
+deleteMaterial(material: any) {
+  // Find the index of the material in the selectedMaterial array
+  const index = this.selectedMaterial.indexOf(material);
+  
+  if (index !== -1) {
+    // Remove the material from the selectedMaterial array
+    this.selectedMaterial.splice(index, 1);
+    
+    // Optionally, you can perform additional logic such as sending an HTTP request to delete the material from the server
+    
+    console.log('Deleted material:', material);
+  }
+}
+
+  saveMaterial(material: any): void {
+    // Implement your logic for saving the edited recipe
+    console.log('Save Material:', material);
+  }
 }

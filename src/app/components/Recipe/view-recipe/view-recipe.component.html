@@ -51,14 +51,12 @@
                           <td>{{ recipe.clienttype }}</td>
                           <td>
                             <!-- Edit, update, and delete buttons -->
-                            <button *ngIf="!recipe.isEditing" class="btn btn-primary" style="margin-inline: 3px;"
+                            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary" style="margin-inline: 3px;"
                               (click)="editRecipe(recipe)">Edit</button>
-                            <button *ngIf="recipe.isEditing" class="btn btn-success" style="margin-inline: 3px;"
+                            <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success" style="margin-inline: 3px;"
                               (click)="updateRecipe(recipe)">Update</button>
-                            <button *ngIf="!recipe.isEditing" class="btn btn-danger" style="margin-inline: 3px;"
+                            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger" style="margin-inline: 3px;"
                               (click)="deleteRecipe(recipe)">Delete</button>
-                            <button *ngIf="recipe.isEditing" class="btn btn-primary" style="margin-inline: 3px;"
-                              (click)="saveRecipe(recipe)">Save</button>
                           </td>
                         </tr>
                       </tbody>
@@ -100,14 +98,12 @@
                           <td>{{ recipe.minventory }}</td>
                           <td>
                             <!-- Edit, update, and delete buttons -->
-                            <button *ngIf="!recipe.isEditing" class="btn btn-primary" style="margin-inline: 3px;"
+                            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary" style="margin-inline: 3px;"
                               (click)="editRecipe(recipe)">Edit</button>
-                            <button *ngIf="recipe.isEditing" class="btn btn-success" style="margin-inline: 3px;"
+                            <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success" style="margin-inline: 3px;"
                               (click)="updateRecipe(recipe)">Update</button>
-                            <button *ngIf="!recipe.isEditing" class="btn btn-danger" style="margin-inline: 3px;"
+                            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger"style="margin-inline: 3px;"
                               (click)="deleteRecipe(recipe)">Delete</button>
-                            <button *ngIf="recipe.isEditing" class="btn btn-primary" style="margin-inline: 3px;"
-                              (click)="saveRecipe(recipe)">Save</button>
                           </td>
                         </tr>
                       </tbody>

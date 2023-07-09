@@ -69,7 +69,7 @@
                     <!-- Edit button and editable dropdowns -->
                     <div class="col-md-4" *ngIf="selectedMaterialData">
                       <br>
-                      <label for="code">M_code</label>
+                      <label for="code">M_Code</label>
                       <div>
                         <input type="text" id="code" class="form-control" name="code"
                           [(ngModel)]="selectedMaterialData.m_code" readonly>
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col-md-4" *ngIf="selectedMaterialData">
                       <br>
-                      <label for="type">M_type</label>
+                      <label for="type">M_Type</label>
                       <div>
                         <input type="text" id="type" class="form-control" name="type"
                           [(ngModel)]="selectedMaterialData.m_type" readonly>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="col-md-4" *ngIf="selectedMaterialData">
                       <br>
-                      <label for="M_inventory">M_inventory</label>
+                      <label for="M_inventory">M_Stock</label>
                       <div>
                         <input type="text" id="M_inventory" class="form-control" name="M_inventory"
                           [(ngModel)]="selectedMaterialData.m_inventory" readonly>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-4" *ngIf="selectedMaterialData">
                       <br>
-                      <label for="newmquantityperkg">Quantity/Per/kg</label>
+                      <label for="newmquantityperkg">Quantity/Per/Unit</label>
                       <div>
                         <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
                           name="newmquantityperkg" [(ngModel)]="selectedMaterialData.mquantity"
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md-4" *ngIf="selectedMaterialData">
                       <br>
-                      <label for="cost">M_cost/per/kg</label>
+                      <label for="cost">M_Cost/Per/Unit</label>
                       <div>
                         <input type="text" id="cost" class="form-control" name="cost"
                           [(ngModel)]="selectedMaterialData.m_cost" readonly>
@@ -120,39 +120,79 @@
                     </div>
                   </div>
                   <div><br><br>
-                    <div *ngIf="selectedMaterialData">
-                      <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <tr>
-                          <th>Id</th>
-                          <th>Name</th>
-                          <th>Vendor</th>
-                          <th>Quantity</th>
-                          <th>Cost</th>
-                          <th>Inventory</th>
-                        </tr>
-                        <tr *ngFor="let y of selectedMaterial">
-                          <td>{{y.id}}</td>
-                          <td>{{y.name}}</td>
-                          <td>{{y.m_Vendor}}</td>
-                          <td>{{y.mquantity}}</td>
-                          <td>{{y.m_cost}}</td>
-                          <td>{{y.m_inventory}}</td>
-                        </tr>
-                      </table>
-                    </div>
                   </div><br>
-                  <button style="margin-inline: 1000px; height: 40px; width: 120px;"  class="btn btn-primary">Submit</button>
+                  <button class="btn btn-primary">Submit</button>
                 </form>
                 <div class="col-md-4" *ngIf="selectedMaterialData">
-                  <button class="btn btn-sm btn-info"style="margin-inline: 2px;" (click)="onAddButtonClick()">Add Material</button>
-                  <button class="btn btn-sm btn-primary"style="margin-inline: 2px;" >Edit</button>
-                  <button class="btn btn-sm btn-secondary"style="margin-inline: 2px;" >Delete</button>
+                  <button class="btn btn-sm btn-warning" style="margin-inline: 1000px; height: 40px; width: 120px;"
+                    (click)="onAddButtonClick()">Add Material</button>
+                </div>
+                <br>
+                <div *ngIf="selectedMaterialData">
+                  <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Vendor</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                        <th>Inventory</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let material of selectedMaterial">
+                        <td>{{ material.id }}</td>
+                        <td>
+                          <ng-container *ngIf="material.isEditing; else displayMaterialName">
+                            <input type="text" [(ngModel)]="material.name" class="form-control">
+                          </ng-container>
+                          <ng-template #displayMaterialName>{{ material.name }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="material.isEditing; else displayMaterialVendor">
+                            <input type="text" [(ngModel)]="material.m_Vendor" class="form-control">
+                          </ng-container>
+                          <ng-template #displayMaterialVendor>{{ material.m_Vendor }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="material.isEditing; else displayMaterialQuantity">
+                            <input type="text" [(ngModel)]="material.mquantity" class="form-control">
+                          </ng-container>
+                          <ng-template #displayMaterialQuantity>{{ material.mquantity }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="material.isEditing; else displayMaterialCost">
+                            <input type="text" [(ngModel)]="material.m_cost" class="form-control">
+                          </ng-container>
+                          <ng-template #displayMaterialCost>{{ material.m_cost }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="material.isEditing; else displayMaterialInventory">
+                            <input type="text" [(ngModel)]="material.m_inventory" class="form-control">
+                          </ng-container>
+                          <ng-template #displayMaterialInventory>{{ material.m_inventory }}</ng-template>
+                        </td>
+                        <td>
+                          <ng-container *ngIf="!material.isEditing">
+                            <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="editMaterial(material)">Edit</button>
+                            <button class="btn btn-sm btn-secondary" style="margin-inline: 2px;" (click)="deleteMaterial(material)">Delete</button>
+                          </ng-container>
+                          <ng-container *ngIf="material.isEditing">
+                            <button class="btn btn-sm btn-success" style="margin-inline: 2px;" (click)="updateMaterial(material)">Update</button>
+                            <!-- <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="saveMaterial(material)">Save</button> -->
+                          </ng-container>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>                        
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </section>
 </main>
