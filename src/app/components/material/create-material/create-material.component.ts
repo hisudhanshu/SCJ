@@ -20,6 +20,7 @@ export class CreateMaterialComponent implements OnInit {
   };
   materialsList: any[] = []; // Array to store the added materials
   editIndex: number = -1; // Index of the material being edited (-1 for none)
+  selectedMaterial: any;
 
   constructor(private authService: AuthServicesService) {}
 
@@ -134,5 +135,10 @@ export class CreateMaterialComponent implements OnInit {
         material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
       );
     }
+  }
+
+  openModal(material: any) {
+      this.selectedMaterial = material;
+      // Code to open the modal
   }
 }

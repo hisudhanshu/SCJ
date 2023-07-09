@@ -77,17 +77,17 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let material of materialsList; let i = index;">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ material.name }}</td>
-                    <td>{{ material.M_type }}</td>
-                    <td>{{ material.code }}</td>
-                    <td>{{ material.M_cost }}</td>
-                    <td>{{ material.M_Vendor }}</td>
-                    <td>{{ material.M_inventory }}</td>
+                  <tr *ngFor="let material of filteredMaterials let i = index;">
+                    <td>{{ material?.id }}</td>
+                    <td>{{ material?.name }}</td>
+                    <td>{{ material?.m_code }}</td>
+                    <td>{{ material?.m_type }}</td>
+                    <td>{{ material?.m_cost }}</td>
+                    <td>{{ material?.m_Vendor }}</td>
+                    <td>{{ material?.m_inventory }}</td>
                     <td>
                       <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                        data-bs-target="#exampleModalToggle" data-bs-toggle="modal"></button>
+                        data-bs-target="#exampleModalToggle" data-bs-toggle="modal" (click)="openModal(material)"></button>
                     </td>
                     <td>
                       <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
@@ -124,7 +124,7 @@
 
               <!-- API Live Database Table here -->
 
-              <!-- <table class="table">
+              <table class="table">
                   <thead>
                     <tr>
                       <th>Sn.</th>
@@ -137,23 +137,23 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let material of filteredMaterials let i = index;">
-                        <td>{{ material?.id }}</td>
-                        <td>{{ material?.name }}</td>
-                        <td>{{ material?.m_code }}</td>
-                        <td>{{ material?.m_type }}</td>
-                        <td>{{ material?.m_cost }}</td>
-                        <td>{{ material?.m_Vendor }}</td>
-                        <td>{{ material?.m_inventory }}</td>
+                    <tr>
+                        <td>{{ selectedMaterial?.id }}</td>
+                        <td>{{ selectedMaterial?.name }}</td>
+                        <td>{{ selectedMaterial?.m_code }}</td>
+                        <td>{{ selectedMaterial?.m_type }}</td>
+                        <td>{{ selectedMaterial?.m_cost }}</td>
+                        <td>{{ selectedMaterial?.m_Vendor }}</td>
+                        <td>{{ selectedMaterial?.m_inventory }}</td>
                     </tr>
                   </tbody>
-                </table> -->
+                </table>
 
               <!-- APi Live Database Table here end -->
 
               <!-- Local Storage Table Start here -->
 
-              <table class="table" *ngIf="materialsList.length > 0">
+              <!-- <table class="table" *ngIf="materialsList.length > 0">
                 <thead>
                   <tr>
                     <th>Id</th>
@@ -176,7 +176,7 @@
                     <td>{{ material.M_inventory }}</td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
               
               <!-- Local Storage Table End here -->
 
