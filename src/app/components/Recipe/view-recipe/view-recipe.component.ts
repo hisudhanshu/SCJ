@@ -69,4 +69,8 @@ deleteRecipe(material: any) {
     // Implement your logic for saving the edited recipe
     console.log('Save recipe:', recipe);
   }
+  // Inside your component class
+  openModal(recipe: any) {
+    this.selectedRecipe = recipe;
+  }
 }

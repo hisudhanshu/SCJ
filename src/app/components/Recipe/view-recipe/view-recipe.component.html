@@ -1,121 +1,104 @@
 <main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
   <div class="pagetitle"></div>
   <section class="section">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card"><br>
-          <div class="card-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-              <strong>List of Created Recipe</strong>
-            </h1>
-            <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
-              <form class="search-form d-flex align-items-center">
-                <div class="input-group">
-                  <input class="form-control" [(ngModel)]="searchKeyword" id="searchKeyword" name="query" type="text"
-                    placeholder="Search here.." title="Enter search keyword" (input)="searchRecipes()" />
-                  <button type="submit" class="btn btn-primary" title="Search">Search</button>
-                </div>
-              </form>
-            </div><br><br>
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="row">
-                  <div class="col-md-12">
-                    <!-- Product Details -->
-                    <h5 style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 420px;">
-                      <strong>Product Details</strong></h5><br>
-                    <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Product Name</th>
-                          <th>Product Category</th>
-                          <th>Product Brand</th>
-                          <th>Customer Type</th>
-                          <th>Client Type</th>
-                          <th>Action</th> <!-- Add new column for actions -->
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let recipe of filteredRecipes">
-                          <td>{{ recipe.Id }}</td>
-                          <td>
-                            <ng-container *ngIf="recipe.isEditing; else displayData">
-                              <input type="text" [(ngModel)]="recipe.name" class="form-control">
-                            </ng-container>
-                            <ng-template #displayData>{{ recipe.name }}</ng-template>
-                          </td>
-                          <td>{{ recipe.category }}</td>
-                          <td>{{ recipe.brand }}</td>
-                          <td>{{ recipe.customer }}</td>
-                          <td>{{ recipe.clienttype }}</td>
-                          <td>
-                            <!-- Edit, update, and delete buttons -->
-                            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary" style="margin-inline: 3px;"
-                              (click)="editRecipe(recipe)">Edit</button>
-                            <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success" style="margin-inline: 3px;"
-                              (click)="updateRecipe(recipe)">Update</button>
-                            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger" style="margin-inline: 3px;"
-                              (click)="deleteRecipe(recipe)">Delete</button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <br><br><br>
-                    <!-- Material Details -->
-                    <h5 style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 420px;">
-                      <strong>Material Details</strong></h5><br>
-                    <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Product Name</th>
-                          <th>Material Name</th>
-                          <th>Code</th>
-                          <th>Material Type</th>
-                          <th>Quantity</th>
-                          <th>Cost</th>
-                          <th>Vendor</th>
-                          <th>Inventory</th>
-                          <th>Action</th> <!-- Add new column for actions -->
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let recipe of filteredRecipes">
-                          <td>{{ recipe.Id }}</td>
-                          <td>
-                            <ng-container *ngIf="recipe.isEditing; else displayData">
-                              <input type="text" [(ngModel)]="recipe.name" class="form-control">
-                            </ng-container>
-                            <ng-template #displayData>{{ recipe.name }}</ng-template>
-                          </td>
-                          <td>{{ recipe.material }}</td>
-                          <td>{{ recipe.mcode }}</td>
-                          <td>{{ recipe.mtype }}</td>
-                          <td>{{ recipe.mquantity }}</td>
-                          <td>{{ recipe.mcost }}</td>
-                          <td>{{ recipe.mvendor }}</td>
-                          <td>{{ recipe.minventory }}</td>
-                          <td>
-                            <!-- Edit, update, and delete buttons -->
-                            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary" style="margin-inline: 3px;"
-                              (click)="editRecipe(recipe)">Edit</button>
-                            <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success" style="margin-inline: 3px;"
-                              (click)="updateRecipe(recipe)">Update</button>
-                            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger"style="margin-inline: 3px;"
-                              (click)="deleteRecipe(recipe)">Delete</button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <br><br>
-                  </div>
-                </div>
-              </div>
-            </div>
+      <div class="row">
+          <div class="col-lg-12">
+              <div class="card"><br>
+                  <div class="card-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                      <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <strong>List of Created Recipe</strong>
+                      </h1>
+                      <div class="col-md-4"
+                          style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
+                          <form class="search-form d-flex align-items-center">
+                              <div class="input-group">
+                                  <input class="form-control" [(ngModel)]="searchKeyword" id="searchKeyword"
+                                      name="query" type="text" placeholder="Search here.."
+                                      title="Enter search keyword" (input)="searchRecipes()" />
+                                  <button type="submit" class="btn btn-primary" title="Search">Search</button>
+                              </div>
+                          </form>
+                      </div><br>
+                      <div class="row">
+                          <div class="col-lg-12">
+                              <div class="row">
+                                  <div class="col-md-12">
+                                     <!-- Product Details Table -->
+<table style="font-family: Georgia, 'Times New Roman', Times, serif;">
+  <thead>
+      <tr>
+          <th>ID</th>
+          <th>Product Name</th>
+          <th>Product Category</th>
+          <th>Product Brand</th>
+          <th>Customer Type</th>
+          <th>Client Type</th>
+          <th>Details</th>
+          <th>Action</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let recipe of filteredRecipes; let i = index;">
+          <td>{{ recipe.Id }}</td>
+          <td>
+              <ng-container *ngIf="recipe.isEditing; else displayData">
+                  <input type="text" [(ngModel)]="recipe.name" class="form-control">
+              </ng-container>
+              <ng-template #displayData>{{ recipe.name }}</ng-template>
+          </td>
+          <td>{{ recipe.category }}</td>
+          <td>{{ recipe.brand }}</td>
+          <td>{{ recipe.customer }}</td>
+          <td>{{ recipe.clienttype }}</td>
+          <td>
+              <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
+                  data-bs-toggle="modal" data-bs-target="#exampleModalToggle" (click)="openModal(recipe)"></button>
+          </td>
+          <td>
+              <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary" style="margin-inline: 3px;"
+                  (click)="editRecipe(recipe)">Edit</button>
+              <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success" style="margin-inline: 3px;"
+                  (click)="updateRecipe(recipe)">Update</button>
+              <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger" style="margin-inline: 3px;"
+                  (click)="deleteRecipe(recipe)">Delete</button>
+          </td>
+      </tr>
+  </tbody>
+</table>
+<!-- Details Modal -->
+<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+  tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h2 class="modal-title fs-5" id="mexampleModalToggleLabel"
+                  style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 600px;">
+                  <strong>Created Product Details</strong>
+              </h2>
           </div>
-        </div>
+          <div class="modal-body">
+              <div class="list-container">
+                  <ul class="list-details">
+                      <li><strong>ID:</strong> {{ selectedRecipe?.Id }}</li>
+                      <li><strong>Product Name:</strong> {{ selectedRecipe?.name }}</li>
+                      <li><strong>Product Category:</strong> {{ selectedRecipe?.category }}</li>
+                      <li><strong>Product Brand:</strong> {{ selectedRecipe?.brand }}</li>
+                      <li><strong>Customer Type:</strong> {{ selectedRecipe?.customer }}</li>
+                      <li><strong>Client Type:</strong> {{ selectedRecipe?.clienttype }}</li>
+                      <li><strong>Material Name:</strong> {{ selectedRecipe?.material }}</li>
+                      <li><strong>Code:</strong> {{ selectedRecipe?.mcode }}</li>
+                      <li><strong>Material Type:</strong> {{ selectedRecipe?.mtype }}</li>
+                      <li><strong>Quantity:</strong> {{ selectedRecipe?.mquantity }}</li>
+                      <li><strong>Cost:</strong> {{ selectedRecipe?.mcost }}</li>
+                      <li><strong>Vendor:</strong> {{ selectedRecipe?.mvendor }}</li>
+                      <li><strong>Inventory:</strong> {{ selectedRecipe?.minventory }}</li>
+                  </ul>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                  aria-label="Close">Close</button>
+          </div>
       </div>
-    </div>
-  </section>
-</main>
+  </div>
+</div>
