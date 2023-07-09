@@ -20,35 +20,86 @@
             </div>
             <br>
             <br>
-            <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-              <thead>
-                <tr>
-                  <th (click)="sortTable('id')">Id  <i class="bi bi-arrow-down-up"></i></th>
-                  <th (click)="sortTable('name')">Name  <i class="bi bi-arrow-down-up"></i></th>
-                  <th (click)="sortTable('m_code')">Material Code  <i class="bi bi-arrow-down-up"></i></th>
-                  <th (click)="sortTable('m_type')">Material Type  <i class="bi bi-arrow-down-up"></i></th>
-                  <th (click)="sortTable('m_cost')">Material Cost  <i class="bi bi-arrow-down-up"></i></th>
-                  <th (click)="sortTable('m_Vendor')">Vendor  <i class="bi bi-arrow-down-up"></i></th>
-                  <th (click)="sortTable('m_inventory')">Inventory  <i class="bi bi-arrow-down-up"></i></th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let material of filteredMaterials">
-                  <td>{{ material?.id }}</td>
-                  <td>{{ material?.name }}</td>
-                  <td>{{ material?.m_code }}</td>
-                  <td>{{ material?.m_type }}</td>
-                  <td>{{ material?.m_cost }}</td>
-                  <td>{{ material?.m_Vendor }}</td>
-                  <td>{{ material?.m_inventory }}</td>
-                  <td>
-                    <button class="btn btn-sm btn-primary" style="margin-inline: 2px;">Edit</button>
-                    <button class="btn btn-sm btn-secondary">Delete</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+              <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                <thead>
+                  <tr>
+                    <th (click)="sortTable('id')">Id  <i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('name')">Name  <i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('m_code')">Material Code  <i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('m_type')">Material Type  <i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('m_cost')">Material Cost  <i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('m_Vendor')">Vendor  <i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('m_inventory')">Inventory  <i class="bi bi-arrow-down-up"></i></th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let material of filteredMaterials">
+                    <td>{{ material?.id }}</td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editName">
+                        {{ material?.name }}
+                      </ng-container>
+                      <ng-template #editName>
+                        <input type="text" [(ngModel)]="material.name" class="form-control">
+                      </ng-template>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editCode">
+                        {{ material?.m_code }}
+                      </ng-container>
+                      <ng-template #editCode>
+                        <input type="text" [(ngModel)]="material.m_code" class="form-control">
+                      </ng-template>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editType">
+                        {{ material?.m_type }}
+                      </ng-container>
+                      <ng-template #editType>
+                        <input type="text" [(ngModel)]="material.m_type" class="form-control">
+                      </ng-template>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editCost">
+                        {{ material?.m_cost }}
+                      </ng-container>
+                      <ng-template #editCost>
+                        <input type="text" [(ngModel)]="material.m_cost" class="form-control">
+                      </ng-template>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editVendor">
+                        {{ material?.m_Vendor }}
+                      </ng-container>
+                      <ng-template #editVendor>
+                        <input type="text" [(ngModel)]="material.m_Vendor" class="form-control">
+                      </ng-template>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editInventory">
+                        {{ material?.m_inventory }}
+                      </ng-container>
+                      <ng-template #editInventory>
+                        <input type="text" [(ngModel)]="material.m_inventory" class="form-control">
+                      </ng-template>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editButtons">
+                        <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
+                          (click)="editMaterial(material)">Edit</button>
+                        <button class="btn btn-sm btn-secondary" style="margin-inline: 2px;"
+                          (click)="deleteMaterial(material)">Delete</button>
+                      </ng-container>
+                      <ng-template #editButtons>
+                        <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
+                          (click)="updateMaterial(material)">Update</button>
+                      </ng-template>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+                         
             <br>
             <br>
           </div>
