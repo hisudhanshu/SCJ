@@ -37,7 +37,7 @@
                       [(ngModel)]="material.code" />
                   </div>
                   <div class="col-md-4" style="margin-top: 30px;">
-                    <label for="namecost">Add Current Cost</label>
+                    <label for="namecost">Add Cost per/unit</label>
                     <input type="number" class="form-control" placeholder="Enter Material Cost" id="namecost"
                       [(ngModel)]="material.M_cost" />
                   </div>
@@ -69,7 +69,7 @@
                     <th>Material Name</th>
                     <th>Material Type</th>
                     <th>Material Code</th>
-                    <th>Material Cost</th>
+                    <th>Cost Per/Unit</th>
                     <th>Vendor</th>
                     <th>Inventory</th>
                     <th>Details</th>
@@ -137,7 +137,7 @@
                             <span>{{ selectedMaterial?.m_code }}</span>
                         </li>
                         <li>
-                            <strong>Material Cost:</strong>
+                            <strong>Cost Per/Unit:</strong>
                             <span>{{ selectedMaterial?.m_cost }}</span>
                         </li>
                         <li>
