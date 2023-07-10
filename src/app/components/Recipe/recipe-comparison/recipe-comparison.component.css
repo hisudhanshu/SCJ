@@ -1,0 +1,11 @@
+.comparison-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .comparison-table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid black;
+  }
+  

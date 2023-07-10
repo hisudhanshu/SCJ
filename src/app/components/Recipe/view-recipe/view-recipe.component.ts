@@ -50,33 +50,33 @@ export class ViewRecipeComponent implements OnInit {
     recipe.isEditing = false; // Set 'isEditing' property back to false after updating
   }
 
-// Component logic
-deleteRecipe(material: any) {
-  // Find the index of the material in the selectedMaterial array
-  const index = this.selectedRecipe.indexOf(material);
-  
-  if (index !== -1) {
-    // Remove the material from the selectedMaterial array
-    this.selectedRecipe.splice(index, 1);
-    
-    // Optionally, you can perform additional logic such as sending an HTTP request to delete the material from the server
-    
-    console.log('Deleted material:', material);
+  // Component logic
+  deleteRecipe(material: any) {
+    // Find the index of the material in the selectedMaterial array
+    const index = this.selectedRecipe.indexOf(material);
+
+    if (index !== -1) {
+      // Remove the material from the selectedMaterial array
+      this.selectedRecipe.splice(index, 1);
+
+      // Optionally, you can perform additional logic such as sending an HTTP request to delete the material from the server
+
+      console.log('Deleted material:', material);
+    }
   }
-}
 
   saveRecipe(recipe: any): void {
     // Implement your logic for saving the edited recipe
     console.log('Save recipe:', recipe);
   }
   // Inside your component class
-openModal(recipe: any) {
-  this.selectedRecipe = recipe;
-}
-showDetails(recipe: any) {
-  this.selectedRecipe = recipe; // Set the selected recipe details
-}
-hasDuplicateId(id: any): boolean {
-  return this.filteredRecipes.findIndex((recipe: any) => recipe.Id === id) !== this.filteredRecipes.findIndex((recipe: any) => recipe.Id === id);
-}
+  openModal(recipe: any) {
+    this.selectedRecipe = recipe;
+  }
+  showDetails(recipe: any) {
+    this.selectedRecipe = recipe; // Set the selected recipe details
+  }
+  hasDuplicateId(id: any): boolean {
+    return this.filteredRecipes.findIndex((recipe: any) => recipe.Id === id) !== this.filteredRecipes.findIndex((recipe: any) => recipe.Id === id);
+  }
 }
