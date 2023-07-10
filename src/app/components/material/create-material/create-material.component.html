@@ -118,39 +118,39 @@
                 </h2>
             </div>
             <div class="modal-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                <div class="list-container">
-                    <ul class="list-details">
-                        <li>
-                            <strong>ID:</strong>
-                            <span>{{ selectedMaterial?.id }}</span>
-                        </li>
-                        <li>
-                            <strong>Material Name:</strong>
-                            <span>{{ selectedMaterial?.name }}</span>
-                        </li>
-                        <li>
-                            <strong>Material Type:</strong>
-                            <span>{{ selectedMaterial?.m_type }}</span>
-                        </li>
-                        <li>
-                            <strong>Material Code:</strong>
-                            <span>{{ selectedMaterial?.m_code }}</span>
-                        </li>
-                        <li>
-                            <strong>Cost Per/Unit:</strong>
-                            <span>{{ selectedMaterial?.m_cost }}</span>
-                        </li>
-                        <li>
-                            <strong>Vendor:</strong>
-                            <span>{{ selectedMaterial?.m_Vendor }}</span>
-                        </li>
-                        <li>
-                            <strong>Inventory:</strong>
-                            <span>{{ selectedMaterial?.m_inventory }}</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+              <div class="table-container">
+                  <table class="table-details  col-md-12">
+                      <tr class="col-md-12">
+                          <td class="col-md-6"><strong>ID:</strong></td>
+                          <td class="col-md-6">{{ selectedMaterial?.id }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Material Name:</strong></td>
+                          <td>{{ selectedMaterial?.name }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Material Type:</strong></td>
+                          <td>{{ selectedMaterial?.m_type }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Material Code:</strong></td>
+                          <td>{{ selectedMaterial?.m_code }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Cost Per/Unit:</strong></td>
+                          <td>{{ selectedMaterial?.m_cost }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Vendor:</strong></td>
+                          <td>{{ selectedMaterial?.m_Vendor }}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>Stock:</strong></td>
+                          <td>{{ selectedMaterial?.m_inventory }}</td>
+                      </tr>
+                  </table>
+              </div>
+          </div>          
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                     aria-label="Close">Close</button>

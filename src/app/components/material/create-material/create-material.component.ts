@@ -48,7 +48,6 @@ export class CreateMaterialComponent implements OnInit {
       );
     }
 
-
   addMaterial(): void {
     const confirmAdd = confirm('Are you sure you want to add this material?');
     if (confirmAdd) {

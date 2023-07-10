@@ -23,82 +23,93 @@
                             <div class="col-lg-12">
                                 <div class="row">
                                     <div class="col-md-12">
-                                       <!-- Product Details Table -->
+                                      <!-- Product Table -->
 <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>Product Name</th>
-            <th>Product Category</th>
-            <th>Product Brand</th>
-            <th>Customer Type</th>
-            <th>Client Type</th>
-            <th>Details</th>
-            <th>Action</th>
-        </tr>
+      <tr>
+        <th>ID</th>
+        <th>Product Name</th>
+        <th>Product Category</th>
+        <th>Product Brand</th>
+        <th>Customer Type</th>
+        <th>Client Type</th>
+        <th>Details</th>
+        <th>Action</th>
+      </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let recipe of filteredRecipes; let i = index;">
-            <td>{{ recipe.Id }}</td>
-            <td>
-                <ng-container *ngIf="recipe.isEditing; else displayData">
-                    <input type="text" [(ngModel)]="recipe.name" class="form-control">
-                </ng-container>
-                <ng-template #displayData>{{ recipe.name }}</ng-template>
-            </td>
-            <td>{{ recipe.category }}</td>
-            <td>{{ recipe.brand }}</td>
-            <td>{{ recipe.customer }}</td>
-            <td>{{ recipe.clienttype }}</td>
-            <td>
-                <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                    data-bs-toggle="modal" data-bs-target="#exampleModalToggle" (click)="openModal(recipe)"></button>
-            </td>
-            <td>
-                <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary" style="margin-inline: 3px;"
-                    (click)="editRecipe(recipe)">Edit</button>
-                <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success" style="margin-inline: 3px;"
-                    (click)="updateRecipe(recipe)">Update</button>
-                <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger" style="margin-inline: 3px;"
-                    (click)="deleteRecipe(recipe)">Delete</button>
-            </td>
+      <ng-container *ngFor="let recipe of filteredRecipes; let i = index;">
+        <tr *ngIf="!hasDuplicateId(recipe.Id)">
+          <td>{{ recipe.Id }}</td>
+          <td>
+            <ng-container *ngIf="recipe.isEditing; else displayData">
+              <input type="text" [(ngModel)]="recipe.name" class="form-control">
+            </ng-container>
+            <ng-template #displayData>{{ recipe.name }}</ng-template>
+          </td>
+          <td>{{ recipe.category }}</td>
+          <td>{{ recipe.brand }}</td>
+          <td>{{ recipe.customer }}</td>
+          <td>{{ recipe.clienttype }}</td>
+          <td>
+            <button class="bi bi-info-circle" style="margin-inline-start: 40px;" (click)="showDetails(recipe)"></button>
+          </td>
+          <td>
+            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary" style="margin-inline: 3px;" (click)="editRecipe(recipe)">Edit</button>
+            <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success" style="margin-inline: 3px;" (click)="updateRecipe(recipe)">Update</button>
+            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger" style="margin-inline: 3px;" (click)="deleteRecipe(recipe)">Delete</button>
+          </td>
         </tr>
+      </ng-container>
     </tbody>
-</table>
-<!-- Details Modal -->
-<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title fs-5" id="mexampleModalToggleLabel"
-                    style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 600px;">
-                    <strong>Created Product Details</strong>
-                </h2>
-            </div>
-            <div class="modal-body">
-                <div class="list-container">
-                    <ul class="list-details">
-                        <li><strong>ID:</strong> {{ selectedRecipe?.Id }}</li>
-                        <li><strong>Product Name:</strong> {{ selectedRecipe?.name }}</li>
-                        <li><strong>Product Category:</strong> {{ selectedRecipe?.category }}</li>
-                        <li><strong>Product Brand:</strong> {{ selectedRecipe?.brand }}</li>
-                        <li><strong>Customer Type:</strong> {{ selectedRecipe?.customer }}</li>
-                        <li><strong>Client Type:</strong> {{ selectedRecipe?.clienttype }}</li>
-                        <li><strong>Material Name:</strong> {{ selectedRecipe?.material }}</li>
-                        <li><strong>Code:</strong> {{ selectedRecipe?.mcode }}</li>
-                        <li><strong>Material Type:</strong> {{ selectedRecipe?.mtype }}</li>
-                        <li><strong>Quantity:</strong> {{ selectedRecipe?.mquantity }}</li>
-                        <li><strong>Cost:</strong> {{ selectedRecipe?.mcost }}</li>
-                        <li><strong>Vendor:</strong> {{ selectedRecipe?.mvendor }}</li>
-                        <li><strong>Inventory:</strong> {{ selectedRecipe?.minventory }}</li>
-                    </ul>
+  </table>
+  <!-- End Product Table -->
+  <br><br>
+                                        <!-- Details Table -->
+                                        <div class="table-container" *ngIf="selectedRecipe">
+                                            <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6>
+                                            <table class="table-details"
+                                                style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                                                <tr>
+                                                    <th><strong>ID:</strong></th>
+                                                    <th>Product Name</th>
+                                                    <th>Category</th>
+                                                    <th>Brand:</th>
+                                                    <th>Customer Type</th>
+                                                    <th>Client Type</th>
+                                                    <th>Material Name</th>
+                                                    <th>Code</th>
+                                                    <th>Type</th>
+                                                    <th>Quantity</th>
+                                                    <th>Cost</th>
+                                                    <th>Vendor</th>
+                                                    <th>Stock</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>{{ selectedRecipe?.Id }}</td>
+                                                    <td>{{ selectedRecipe?.name }}</td>
+                                                    <td>{{ selectedRecipe?.category }}</td>
+                                                    <td>{{ selectedRecipe?.brand }}</td>
+                                                    <td>{{ selectedRecipe?.customer }}</td>
+                                                    <td>{{ selectedRecipe?.clienttype }}</td>
+                                                    <td>{{ selectedRecipe?.material }}</td>
+                                                    <td>{{ selectedRecipe?.mcode }}</td>
+                                                    <td>{{ selectedRecipe?.mtype }}</td>
+                                                    <td>{{ selectedRecipe?.mquantity }}</td>
+                                                    <td>{{ selectedRecipe?.mcost }}</td>
+                                                    <td>{{ selectedRecipe?.mvendor }}</td>
+                                                    <td>{{ selectedRecipe?.minventory }}</td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!-- End Details Table -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                    aria-label="Close">Close</button>
-            </div>
         </div>
-    </div>
-</div>
+    </section>
+</main>

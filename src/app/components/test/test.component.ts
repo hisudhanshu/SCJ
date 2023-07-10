@@ -73,5 +73,10 @@ deleteRecipe(material: any) {
 openModal(recipe: any) {
   this.selectedRecipe = recipe;
 }
-
+showDetails(recipe: any) {
+  this.selectedRecipe = recipe; // Set the selected recipe details
+}
+hasDuplicateId(id: any): boolean {
+  return this.filteredRecipes.findIndex((recipe: any) => recipe.Id === id) !== this.filteredRecipes.findIndex((recipe: any) => recipe.Id === id);
+}
 }
