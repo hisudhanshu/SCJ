@@ -1,3 +1,4 @@
+<!-- recipe-comparison.component.html -->
 <main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
     <div class="pagetitle"></div>
     <section class="section">
@@ -11,22 +12,21 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="row">
-                                    
                                     <div class="col-md-6">
                                         <label for="name">Products</label>
                                         <select id="name" class="form-select" aria-label="Default select example">
                                             <option value="">Select</option>
-                                            <option value="">Bottle</option>
-                                             <option value="">Bottle</option>
+                                            <option value="Bottle">Bottle</option>
                                         </select>
                                     </div>
-                                   <div class="col-md-6">
+                                    <div class="col-md-6">
                                         <label for="Recipe">Recipe</label>
                                         <select id="Recipe" class="form-select" aria-label="Default select example">
                                             <option value="">Select</option>
-                                            <option value="">Select</option>
+                                            <option value="Glass">Glass</option>
                                         </select>
                                     </div>
+                                    <button class="btn btn-primary" (click)="addData()">Add</button>
                                 </div>
                             </div>
                         </div>
@@ -36,3 +36,21 @@
         </div>
     </section>
 </main>
+
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to add this data?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="saveChanges()">Save</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
