@@ -88,7 +88,7 @@
                       <ng-container *ngIf="!material.isEditing; else editButtons">
                         <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
                           (click)="editMaterial(material)">Edit</button>
-                        <button class="btn btn-sm btn-secondary" style="margin-inline: 2px;"
+                        <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
                           (click)="deleteMaterial(material)">Delete</button>
                       </ng-container>
                       <ng-template #editButtons>
