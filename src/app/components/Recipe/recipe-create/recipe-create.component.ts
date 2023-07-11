@@ -113,7 +113,7 @@ export class RecipeCreateComponent implements OnInit {
             this.saveProducts();
 
             this.successMessage = 'Product added successfully.';
-            alert('Data saved successfully.');
+            alert('Product added successfully.');
           },
           (error) => {
             console.error('Error occurred while inserting product data:', error);
