@@ -41,13 +41,27 @@ export class ViewRecipeComponent implements OnInit {
   }
 
   editRecipe(recipe: any): void {
-    recipe.isEditing = true; // Set 'isEditing' property to true for the selected recipe
+    // Set 'isEditing' property to true for the selected recipe
+    recipe.isEditing = true;
+  
+    // Clone the recipe object to create a backup
+    recipe.backup = { ...recipe };
   }
-
+  
+  cancelEdit(recipe: any): void {
+    // Restore the original values from the backup
+    Object.assign(recipe, recipe.backup);
+  
+    // Set 'isEditing' property back to false
+    recipe.isEditing = false;
+  }
   updateRecipe(recipe: any): void {
     // Implement your logic for updating a recipe
     console.log('Update recipe:', recipe);
-    recipe.isEditing = false; // Set 'isEditing' property back to false after updating
+  
+    // Set 'isEditing' property back to false after updating
+    recipe.isEditing = false;
+    delete recipe.backup; // Remove the backup property
   }
 
   // Component logic

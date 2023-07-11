@@ -11,8 +11,8 @@ export class RecipeComparisonComponent implements OnInit {
   selectedProduct: string = '';
   showComparisonResults: boolean = false;
   editMode: boolean = false;
-  
-  
+
+
   // Properties for editing
   createdRecipeCategory: string = 'Small';
   createdRecipeClientType: string = 'Clay';
@@ -66,26 +66,26 @@ export class RecipeComparisonComponent implements OnInit {
       this.selectedRecipe = this.filteredRecipes.find(recipe => recipe.name === selectedRecipeName);
     }
   }
-  
+
   compareRecipes(): void {
     // Implementation of comparison logic (if needed)
     // You can perform additional operations here based on the selectedProduct and selectedRecipe values.
     // This function will be called when the "Compare" button is clicked.
-    
+
     // Show comparison results
     this.showComparisonResults = true;
   }
   saveChanges(): void {
     // Save the changes made in the edit mode
     // Perform any necessary operations to save the changes
-    
+
     this.editMode = false;
   }
 
   cancelChanges(): void {
     // Cancel the changes made in the edit mode
     // Reset the values to their original state
-    
+
     this.editMode = false;
   }
 }

@@ -40,15 +40,45 @@
                           <tr *ngIf="!hasDuplicateId(recipe.Id)">
                             <td>{{ recipe.Id }}</td>
                             <td>
-                              <ng-container *ngIf="recipe.isEditing; else displayData">
-                                <input type="text" [(ngModel)]="recipe.name" class="form-control">
+                              <ng-container *ngIf="!recipe.isEditing; else editData">
+                                {{ recipe.name }}
                               </ng-container>
-                              <ng-template #displayData>{{ recipe.name }}</ng-template>
+                              <ng-template #editData>
+                                <input type="text" [(ngModel)]="recipe.name" class="form-control">
+                              </ng-template>
                             </td>
-                            <td>{{ recipe.category }}</td>
-                            <td>{{ recipe.brand }}</td>
-                            <td>{{ recipe.customer }}</td>
-                            <td>{{ recipe.clienttype }}</td>
+                            <td>
+                              <ng-container *ngIf="!recipe.isEditing; else editcategory">
+                                {{ recipe.category }}
+                              </ng-container>
+                              <ng-template #editcategory>
+                                <input type="text" [(ngModel)]="recipe.category" class="form-control">
+                              </ng-template>
+                            </td>
+                            <td>
+                              <ng-container *ngIf="!recipe.isEditing; else editbrand">
+                                {{ recipe.brand }}
+                              </ng-container>
+                              <ng-template #editbrand>
+                                <input type="text" [(ngModel)]="recipe.brand" class="form-control">
+                              </ng-template>
+                            </td>
+                            <td>
+                              <ng-container *ngIf="!recipe.isEditing; else editcustomer">
+                                {{ recipe.customer }}
+                              </ng-container>
+                              <ng-template #editcustomer>
+                                <input type="text" [(ngModel)]="recipe.customer" class="form-control">
+                              </ng-template>
+                            </td>
+                            <td>
+                              <ng-container *ngIf="!recipe.isEditing; else editclienttype">
+                                {{ recipe.clienttype }}
+                              </ng-container>
+                              <ng-template #editclienttype>
+                                <input type="text" [(ngModel)]="recipe.clienttype" class="form-control">
+                              </ng-template>
+                            </td>
                             <td>
                               <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
                                 (click)="showDetails(recipe)"></button>
