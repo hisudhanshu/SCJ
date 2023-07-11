@@ -25,6 +25,7 @@
                     <select id="name" class="form-select" aria-label="Default select example"
                       [(ngModel)]="selectedProduct">
                       <option value="">Select</option>
+                      <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option>
                       <option value="Polyvinyl Chloride">Polyvinyl Chloride</option>
                     </select>
                   </div>
