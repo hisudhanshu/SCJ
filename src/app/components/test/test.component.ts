@@ -7,10 +7,27 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
+  selectedProduct: string = '';
+  showComparisonResults: boolean = false;
+  editMode: boolean = false;
+  
+  
+  // Properties for editing
+  createdRecipeCategory: string = 'Small';
+  createdRecipeClientType: string = 'Clay';
+  createdRecipeBrand: string = 'Type A';
+  createdRecipeCustomer: string = 'Claylogix';
+  createdRecipeMaterialName: string = 'Polythiene';
+  createdRecipeCode: string = 'P83912';
+  createdRecipeType: string = 'Small Type';
+  createdRecipeQuantity: number = 100;
+  createdRecipeCostPerUnit: number = 1000;
+  createdRecipeVendor: string = 'Vendor New';
+  createdRecipeStock: number = 1000;
   recipes: any[] = []; // Array to store all recipes data
   filteredRecipes: any[] = []; // Array to store filtered recipes data
   searchKeyword: string = ''; // Variable to store the search keyword
-  selectedRecipe: any;
+  selectedRecipe: any = null;
 
   constructor(private authService: AuthServicesService) { }
 
@@ -40,43 +57,34 @@ export class TestComponent implements OnInit {
     }
   }
 
-  editRecipe(recipe: any): void {
-    recipe.isEditing = true; // Set 'isEditing' property to true for the selected recipe
+  showDetails(event: Event): void {
+    const selectedRecipeName = (event.target as HTMLSelectElement).value;
+    if (selectedRecipeName === '') {
+      this.selectedRecipe = null; // If no recipe is selected, reset the selectedRecipe variable
+    } else {
+      this.selectedRecipe = this.filteredRecipes.find(recipe => recipe.name === selectedRecipeName);
+    }
   }
-
-  updateRecipe(recipe: any): void {
-    // Implement your logic for updating a recipe
-    console.log('Update recipe:', recipe);
-    recipe.isEditing = false; // Set 'isEditing' property back to false after updating
-  }
-
-// Component logic
-deleteRecipe(material: any) {
-  // Find the index of the material in the selectedMaterial array
-  const index = this.selectedRecipe.indexOf(material);
   
-  if (index !== -1) {
-    // Remove the material from the selectedMaterial array
-    this.selectedRecipe.splice(index, 1);
+  compareRecipes(): void {
+    // Implementation of comparison logic (if needed)
+    // You can perform additional operations here based on the selectedProduct and selectedRecipe values.
+    // This function will be called when the "Compare" button is clicked.
     
-    // Optionally, you can perform additional logic such as sending an HTTP request to delete the material from the server
-    
-    console.log('Deleted material:', material);
+    // Show comparison results
+    this.showComparisonResults = true;
   }
-}
+  saveChanges(): void {
+    // Save the changes made in the edit mode
+    // Perform any necessary operations to save the changes
+    
+    this.editMode = false;
+  }
 
-  saveRecipe(recipe: any): void {
-    // Implement your logic for saving the edited recipe
-    console.log('Save recipe:', recipe);
+  cancelChanges(): void {
+    // Cancel the changes made in the edit mode
+    // Reset the values to their original state
+    
+    this.editMode = false;
   }
-  // Inside your component class
-openModal(recipe: any) {
-  this.selectedRecipe = recipe;
-}
-showDetails(recipe: any) {
-  this.selectedRecipe = recipe; // Set the selected recipe details
-}
-hasDuplicateId(id: any): boolean {
-  return this.filteredRecipes.findIndex((recipe: any) => recipe.Id === id) !== this.filteredRecipes.findIndex((recipe: any) => recipe.Id === id);
-}
 }

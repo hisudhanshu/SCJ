@@ -1,115 +1,205 @@
 <main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-    <div class="pagetitle"></div>
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card"><br>
-                    <div class="card-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <strong>List of Created Recipe</strong>
-                        </h1>
-                        <div class="col-md-4"
-                            style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
-                            <form class="search-form d-flex align-items-center">
-                                <div class="input-group">
-                                    <input class="form-control" [(ngModel)]="searchKeyword" id="searchKeyword"
-                                        name="query" type="text" placeholder="Search here.."
-                                        title="Enter search keyword" (input)="searchRecipes()" />
-                                    <button type="submit" class="btn btn-primary" title="Search">Search</button>
-                                </div>
-                            </form>
-                        </div><br>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                      <!-- Product Table -->
-<table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Product Name</th>
-        <th>Product Category</th>
-        <th>Product Brand</th>
-        <th>Customer Type</th>
-        <th>Client Type</th>
-        <th>Details</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let recipe of filteredRecipes; let i = index;">
-        <tr *ngIf="!hasDuplicateId(recipe.Id)">
-          <td>{{ recipe.Id }}</td>
-          <td>
-            <ng-container *ngIf="recipe.isEditing; else displayData">
-              <input type="text" [(ngModel)]="recipe.name" class="form-control">
-            </ng-container>
-            <ng-template #displayData>{{ recipe.name }}</ng-template>
-          </td>
-          <td>{{ recipe.category }}</td>
-          <td>{{ recipe.brand }}</td>
-          <td>{{ recipe.customer }}</td>
-          <td>{{ recipe.clienttype }}</td>
-          <td>
-            <button class="bi bi-info-circle" style="margin-inline-start: 40px;" (click)="showDetails(recipe)"></button>
-          </td>
-          <td>
-            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary" style="margin-inline: 3px;" (click)="editRecipe(recipe)">Edit</button>
-            <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success" style="margin-inline: 3px;" (click)="updateRecipe(recipe)">Update</button>
-            <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger" style="margin-inline: 3px;" (click)="deleteRecipe(recipe)">Delete</button>
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
-  <!-- End Product Table -->
-  <br><br>
-                                        <!-- Details Table -->
-                                        <div class="table-container" *ngIf="selectedRecipe">
-                                            <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6>
-                                            <table class="table-details"
-                                                style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                                                <tr>
-                                                    <th><strong>ID:</strong></th>
-                                                    <th>Product Name</th>
-                                                    <th>Category</th>
-                                                    <th>Brand:</th>
-                                                    <th>Customer Type</th>
-                                                    <th>Client Type</th>
-                                                    <th>Material Name</th>
-                                                    <th>Code</th>
-                                                    <th>Type</th>
-                                                    <th>Quantity</th>
-                                                    <th>Cost</th>
-                                                    <th>Vendor</th>
-                                                    <th>Stock</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>{{ selectedRecipe?.Id }}</td>
-                                                    <td>{{ selectedRecipe?.name }}</td>
-                                                    <td>{{ selectedRecipe?.category }}</td>
-                                                    <td>{{ selectedRecipe?.brand }}</td>
-                                                    <td>{{ selectedRecipe?.customer }}</td>
-                                                    <td>{{ selectedRecipe?.clienttype }}</td>
-                                                    <td>{{ selectedRecipe?.material }}</td>
-                                                    <td>{{ selectedRecipe?.mcode }}</td>
-                                                    <td>{{ selectedRecipe?.mtype }}</td>
-                                                    <td>{{ selectedRecipe?.mquantity }}</td>
-                                                    <td>{{ selectedRecipe?.mcost }}</td>
-                                                    <td>{{ selectedRecipe?.mvendor }}</td>
-                                                    <td>{{ selectedRecipe?.minventory }}</td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                        <!-- End Details Table -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+  <div class="pagetitle"></div>
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card"><br>
+          <div class="card-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+            <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+              <strong>Recipe Compare</strong>
+            </h1>
+            <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
+              <form class="search-form d-flex align-items-center">
+                <div class="input-group">
+                  <input class="form-control" [(ngModel)]="searchKeyword" id="searchKeyword" name="query" type="text"
+                    placeholder="Search here.." title="Enter search keyword" (input)="searchRecipes()" />
+                  <button type="submit" class="btn btn-primary" title="Search">Search</button>
                 </div>
+              </form>
+            </div><br>
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="name">Created Recipe</label>
+                    <select id="name" class="form-select" aria-label="Default select example"
+                      [(ngModel)]="selectedProduct">
+                      <option value="">Select</option>
+                      <option value="Polyvinyl Chloride">Polyvinyl Chloride</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="Recipe">Actual Recipe</label>
+                    <select id="Recipe" class="form-select" aria-label="Default select example"
+                      (change)="showDetails($event)">
+                      <option value="">Select</option>
+                      <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option>
+                    </select>
+                  </div>
+                  <div>
+                    <br><br>
+                    <button class="btn btn-primary" style="height: 40px; width: 120px; margin-inline:500px;"
+                      (click)="compareRecipes()">Compare</button>
+                  </div>
+                  <br>
+                  <div *ngIf="showComparisonResults">
+                    <h4 style="font-family: Georgia, 'Times New Roman', Times, serif;">Comparison
+                      Results</h4><br>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <table class="comparison-table" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Created Recipe</strong></td>
+                            <td>{{ selectedProduct }}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Category</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeCategory }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCategory" type="text"
+                                class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Brand</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeBrand" type="text" class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Customer</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeCustomer }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCustomer" type="text"
+                                class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Client Type</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeClientType }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeClientType" type="text"
+                                class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Material Name</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeMaterialName }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeMaterialName" type="text"
+                                class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Material Code</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeCode }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCode" type="text" class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Material Type</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeType }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeType" type="text" class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Material Quantity</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeQuantity }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeQuantity" type="text"
+                                class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Cost Per/unit</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeCostPerUnit }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCostPerUnit" type="text"
+                                class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Material Vendor</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeVendor }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeVendor" type="text"
+                                class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <td><strong>Material Stock</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeStock }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeStock" type="text" class="form-control">
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div class="col-md-6">
+                        <table *ngIf="selectedRecipe" class="comparison-table">
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Actual Recipe</strong></td>
+                            <td>{{ selectedRecipe?.name }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Category</strong></td>
+                            <td>{{ selectedRecipe?.category }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Brand</strong></td>
+                            <td>{{ selectedRecipe?.brand }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Customer</strong></td>
+                            <td>{{ selectedRecipe?.customer }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Client Type</strong></td>
+                            <td>{{ selectedRecipe?.clienttype }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Material Name</strong></td>
+                            <td>{{ selectedRecipe?.material }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Material Code</strong></td>
+                            <td>{{ selectedRecipe?.mcode }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Material Type</strong></td>
+                            <td>{{ selectedRecipe?.mtype }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Material Quantity</strong></td>
+                            <td>{{ selectedRecipe?.mquantity }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Cost Per/unit</strong></td>
+                            <td>{{ selectedRecipe?.mcost }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Material Vendor</strong></td>
+                            <td>{{ selectedRecipe?.mvendor }}</td>
+                          </tr>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <td><strong>Material Stock</strong></td>
+                            <td>{{ selectedRecipe?.minventory }}</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                    <br>
+                    <div *ngIf="!editMode">
+                      <button class="btn btn-primary" style="height: 40px; width: 120px;"
+                        (click)="editMode = true">Edit</button>
+                    </div>
+                    <div *ngIf="editMode">
+                      <button class="btn btn-success" style="margin-right: 3px; height: 40px; width: 120px;"
+                        (click)="saveChanges()">Save</button>
+                      <button class="btn btn-danger" style="height: 40px; width: 120px;"
+                        (click)="cancelChanges()">Cancel</button>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </main>

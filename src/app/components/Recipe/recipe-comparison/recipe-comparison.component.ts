@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 @Component({
   selector: 'app-recipe-comparison',
@@ -8,14 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class RecipeComparisonComponent implements OnInit {
 
   selectedProduct: string = '';
-  selectedRecipe: string = '';
   showComparisonResults: boolean = false;
   editMode: boolean = false;
+  
   
   // Properties for editing
   createdRecipeCategory: string = 'Small';
   createdRecipeClientType: string = 'Clay';
   createdRecipeBrand: string = 'Type A';
+  createdRecipeCustomer: string = 'Claylogix';
   createdRecipeMaterialName: string = 'Polythiene';
   createdRecipeCode: string = 'P83912';
   createdRecipeType: string = 'Small Type';
@@ -23,23 +25,48 @@ export class RecipeComparisonComponent implements OnInit {
   createdRecipeCostPerUnit: number = 1000;
   createdRecipeVendor: string = 'Vendor New';
   createdRecipeStock: number = 1000;
+  recipes: any[] = []; // Array to store all recipes data
+  filteredRecipes: any[] = []; // Array to store filtered recipes data
+  searchKeyword: string = ''; // Variable to store the search keyword
+  selectedRecipe: any = null;
 
-  actualRecipeCategory: string = 'Hard';
-  actualRecipeClientType: string = 'SCJ';
-  actualRecipeBrand: string = 'Type B';
-  actualRecipeMaterialName: string = 'Rubber';
-  actualRecipeCode: string = 'R83012';
-  actualRecipeType: string = 'Hard Type';
-  actualRecipeQuantity: number = 200;
-  actualRecipeCostPerUnit: number = 2000;
-  actualRecipeVendor: string = 'Vendor Clay';
-  actualRecipeStock: number = 2000;
-
-  constructor() { }
+  constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
+    this.authService.getRecipes().subscribe(
+      (response: any) => {
+        if (response.isSuccess && response.jsonData !== null) {
+          this.recipes = JSON.parse(response.jsonData);
+          this.filteredRecipes = this.recipes; // Initialize filteredRecipes with all recipes
+        } else {
+          console.log('API request failed or no data received');
+        }
+      },
+      (error: any) => {
+        console.log('Error fetching materials:', error);
+      }
+    );
   }
 
+  searchRecipes(): void {
+    if (this.searchKeyword.trim() === '') {
+      this.filteredRecipes = this.recipes; // If search keyword is empty, show all recipes
+    } else {
+      this.filteredRecipes = this.recipes.filter(recipe =>
+        recipe.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
+      );
+    }
+  }
+
+  showDetails(event: Event): void {
+    const selectedRecipeName = (event.target as HTMLSelectElement).value;
+    if (selectedRecipeName === '') {
+      this.selectedRecipe = null; // If no recipe is selected, reset the selectedRecipe variable
+    } else {
+      this.selectedRecipe = this.filteredRecipes.find(recipe => recipe.name === selectedRecipeName);
+    }
+  }
+  
   compareRecipes(): void {
     // Implementation of comparison logic (if needed)
     // You can perform additional operations here based on the selectedProduct and selectedRecipe values.
@@ -48,7 +75,6 @@ export class RecipeComparisonComponent implements OnInit {
     // Show comparison results
     this.showComparisonResults = true;
   }
-
   saveChanges(): void {
     // Save the changes made in the edit mode
     // Perform any necessary operations to save the changes
@@ -63,24 +89,3 @@ export class RecipeComparisonComponent implements OnInit {
     this.editMode = false;
   }
 }
-
-
-  // addData(): void {
-  //   this.selectedProduct = (document.getElementById('name') as HTMLSelectElement).value;
-  //   this.selectedRecipe = (document.getElementById('Recipe') as HTMLSelectElement).value;
-  //   localStorage.setItem('selectedProduct', this.selectedProduct);
-  //   localStorage.setItem('selectedRecipe', this.selectedRecipe);
-  //   this.showModal();
-  // }
-
-  // showModal(): void {
-  //   const modal = document.getElementsByClassName('modal')[0] as HTMLElement;
-  //   modal.style.display = 'block';
-  // }
-
-  // saveChanges(): void {
-  //   // Handle save changes functionality here
-  //   const modal = document.getElementsByClassName('modal')[0] as HTMLElement;
-  //   modal.style.display = 'none';
-  // }
-
