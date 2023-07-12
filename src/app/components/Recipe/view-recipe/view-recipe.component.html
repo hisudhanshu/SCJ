@@ -24,12 +24,12 @@
                     <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
                       <thead>
                         <tr>
-                          <th>ID</th>
-                          <th>Product Name</th>
-                          <th>Product Category</th>
-                          <th>Product Brand</th>
-                          <th>Customer Type</th>
-                          <th>Client Type</th>
+                          <th (click)="sortTable('Id')">ID <i class="bi bi-arrow-down-up"></i></th>
+                          <th (click)="sortTable('name')">Product Name <i class="bi bi-arrow-down-up"></i></th>
+                          <th (click)="sortTable('category')">Product Category <i class="bi bi-arrow-down-up"></i></th>
+                          <th (click)="sortTable('brand')">Product Brand <i class="bi bi-arrow-down-up"></i></th>
+                          <th (click)="sortTable('customer')">Customer Type <i class="bi bi-arrow-down-up"></i></th>
+                          <th (click)="sortTable('clienttype')">Client Type <i class="bi bi-arrow-down-up"></i></th>
                           <th>Details</th>
                           <th>Action</th>
                         </tr>
@@ -37,21 +37,61 @@
                       <tbody>
                         <tr *ngFor="let recipe of filteredRecipes">
                           <td>{{ recipe.Id }}</td>
-                          <td>{{ recipe.name }}</td>
-                          <td>{{ recipe.category }}</td>
-                          <td>{{ recipe.brand }}</td>
-                          <td>{{ recipe.customer }}</td>
-                          <td>{{ recipe.clienttype }}</td>
                           <td>
-                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                              (click)="showDetails(recipe)"></button>
+                            <ng-container *ngIf="!recipe.isEditing; else editName">
+                              {{ recipe.name }}
+                            </ng-container>
+                            <ng-template #editName>
+                              <input type="text" [(ngModel)]="recipe.name" class="form-control">
+                            </ng-template>
                           </td>
-                          <td> <button class="btn-primary">Edit</button>
-                            <button class="btn-danger">Delete</button>
+                          <td>
+                            <ng-container *ngIf="!recipe.isEditing; else editCategory">
+                              {{ recipe.category }}
+                            </ng-container>
+                            <ng-template #editCategory>
+                              <input type="text" [(ngModel)]="recipe.category" class="form-control">
+                            </ng-template>
+                          </td>
+                          <td>
+                            <ng-container *ngIf="!recipe.isEditing; else editBrand">
+                              {{ recipe.brand }}
+                            </ng-container>
+                            <ng-template #editBrand>
+                              <input type="text" [(ngModel)]="recipe.brand" class="form-control">
+                            </ng-template>
+                          </td>
+                          <td>
+                            <ng-container *ngIf="!recipe.isEditing; else editCustomer">
+                              {{ recipe.customer }}
+                            </ng-container>
+                            <ng-template #editCustomer>
+                              <input type="text" [(ngModel)]="recipe.customer" class="form-control">
+                            </ng-template>
+                          </td>
+                          <td>
+                            <ng-container *ngIf="!recipe.isEditing; else editClientType">
+                              {{ recipe.clienttype }}
+                            </ng-container>
+                            <ng-template #editClientType>
+                              <input type="text" [(ngModel)]="recipe.clienttype" class="form-control">
+                            </ng-template>
+                          </td>
+                          <td>
+                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;" (click)="showDetails(recipe)"></button>
+                          </td>
+                          <td>
+                            <ng-container *ngIf="!recipe.isEditing; else editButtons">
+                              <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="editRecipe(recipe)">Edit</button>
+                              <button class="btn btn-sm btn-danger" style="margin-inline: 2px;" (click)="deleteRecipe(recipe)">Delete</button>
+                            </ng-container>
+                            <ng-template #editButtons>
+                              <button class="btn btn-sm btn-success" style="margin-inline: 2px;" (click)="updateRecipe(recipe)">Update</button>
+                            </ng-template>
                           </td>
                         </tr>
                       </tbody>
-                    </table>
+                    </table>                    
                   </div>
                 </div>
                 <br><br>
@@ -59,6 +99,7 @@
                   <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6>
                   <table class="table-details" style="font-family: Georgia, 'Times New Roman', Times, serif;">
                     <tr>
+                      <th>Id</th>
                       <th>Material Name</th>
                       <th>Code</th>
                       <th>Type</th>
@@ -68,6 +109,7 @@
                       <th>Stock</th>
                     </tr>
                     <tr *ngFor="let recipe of recipesData">
+                      <td>{{ recipe.id }}</td>
                       <td>{{ recipe.material }}</td>
                       <td>{{ recipe.mcode }}</td>
                       <td>{{ recipe.mtype }}</td>

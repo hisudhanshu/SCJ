@@ -12,6 +12,7 @@ export class ViewRecipeComponent implements OnInit {
   filteredRecipes: any[] = []; // Array to store filtered recipe data
   searchKeyword: string = ''; // Variable to store the search keyword
   recipes: any;
+  
 
   constructor(private authService: AuthServicesService) {}
 
@@ -48,9 +49,30 @@ export class ViewRecipeComponent implements OnInit {
   searchRecipes(): void {
     // No filtering is required for object data
   }
-  
-}
+  sortTable(column: string) {
+    // Implement sorting logic based on the provided column
+    // ...
+  }
 
+  // Edit recipe function
+  editRecipe(recipe: any) {
+    recipe.isEditing = true;
+  }
+
+  // Update recipe function
+  updateRecipe(recipe: any) {
+    // Implement the logic to update the recipe
+    // ...
+    recipe.isEditing = false;
+  }
+
+  // Delete recipe function
+  deleteRecipe(recipe: any) {
+    // Implement the logic to delete the recipe
+    // ...
+  }
+}
+  
 interface Recipe {
   Id: number;
   name: string;
