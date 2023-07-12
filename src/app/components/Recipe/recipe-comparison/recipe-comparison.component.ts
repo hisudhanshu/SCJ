@@ -33,7 +33,7 @@ export class RecipeComparisonComponent implements OnInit {
   constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
-    this.authService.getRecipes().subscribe(
+    this.authService.getRecipescompare().subscribe(
       (response: any) => {
         if (response.isSuccess && response.jsonData !== null) {
           this.recipes = JSON.parse(response.jsonData);

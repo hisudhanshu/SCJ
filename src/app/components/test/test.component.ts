@@ -7,36 +7,32 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  selectedProduct: string = '';
-  showComparisonResults: boolean = false;
-  editMode: boolean = false;
-  
-  
-  // Properties for editing
-  createdRecipeCategory: string = 'Small';
-  createdRecipeClientType: string = 'Clay';
-  createdRecipeBrand: string = 'Type A';
-  createdRecipeCustomer: string = 'Claylogix';
-  createdRecipeMaterialName: string = 'Polythiene';
-  createdRecipeCode: string = 'P83912';
-  createdRecipeType: string = 'Small Type';
-  createdRecipeQuantity: number = 100;
-  createdRecipeCostPerUnit: number = 1000;
-  createdRecipeVendor: string = 'Vendor New';
-  createdRecipeStock: number = 1000;
-  recipes: any[] = []; // Array to store all recipes data
-  filteredRecipes: any[] = []; // Array to store filtered recipes data
+  recipesData: any[] = [];
+  selectedRecipe: any;
+  filteredRecipes: any[] = []; // Array to store filtered recipe data
   searchKeyword: string = ''; // Variable to store the search keyword
-  selectedRecipe: any = null;
+  recipes: any;
 
-  constructor(private authService: AuthServicesService) { }
+  constructor(private authService: AuthServicesService) {}
 
   ngOnInit(): void {
+    this.authService.getRecipes1().subscribe(
+      (response: any) => {
+        if (response.isSuccess && response.productJson !== null) {
+          this.filteredRecipes = JSON.parse(response.productJson);
+        } else {
+          console.log('API request failed or no data received');
+        }
+      },
+      (error: any) => {
+        console.log('Error fetching recipes:', error);
+      }
+    );
+
     this.authService.getRecipes().subscribe(
       (response: any) => {
         if (response.isSuccess && response.jsonData !== null) {
-          this.recipes = JSON.parse(response.jsonData);
-          this.filteredRecipes = this.recipes; // Initialize filteredRecipes with all recipes
+          this.recipesData = JSON.parse(response.jsonData);
         } else {
           console.log('API request failed or no data received');
         }
@@ -45,46 +41,34 @@ export class TestComponent implements OnInit {
         console.log('Error fetching materials:', error);
       }
     );
-  }
-
+    }    
+    showDetails(recipeData: any) {
+      this.selectedRecipe = recipeData;
+    }
   searchRecipes(): void {
-    if (this.searchKeyword.trim() === '') {
-      this.filteredRecipes = this.recipes; // If search keyword is empty, show all recipes
-    } else {
-      this.filteredRecipes = this.recipes.filter(recipe =>
-        recipe.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
-      );
-    }
-  }
-
-  showDetails(event: Event): void {
-    const selectedRecipeName = (event.target as HTMLSelectElement).value;
-    if (selectedRecipeName === '') {
-      this.selectedRecipe = null; // If no recipe is selected, reset the selectedRecipe variable
-    } else {
-      this.selectedRecipe = this.filteredRecipes.find(recipe => recipe.name === selectedRecipeName);
-    }
+    // No filtering is required for object data
   }
   
-  compareRecipes(): void {
-    // Implementation of comparison logic (if needed)
-    // You can perform additional operations here based on the selectedProduct and selectedRecipe values.
-    // This function will be called when the "Compare" button is clicked.
-    
-    // Show comparison results
-    this.showComparisonResults = true;
-  }
-  saveChanges(): void {
-    // Save the changes made in the edit mode
-    // Perform any necessary operations to save the changes
-    
-    this.editMode = false;
-  }
+}
 
-  cancelChanges(): void {
-    // Cancel the changes made in the edit mode
-    // Reset the values to their original state
-    
-    this.editMode = false;
-  }
+interface Recipe {
+  Id: number;
+  name: string;
+  category: string;
+  brand: string;
+  customer: string;
+  clienttype: string;
+  materials: Material[];
+}
+
+interface Material {
+  Id: number;
+  productName: string;
+  materialName: string;
+  code: string;
+  type: string;
+  quantity: number;
+  cost: number;
+  vendor: string;
+  stock: number;
 }

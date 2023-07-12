@@ -115,11 +115,32 @@ export class AuthServicesService {
       'Authorization': `Bearer ${this.token}`
     });
     
-    let url = this.urlprefix + "api/Authentication/GetFullRecipe";
+    let url = this.urlprefix + "api/Authentication/GetRecipe";
     return this.http.get<any[]>(url, { headers: headers });
   }
   
+    // FUll Recipe API Call here
+    getRecipes1(): Observable<any[]> {
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.token}`
+      });
+      
+      let url = this.urlprefix + "api/Authentication/GetProductData";
+      return this.http.get<any[]>(url, { headers: headers });
+    }
 
+      // Recipe Compare API Call here
+
+  getRecipescompare(): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    });
+    
+    let url = this.urlprefix + "api/Authentication/GetProductData";
+    return this.http.get<any[]>(url, { headers: headers });
+  }
   getRawMaterialsrecipe(): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

@@ -21,7 +21,6 @@
               <div class="col-lg-12">
                 <div class="row">
                   <div class="col-md-12">
-                    <!-- Product Table -->
                     <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
                       <thead>
                         <tr>
@@ -36,104 +35,54 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <ng-container *ngFor="let recipe of filteredRecipes; let i = index;">
-                          <tr *ngIf="!hasDuplicateId(recipe.Id)">
-                            <td>{{ recipe.Id }}</td>
-                            <td>
-                              <ng-container *ngIf="!recipe.isEditing; else editData">
-                                {{ recipe.name }}
-                              </ng-container>
-                              <ng-template #editData>
-                                <input type="text" [(ngModel)]="recipe.name" class="form-control">
-                              </ng-template>
-                            </td>
-                            <td>
-                              <ng-container *ngIf="!recipe.isEditing; else editcategory">
-                                {{ recipe.category }}
-                              </ng-container>
-                              <ng-template #editcategory>
-                                <input type="text" [(ngModel)]="recipe.category" class="form-control">
-                              </ng-template>
-                            </td>
-                            <td>
-                              <ng-container *ngIf="!recipe.isEditing; else editbrand">
-                                {{ recipe.brand }}
-                              </ng-container>
-                              <ng-template #editbrand>
-                                <input type="text" [(ngModel)]="recipe.brand" class="form-control">
-                              </ng-template>
-                            </td>
-                            <td>
-                              <ng-container *ngIf="!recipe.isEditing; else editcustomer">
-                                {{ recipe.customer }}
-                              </ng-container>
-                              <ng-template #editcustomer>
-                                <input type="text" [(ngModel)]="recipe.customer" class="form-control">
-                              </ng-template>
-                            </td>
-                            <td>
-                              <ng-container *ngIf="!recipe.isEditing; else editclienttype">
-                                {{ recipe.clienttype }}
-                              </ng-container>
-                              <ng-template #editclienttype>
-                                <input type="text" [(ngModel)]="recipe.clienttype" class="form-control">
-                              </ng-template>
-                            </td>
-                            <td>
-                              <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                                (click)="showDetails(recipe)"></button>
-                            </td>
-                            <td>
-                              <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-primary"
-                                style="margin-inline: 3px;" (click)="editRecipe(recipe)">Edit</button>
-                              <button *ngIf="recipe.isEditing" class="btn btn-sm btn-success"
-                                style="margin-inline: 3px;" (click)="updateRecipe(recipe)">Update</button>
-                              <button *ngIf="!recipe.isEditing" class="btn btn-sm btn-danger"
-                                style="margin-inline: 3px;" (click)="deleteRecipe(recipe)">Delete</button>
-                            </td>
-                          </tr>
-                        </ng-container>
+                        <tr *ngFor="let recipe of filteredRecipes">
+                          <td>{{ recipe.Id }}</td>
+                          <td>{{ recipe.name }}</td>
+                          <td>{{ recipe.category }}</td>
+                          <td>{{ recipe.brand }}</td>
+                          <td>{{ recipe.customer }}</td>
+                          <td>{{ recipe.clienttype }}</td>
+                          <td>
+                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
+                              (click)="showDetails(recipe)"></button>
+                          </td>
+                          <td> <button class="btn-primary">Edit</button>
+                            <button class="btn-danger">Delete</button>
+                          </td>
+                        </tr>
                       </tbody>
                     </table>
-                    <!-- End Product Table -->
-                    <br><br>
-                    <!-- Details Table -->
-                    <div class="table-container" *ngIf="selectedRecipe">
-                      <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details
-                      </h6>
-                      <table class="table-details" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <tr>
-                          <th><strong>ID:</strong></th>
-                          <th>Product Name</th>
-                          <th>Material Name</th>
-                          <th>Code</th>
-                          <th>Type</th>
-                          <th>Quantity</th>
-                          <th>Cost</th>
-                          <th>Vendor</th>
-                          <th>Stock</th>
-                        </tr>
-                        <tr>
-                          <td>{{ selectedRecipe?.Id }}</td>
-                          <td>{{ selectedRecipe?.name }}</td>
-                          <td>{{ selectedRecipe?.material }}</td>
-                          <td>{{ selectedRecipe?.mcode }}</td>
-                          <td>{{ selectedRecipe?.mtype }}</td>
-                          <td>{{ selectedRecipe?.mquantity }}</td>
-                          <td>{{ selectedRecipe?.mcost }}</td>
-                          <td>{{ selectedRecipe?.mvendor }}</td>
-                          <td>{{ selectedRecipe?.minventory }}</td>
-                        </tr>
-                      </table>
-                    </div>
-                    <!-- End Details Table -->
                   </div>
+                </div>
+                <br><br>
+                <div class="table-container" *ngIf="selectedRecipe">
+                  <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6>
+                  <table class="table-details" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                    <tr>
+                      <th>Material Name</th>
+                      <th>Code</th>
+                      <th>Type</th>
+                      <th>Quantity</th>
+                      <th>Cost</th>
+                      <th>Vendor</th>
+                      <th>Stock</th>
+                    </tr>
+                    <tr *ngFor="let recipe of recipesData">
+                      <td>{{ recipe.material }}</td>
+                      <td>{{ recipe.mcode }}</td>
+                      <td>{{ recipe.mtype }}</td>
+                      <td>{{ recipe.mquantity }}</td>
+                      <td>{{ recipe.mcost }}</td>
+                      <td>{{ recipe.mvendor }}</td>
+                      <td>{{ recipe.minventory }}</td>
+                    </tr>
+                  </table>
+                </div>                
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+</section>
 </main>
