@@ -1,25 +1,112 @@
-<main id="main" class="main" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+<main id="main" class="main">
     <div class="pagetitle"></div>
     <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card"><br>
-                    <div class="card-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <strong>List of Created Recipe</strong>
-                        </h1>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <br>
+            <div class="card-body">
+              <h1 class="card-title">
+                <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">Product & Material Recipe Details</strong>
+              </h1>
+              <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
+                <form class="search-form d-flex align-items-center">
+                  <div class="input-group">
+                    <input class="form-control" id="searchKeyword" name="query" type="text" [(ngModel)]="searchKeyword"
+                      placeholder="Search here.." title="Enter search keyword" (input)="search()" />
+                    <button type="submit" class="btn btn-primary" title="Search">Search</button>
+                  </div>
+                </form>
+              </div>
+              <br>
+            <div class="table-responsive">
+              <table class="table table-bordered table-responsive-md" style="font-size: 12px;">
+                <thead>
+                  <tr>
+                    <th (click)="sortTable('Id')">Id <i class="bi bi-arrow-down-up"></i></th>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Brand</th>
+                    <th>Customer</th>
+                    <th>Client</th>
+                    <th>Material</th>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
+                    <th>Vendor</th>
+                    <th>Stock</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of filteredRecipes">
+                    <td>{{ item.Id }}</td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.name }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.name">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.category }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.category">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.brand }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.brand">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.customer }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.customer">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.clienttype }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.clienttype">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.material }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.material">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.mcode }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.mcode">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.mtype }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.mtype">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.mquantity }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.mquantity">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.mcost }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.mcost">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.mvendor }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.mvendor">
+                    </td>
+                    <td>
+                      <span *ngIf="selectedItem !== item">{{ item.minventory }}</span>
+                      <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.minventory">
+                    </td>
+                    <td>
+                      <ng-container *ngIf="selectedItem !== item">
+                        <button class="btn btn-sm btn-primary" style="font-size: 12px;" (click)="editItem(item)">Edit</button>
+                        <button class="btn btn-sm btn-danger" style="font-size: 12px;" (click)="deleteItem(item)">Delete</button>
+                      </ng-container>
+                      <ng-container *ngIf="selectedItem === item">
+                        <button class="btn btn-sm btn-success" style="font-size: 12px;" (click)="updateItem(item)">Update</button>
+                      </ng-container>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <br><br><br><br>
             </div>
+          </div>
         </div>
+        </div>  </div>
     </section>
-</main>
+  </main>
+  
