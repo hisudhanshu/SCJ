@@ -78,10 +78,22 @@ export class ViewRecipeComponent implements OnInit {
     recipe.isEditing = false;
   }
 
-  // Delete recipe function
   deleteRecipe(recipe: any) {
     // Implement the logic to delete the recipe
-    // ...
+    const index = this.filteredRecipes.indexOf(recipe);
+    if (index !== -1) {
+      this.filteredRecipes.splice(index, 1);
+      // You may also want to update the original recipesData array
+      const originalIndex = this.recipesData.findIndex((r: any) => r.Id === recipe.Id);
+      if (originalIndex !== -1) {
+        this.recipesData.splice(originalIndex, 1);
+      }
+      // Reset the selected recipe if the deleted recipe was selected
+      if (this.selectedRecipe && this.selectedRecipe.Id === recipe.Id) {
+        this.selectedRecipe = null;
+        this.selectedProductId = null;
+      }
+    }
   }
 }
   
