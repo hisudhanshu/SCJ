@@ -7,7 +7,7 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./view-recipe.component.css']
 })
 export class ViewRecipeComponent implements OnInit {
-  
+
   selectedProductId: number | null = null;
   recipesData: any[] = [];
   selectedRecipe: any;
@@ -17,7 +17,7 @@ export class ViewRecipeComponent implements OnInit {
   isAscending: boolean = true;
   sortColumn: string = '';
 
-  constructor(private authService: AuthServicesService) {}
+  constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
     this.authService.getRecipes1().subscribe(
@@ -110,6 +110,27 @@ export class ViewRecipeComponent implements OnInit {
       if (this.selectedRecipe && this.selectedRecipe.Id === recipe.Id) {
         this.selectedRecipe = null;
         this.selectedProductId = null;
+      }
+    }
+  }
+
+  // Functionality for editing and updating material details
+  editMaterial(material: any) {
+    material.isEditing = true;
+  }
+
+  updateMaterial(material: any) {
+    // Implement the logic to update the material details
+    material.isEditing = false;
+  }
+
+  deleteMaterial(material: any) {
+    const index = this.getSelectedProductMaterials().indexOf(material);
+    if (index !== -1) {
+      this.getSelectedProductMaterials().splice(index, 1);
+      const originalIndex = this.recipesData.findIndex((r: any) => r.Id === material.Id);
+      if (originalIndex !== -1) {
+        this.recipesData.splice(originalIndex, 1);
       }
     }
   }
