@@ -48,15 +48,15 @@ export class RecipeComparisonComponent implements OnInit {
     );
   }
 
-  searchRecipes(): void {
-    if (this.searchKeyword.trim() === '') {
-      this.filteredRecipes = this.recipes; // If search keyword is empty, show all recipes
-    } else {
-      this.filteredRecipes = this.recipes.filter(recipe =>
-        recipe.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
-      );
-    }
-  }
+  // searchRecipes(): void {
+  //   if (this.searchKeyword.trim() === '') {
+  //     this.filteredRecipes = this.recipes; // If search keyword is empty, show all recipes
+  //   } else {
+  //     this.filteredRecipes = this.recipes.filter(recipe =>
+  //       recipe.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
+  //     );
+  //   }
+  // }
 
   showDetails(event: Event): void {
     const selectedRecipeName = (event.target as HTMLSelectElement).value;
