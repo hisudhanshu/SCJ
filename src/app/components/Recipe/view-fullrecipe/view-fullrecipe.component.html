@@ -23,25 +23,28 @@
               <table class="table table-bordered table-responsive-md" style="font-size: 12px;">
                 <thead>
                   <tr>
-                    <th (click)="sortTable('Id')">Id <i class="bi bi-arrow-down-up"></i></th>
-                    <th>Product</th>
-                    <th>Category</th>
-                    <th>Brand</th>
-                    <th>Customer</th>
-                    <th>Client</th>
-                    <th>Material</th>
-                    <th>Code</th>
-                    <th>Type</th>
-                    <th>Quantity</th>
-                    <th>Cost</th>
-                    <th>Vendor</th>
-                    <th>Stock</th>
+                    <!-- <th (click)="sortTable('Id')">Id<i class="bi bi-arrow-down-up"></i></th> -->
+                    <th (click)="sortTable('Id')">Sn.<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('name')">Product<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('category')">Category<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('brand')">Brand<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('customer')">Customer<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('clienttype')">Client<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('material')">Material<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('mcode')">Code<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('mtype')">Type<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('mquantity')">Quantity<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('mcost')">Cost<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('mvendor')">Vendor<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('minventory')">Stock<i class="bi bi-arrow-down-up"></i></th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of filteredRecipes">
-                    <td>{{ item.Id }}</td>
+                   
+                  <tr *ngFor="let item of filteredRecipes; let i = index">
+                    <td>{{ i + 1 }}</td>
+                       <!-- <td>{{ item.Id }}</td> -->
                     <td>
                       <span *ngIf="selectedItem !== item">{{ item.name }}</span>
                       <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.name">

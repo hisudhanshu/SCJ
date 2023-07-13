@@ -17,6 +17,7 @@ export class ViewFullrecipeComponent implements OnInit {
   sortColumn: string = '';
   isModalOpen: boolean = false;
   selectedItem: any | null = null; // Update the type to "any"
+  sn: number | undefined; // Declare 'sn' property
 
   constructor(private authService: AuthServicesService) {}
 
@@ -45,11 +46,11 @@ export class ViewFullrecipeComponent implements OnInit {
       this.sortColumn = column;
       this.isAscending = true;
     }
-
+  
     this.filteredRecipes.sort((a, b) => {
       const valueA = a[column];
       const valueB = b[column];
-
+  
       if (valueA < valueB) {
         return this.isAscending ? -1 : 1;
       } else if (valueA > valueB) {
@@ -59,7 +60,6 @@ export class ViewFullrecipeComponent implements OnInit {
       }
     });
   }
-
   updateItem(item: any) {
     // Perform the update logic here
     // For example, you can make an API call to update the item
