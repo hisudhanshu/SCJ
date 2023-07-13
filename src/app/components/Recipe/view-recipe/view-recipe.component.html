@@ -128,9 +128,10 @@
               <div class="col-md-12" *ngIf="selectedProductId !== null && selectedProductId === selectedRecipe?.Id">
                 <!-- <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6><br><br> -->
                 <ul class="list-details" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                  <li *ngFor="let material of getSelectedProductMaterials()">
+                  <li *ngFor="let material of getSelectedProductMaterials(); let sn = index;">
                     <div class="row">
                       <div class="col-md-6" style="font-family:Georgia, 'Times New Roman', Times, serif ;">
+                        <span style="margin-inline: 400pxs;"><strong>Recipe</strong> {{ sn + 1 }}</span><br><br>
                         <span><strong>Id:</strong> {{ selectedRecipe?.Id }}</span><br>
                         <span>
                           <strong>Product Name:</strong>
@@ -169,6 +170,7 @@
                         </span><br>
                       </div>
                       <div class="col-md-6" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                        <br><br>
                         <span>
                           <strong>Material Name:</strong>
                           <ng-container *ngIf="!material.isEditing; else editMaterialName">{{ material.material
@@ -248,3 +250,5 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
