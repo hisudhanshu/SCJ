@@ -12,9 +12,10 @@
               <form class="search-form d-flex align-items-center">
                 <div class="input-group">
                   <input class="form-control" [(ngModel)]="searchKeyword" id="searchKeyword" name="query" type="text"
-                    placeholder="Search here.." title="Enter search keyword" (input)="searchRecipes()" />
-                  <button type="submit" class="btn btn-primary" title="Search">Search</button>
-                </div>
+                  placeholder="Search here.." title="Enter search keyword" />
+                
+                <button type="submit" class="btn btn-primary" title="Search" (click)="searchRecipes()">Search</button>
+                                  </div>
               </form>
             </div><br>
             <div class="row">
@@ -38,10 +39,10 @@
                         <tr *ngFor="let recipe of filteredRecipes">
                           <td>{{ recipe.Id }}</td>
                           <td>
-                            <ng-container *ngIf="!recipe.isEditing; else editName">
-                              {{ recipe.name }}
+                            <ng-container *ngIf="!recipe.isEditing; else editNAME">
+                              {{ recipe.NAME }}
                             </ng-container>
-                            <ng-template #editName>
+                            <ng-template #editNAME>
                               <input type="text" [(ngModel)]="recipe.name" class="form-control">
                             </ng-template>
                           </td>

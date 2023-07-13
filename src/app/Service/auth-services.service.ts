@@ -138,7 +138,7 @@ export class AuthServicesService {
       'Authorization': `Bearer ${this.token}`
     });
     
-    let url = this.urlprefix + "api/Authentication/GetProductData";
+    let url = this.urlprefix + "api/Authentication/GetComparisionRecipe'";
     return this.http.get<any[]>(url, { headers: headers });
   }
   getRawMaterialsrecipe(): Observable<any> {

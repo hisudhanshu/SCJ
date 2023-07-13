@@ -61,9 +61,20 @@ export class ViewRecipeComponent implements OnInit {
   }
 
   searchRecipes(): void {
-    // No filtering is required for object data
+    const keyword = this.searchKeyword.toLowerCase().trim();
+    if (keyword === '') {
+      this.filteredRecipes = [...this.recipesData];
+    } else {
+      this.filteredRecipes = this.recipesData.filter(recipe =>
+        recipe.name.toLowerCase().includes(keyword) ||
+        recipe.category.toLowerCase().includes(keyword) ||
+        recipe.brand.toLowerCase().includes(keyword) ||
+        recipe.customer.toLowerCase().includes(keyword) ||
+        recipe.clienttype.toLowerCase().includes(keyword)
+      );
+    }
   }
-
+    
   sortTable(column: string) {
     if (column === this.sortColumn) {
       // If the same column is clicked again, reverse the sort order
