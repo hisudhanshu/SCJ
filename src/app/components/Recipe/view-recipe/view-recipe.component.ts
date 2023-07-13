@@ -16,6 +16,8 @@ export class ViewRecipeComponent implements OnInit {
   recipes: any;
   isAscending: boolean = true;
   sortColumn: string = '';
+  isModalOpen: boolean = false;
+
 
   constructor(private authService: AuthServicesService) { }
 
@@ -145,4 +147,10 @@ export class ViewRecipeComponent implements OnInit {
       }
     }
   }
-}
+  openModal() {
+    this.isModalOpen = true;
+  }
+  closeModal() {
+    this.isModalOpen = false;
+  }  
+  }
