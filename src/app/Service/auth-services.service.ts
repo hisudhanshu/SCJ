@@ -132,7 +132,7 @@ export class AuthServicesService {
 
       // Recipe Compare API Call here
 
-  getRecipescompare(): Observable<any[]> {
+      getRecipescompare(): Observable<any[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`

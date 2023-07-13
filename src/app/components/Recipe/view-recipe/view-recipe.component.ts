@@ -7,6 +7,8 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./view-recipe.component.css']
 })
 export class ViewRecipeComponent implements OnInit {
+  
+  selectedProductId: number | null = null;
   recipesData: any[] = [];
   selectedRecipe: any;
   filteredRecipes: any[] = []; // Array to store filtered recipe data
@@ -43,9 +45,19 @@ export class ViewRecipeComponent implements OnInit {
       }
     );
     }    
+    getSelectedProductMaterials(): any[] {
+      if (this.selectedProductId === null) {
+        return [];
+      }
+  
+      return this.recipesData.filter(recipe => recipe.P_Id === this.selectedProductId);
+    }
+  
     showDetails(recipeData: any) {
       this.selectedRecipe = recipeData;
+      this.selectedProductId = recipeData.Id;
     }
+  
   searchRecipes(): void {
     // No filtering is required for object data
   }
