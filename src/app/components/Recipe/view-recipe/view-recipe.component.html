@@ -26,7 +26,7 @@
                       <thead>
                         <tr>
                           <th (click)="sortTable('Id')">ID <i class="bi bi-arrow-down-up"></i></th>
-                          <th (click)="sortTable('name')">Product Name <i class="bi bi-arrow-down-up"></i></th>
+                          <th (click)="sortTable('NAME')">Product Name <i class="bi bi-arrow-down-up"></i></th>
                           <th (click)="sortTable('category')">Product Category <i class="bi bi-arrow-down-up"></i></th>
                           <th (click)="sortTable('brand')">Product Brand <i class="bi bi-arrow-down-up"></i></th>
                           <th (click)="sortTable('customer')">Customer Type <i class="bi bi-arrow-down-up"></i></th>
@@ -43,7 +43,7 @@
                               {{ recipe.NAME }}
                             </ng-container>
                             <ng-template #editNAME>
-                              <input type="text" [(ngModel)]="recipe.name" class="form-control">
+                              <input type="text" [(ngModel)]="recipe.NAME" class="form-control">
                             </ng-template>
                           </td>
                           <td>
@@ -108,7 +108,6 @@
     </div>
   </section>
 </main>
-
 <!-- Details Modal -->
 <div class="modal fade" id="exampleModalToggle" [class.show]="isModalOpen" [class.d-block]="isModalOpen" tabindex="-1">
   <div class="modal-dialog modal-dialog-centered modal-fullscreen">
@@ -118,135 +117,119 @@
           style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 500px;">
           <strong>Created Product & Material Recipe Details</strong>
         </h4>
-        <button type="button" class="btn-danger" (click)="closeModal()" aria-label="Close">Close</button>
       </div>
       <div class="modal-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
         <div class="table-container">
           <br><br>
-          <div class="list-container">
-            <div class="row">
-              <div class="col-md-12" *ngIf="selectedProductId !== null && selectedProductId === selectedRecipe?.Id">
-                <!-- <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6><br><br> -->
-                <ul class="list-details" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                  <li *ngFor="let material of getSelectedProductMaterials(); let sn = index;">
-                    <div class="row">
-                      <div class="col-md-6" style="font-family:Georgia, 'Times New Roman', Times, serif ;">
-                        <span style="margin-inline: 400pxs;"><strong>Recipe</strong> {{ sn + 1 }}</span><br><br>
-                        <span><strong>Id:</strong> {{ selectedRecipe?.Id }}</span><br>
-                        <span>
-                          <strong>Product Name:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editProductName">{{ selectedRecipe?.NAME
-                            }}</ng-container>
-                          <ng-template #editProductName><input type="text" [(ngModel)]="selectedRecipe.NAME"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Product Category:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editProductCategory">{{
-                            selectedRecipe?.category }}</ng-container>
-                          <ng-template #editProductCategory><input type="text" [(ngModel)]="selectedRecipe.category"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Product Brand:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editProductBrand">{{ selectedRecipe?.brand
-                            }}</ng-container>
-                          <ng-template #editProductBrand><input type="text" [(ngModel)]="selectedRecipe.brand"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Customer Type:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editProductCustomer">{{
-                            selectedRecipe?.customer }}</ng-container>
-                          <ng-template #editProductCustomer><input type="text" [(ngModel)]="selectedRecipe.customer"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Client Type:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editProductClientType">{{
-                            selectedRecipe?.clienttype }}</ng-container>
-                          <ng-template #editProductClientType><input type="text" [(ngModel)]="selectedRecipe.clienttype"
-                              class="form-control"></ng-template>
-                        </span><br>
-                      </div>
-                      <div class="col-md-6" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <br><br>
-                        <span>
-                          <strong>Material Name:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editMaterialName">{{ material.material
-                            }}</ng-container>
-                          <ng-template #editMaterialName><input type="text" [(ngModel)]="material.material"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Code:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editMaterialCode">{{ material.mcode
-                            }}</ng-container>
-                          <ng-template #editMaterialCode><input type="text" [(ngModel)]="material.mcode"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Type:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editMaterialType">{{ material.mtype
-                            }}</ng-container>
-                          <ng-template #editMaterialType><input type="text" [(ngModel)]="material.mtype"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Quantity:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editMaterialQuantity">{{ material.mquantity
-                            }}</ng-container>
-                          <ng-template #editMaterialQuantity><input type="text" [(ngModel)]="material.mquantity"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Cost:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editMaterialCost">{{ material.mcost
-                            }}</ng-container>
-                          <ng-template #editMaterialCost><input type="text" [(ngModel)]="material.mcost"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Vendor:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editMaterialVendor">{{ material.mvendor
-                            }}</ng-container>
-                          <ng-template #editMaterialVendor><input type="text" [(ngModel)]="material.mvendor"
-                              class="form-control"></ng-template>
-                        </span><br>
-                        <span>
-                          <strong>Stock:</strong>
-                          <ng-container *ngIf="!material.isEditing; else editMaterialStock">{{ material.minventory
-                            }}</ng-container>
-                          <ng-template #editMaterialStock><input type="text" [(ngModel)]="material.minventory"
-                              class="form-control"></ng-template>
-                        </span><br>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-12" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                        <span class="margin-inline:1000px;">
-                          <ng-container *ngIf="!material.isEditing; else editMaterialButtons">
-                            <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
-                              (click)="editMaterial(material)">Edit</button>
-                            <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
-                              (click)="deleteMaterial(material)">Delete</button>
-                          </ng-container>
-                          <ng-template #editMaterialButtons>
-                            <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
-                              (click)="updateMaterial(material)">Update</button>
-                          </ng-template>
-                        </span>
-                      </div>
-                    </div>
-                    <hr>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-danger" (click)="closeModal()" aria-label="Close">Close</button>
-          </div> -->
+          <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
+            <tbody>
+              <tr>
+                <th>Recipe</th>
+                <!-- <th>Id</th> -->
+                <th>Product Name</th>
+                <th>Product Category</th>
+                <th>Product Brand</th>
+                <th>Customer Type</th>
+                <th>Client Type</th>
+                <th>Material Name</th>
+                <th>Code</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Cost</th>
+                <th>Vendor</th>
+                <th>Stock</th>
+                <th>Action</th>
+              </tr>
+              <tr *ngFor="let material of getSelectedProductMaterials(); let sn = index;">
+                <td>{{ sn + 1 }}</td>
+                <!-- <td>{{ selectedRecipe?.Id }}</td> -->
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editProductName">{{ selectedRecipe?.NAME
+                    }}</ng-container>
+                  <ng-template #editProductName><input type="text" [(ngModel)]="selectedRecipe.NAME"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editProductCategory">{{ selectedRecipe?.category
+                    }}</ng-container>
+                  <ng-template #editProductCategory><input type="text" [(ngModel)]="selectedRecipe.category"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editProductBrand">{{ selectedRecipe?.brand
+                    }}</ng-container>
+                  <ng-template #editProductBrand><input type="text" [(ngModel)]="selectedRecipe.brand"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editProductCustomer">{{ selectedRecipe?.customer
+                    }}</ng-container>
+                  <ng-template #editProductCustomer><input type="text" [(ngModel)]="selectedRecipe.customer"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editProductClientType">{{ selectedRecipe?.clienttype
+                    }}</ng-container>
+                  <ng-template #editProductClientType><input type="text" [(ngModel)]="selectedRecipe.clienttype"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editMaterialName">{{ material.material
+                    }}</ng-container>
+                  <ng-template #editMaterialName><input type="text" [(ngModel)]="material.material"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editMaterialCode">{{ material.mcode }}</ng-container>
+                  <ng-template #editMaterialCode><input type="text" [(ngModel)]="material.mcode"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editMaterialType">{{ material.mtype }}</ng-container>
+                  <ng-template #editMaterialType><input type="text" [(ngModel)]="material.mtype"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editMaterialQuantity">{{ material.mquantity
+                    }}</ng-container>
+                  <ng-template #editMaterialQuantity><input type="text" [(ngModel)]="material.mquantity"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editMaterialCost">{{ material.mcost }}</ng-container>
+                  <ng-template #editMaterialCost><input type="text" [(ngModel)]="material.mcost"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editMaterialVendor">{{ material.mvendor
+                    }}</ng-container>
+                  <ng-template #editMaterialVendor><input type="text" [(ngModel)]="material.mvendor"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editMaterialStock">{{ material.minventory
+                    }}</ng-container>
+                  <ng-template #editMaterialStock><input type="text" [(ngModel)]="material.minventory"
+                      class="form-control"></ng-template>
+                </td>
+                <td>
+                  <ng-container *ngIf="!material.isEditing; else editMaterialButtons">
+                    <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
+                      (click)="editMaterial(material)">Edit</button>
+                    <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
+                      (click)="deleteMaterial(material)">Delete</button>
+                  </ng-container>
+                  <ng-template #editMaterialButtons>
+                    <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
+                      (click)="updateMaterial(material)">Update</button>
+                  </ng-template>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" (click)="closeModal()" aria-label="Close">Close</button>
         </div>
       </div>
     </div>
