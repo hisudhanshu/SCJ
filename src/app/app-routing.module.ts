@@ -32,11 +32,13 @@ import { CreateMaterialComponent } from './components/material/create-material/c
 import { MaterialViewComponent } from './components/material/material-view/material-view.component';
 import { ViewRecipeComponent } from './components/Recipe/view-recipe/view-recipe.component';
 import { RecipeComparisonComponent } from './components/Recipe/recipe-comparison/recipe-comparison.component';
+import { ViewFullrecipeComponent } from './components/Recipe/view-fullrecipe/view-fullrecipe.component';
 
 
 const routes: Routes = [
 
   { path: '', component: PagesLoginComponent },
+  { path: 'viewfullrecipe', component: ViewFullrecipeComponent},
   { path: 'comparison', component: RecipeComparisonComponent },
   { path: 'viewrecipe', component: ViewRecipeComponent },
   { path: 'viewmaterial', component: MaterialViewComponent },

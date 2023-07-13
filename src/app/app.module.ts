@@ -36,6 +36,7 @@ import { CreateMaterialComponent } from './components/material/create-material/c
 import { MaterialViewComponent } from './components/material/material-view/material-view.component';
 import { ViewRecipeComponent } from './components/Recipe/view-recipe/view-recipe.component';
 import { RecipeComparisonComponent } from './components/Recipe/recipe-comparison/recipe-comparison.component';
+import { ViewFullrecipeComponent } from './components/Recipe/view-fullrecipe/view-fullrecipe.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { RecipeComparisonComponent } from './components/Recipe/recipe-comparison
     MaterialViewComponent,
     ViewRecipeComponent,
     RecipeComparisonComponent,
+    ViewFullrecipeComponent,
   ],
   imports: [
     BrowserModule,
