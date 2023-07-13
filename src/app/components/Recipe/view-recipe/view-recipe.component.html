@@ -95,40 +95,40 @@
                   </div>
                 </div>
                 <br><br>
-                   <!-- Existing code... -->
-            <div class="table-container" *ngIf="selectedProductId !== null && selectedProductId === selectedRecipe.Id">
-              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6>
-              <table class="table-details" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Material Name</th>
-                    <th>Code</th>
-                    <th>Type</th>
-                    <th>Quantity</th>
-                    <th>Cost</th>
-                    <th>Vendor</th>
-                    <th>Stock</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let material of getSelectedProductMaterials()">
-                    <td>{{ selectedRecipe.Id }}</td>
-                    <td>{{ material.material }}</td>
-                    <td>{{ material.mcode }}</td>
-                    <td>{{ material.mtype }}</td>
-                    <td>{{ material.mquantity }}</td>
-                    <td>{{ material.mcost }}</td>
-                    <td>{{ material.mvendor }}</td>
-                    <td>{{ material.minventory }}</td>
-                  </tr>
-                </tbody>
-              </table>
+                <div class="table-container" *ngIf="selectedProductId !== null && selectedProductId === selectedRecipe.Id">
+                  <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6>
+                  <table class="table-details" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Material Name</th>
+                        <th>Code</th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>Cost</th>
+                        <th>Vendor</th>
+                        <th>Stock</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let material of getSelectedProductMaterials()">
+                        <td>{{ selectedRecipe.Id }}</td>
+                        <td>{{ material.material }}</td>
+                        <td>{{ material.mcode }}</td>
+                        <td>{{ material.mtype }}</td>
+                        <td>{{ material.mquantity }}</td>
+                        <td>{{ material.mcost }}</td>
+                        <td>{{ material.mvendor }}</td>
+                        <td>{{ material.minventory }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-      </div></div>
   </section>
 </main>
