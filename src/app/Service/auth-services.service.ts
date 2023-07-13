@@ -132,13 +132,13 @@ export class AuthServicesService {
 
       // Recipe Compare API Call here
 
-      getRecipescompare(): Observable<any[]> {
+    getRecipescompare(): Observable<any[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     });
     
-    let url = this.urlprefix + "api/Authentication/GetComparisionRecipe'";
+    let url = this.urlprefix + "api/Authentication/GetComparisionRecipe";
     return this.http.get<any[]>(url, { headers: headers });
   }
   getRawMaterialsrecipe(): Observable<any> {
