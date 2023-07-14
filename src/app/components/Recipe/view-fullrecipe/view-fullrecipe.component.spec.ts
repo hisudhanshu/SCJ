@@ -8,9 +8,9 @@ describe('ViewFullrecipeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ViewFullrecipeComponent ]
+      declarations: [ViewFullrecipeComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ViewFullrecipeComponent);
     component = fixture.componentInstance;
