@@ -12,7 +12,7 @@
               <form class="search-form d-flex align-items-center">
                 <div class="input-group">
                   <input class="form-control" [(ngModel)]="searchKeyword" id="searchKeyword" name="query" type="text"
-                    placeholder="Search here.." title="Enter search keyword" (input)="searchRecipes()" />
+                    placeholder="Search here.." title="Enter search keyword"/>
                   <button type="submit" class="btn btn-primary" title="Search">Search</button>
                 </div>
               </form>
@@ -21,63 +21,10 @@
               <div class="col-lg-12">
                 <div class="row">
                   <div class="col-md-12">
-                    <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Product Name</th>
-                          <th>Product Category</th>
-                          <th>Product Brand</th>
-                          <th>Customer Type</th>
-                          <th>Client Type</th>
-                          <th>Details</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let recipe of filteredRecipes">
-                          <td>{{ recipe.Id }}</td>
-                          <td>{{ recipe.name }}</td>
-                          <td>{{ recipe.category }}</td>
-                          <td>{{ recipe.brand }}</td>
-                          <td>{{ recipe.customer }}</td>
-                          <td>{{ recipe.clienttype }}</td>
-                          <td>
-                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                              (click)="showDetails(recipe)"></button>
-                          </td>
-                          <td> <button class="btn-primary">Edit</button>
-                            <button class="btn-danger">Delete</button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  
+                  
                   </div>
-                </div>
-                <br><br>
-                <div class="table-container" *ngIf="selectedRecipe">
-                  <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product with Material Details</h6>
-                  <table class="table-details" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                    <tr>
-                      <th>Material Name</th>
-                      <th>Code</th>
-                      <th>Type</th>
-                      <th>Quantity</th>
-                      <th>Cost</th>
-                      <th>Vendor</th>
-                      <th>Stock</th>
-                    </tr>
-                    <tr *ngFor="let recipe of recipesData">
-                      <td>{{ recipe.material }}</td>
-                      <td>{{ recipe.mcode }}</td>
-                      <td>{{ recipe.mtype }}</td>
-                      <td>{{ recipe.mquantity }}</td>
-                      <td>{{ recipe.mcost }}</td>
-                      <td>{{ recipe.mvendor }}</td>
-                      <td>{{ recipe.minventory }}</td>
-                    </tr>
-                  </table>
-                </div>                
+                </div>       
                 </div>
               </div>
             </div>
