@@ -130,3 +130,10 @@ button:active {
   background-color: #ccc;
   margin-right: 10px;
 }
+th {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid black;
+  background-color: rgb(40, 110, 231); /* Add this line to set the background color */
+  color: white; /* Add this line to set the text color */
+}
