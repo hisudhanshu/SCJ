@@ -18,7 +18,7 @@
                   </div>
                 </form>
               </div>
-              <br>
+              <br><br>
             <div class="table-responsive">
               <table class="table table-bordered table-responsive-md" style="font-size: 12px;">
                 <thead>
@@ -37,7 +37,7 @@
                     <th (click)="sortTable('mcost')">Cost<i class="bi bi-arrow-down-up"></i></th>
                     <th (click)="sortTable('mvendor')">Vendor<i class="bi bi-arrow-down-up"></i></th>
                     <th (click)="sortTable('minventory')">Stock<i class="bi bi-arrow-down-up"></i></th>
-                    <th>Action</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -95,7 +95,7 @@
                     </td>
                     <td>
                       <ng-container *ngIf="selectedItem !== item">
-                        <button class="btn btn-sm btn-primary" style="font-size: 12px;" (click)="editItem(item)">Edit</button>
+                        <button class="btn btn-sm btn-primary" style="font-size: 12px; margin-inline: 2px;" (click)="editItem(item)">Edit</button>
                         <button class="btn btn-sm btn-danger" style="font-size: 12px;" (click)="deleteItem(item)">Delete</button>
                       </ng-container>
                       <ng-container *ngIf="selectedItem === item">
