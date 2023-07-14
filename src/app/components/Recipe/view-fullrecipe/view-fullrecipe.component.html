@@ -7,7 +7,7 @@
             <br>
             <div class="card-body">
               <h1 class="card-title">
-                <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">Product & Material Recipe Details</strong>
+                <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">Product Recipe Details</strong>
               </h1>
               <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
                 <form class="search-form d-flex align-items-center">
@@ -23,8 +23,8 @@
               <table class="table table-bordered table-responsive-md" style="font-size: 12px;">
                 <thead>
                   <tr>
-                    <!-- <th (click)="sortTable('Id')">Id<i class="bi bi-arrow-down-up"></i></th> -->
-                    <th (click)="sortTable('Id')">Sn.<i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('Id')">Id<i class="bi bi-arrow-down-up"></i></th>
+                    <!-- <th (click)="sortTable('Id')">Sn.<i class="bi bi-arrow-down-up"></i></th> -->
                     <th (click)="sortTable('name')">Product<i class="bi bi-arrow-down-up"></i></th>
                     <th (click)="sortTable('category')">Category<i class="bi bi-arrow-down-up"></i></th>
                     <th (click)="sortTable('brand')">Brand<i class="bi bi-arrow-down-up"></i></th>
@@ -43,8 +43,8 @@
                 <tbody>
                    
                   <tr *ngFor="let item of filteredRecipes; let i = index">
-                    <td>{{ i + 1 }}</td>
-                       <!-- <td>{{ item.Id }}</td> -->
+                    <!-- <td>{{ i + 1 }}</td> -->
+                       <td>{{ item.Id }}</td>
                     <td>
                       <span *ngIf="selectedItem !== item">{{ item.name }}</span>
                       <input type="text" *ngIf="selectedItem === item" [(ngModel)]="item.name">
