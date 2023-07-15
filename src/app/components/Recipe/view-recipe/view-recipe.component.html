@@ -124,7 +124,7 @@
         <h4 class="modal-title fs-5" id="mexampleModalToggleLabel"
           style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 650px;">
           <strong>{{ selectedRecipe?.NAME
-          }}</strong>
+            }}</strong>
         </h4>
       </div>
       <h6></h6>
@@ -239,6 +239,8 @@
           </table>
         </div>
         <div class="modal-footer">
+          <button type="button" class="btn btn-warning" style="margin-inline-start: 40px;"
+            routerLink="/invoice">invoice</button>
           <button type="button" class="btn btn-danger" (click)="closeModal()" aria-label="Close">Close</button>
         </div>
       </div>
