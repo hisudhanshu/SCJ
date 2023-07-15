@@ -80,15 +80,15 @@
                           </td>
                           <td>
                             <!-- Modal Show -->
-<!-- 
+
                             <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                              (click)="showDetails(recipe)" (click)="openModal()"></button> -->
+                              (click)="showDetails(recipe)" (click)="openModal()"></button>
 
                             <!-- ViewFullRecipe Screen -->
 
-                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
+                            <!-- <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
                               routerLink="/viewfullrecipe"></button>
-                              
+                               -->
                           </td>
                           <td>
                             <ng-container *ngIf="!recipe.isEditing; else editButtons">
@@ -122,10 +122,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title fs-5" id="mexampleModalToggleLabel"
-          style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 500px;">
-          <strong>Created Product & Material Recipe Details</strong>
+          style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 650px;">
+          <strong>{{ selectedRecipe?.NAME
+          }}</strong>
         </h4>
       </div>
+      <h6></h6>
       <div class="modal-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
         <div class="table-container">
           <br><br>
@@ -134,11 +136,11 @@
               <tr>
                 <th>Recipe</th>
                 <!-- <th>Id</th> -->
-                <th>Product Name</th>
-                <th>Product Category</th>
+                <!-- <th>Product Name</th> -->
+                <!-- <th>Product Category</th>
                 <th>Product Brand</th>
                 <th>Customer Type</th>
-                <th>Client Type</th>
+                <th>Client Type</th> -->
                 <th>Material Name</th>
                 <th>Code</th>
                 <th>Type</th>
@@ -151,13 +153,13 @@
               <tr *ngFor="let material of getSelectedProductMaterials(); let sn = index;">
                 <td>{{ sn + 1 }}</td>
                 <!-- <td>{{ selectedRecipe?.Id }}</td> -->
-                <td>
+                <!-- <td>
                   <ng-container *ngIf="!material.isEditing; else editProductName">{{ selectedRecipe?.NAME
                     }}</ng-container>
                   <ng-template #editProductName><input type="text" [(ngModel)]="selectedRecipe.NAME"
                       class="form-control"></ng-template>
-                </td>
-                <td>
+                </td> -->
+                <!-- <td>
                   <ng-container *ngIf="!material.isEditing; else editProductCategory">{{ selectedRecipe?.category
                     }}</ng-container>
                   <ng-template #editProductCategory><input type="text" [(ngModel)]="selectedRecipe.category"
@@ -180,7 +182,7 @@
                     }}</ng-container>
                   <ng-template #editProductClientType><input type="text" [(ngModel)]="selectedRecipe.clienttype"
                       class="form-control"></ng-template>
-                </td>
+                </td> -->
                 <td>
                   <ng-container *ngIf="!material.isEditing; else editMaterialName">{{ material.material
                     }}</ng-container>
@@ -237,8 +239,7 @@
           </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-warning" routerLink="/invoice">Inovice</button>
-          <button type="button" class="btn btn-danger" (click)="closeModal()" aria-label="Close">Close</button>                              
+          <button type="button" class="btn btn-danger" (click)="closeModal()" aria-label="Close">Close</button>
         </div>
       </div>
     </div>
