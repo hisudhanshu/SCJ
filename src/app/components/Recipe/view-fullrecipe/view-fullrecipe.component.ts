@@ -7,26 +7,24 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./view-fullrecipe.component.css']
 })
 export class ViewFullrecipeComponent implements OnInit {
-  filteredRecipes: any[] = [];
   selectedProductId: number | null = null;
   recipesData: any[] = [];
   selectedRecipe: any;
+  filteredRecipes: any[] = [];
   searchKeyword: string = '';
   recipes: any;
   isAscending: boolean = true;
   sortColumn: string = '';
   isModalOpen: boolean = false;
-  selectedItem: any | null = null; // Update the type to "any"
-  sn: number | undefined; // Declare 'sn' property
+
 
   constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
-    this.authService.getRecipescompare().subscribe(
+    this.authService.getRecipes1().subscribe(
       (response: any) => {
-        if (response.isSuccess && response.jsonData !== null) {
-          this.recipesData = JSON.parse(response.jsonData);
-          this.filteredRecipes = this.recipesData; // Initialize filteredRecipes with all recipes
+        if (response.isSuccess && response.productJson !== null) {
+          this.filteredRecipes = JSON.parse(response.productJson);
         } else {
           console.log('API request failed or no data received');
         }
@@ -35,52 +33,56 @@ export class ViewFullrecipeComponent implements OnInit {
         console.log('Error fetching recipes:', error);
       }
     );
-  }
 
-  sortTable(column: string) {
-    if (column === this.sortColumn) {
-      // If the same column is clicked again, reverse the sort order
-      this.isAscending = !this.isAscending;
-    } else {
-      // If a different column is clicked, set it as the new sort column
-      this.sortColumn = column;
-      this.isAscending = true;
-    }
-
-    this.filteredRecipes.sort((a, b) => {
-      const valueA = a[column];
-      const valueB = b[column];
-
-      if (valueA < valueB) {
-        return this.isAscending ? -1 : 1;
-      } else if (valueA > valueB) {
-        return this.isAscending ? 1 : -1;
-      } else {
-        return 0;
+    this.authService.getRecipes().subscribe(
+      (response: any) => {
+        if (response.isSuccess && response.jsonData !== null) {
+          this.recipesData = JSON.parse(response.jsonData);
+        } else {
+          console.log('API request failed or no data received');
+        }
+      },
+      (error: any) => {
+        console.log('Error fetching materials:', error);
       }
-    });
-  }
-  updateItem(item: any) {
-    // Perform the update logic here
-    // For example, you can make an API call to update the item
-    // Once the update is successful, reset the selectedItem to null
-    this.selectedItem = null;
-  }
-  editItem(item: any) {
-    this.selectedItem = item; // Set the selected item for editing
+    );
   }
 
-  deleteItem(item: any) {
-    const index = this.filteredRecipes.indexOf(item);
-    if (index !== -1) {
-      this.filteredRecipes.splice(index, 1); // Remove the item from the array
+  getSelectedProductMaterials(): any[] {
+    if (this.selectedProductId === null) {
+      return [];
     }
 
+    return this.recipesData.filter(recipe => recipe.P_Id === this.selectedProductId);
   }
 
+  showDetails(recipeData: any) {
+    this.selectedRecipe = recipeData;
+    this.selectedProductId = recipeData.Id;
+  }
   search() {
     this.filteredRecipes = this.recipesData.filter((item: { name: string }) =>
       item.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
     );
+  }
+  // Functionality for editing and updating material details
+  editMaterial(material: any) {
+    material.isEditing = true;
+  }
+
+  updateMaterial(material: any) {
+    // Implement the logic to update the material details
+    material.isEditing = false;
+  }
+
+  deleteMaterial(material: any) {
+    const index = this.getSelectedProductMaterials().indexOf(material);
+    if (index !== -1) {
+      this.getSelectedProductMaterials().splice(index, 1);
+      const originalIndex = this.recipesData.findIndex((r: any) => r.Id === material.Id);
+      if (originalIndex !== -1) {
+        this.recipesData.splice(originalIndex, 1);
+      }
+    }
   }
 }
