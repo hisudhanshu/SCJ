@@ -28,11 +28,11 @@ export class ViewFullrecipeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-  this.activatedRoute.params.subscribe(res => {
-    this.productId = res['id'];
-  console.log(res)
-})
+
+    this.activatedRoute.params.subscribe(res => {
+      this.productId = res['id'];
+      console.log(res)
+    })
 
     this.authService.getRecipes().subscribe(
       (response: any) => {
@@ -40,7 +40,7 @@ export class ViewFullrecipeComponent implements OnInit {
           this.recipesData = JSON.parse(response.jsonData);
           console.log(this.recipesData)
           this.productDetails = this.recipesData.filter((item) => {
-            if(item.P_Id == this.productId) {
+            if (item.P_Id == this.productId) {
               return item;
             }
           })
@@ -53,7 +53,20 @@ export class ViewFullrecipeComponent implements OnInit {
         console.log('Error fetching materials:', error);
       }
     );
+    this.authService.getRecipes1().subscribe(
+      (response: any) => {
+        if (response.isSuccess && response.productJson !== null) {
+          this.filteredRecipes = JSON.parse(response.productJson);
+        } else {
+          console.log('API request failed or no data received');
+        }
+      },
+      (error: any) => {
+        console.log('Error fetching recipes:', error);
+      }
+    );
   }
+  
   getSelectedProductMaterials(): any[] {
     if (this.productId === null) {
       return [];
@@ -91,11 +104,11 @@ export class ViewFullrecipeComponent implements OnInit {
       }
     }
   }
-  getProductDetails(id:string){
+  getProductDetails(id: string) {
     this.authService.getRecipes().subscribe(res => {
       let data = res;
       this.productDetails = data.filter((item) => {
-        if(item.Id == id) {
+        if (item.Id == id) {
           return item;
         }
       })
