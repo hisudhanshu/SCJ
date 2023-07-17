@@ -21,14 +21,11 @@ export class ViewFullrecipeComponent implements OnInit {
   productId!: string;
   productDetails: any;
 
-
   constructor(private authService: AuthServicesService, private activatedRoute: ActivatedRoute) { }
 
 
 
   ngOnInit(): void {
-
-
     this.activatedRoute.params.subscribe(res => {
       this.productId = res['id'];
       console.log(res)
@@ -66,7 +63,8 @@ export class ViewFullrecipeComponent implements OnInit {
       }
     );
   }
-  
+
+
   getSelectedProductMaterials(): any[] {
     if (this.productId === null) {
       return [];
@@ -118,4 +116,79 @@ export class ViewFullrecipeComponent implements OnInit {
 
     })
   }
+  sortTable(column: string) {
+    if (column === this.sortColumn) {
+      // If the same column is clicked again, reverse the sort order
+      this.isAscending = !this.isAscending;
+    } else {
+      // If a different column is clicked, set it as the new sort column
+      this.sortColumn = column;
+      this.isAscending = true;
+    }
+
+    this.filteredRecipes.sort((a, b) => {
+      const valueA = a[column];
+      const valueB = b[column];
+
+      if (valueA < valueB) {
+        return this.isAscending ? -1 : 1;
+      } else if (valueA > valueB) {
+        return this.isAscending ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  searchRecipes(): void {
+    const keyword = this.searchKeyword.toLowerCase().trim();
+    if (keyword === '') {
+      this.filteredRecipes = [...this.recipesData];
+    } else {
+      this.filteredRecipes = this.recipesData.filter(recipe =>
+        recipe.name.toLowerCase().includes(keyword) ||
+        recipe.category.toLowerCase().includes(keyword) ||
+        recipe.brand.toLowerCase().includes(keyword) ||
+        recipe.customer.toLowerCase().includes(keyword) ||
+        recipe.clienttype.toLowerCase().includes(keyword)
+      );
+    }
+  }
+  editRecipe(recipe: any) {
+    recipe.isEditing = true;
+  }
+
+  updateRecipe(recipe: any) {
+    // Implement the logic to update the recipe
+    recipe.isEditing = false;
+  }
+
+  deleteRecipe(recipe: any) {
+    const index = this.filteredRecipes.indexOf(recipe);
+    if (index !== -1) {
+      this.filteredRecipes.splice(index, 1);
+
+      const originalIndex = this.recipesData.findIndex((r: any) => r.Id === recipe.Id);
+      if (originalIndex !== -1) {
+        this.recipesData.splice(originalIndex, 1);
+      }
+
+      if (this.selectedRecipe && this.selectedRecipe.Id === recipe.Id) {
+        this.selectedRecipe = null;
+        this.selectedProductId = null;
+      }
+    }
+  }
+
+  // getProductById(productId: number): any {
+  //   return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
+  // }
+  // Function to retrieve the product by ID
+  // getProductById(productId: number): any {
+  //   return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
+  // }
+
+    // Function to retrieve the product by ID
+    getProductById(productId: number): any {
+      return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
+    }
 }
