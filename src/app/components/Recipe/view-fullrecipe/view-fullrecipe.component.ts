@@ -178,15 +178,6 @@ export class ViewFullrecipeComponent implements OnInit {
       }
     }
   }
-
-  // getProductById(productId: number): any {
-  //   return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
-  // }
-  // Function to retrieve the product by ID
-  // getProductById(productId: number): any {
-  //   return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
-  // }
-
     // Function to retrieve the product by ID
     getProductById(productId: number): any {
       return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
