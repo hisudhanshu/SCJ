@@ -39,7 +39,7 @@
                     <th>Stock</th>
                     <th>Action</th>
                   </tr>
-                  <tr *ngFor="let material of getSelectedProductMaterials(); let sn = index;">
+                  <tr *ngFor="let material of productDetails; let sn = index;">
                     <td>{{ sn + 1 }}</td>
                     <td>{{ selectedRecipe?.Id }}</td>
                     <!-- <td>

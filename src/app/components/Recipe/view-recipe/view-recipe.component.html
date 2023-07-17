@@ -81,8 +81,7 @@
                           <td>
                             <!-- Modal Show -->
 
-                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                              (click)="showDetails(recipe)" (click)="openModal()"></button>
+                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;" [routerLink]="['/viewfullrecipe', recipe.Id]"></button>
 
                             <!-- ViewFullRecipe Screen -->
 

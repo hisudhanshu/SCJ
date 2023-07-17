@@ -38,7 +38,7 @@ import { ViewFullrecipeComponent } from './components/Recipe/view-fullrecipe/vie
 const routes: Routes = [
 
   { path: '', component: PagesLoginComponent },
-  { path: 'viewfullrecipe', component: ViewFullrecipeComponent},
+  { path: 'viewfullrecipe/:id', component: ViewFullrecipeComponent},
   { path: 'comparison', component: RecipeComparisonComponent },
   { path: 'viewrecipe', component: ViewRecipeComponent },
   { path: 'viewmaterial', component: MaterialViewComponent },

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 @Component({
@@ -16,15 +17,34 @@ export class ViewFullrecipeComponent implements OnInit {
   isAscending: boolean = true;
   sortColumn: string = '';
   isModalOpen: boolean = false;
+  // productId: any;
+  productId!: string;
+  productDetails: any;
 
 
-  constructor(private authService: AuthServicesService) { }
+  constructor(private authService: AuthServicesService, private activatedRoute: ActivatedRoute) { }
+
+
 
   ngOnInit(): void {
+
+    
+  this.activatedRoute.params.subscribe(res => {
+    this.productId = res['id'];
+  console.log(res)
+})
+
     this.authService.getRecipes().subscribe(
       (response: any) => {
         if (response.isSuccess && response.jsonData !== null) {
           this.recipesData = JSON.parse(response.jsonData);
+          console.log(this.recipesData)
+          this.productDetails = this.recipesData.filter((item) => {
+            if(item.P_Id == this.productId) {
+              return item;
+            }
+          })
+          console.log(this.productDetails)
         } else {
           console.log('API request failed or no data received');
         }
@@ -34,18 +54,17 @@ export class ViewFullrecipeComponent implements OnInit {
       }
     );
   }
-
   getSelectedProductMaterials(): any[] {
-    if (this.selectedProductId === null) {
+    if (this.productId === null) {
       return [];
     }
 
-    return this.recipesData.filter(recipe => recipe.P_Id === this.selectedProductId);
+    return this.recipesData.filter(recipe => recipe.P_Id === this.productId);
   }
 
   showDetails(recipeData: any) {
     this.selectedRecipe = recipeData;
-    this.selectedProductId = recipeData.Id;
+    this.productId = recipeData.Id;
   }
   search() {
     this.filteredRecipes = this.recipesData.filter((item: { name: string }) =>
@@ -71,5 +90,19 @@ export class ViewFullrecipeComponent implements OnInit {
         this.recipesData.splice(originalIndex, 1);
       }
     }
+  }
+  getProductDetails(id:string){
+    this.authService.getRecipes().subscribe(res => {
+      let data = res;
+      this.productDetails = data.filter((item) => {
+        if(item.Id == id) {
+          return item;
+        }
+      })
+
+      console.log(res)
+      console.log(this.productDetails);
+
+    })
   }
 }
