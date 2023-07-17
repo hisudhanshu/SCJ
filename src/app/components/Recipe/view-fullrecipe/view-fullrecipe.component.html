@@ -21,7 +21,7 @@
               <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
                 <tbody>
                   <tr>
-                    <th>#</th>
+                    <th>Recipe</th>
                     <th>Material Name</th>
                     <th>Code</th>
                     <th>Type</th>
@@ -69,7 +69,7 @@
                       <ng-template #editMaterialStock><input type="text" [(ngModel)]="material.minventory"
                           class="form-control"></ng-template>
                     </td>
-                    <td></td>
+                    <td>{{ material.mcost }}</td>
                     <td>
                       <ng-container *ngIf="!material.isEditing; else editMaterialButtons">
                         <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="editMaterial(material)">Edit</button>
