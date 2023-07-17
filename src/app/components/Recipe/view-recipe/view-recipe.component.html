@@ -81,7 +81,8 @@
                           <td>
                             <!-- Modal Show -->
 
-                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;" [routerLink]="['/viewfullrecipe', recipe.Id]"></button>
+                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
+                              [routerLink]="['/viewfullrecipe', recipe.Id]"></button>
 
                             <!-- ViewFullRecipe Screen -->
 
@@ -240,10 +241,10 @@
           </table>
         </div>
         <div class="modal-footer">
-    
+
           <button type="button" class="btn btn-warning" style="margin-inline-start: 40px;"
             routerLink="/invoice">invoice</button>
-            <button type="button" class="btn btn-primary" aria-label="">Add Material</button>
+          <button type="button" class="btn btn-primary" aria-label="">Add Material</button>
           <button type="button" class="btn btn-danger" (click)="closeModal()" aria-label="Close">Close</button>
         </div>
       </div>

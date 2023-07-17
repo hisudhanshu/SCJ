@@ -76,7 +76,7 @@ export class ViewRecipeComponent implements OnInit {
       );
     }
   }
-    
+
   sortTable(column: string) {
     if (column === this.sortColumn) {
       // If the same column is clicked again, reverse the sort order
@@ -152,5 +152,5 @@ export class ViewRecipeComponent implements OnInit {
   }
   closeModal() {
     this.isModalOpen = false;
-  }  
   }
+}
