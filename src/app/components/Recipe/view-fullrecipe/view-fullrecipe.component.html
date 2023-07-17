@@ -1,15 +1,14 @@
 <main id="main" class="main">
- <div class="pagetitle"></div>
+  <div class="pagetitle"></div>
   <section class="section">
     <div class="row">
       <div class="col-lg-12">
         <div class="card">
-          <br>
           <div class="card-body">
             <h1 class="card-title">
-              <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">Product Recipe Details</strong>
+              <strong style="font-family: Georgia, 'Times New Roman', Times, serif;"></strong>
             </h1>
-            <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
+            <!-- <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
               <form class="search-form d-flex align-items-center">
                 <div class="input-group">
                   <input class="form-control" id="searchKeyword" name="query" type="text" [(ngModel)]="searchKeyword"
@@ -17,19 +16,12 @@
                   <button type="submit" class="btn btn-primary" title="Search">Search</button>
                 </div>
               </form>
-            </div>
-            <br><br>
+            </div> -->
             <div class="table-responsive">
               <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
                 <tbody>
                   <tr>
-                    <!-- <th>Recipe</th> -->
-                    <th>Id</th>
-                    <!-- <th>Product Name</th> -->
-                    <!-- <th>Product Category</th>
-                    <th>Product Brand</th>
-                    <th>Customer Type</th>
-                    <th>Client Type</th> -->
+                    <th>#</th>
                     <th>Material Name</th>
                     <th>Code</th>
                     <th>Type</th>
@@ -37,44 +29,13 @@
                     <th>Cost</th>
                     <th>Vendor</th>
                     <th>Stock</th>
+                    <th>Total Cost</th>
                     <th>Action</th>
                   </tr>
                   <tr *ngFor="let material of productDetails; let sn = index;">
                     <td>{{ sn + 1 }}</td>
-                    <td>{{ selectedRecipe?.Id }}</td>
-                    <!-- <td>
-                      <ng-container *ngIf="!material.isEditing; else editProductName">{{ selectedRecipe?.NAME
-                        }}</ng-container>
-                      <ng-template #editProductName><input type="text" [(ngModel)]="selectedRecipe.NAME"
-                          class="form-control"></ng-template>
-                    </td> -->
-                    <!-- <td>
-                      <ng-container *ngIf="!material.isEditing; else editProductCategory">{{ selectedRecipe?.category
-                        }}</ng-container>
-                      <ng-template #editProductCategory><input type="text" [(ngModel)]="selectedRecipe.category"
-                          class="form-control"></ng-template>
-                    </td>
                     <td>
-                      <ng-container *ngIf="!material.isEditing; else editProductBrand">{{ selectedRecipe?.brand
-                        }}</ng-container>
-                      <ng-template #editProductBrand><input type="text" [(ngModel)]="selectedRecipe.brand"
-                          class="form-control"></ng-template>
-                    </td>
-                    <td>
-                      <ng-container *ngIf="!material.isEditing; else editProductCustomer">{{ selectedRecipe?.customer
-                        }}</ng-container>
-                      <ng-template #editProductCustomer><input type="text" [(ngModel)]="selectedRecipe.customer"
-                          class="form-control"></ng-template>
-                    </td>
-                    <td>
-                      <ng-container *ngIf="!material.isEditing; else editProductClientType">{{ selectedRecipe?.clienttype
-                        }}</ng-container>
-                      <ng-template #editProductClientType><input type="text" [(ngModel)]="selectedRecipe.clienttype"
-                          class="form-control"></ng-template>
-                    </td> -->
-                    <td>
-                      <ng-container *ngIf="!material.isEditing; else editMaterialName">{{ material.material
-                        }}</ng-container>
+                      <ng-container *ngIf="!material.isEditing; else editMaterialName">{{ material.material }}</ng-container>
                       <ng-template #editMaterialName><input type="text" [(ngModel)]="material.material"
                           class="form-control"></ng-template>
                     </td>
@@ -89,8 +50,7 @@
                           class="form-control"></ng-template>
                     </td>
                     <td>
-                      <ng-container *ngIf="!material.isEditing; else editMaterialQuantity">{{ material.mquantity
-                        }}</ng-container>
+                      <ng-container *ngIf="!material.isEditing; else editMaterialQuantity">{{ material.mquantity }}</ng-container>
                       <ng-template #editMaterialQuantity><input type="text" [(ngModel)]="material.mquantity"
                           class="form-control"></ng-template>
                     </td>
@@ -100,34 +60,34 @@
                           class="form-control"></ng-template>
                     </td>
                     <td>
-                      <ng-container *ngIf="!material.isEditing; else editMaterialVendor">{{ material.mvendor
-                        }}</ng-container>
+                      <ng-container *ngIf="!material.isEditing; else editMaterialVendor">{{ material.mvendor }}</ng-container>
                       <ng-template #editMaterialVendor><input type="text" [(ngModel)]="material.mvendor"
                           class="form-control"></ng-template>
                     </td>
                     <td>
-                      <ng-container *ngIf="!material.isEditing; else editMaterialStock">{{ material.minventory
-                        }}</ng-container>
+                      <ng-container *ngIf="!material.isEditing; else editMaterialStock">{{ material.minventory }}</ng-container>
                       <ng-template #editMaterialStock><input type="text" [(ngModel)]="material.minventory"
                           class="form-control"></ng-template>
                     </td>
+                    <td></td>
                     <td>
                       <ng-container *ngIf="!material.isEditing; else editMaterialButtons">
-                        <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
-                          (click)="editMaterial(material)">Edit</button>
-                        <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
-                          (click)="deleteMaterial(material)">Delete</button>
+                        <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="editMaterial(material)">Edit</button>
+                        <button class="btn btn-sm btn-danger" style="margin-inline: 2px;" (click)="deleteMaterial(material)">Delete</button>
                       </ng-container>
                       <ng-template #editMaterialButtons>
-                        <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
-                          (click)="updateMaterial(material)">Update</button>
+                        <button class="btn btn-sm btn-success" style="margin-inline: 2px;" (click)="updateMaterial(material)">Update</button>
                       </ng-template>
                     </td>
                   </tr>
                 </tbody>
               </table>
               <br><br>
-              <button type="button" class="btn btn-warning" style="margin-inline: 1060px;" routerLink="/invoice">Inovice</button><br><br>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; gap: 10px; margin-inline: 960px;">
+                  <button type="button" class="btn btn-warning" routerLink="/invoice">Invoice</button>
+                  <button type="button" class="btn btn-dark" routerLink="/viewrecipe">Back</button>
+                </div></div>
             </div>
           </div>
         </div>
