@@ -21,19 +21,6 @@ export class ViewFullrecipeComponent implements OnInit {
   constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
-    this.authService.getRecipes1().subscribe(
-      (response: any) => {
-        if (response.isSuccess && response.productJson !== null) {
-          this.filteredRecipes = JSON.parse(response.productJson);
-        } else {
-          console.log('API request failed or no data received');
-        }
-      },
-      (error: any) => {
-        console.log('Error fetching recipes:', error);
-      }
-    );
-
     this.authService.getRecipes().subscribe(
       (response: any) => {
         if (response.isSuccess && response.jsonData !== null) {

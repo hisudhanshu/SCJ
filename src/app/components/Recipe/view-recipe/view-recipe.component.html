@@ -122,7 +122,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title fs-5" id="mexampleModalToggleLabel"
-          style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 650px;">
+          style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 550px;">
           <strong>Product : {{ selectedRecipe?.NAME
             }}</strong>
         </h4>
@@ -148,6 +148,7 @@
                 <th>Cost</th>
                 <th>Vendor</th>
                 <th>Stock</th>
+                <th>Total Cost</th>
                 <th>Action</th>
               </tr>
               <tr *ngFor="let material of getSelectedProductMaterials(); let sn = index;">
@@ -222,6 +223,7 @@
                   <ng-template #editMaterialStock><input type="text" [(ngModel)]="material.minventory"
                       class="form-control"></ng-template>
                 </td>
+                <td></td>
                 <td>
                   <ng-container *ngIf="!material.isEditing; else editMaterialButtons">
                     <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
@@ -239,8 +241,10 @@
           </table>
         </div>
         <div class="modal-footer">
+    
           <button type="button" class="btn btn-warning" style="margin-inline-start: 40px;"
             routerLink="/invoice">invoice</button>
+            <button type="button" class="btn btn-primary" aria-label="">Add Material</button>
           <button type="button" class="btn btn-danger" (click)="closeModal()" aria-label="Close">Close</button>
         </div>
       </div>

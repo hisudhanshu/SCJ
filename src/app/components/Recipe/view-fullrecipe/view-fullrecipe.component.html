@@ -23,8 +23,8 @@
               <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
                 <tbody>
                   <tr>
-                    <th>Recipe</th>
-                    <!-- <th>Id</th> -->
+                    <!-- <th>Recipe</th> -->
+                    <th>Id</th>
                     <!-- <th>Product Name</th> -->
                     <!-- <th>Product Category</th>
                     <th>Product Brand</th>
@@ -41,7 +41,7 @@
                   </tr>
                   <tr *ngFor="let material of getSelectedProductMaterials(); let sn = index;">
                     <td>{{ sn + 1 }}</td>
-                    <!-- <td>{{ selectedRecipe?.Id }}</td> -->
+                    <td>{{ selectedRecipe?.Id }}</td>
                     <!-- <td>
                       <ng-container *ngIf="!material.isEditing; else editProductName">{{ selectedRecipe?.NAME
                         }}</ng-container>
