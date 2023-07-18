@@ -82,13 +82,13 @@
                             <!-- Modal Show -->
 
                             <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                              [routerLink]="['/viewfullrecipe', recipe.Id]"></button>
+                              (click)="showDetails(recipe)" (click)="openModal()"></button>
 
                             <!-- ViewFullRecipe Screen -->
-
-                            <!-- <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                              routerLink="/viewfullrecipe"></button>
-                               -->
+<!-- 
+                            <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
+                              routerLink="/viewfullrecipe"></button> -->
+                              
                           </td>
                           <td>
                             <ng-container *ngIf="!recipe.isEditing; else editButtons">
