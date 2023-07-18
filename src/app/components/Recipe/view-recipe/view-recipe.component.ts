@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-view-recipe',
   templateUrl: './view-recipe.component.html',
-  styleUrls: ['./view-recipe.component.css']
+  styleUrls: ['./view-recipe.component.css'],
 })
 export class ViewRecipeComponent implements OnInit {
+  // Declare flag variables
+  flag: number = 1;
+  P_Id: any;
 
   selectedProductId: number | null = null;
   recipesData: any[] = [];
@@ -18,10 +23,42 @@ export class ViewRecipeComponent implements OnInit {
   sortColumn: string = '';
   isModalOpen: boolean = false;
 
+  productId!: string;
+  productDetails: any;
 
-  constructor(private authService: AuthServicesService) { }
+  constructor(
+    private authService: AuthServicesService,
+    private activatedRoute: ActivatedRoute,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
+    // Get the product ID from the route params
+    this.activatedRoute.params.subscribe((res) => {
+      this.productId = res['id'];
+      console.log(res);
+      // Assign the product ID to P_Id
+      this.P_Id = parseInt(this.productId, 10);
+      // Call the function to send the flag and product ID to the database during component initialization
+      this.sendflagAndProductIdToDatabase();
+    });
+
+    this.authService.getRecipes().subscribe(
+      (response: any) => {
+        if (response.isSuccess && response.jsonData !== null) {
+          this.recipesData = JSON.parse(response.jsonData);
+          console.log(this.recipesData);
+          this.productDetails = this.recipesData.find((item) => item.P_Id === this.P_Id);
+          console.log(this.productDetails);
+        } else {
+          console.log('API request failed or no data received');
+        }
+      },
+      (error: any) => {
+        console.log('Error fetching materials:', error);
+      }
+    );
+
     this.authService.getRecipes1().subscribe(
       (response: any) => {
         if (response.isSuccess && response.productJson !== null) {
@@ -34,17 +71,20 @@ export class ViewRecipeComponent implements OnInit {
         console.log('Error fetching recipes:', error);
       }
     );
+  }
 
-    this.authService.getRecipes().subscribe(
+  // Function to send the flag and P_Id (product ID) value to the database using API
+  sendflagAndProductIdToDatabase(): void {
+    const apiUrl = `https://localhost:44384/api/Authentication/GetProductData?flag=${this.flag}&P_Id=${this.P_Id}`; // Updated URL with query parameters
+
+    // Make an HTTP GET request to the API endpoint
+    this.http.get(apiUrl).subscribe(
       (response: any) => {
-        if (response.isSuccess && response.jsonData !== null) {
-          this.recipesData = JSON.parse(response.jsonData);
-        } else {
-          console.log('API request failed or no data received');
-        }
+        // Handle the response from the server if needed
+        console.log('flag and P_Id sent to the database successfully:', response);
       },
       (error: any) => {
-        console.log('Error fetching materials:', error);
+        console.log('Error sending flag and P_Id to the database:', error);
       }
     );
   }
@@ -56,7 +96,6 @@ export class ViewRecipeComponent implements OnInit {
 
     return this.recipesData.filter(recipe => recipe.P_Id === this.selectedProductId);
   }
-
   showDetails(recipeData: any) {
     this.selectedRecipe = recipeData;
     this.selectedProductId = recipeData.Id;
