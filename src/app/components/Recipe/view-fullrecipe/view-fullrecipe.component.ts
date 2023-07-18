@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
+import { HttpClient } from '@angular/common/http'; // Import HttpClient
 
 @Component({
   selector: 'app-view-fullrecipe',
@@ -8,6 +9,11 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./view-fullrecipe.component.css']
 })
 export class ViewFullrecipeComponent implements OnInit {
+
+  // Declare flag variables
+  Flag: 2 | undefined = 2;
+  P_Id: number | undefined;
+
   selectedProductId: number | null = null;
   recipesData: any[] = [];
   selectedRecipe: any;
@@ -17,15 +23,21 @@ export class ViewFullrecipeComponent implements OnInit {
   isAscending: boolean = true;
   sortColumn: string = '';
   isModalOpen: boolean = false;
+
   // productId: any;
   productId!: string;
   productDetails: any;
 
-  constructor(private authService: AuthServicesService, private activatedRoute: ActivatedRoute) { }
-
-
+  constructor(
+    private authService: AuthServicesService,
+    private activatedRoute: ActivatedRoute,
+    private http: HttpClient // Step 1: Import HttpClient
+  ) { }
 
   ngOnInit(): void {
+    // Call the function to send the flag and product ID to the database during component initialization
+    this.sendFlagAndProductIdToDatabase();
+
     this.activatedRoute.params.subscribe(res => {
       this.productId = res['id'];
       console.log(res)
@@ -64,6 +76,27 @@ export class ViewFullrecipeComponent implements OnInit {
     );
   }
 
+  // Function to send the Flag and P_Id (product ID) value to the database using API
+  sendFlagAndProductIdToDatabase(): void {
+    const apiUrl = 'https://localhost:44384/api/Authentication/GetProductData'; // Replace with your actual API endpoint URL
+
+    // Create a data object containing the Flag and P_Id values
+    const dataToSend = {
+      Flag: this.Flag,
+      P_Id: this.P_Id
+    };
+
+    // Make an HTTP POST request to the API endpoint
+    this.http.post(apiUrl, dataToSend).subscribe(
+      (response: any) => {
+        // Handle the response from the server if needed
+        console.log('Flag and P_Id sent to the database successfully:', response);
+      },
+      (error: any) => {
+        console.log('Error sending Flag and P_Id to the database:', error);
+      }
+    );
+  }
 
   getSelectedProductMaterials(): any[] {
     if (this.productId === null) {
@@ -178,8 +211,8 @@ export class ViewFullrecipeComponent implements OnInit {
       }
     }
   }
-    // Function to retrieve the product by ID
-    getProductById(productId: number): any {
-      return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
-    }
+  // Function to retrieve the product by ID
+  getProductById(productId: number): any {
+    return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
+  }
 }
