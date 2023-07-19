@@ -8,6 +8,7 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 })
 export class ViewRecipeComponent implements OnInit {
 
+  materials: any[] = []; // Assuming you have the materials data here
   selectedProductId: number | null = null;
   recipesData: any[] = [];
   selectedRecipe: any;
@@ -134,10 +135,14 @@ export class ViewRecipeComponent implements OnInit {
       }
     }
   }
+
   openModal() {
     this.isModalOpen = true;
   }
   closeModal() {
     this.isModalOpen = false;
+  }
+  calculateTotalCost() {
+    return this.materials.reduce((total, material) => total + parseFloat(material.mcost), 0).toFixed(2);
   }
 }
