@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-view-fullrecipe',
@@ -10,37 +11,50 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 export class ViewFullrecipeComponent implements OnInit {
   selectedProductId: number | null = null;
   recipesData: any[] = [];
-  selectedRecipe: any;
+  @Input() selectedRecipe: any;
   filteredRecipes: any[] = [];
   searchKeyword: string = '';
   recipes: any;
   isAscending: boolean = true;
   sortColumn: string = '';
   isModalOpen: boolean = false;
-  // productId: any;
   productId!: string;
   productDetails: any;
 
+  isEditingName = false;
+  isEditingCategory = false;
+  isEditingBrand = false;
+  isEditingCustomer = false;
+  isEditingClientType = false;
+  products: any;
+
   constructor(private authService: AuthServicesService, private activatedRoute: ActivatedRoute) { }
-
-
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(res => {
       this.productId = res['id'];
-      console.log(res)
-    })
+    });
+
+    
+    // Retrieve the recipe details from localStorage
+    
+    const recipeDetailsString = localStorage.getItem('selectedProduct');
+    if (recipeDetailsString) {
+
+    // If there is data in localStorage, parse it as JSON and assign it to the selectedRecipe variable
+      this.selectedRecipe = JSON.parse(recipeDetailsString);
+    }
+
+
     this.authService.getRecipes().subscribe(
       (response: any) => {
         if (response.isSuccess && response.jsonData !== null) {
           this.recipesData = JSON.parse(response.jsonData);
-          console.log(this.recipesData)
           this.productDetails = this.recipesData.filter((item) => {
             if (item.P_Id == this.productId) {
               return item;
             }
-          })
-          console.log(this.productDetails)
+          });
         } else {
           console.log('API request failed or no data received');
         }
@@ -49,6 +63,7 @@ export class ViewFullrecipeComponent implements OnInit {
         console.log('Error fetching materials:', error);
       }
     );
+
     this.authService.getRecipes1().subscribe(
       (response: any) => {
         if (response.isSuccess && response.productJson !== null) {
@@ -63,57 +78,8 @@ export class ViewFullrecipeComponent implements OnInit {
     );
   }
 
-  getSelectedProductMaterials(): any[] {
-    if (this.productId === null) {
-      return [];
-    }
+  // Rest of your methods...
 
-    return this.recipesData.filter(recipe => recipe.P_Id === this.productId);
-  }
-
-  showDetails(recipeData: any) {
-    this.selectedRecipe = recipeData;
-    this.productId = recipeData.Id;
-  }
-  search() {
-    this.filteredRecipes = this.recipesData.filter((item: { name: string }) =>
-      item.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
-    );
-  }
-  // Functionality for editing and updating material details
-  editMaterial(material: any) {
-    material.isEditing = true;
-  }
-
-  updateMaterial(material: any) {
-    // Implement the logic to update the material details
-    material.isEditing = false;
-  }
-
-  deleteMaterial(material: any) {
-    const index = this.getSelectedProductMaterials().indexOf(material);
-    if (index !== -1) {
-      this.getSelectedProductMaterials().splice(index, 1);
-      const originalIndex = this.recipesData.findIndex((r: any) => r.Id === material.Id);
-      if (originalIndex !== -1) {
-        this.recipesData.splice(originalIndex, 1);
-      }
-    }
-  }
-  getProductDetails(id: string) {
-    this.authService.getRecipes().subscribe(res => {
-      let data = res;
-      this.productDetails = data.filter((item) => {
-        if (item.Id == id) {
-          return item;
-        }
-      })
-
-      console.log(res)
-      console.log(this.productDetails);
-
-    })
-  }
   sortTable(column: string) {
     if (column === this.sortColumn) {
       // If the same column is clicked again, reverse the sort order
@@ -137,6 +103,12 @@ export class ViewFullrecipeComponent implements OnInit {
       }
     });
   }
+  
+  // Function to retrieve the product by ID
+  getProductById(productId: number): any {
+    return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
+  }
+
   searchRecipes(): void {
     const keyword = this.searchKeyword.toLowerCase().trim();
     if (keyword === '') {
@@ -151,33 +123,40 @@ export class ViewFullrecipeComponent implements OnInit {
       );
     }
   }
-  editRecipe(recipe: any) {
-    recipe.isEditing = true;
+  search() {
+    this.filteredRecipes = this.recipesData.filter((item: { name: string }) =>
+      item.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
+    );
+  }
+  // Functionality for editing and updating material details
+  editMaterial(material: any) {
+    material.isEditing = true;
   }
 
-  updateRecipe(recipe: any) {
-    // Implement the logic to update the recipe
-    recipe.isEditing = false;
+  updateMaterial(material: any) {
+    // Implement the logic to update the material details
+    material.isEditing = false;
+  }
+  getSelectedProductMaterials() {
+    throw new Error('Method not implemented.');
+ 
+  }
+  isEditing = false;
+
+  editProduct() {
+    this.isEditing = true;
   }
 
-  deleteRecipe(recipe: any) {
-    const index = this.filteredRecipes.indexOf(recipe);
+  updateProduct() {
+    this.isEditing = false;
+    // Here you can perform any update logic or API call if needed.
+    // Update the properties in the selectedRecipe object.
+  }
+  deleteProduct() {
+    const index = this.products.findIndex((product: any) => product === this.selectedRecipe);
     if (index !== -1) {
-      this.filteredRecipes.splice(index, 1);
-
-      const originalIndex = this.recipesData.findIndex((r: any) => r.Id === recipe.Id);
-      if (originalIndex !== -1) {
-        this.recipesData.splice(originalIndex, 1);
-      }
-
-      if (this.selectedRecipe && this.selectedRecipe.Id === recipe.Id) {
-        this.selectedRecipe = null;
-        this.selectedProductId = null;
-      }
+      this.products.splice(index, 1); // Remove the selected recipe from the list.
     }
-  }
-  // Function to retrieve the product by ID
-  getProductById(productId: number): any {
-    return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
+    this.selectedRecipe = null; // Clear the selected recipe after deletion.
   }
 }

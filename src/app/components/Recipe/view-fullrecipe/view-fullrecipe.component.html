@@ -8,7 +8,6 @@
             <h1 class="card-title">
               <strong style="font-family: Georgia, 'Times New Roman', Times, serif;"></strong>
             </h1>
-
             <!-- <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
               <form class="search-form d-flex align-items-center">
                 <div class="input-group">
@@ -18,76 +17,75 @@
                 </div>
               </form>
             </div> -->
+            <h4 style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 400px;">Product - {{
+              selectedRecipe.NAME }}</h4>
             <br><br>
-
-            <!-- Product Table Call with Recipes API Data -->
-
-            <div class="row">
-              <div class="col-md-12">
-                <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product Details</h5>
-                <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
-                  <thead>
+            <!-- product-details.component.html -->
+            <div class="table-responsive">
+              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product Details</h6>
+              <div *ngIf="selectedRecipe">
+                <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
+                  <tbody style="font-family: Georgia, 'Times New Roman', Times, serif;">
                     <tr>
-                      <th>Sn</th>
-                      <!-- <th (click)="sortTable('Id')">ID <i class="bi bi-arrow-down-up"></i></th> -->
-                      <th (click)="sortTable('NAME')">Product Name <i class="bi bi-arrow-down-up"></i></th>
-                      <th (click)="sortTable('category')">Product Category <i class="bi bi-arrow-down-up"></i></th>
-                      <th (click)="sortTable('brand')">Product Brand <i class="bi bi-arrow-down-up"></i></th>
-                      <th (click)="sortTable('customer')">Customer Type <i class="bi bi-arrow-down-up"></i></th>
-                      <th (click)="sortTable('clienttype')">Client Type <i class="bi bi-arrow-down-up"></i></th>
-                      <th>Actions</th>
+                      <th>Sn.</th>
+                      <th>Product Name</th>
+                      <th>Category</th>
+                      <th>Brand</th>
+                      <th>Customer Type</th>
+                      <th>Client Type</th>
+                      <th>Action</th>
                     </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let material of productDetails; let sn = index;">
-                      <td>{{ sn + 1 }}</td>
-                      <!-- <td>{{ recipe.Id }}</td> -->
-                      <td><ng-container *ngIf="!material.isEditing; else editMaterialName1">
-                          {{ getProductById(material.P_Id).NAME }}</ng-container><ng-template #editMaterialName1><input
-                            type="text" [(ngModel)]="getProductById(material.P_Id).NAME"
-                            class="form-control"></ng-template></td>
-
-                      <td><ng-container *ngIf="!material.isEditing; else editMaterialName2">
-                          {{ getProductById(material.P_Id).category }}</ng-container><ng-template
-                          #editMaterialName2><input type="text" [(ngModel)]="getProductById(material.P_Id).category"
-                            class="form-control"></ng-template></td>
-
-                      <td><ng-container *ngIf="!material.isEditing; else editMaterialName3">
-                          {{ getProductById(material.P_Id).brand }}</ng-container><ng-template #editMaterialName3><input
-                            type="text" [(ngModel)]="getProductById(material.P_Id).brand"
-                            class="form-control"></ng-template></td>
-
-                      <td><ng-container *ngIf="!material.isEditing; else editMaterialName4">
-                          {{ getProductById(material.P_Id).customer }}</ng-container><ng-template
-                          #editMaterialName4><input type="text" [(ngModel)]="getProductById(material.P_Id).customer"
-                            class="form-control"></ng-template></td>
-                      <td><ng-container *ngIf="!material.isEditing; else editMaterialName5">
-                          {{ getProductById(material.P_Id).clienttype }}</ng-container><ng-template
-                          #editMaterialName5><input type="text" [(ngModel)]="getProductById(material.P_Id).clienttype"
-                            class="form-control"></ng-template></td>
+                    <tr>
+                      <td>1</td>
                       <td>
-                        <ng-container *ngIf="!material.isEditing; else editMaterialButtons">
+                        <ng-container *ngIf="!isEditing; else editProductName">{{ selectedRecipe.NAME }}</ng-container>
+                        <ng-template #editProductName><input type="text" [(ngModel)]="selectedRecipe.NAME"
+                            class="form-control"></ng-template>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing; else editProductCategory">{{ selectedRecipe.category
+                          }}</ng-container>
+                        <ng-template #editProductCategory><input type="text" [(ngModel)]="selectedRecipe.category"
+                            class="form-control"></ng-template>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing; else editProductBrand">{{ selectedRecipe.brand
+                          }}</ng-container>
+                        <ng-template #editProductBrand><input type="text" [(ngModel)]="selectedRecipe.brand"
+                            class="form-control"></ng-template>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing; else editProductCustomer">{{ selectedRecipe.customer
+                          }}</ng-container>
+                        <ng-template #editProductCustomer><input type="text" [(ngModel)]="selectedRecipe.customer"
+                            class="form-control"></ng-template>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing; else editProductClientType">{{ selectedRecipe.clienttype
+                          }}</ng-container>
+                        <ng-template #editProductClientType><input type="text" [(ngModel)]="selectedRecipe.clienttype"
+                            class="form-control"></ng-template>
+                      </td>
+                      <td>
+                        <ng-container *ngIf="!isEditing">
                           <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
-                            (click)="editMaterial(material)">Edit</button>
+                            (click)="editProduct()">Edit</button>
                           <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
-                            (click)="deleteMaterial(material)">Delete</button>
+                            (click)="deleteProduct()">Delete</button>
                         </ng-container>
-                        <ng-template #editMaterialButtons>
+                        <ng-container *ngIf="isEditing">
                           <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
-                            (click)="updateMaterial(material)">Update</button>
-                        </ng-template>
+                            (click)="updateProduct()">Update</button>
+                        </ng-container>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-            <br><br><br>
-
-            <!-- Product Table Call with Recipes API Data END here -->
-
+            <br><br>
             <div class="table-responsive">
-              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Material Details Table</h6>
+              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Material Details</h6>
               <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
                 <tbody>
                   <tr>
@@ -146,13 +144,18 @@
                       <ng-template #editMaterialStock><input type="text" [(ngModel)]="material.minventory"
                           class="form-control"></ng-template>
                     </td>
-                    <td>{{ material.mcost }}</td>
+                    <td> <ng-container *ngIf="!material.isEditing; else editMaterialCost">{{ material.mcost
+                        }}</ng-container>
+                      <ng-template #editMaterialCost><input type="text" [(ngModel)]="material.mcost"
+                          class="form-control"></ng-template>
+                    </td>
                     <td>
                       <ng-container *ngIf="!material.isEditing; else editMaterialButtons">
                         <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
                           (click)="editMaterial(material)">Edit</button>
-                        <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
-                          (click)="deleteMaterial(material)">Delete</button>
+                      </ng-container>
+                      <ng-container editMaterialButtons>
+                        <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
                       </ng-container>
                       <ng-template #editMaterialButtons>
                         <button class="btn btn-sm btn-success" style="margin-inline: 2px;"

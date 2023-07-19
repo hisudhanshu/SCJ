@@ -145,4 +145,17 @@ export class ViewRecipeComponent implements OnInit {
   calculateTotalCost() {
     return this.materials.reduce((total, material) => total + parseFloat(material.mcost), 0).toFixed(2);
   }
+
+
+   // Function to handle the click event for "Details" button
+   saveProductDetailsToLocalstorage(recipe: any) {
+    // Assuming the 'recipe' parameter contains the product details
+    // Convert the product details to a JSON string
+    const productDetails = JSON.stringify(recipe);
+
+    // Save the product details to localStorage with a unique key, for example, 'selectedProduct'
+    localStorage.setItem('selectedProduct', productDetails);
+  }
+
+
 }
