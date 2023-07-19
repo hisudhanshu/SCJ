@@ -3,12 +3,40 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
 import { Input } from '@angular/core';
 
+interface Material {
+  id: number;
+  p_id: number;
+  name: string;
+  m_code: string;
+  m_type: string;
+  m_cost: string;
+  m_Vendor: string;
+  m_inventory: string;
+  mquantity: string;
+}
+
+interface Element {
+  id: number;
+  data: string;
+}
+
+
+interface RequestData {
+  id: number;
+  [key: string]: string | number;
+}
+
 @Component({
   selector: 'app-view-fullrecipe',
   templateUrl: './view-fullrecipe.component.html',
   styleUrls: ['./view-fullrecipe.component.css']
 })
 export class ViewFullrecipeComponent implements OnInit {
+
+  productDetails: any[] = []; // Assuming you have an array of objects here for your existing rows
+  newMaterial: any = {}; // Empty object for the new row
+  showBlankRow = false; // Flag to control whether the blank row should be displayed
+
   selectedProductId: number | null = null;
   recipesData: any[] = [];
   @Input() selectedRecipe: any;
@@ -19,7 +47,8 @@ export class ViewFullrecipeComponent implements OnInit {
   sortColumn: string = '';
   isModalOpen: boolean = false;
   productId!: string;
-  productDetails: any;
+
+  // productDetails: any;
 
   isEditingName = false;
   isEditingCategory = false;
@@ -27,6 +56,47 @@ export class ViewFullrecipeComponent implements OnInit {
   isEditingCustomer = false;
   isEditingClientType = false;
   products: any;
+  SelectedMaterial: string[] = [];
+
+  // Declare flag variables
+  isFlag1Selected: boolean = false;
+  isFlag2Selected: boolean = false;
+
+
+  materials: Material[] = [];
+  showMaterialDropdowns = false;
+
+  // Existing code...
+
+  selectedMaterialId: number = 0;
+  selectedMaterialData: Material | undefined;
+  isEditing: boolean = false;
+
+  selectedMaterial: any = [];
+  elements: Element[] = [];
+  successMessage: string = '';
+  isEditMode: boolean = false;
+  editIndex: number = -1;
+
+  rawElements: any[] = [];
+  selectedMaterialName: string | undefined;
+  columnData: string[] = [];
+  filteredData: any[] = [];
+  materialDropdownData: string[] = [];
+  selectedFilteredItem: any;
+  showDropdowns: boolean | undefined;
+
+  newProduct: any = {
+    // p_id: 0,
+    flag: 2,
+    name: '',
+    category: '',
+    brand: '',
+    customer: '',
+    clientType: '',
+    SelectedMaterial: this.selectedMaterial,
+
+  };
 
   constructor(private authService: AuthServicesService, private activatedRoute: ActivatedRoute) { }
 
@@ -63,6 +133,27 @@ export class ViewFullrecipeComponent implements OnInit {
         console.log('Error fetching materials:', error);
       }
     );
+    this.authService.getMaterials().subscribe((response: any) => {
+      if (response.isSuccess && response.matdata !== null) {
+        this.materials = response.matdata;
+      } else {
+        console.log('API request failed or no data received');
+      }
+    });
+
+    this.products();
+    this.authService.getRawElements().subscribe(
+      (data: any) => {
+        this.rawElements = data.matdata.filter((item: any) => item.name !== '');
+        if (this.rawElements.length > 0) {
+          this.columnData = Object.keys(this.rawElements[0]).filter((key) => key !== 'id' && key !== 'name') as string[];
+        }
+      },
+      (error: any) => {
+        console.error('Failed to fetch raw elements:', error);
+      }
+    );
+
 
     this.authService.getRecipes1().subscribe(
       (response: any) => {
@@ -141,7 +232,6 @@ export class ViewFullrecipeComponent implements OnInit {
     throw new Error('Method not implemented.');
 
   }
-  isEditing = false;
 
   editProduct() {
     this.isEditing = true;
@@ -158,5 +248,53 @@ export class ViewFullrecipeComponent implements OnInit {
       this.products.splice(index, 1); // Remove the selected recipe from the list.
     }
     this.selectedRecipe = null; // Clear the selected recipe after deletion.
+  }
+  // Assuming you have defined the Material interface
+
+  onMaterialChange(event: any): void {
+    const selectedMaterialName = event.target.value;
+
+    if (selectedMaterialName) {
+      this.selectedMaterialData = this.getMaterialDataByName(selectedMaterialName);
+    } else {
+      this.selectedMaterialData = undefined;
+    }
+  }
+
+  getMaterialDataByName(name: string): Material | undefined {
+    return this.materials.find((material: Material) => material.name === name);
+  }
+
+  // deleteMaterial(material: Material) {
+  //   // Perform the necessary logic to delete the material
+  //   // e.g., call an API or update the data in your service
+  //   console.log('Deleting material:', material);
+  // }
+
+  toggleEditing() {
+    this.isEditing = !this.isEditing;
+  }
+
+  onAddButtonClick(): void {
+    if (this.selectedMaterialData) {
+      this.selectedMaterial.push(this.selectedMaterialData);
+    }
+  }
+
+  calculatePrice(): void {
+    if (this.selectedMaterialData && this.selectedMaterialData.mquantity) {
+      const quantity = parseFloat(this.selectedMaterialData.mquantity);
+      this.selectedMaterialData.m_cost = (quantity * 100).toString();
+    }
+  }
+  addMaterial() {
+    // Push the new material object to the productDetails array
+    this.productDetails.push(this.newMaterial);
+
+    // Reset the newMaterial object for the next blank row
+    this.newMaterial = {};
+
+    // Hide the blank row after adding a new material
+    this.showBlankRow = false;
   }
 }

@@ -70,8 +70,6 @@
                         <ng-container *ngIf="!isEditing">
                           <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
                             (click)="editProduct()">Edit</button>
-                          <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
-                            (click)="deleteProduct()">Delete</button>
                         </ng-container>
                         <ng-container *ngIf="isEditing">
                           <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
@@ -83,7 +81,7 @@
                 </table>
               </div>
             </div>
-            <br><br><br><br>
+            <br><br><br>
             <div class="table-responsive">
               <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Material Details</h6>
               <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
@@ -154,6 +152,9 @@
                         <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
                           (click)="editMaterial(material)">Edit</button>
                       </ng-container>
+                      <ng-container>
+                        <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
+                          (click)="showBlankRow = true">Add</button></ng-container>
                       <ng-container editMaterialButtons>
                         <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
                       </ng-container>
@@ -163,14 +164,98 @@
                       </ng-template>
                     </td>
                   </tr>
+                  <!-- Blank row template -->
+                  <tr *ngIf="showBlankRow">
+                    <td>{{ productDetails.length + 1 }}</td>
+                    <td>
+                      <select id="selectedMaterial" class="form-select" name="selectedMaterial"
+                        (change)="onMaterialChange($event)" [(ngModel)]="newProduct.material" required>
+                        <option value="">--Select--</option>
+                        <option *ngFor="let material of materials" [value]="material.name">{{ material.name }}</option>
+                      </select>
+                    </td>
+                    <td>
+                      <div *ngIf="selectedMaterialData">
+                        <div>
+                          <input type="text" id="code" class="form-control" name="code"
+                            [(ngModel)]="selectedMaterialData.m_code" readonly>
+                          <input type="hidden" value="0" id="p_id" class="form-control" name="p_id"
+                            [(ngModel)]="selectedMaterialData.p_id" readonly>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="selectedMaterialData">
+                        <div>
+                          <input type="text" id="type" class="form-control" name="type"
+                            [(ngModel)]="selectedMaterialData.m_type" readonly>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="selectedMaterialData">
+                        <div>
+                          <input type="text" placeholder="Enter here" id="newmquantityperkg" class="form-control"
+                            name="newmquantityperkg" [(ngModel)]="selectedMaterialData.mquantity"
+                            (input)="calculatePrice()" required>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="selectedMaterialData">
+                        <div>
+                          <input type="text" id="cost" class="form-control" name="cost"
+                            [(ngModel)]="selectedMaterialData.m_cost" readonly>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="selectedMaterialData">
+                        <div>
+                          <input type="text" id="vendor" class="form-control" name="vendor"
+                            [(ngModel)]="selectedMaterialData.m_Vendor" readonly>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="selectedMaterialData">
+                        <div>
+                          <input type="text" id="M_inventory" class="form-control" name="M_inventory"
+                            [(ngModel)]="selectedMaterialData.m_inventory" readonly>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div *ngIf="selectedMaterialData">
+                        <div>
+                          <input type="text" id="cost" class="form-control" name="cost"
+                            [(ngModel)]="selectedMaterialData.m_cost" readonly>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <ng-container>
+                        <button class="btn btn-sm btn-primary" style="margin-inline: 2px;">Edit</button>
+                      </ng-container>
+                      <ng-container>
+                        <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
+                          (click)="showBlankRow = true">Add</button></ng-container>
+                      <ng-container editMaterialButtons>
+                        <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
+                      </ng-container>
+                      <ng-template #editMaterialButtons>
+                        <button class="btn btn-sm btn-success" style="margin-inline: 2px;">Update</button>
+                      </ng-template>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
-              <br><br>
-              <div style="display: flex; justify-content: space-between; align-items: center;">
-                <div style="display: flex; gap: 10px; margin-inline: 970px;">
-                  <button type="button" class="btn btn-warning" routerLink="/invoice">Invoice</button>
-                  <button type="button" class="btn btn-dark" routerLink="/viewrecipe">Back</button>
-                </div>
+            </div>
+            <br><br>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="display: flex; gap: 10px; margin-inline: 970px;">
+                <button type="button" class="btn btn-warning" routerLink="/invoice">Invoice</button>
+                <button type="button" class="btn btn-dark" routerLink="/viewrecipe">Back</button>
               </div>
             </div>
           </div>
