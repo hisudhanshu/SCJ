@@ -35,13 +35,13 @@ export class ViewFullrecipeComponent implements OnInit {
       this.productId = res['id'];
     });
 
-    
+
     // Retrieve the recipe details from localStorage
-    
+
     const recipeDetailsString = localStorage.getItem('selectedProduct');
     if (recipeDetailsString) {
 
-    // If there is data in localStorage, parse it as JSON and assign it to the selectedRecipe variable
+      // If there is data in localStorage, parse it as JSON and assign it to the selectedRecipe variable
       this.selectedRecipe = JSON.parse(recipeDetailsString);
     }
 
@@ -103,7 +103,7 @@ export class ViewFullrecipeComponent implements OnInit {
       }
     });
   }
-  
+
   // Function to retrieve the product by ID
   getProductById(productId: number): any {
     return this.filteredRecipes.find((recipe: any) => recipe.Id === productId);
@@ -139,7 +139,7 @@ export class ViewFullrecipeComponent implements OnInit {
   }
   getSelectedProductMaterials() {
     throw new Error('Method not implemented.');
- 
+
   }
   isEditing = false;
 
