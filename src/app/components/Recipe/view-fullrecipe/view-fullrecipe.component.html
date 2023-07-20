@@ -17,17 +17,17 @@
                 </div>
               </form>
             </div> -->
-            <h4 style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 400px;">Product - {{
-              selectedRecipe.NAME }}</h4>
+            <!-- <h4 style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 400px;">Product - {{
+              selectedRecipe.NAME }}</h4> -->
             <br><br>
             <!-- product-details.component.html -->
             <div class="table-responsive">
-              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product Details</h6>
+              <!-- <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product Details</h6> -->
               <div *ngIf="selectedRecipe">
-                <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
+                <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 12px;">
                   <tbody style="font-family: Georgia, 'Times New Roman', Times, serif;">
                     <tr>
-                      <th>Sn.</th>
+                      <!-- <th>Sn.</th> -->
                       <th>Product Name</th>
                       <th>Category</th>
                       <th>Brand</th>
@@ -36,7 +36,7 @@
                       <th>Action</th>
                     </tr>
                     <tr>
-                      <td>1</td>
+                      <!-- <td>1</td> -->
                       <td>
                         <ng-container *ngIf="!isEditing; else editProductName">{{ selectedRecipe.NAME }}</ng-container>
                         <ng-template #editProductName><input type="text" [(ngModel)]="selectedRecipe.NAME"
@@ -84,7 +84,7 @@
             <br><br><br>
             <div class="table-responsive">
               <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Material Details</h6>
-              <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
+              <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 12px;">
                 <tbody>
                   <tr>
                     <th>Recipe</th>
@@ -165,7 +165,7 @@
                     </td>
                   </tr>
                   <!-- Blank row template -->
-                  <tr *ngIf="showBlankRow">
+                  <tr *ngIf="showBlankRow" style="font-size: 12px;">
                     <td>{{ productDetails.length + 1 }}</td>
                     <td>
                       <select id="selectedMaterial" class="form-select" name="selectedMaterial"
