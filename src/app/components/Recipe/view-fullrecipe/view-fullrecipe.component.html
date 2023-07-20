@@ -152,9 +152,6 @@
                         <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
                           (click)="editMaterial(material)">Edit</button>
                       </ng-container>
-                      <ng-container>
-                        <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
-                          (click)="showBlankRow = true">Add</button></ng-container>
                       <ng-container editMaterialButtons>
                         <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
                       </ng-container>
@@ -237,9 +234,6 @@
                       <ng-container>
                         <button class="btn btn-sm btn-primary" style="margin-inline: 2px;">Edit</button>
                       </ng-container>
-                      <ng-container>
-                        <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
-                          (click)="showBlankRow = true">Add</button></ng-container>
                       <ng-container editMaterialButtons>
                         <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
                       </ng-container>
@@ -250,11 +244,19 @@
                   </tr>
                 </tbody>
               </table>
-            </div>
+            </div><br>
+            <ng-container>
+              <button *ngIf="!showBlankRow" class="btn btn-sm btn-success" style="display: flex; gap: 10px; margin-inline: 1080px;"
+                (click)="showBlankRow = true">Add</button>
+              <div *ngIf="showBlankRow" style="display: flex; gap: 10px; margin-inline: 1000px;">
+                <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="addMaterial()">Save</button>
+                <button class="btn btn-sm btn-danger" (click)="cancelAddMaterial()">Cancel</button>
+              </div>
+            </ng-container>
             <br><br>
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="display: flex; gap: 10px; margin-inline: 970px;">
-                <button type="button" class="btn btn-warning" routerLink="/invoice">Invoice</button>
+              <div style="display: flex; gap: 10px; margin-inline: 1070px;">
+                <!-- <button type="button" class="btn btn-warning" routerLink="/invoice">Invoice</button> -->
                 <button type="button" class="btn btn-dark" routerLink="/viewrecipe">Back</button>
               </div>
             </div>

@@ -20,7 +20,6 @@ interface Element {
   data: string;
 }
 
-
 interface RequestData {
   id: number;
   [key: string]: string | number;
@@ -72,7 +71,7 @@ export class ViewFullrecipeComponent implements OnInit {
   selectedMaterialData: Material | undefined;
   isEditing: boolean = false;
 
-  selectedMaterial: any = [];
+  selectedMaterial: any[] = [];
   elements: Element[] = [];
   successMessage: string = '';
   isEditMode: boolean = false;
@@ -95,7 +94,6 @@ export class ViewFullrecipeComponent implements OnInit {
     customer: '',
     clientType: '',
     SelectedMaterial: this.selectedMaterial,
-
   };
 
   constructor(private authService: AuthServicesService, private activatedRoute: ActivatedRoute) { }
@@ -105,16 +103,12 @@ export class ViewFullrecipeComponent implements OnInit {
       this.productId = res['id'];
     });
 
-
     // Retrieve the recipe details from localStorage
-
     const recipeDetailsString = localStorage.getItem('selectedProduct');
     if (recipeDetailsString) {
-
       // If there is data in localStorage, parse it as JSON and assign it to the selectedRecipe variable
       this.selectedRecipe = JSON.parse(recipeDetailsString);
     }
-
 
     this.authService.getRecipes().subscribe(
       (response: any) => {
@@ -133,6 +127,7 @@ export class ViewFullrecipeComponent implements OnInit {
         console.log('Error fetching materials:', error);
       }
     );
+
     this.authService.getMaterials().subscribe((response: any) => {
       if (response.isSuccess && response.matdata !== null) {
         this.materials = response.matdata;
@@ -140,8 +135,6 @@ export class ViewFullrecipeComponent implements OnInit {
         console.log('API request failed or no data received');
       }
     });
-
-    this.products();
     this.authService.getRawElements().subscribe(
       (data: any) => {
         this.rawElements = data.matdata.filter((item: any) => item.name !== '');
@@ -153,7 +146,6 @@ export class ViewFullrecipeComponent implements OnInit {
         console.error('Failed to fetch raw elements:', error);
       }
     );
-
 
     this.authService.getRecipes1().subscribe(
       (response: any) => {
@@ -214,11 +206,13 @@ export class ViewFullrecipeComponent implements OnInit {
       );
     }
   }
+
   search() {
     this.filteredRecipes = this.recipesData.filter((item: { name: string }) =>
       item.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
     );
   }
+
   // Functionality for editing and updating material details
   editMaterial(material: any) {
     material.isEditing = true;
@@ -228,9 +222,10 @@ export class ViewFullrecipeComponent implements OnInit {
     // Implement the logic to update the material details
     material.isEditing = false;
   }
-  getSelectedProductMaterials() {
-    throw new Error('Method not implemented.');
 
+  getSelectedProductMaterials() {
+    // Implement the logic to get selected product materials
+    // and update this.selectedMaterial array
   }
 
   editProduct() {
@@ -242,6 +237,7 @@ export class ViewFullrecipeComponent implements OnInit {
     // Here you can perform any update logic or API call if needed.
     // Update the properties in the selectedRecipe object.
   }
+
   deleteProduct() {
     const index = this.products.findIndex((product: any) => product === this.selectedRecipe);
     if (index !== -1) {
@@ -249,6 +245,7 @@ export class ViewFullrecipeComponent implements OnInit {
     }
     this.selectedRecipe = null; // Clear the selected recipe after deletion.
   }
+
   // Assuming you have defined the Material interface
 
   onMaterialChange(event: any): void {
@@ -287,14 +284,45 @@ export class ViewFullrecipeComponent implements OnInit {
       this.selectedMaterialData.m_cost = (quantity * 100).toString();
     }
   }
+
   addMaterial() {
-    // Push the new material object to the productDetails array
-    this.productDetails.push(this.newMaterial);
+    if (this.selectedMaterialData) {
+      const newMaterialData = { ...this.selectedMaterialData }; // Create a copy of the selectedMaterialData
+      this.productDetails.push(newMaterialData);
 
-    // Reset the newMaterial object for the next blank row
-    this.newMaterial = {};
+      // Call the MaterialService to insert the new material data
+      this.authService.insertProductData(newMaterialData).subscribe(
+        (response: any) => {
+          console.log('Material data inserted successfully:', response);
+          // Handle success if needed
+        },
+        (error: any) => {
+          console.error('Error occurred while inserting material data:', error);
+          // Handle error if needed
+        }
+      );
 
-    // Hide the blank row after adding a new material
+      // Save the selected material data in localStorage
+      localStorage.setItem('selectedMaterialData', JSON.stringify(newMaterialData));
+    }
+
+    // Reset the selectedMaterialData and hide the blank row after adding a new material
+    this.selectedMaterialData = undefined;
     this.showBlankRow = false;
+  }
+
+  cancelAddMaterial() {
+    // Reset the newMaterial object and hide the blank row when canceled
+    this.newMaterial = {};
+    this.showBlankRow = false;
+  }
+
+  // Function to retrieve the selected material data from localStorage
+  getSelectedMaterialDataFromLocalStorage(): void {
+    const selectedMaterialDataString = localStorage.getItem('selectedMaterialData');
+    if (selectedMaterialDataString) {
+      const selectedMaterialData = JSON.parse(selectedMaterialDataString);
+      this.selectedMaterial.push(selectedMaterialData);
+    }
   }
 }
