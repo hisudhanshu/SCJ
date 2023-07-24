@@ -47,7 +47,7 @@
                       [(ngModel)]="material.M_Vendor" />
                   </div>
                   <div class="col-md-4" style="margin-top: 30px;">
-                    <label for="namelevel">Inventory Level</label>
+                    <label for="namelevel">Stock</label>
                     <input type="text" class="form-control" placeholder="Enter Inventory Level" id="namelevel"
                       [(ngModel)]="material.M_inventory" />
                   </div>
@@ -72,7 +72,8 @@
                     <th>Material Code</th>
                     <th>Cost Per/Unit</th>
                     <th>Vendor</th>
-                    <th>Inventory</th>
+                    <th>Stock</th>
+                    <th>Created Date</th>
                     <th>Details</th>
                     <th>Actions</th>
                   </tr>
@@ -86,6 +87,7 @@
                     <td>{{ material?.m_cost }}</td>
                     <td>{{ material?.m_Vendor }}</td>
                     <td>{{ material?.m_inventory }}</td>
+                    <td>{{ formatDate(material?.created_date) }}</td>
                     <td>
                       <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
                         data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
@@ -101,6 +103,23 @@
               </table>
               <p *ngIf="materialsList.length === 0"></p>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="updateMaterialModal" tabindex="-1" aria-labelledby="updateMaterialModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateMaterialModalLabel">Update Material</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>Are you sure you want to update this material?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="updateMaterial()">Update</button>
           </div>
         </div>
       </div>

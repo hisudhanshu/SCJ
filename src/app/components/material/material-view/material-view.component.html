@@ -28,8 +28,9 @@
                     <th (click)="sortTable('m_code')">Material Code  <i class="bi bi-arrow-down-up"></i></th>
                     <th (click)="sortTable('m_type')">Material Type  <i class="bi bi-arrow-down-up"></i></th>
                     <th (click)="sortTable('m_cost')">Material Cost  <i class="bi bi-arrow-down-up"></i></th>
-                    <th (click)="sortTable('m_Vendor')">Vendor  <i class="bi bi-arrow-down-up"></i></th>
-                    <th (click)="sortTable('m_inventory')">Inventory  <i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('m_Vendor')">Vendor <i class="bi bi-arrow-down-up"></i></th>
+                    <th (click)="sortTable('m_inventory')">Stock <i class="bi bi-arrow-down-up"></i></th>
+                    <!-- <th (click)="sortTable('createddate')">Created date  <i class="bi bi-arrow-down-up"></i></th> -->
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -84,6 +85,7 @@
                         <input type="text" [(ngModel)]="material.m_inventory" class="form-control">
                       </ng-template>
                     </td>
+                    <!-- <td></td> -->
                     <td>
                       <ng-container *ngIf="!material.isEditing; else editButtons">
                         <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"

@@ -140,4 +140,12 @@ export class CreateMaterialComponent implements OnInit {
       this.selectedMaterial = material;
       // Code to open the modal
   }
+  formatDate(date: string): string {
+    // Format the date to display in dd/MM/yyyy format
+    const formattedDate = new Date(date);
+    const day = formattedDate.getDate().toString().padStart(2, '0');
+    const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0');
+    const year = formattedDate.getFullYear().toString();
+    return `${day}/${month}/${year}`;
+  }
 }
