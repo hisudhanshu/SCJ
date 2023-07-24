@@ -7,6 +7,8 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./create-material.component.css']
 })
 export class CreateMaterialComponent implements OnInit {
+  successMessage: string = '';
+  errorMessage: string = '';
   materials: any[] | undefined;
   filteredMaterials: any[] | undefined;
   searchKeyword: string = '';
@@ -47,24 +49,40 @@ export class CreateMaterialComponent implements OnInit {
         }
       );
     }
-
-  addMaterial(): void {
-    const confirmAdd = confirm('Are you sure you want to add this material?');
-    if (confirmAdd) {
-      this.authService.insertData(this.material).subscribe(
-        (response: any) => {
-          console.log('Material added successfully.', response);
-          alert('Material added successfully.');
-          this.materialsList.push(this.material); // Add material to the list
-          this.saveMaterials(); // Save materials to local storage
-          this.clearForm(); // Clear the form fields
-        },
-        (error: any) => {
-          console.error('Error adding material.', error);
-        }
-      );
+    addMaterial(): void {
+      const confirmAdd = confirm('Are you sure you want to add this material?');
+      if (confirmAdd) {
+        this.authService.insertData(this.material).subscribe(
+          (response: any) => {
+            if (response.isSuccess) {
+              this.successMessage = 'Material added successfully.';
+              this.errorMessage = '';
+              this.clearAlertsAfterTimeout();
+            } else {
+              this.errorMessage = 'Error adding material.';
+              this.successMessage = '';
+              this.clearAlertsAfterTimeout();
+            }
+            this.materialsList.push(this.material); // Add material to the list
+            this.saveMaterials(); // Save materials to local storage
+            this.clearForm(); // Clear the form fields
+          },
+          (error: any) => {
+            this.errorMessage = 'Error adding material.';
+            this.successMessage = '';
+            console.error('Error adding material.', error);
+            this.clearAlertsAfterTimeout();
+          }
+        );
+      }
     }
-  }
+  
+    clearAlertsAfterTimeout(): void {
+      setTimeout(() => {
+        this.successMessage = '';
+        this.errorMessage = '';
+      }, 2000);
+    }
 
   saveMaterials(): void {
     localStorage.setItem('materials', JSON.stringify(this.materialsList));
