@@ -127,6 +127,8 @@ export class CreateMaterialComponent implements OnInit {
     } else if (this.confirmModalTitle === 'Update Material') {
       const confirmUpdate = true; // Replace this with the actual API call or logic for updating material
       if (confirmUpdate) {
+        this.successMessage = 'Material Updated successfully.';
+        this.errorMessage = 'Material not Updated';
         // API call for updating material
         const materialToUpdate = this.materialsList[this.editIndex];
         materialToUpdate.name = this.material.name;
@@ -144,6 +146,8 @@ export class CreateMaterialComponent implements OnInit {
       // Handle the delete logic here
       const confirmDelete = true; // Replace this with the actual API call or logic for deleting material
       if (confirmDelete) {
+        this.successMessage = 'Material Delete successfully.';
+        this.errorMessage = '';
         // API call for deleting material
         this.materialsList.splice(this.editIndex, 1);
         this.saveMaterials();
