@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
+import { Modal } from 'bootstrap';
+declare const bootstrap: any;
 
 interface Material {
   id: number;
@@ -18,7 +20,6 @@ interface Element {
   data: string;
 }
 
-
 interface RequestData {
   id: number;
   [key: string]: string | number;
@@ -29,13 +30,18 @@ interface RequestData {
   templateUrl: './recipe-create.component.html',
   styleUrls: ['./recipe-create.component.css']
 })
-export class RecipeCreateComponent implements OnInit {
+export class RecipeCreateComponent implements OnInit { 
+
+  successMessage: string = '';
+  errorMessage: string = '';
+  confirmModalTitle: string = '';
+  confirmModalMessage: string = '';
+
   SelectedMaterial: string[] = [];
 
   // Declare flag variables
   isFlag1Selected: boolean = false;
   isFlag2Selected: boolean = false;
-
 
   materials: Material[] = [];
   showMaterialDropdowns = false;
@@ -51,7 +57,6 @@ export class RecipeCreateComponent implements OnInit {
 
   categories: string[] = ['Category A', 'Category B', 'Category C'];
   products: any[] = [];
-  successMessage: string = '';
 
   newProduct: any = {
     // p_id: 0,
@@ -62,7 +67,6 @@ export class RecipeCreateComponent implements OnInit {
     customer: '',
     clientType: '',
     SelectedMaterial: this.selectedMaterial,
-
   };
 
   isEditMode: boolean = false;
@@ -99,35 +103,23 @@ export class RecipeCreateComponent implements OnInit {
       }
     );
   }
+
   createOrUpdateProduct() {
     if (this.isEditMode) {
       // Update the existing product
       this.products[this.editIndex] = { ...this.newProduct };
     } else {
-      const confirmCreate = confirm("Are you sure you want to create this product?");
-      if (confirmCreate) {
-        this.authService.insertProductData(this.newProduct).subscribe(
-          (response) => {
-            console.log('Product data inserted successfully:', response);
-            this.products.push({ ...this.newProduct });
-            this.saveProducts();
-
-            this.successMessage = 'Product added successfully.';
-            alert('Product added successfully.');
-          },
-          (error) => {
-            console.error('Error occurred while inserting product data:', error);
-          }
-        );
-      }
+      this.confirmModalTitle = 'Add Product';
+      this.confirmModalMessage = 'Are you sure you want to add this product?';
+      this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
     }
   }
-
 
   removeProduct(index: number) {
     this.products.splice(index, 1);
     this.saveProducts();
   }
+
   private loadProducts() {
     const savedProducts = localStorage.getItem('products');
     if (savedProducts) {
@@ -159,12 +151,6 @@ export class RecipeCreateComponent implements OnInit {
     return this.materials.find((material: Material) => material.name === name);
   }
 
-  // deleteMaterial(material: Material) {
-  //   // Perform the necessary logic to delete the material
-  //   // e.g., call an API or update the data in your service
-  //   console.log('Deleting material:', material);
-  // }
-
   toggleEditing() {
     this.isEditing = !this.isEditing;
   }
@@ -181,34 +167,122 @@ export class RecipeCreateComponent implements OnInit {
       this.selectedMaterialData.m_cost = (quantity * 100).toString();
     }
   }
+
   // Edit function
   editMaterial(material: any) {
     material.isEditing = true; // Set 'isEditing' property to true for the selected recipe
   }
 
-  updateMaterial(material: any): void {
-    // Implement your logic for updating a recipe
-    console.log('Update material:', material);
-    material.isEditing = false; // Set 'isEditing' property back to false after updating
-  }
+  // Component logic
+  deleteMaterial(material: any) {
+    // Find the index of the material in the selectedMaterial array
+    const index = this.selectedMaterial.indexOf(material);
 
-// Component logic
-deleteMaterial(material: any) {
-  // Find the index of the material in the selectedMaterial array
-  const index = this.selectedMaterial.indexOf(material);
-  
-  if (index !== -1) {
-    // Remove the material from the selectedMaterial array
-    this.selectedMaterial.splice(index, 1);
-    
-    // Optionally, you can perform additional logic such as sending an HTTP request to delete the material from the server
-    
-    console.log('Deleted material:', material);
+    if (index !== -1) {
+      // Remove the material from the selectedMaterial array
+      this.selectedMaterial.splice(index, 1);
+
+      // Optionally, you can perform additional logic such as sending an HTTP request to delete the material from the server
+
+      console.log('Deleted material:', material);
+    }
   }
-}
 
   saveMaterial(material: any): void {
     // Implement your logic for saving the edited recipe
     console.log('Save Material:', material);
+  }
+
+  // Method to show the success modal
+  showSuccessModal(message: string): void {
+    this.successMessage = message;
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+      const bootstrapModal = new bootstrap.Modal(successModal);
+      bootstrapModal.show();
+      setTimeout(() => bootstrapModal.hide(), 2000); // Automatically hide after 2 seconds
+    }
+  }
+
+  // Method to show the error modal
+  showErrorModal(message: string): void {
+    this.errorMessage = message;
+    const errorModal = document.getElementById('errorModal');
+    if (errorModal) {
+      const bootstrapModal = new bootstrap.Modal(errorModal);
+      bootstrapModal.show();
+      setTimeout(() => bootstrapModal.hide(), 2000); // Automatically hide after 2 seconds
+    }
+  }
+
+  // Method to show the confirmation modal
+  showConfirmationModal(title: string, message: string): void {
+    this.confirmModalTitle = title;
+    this.confirmModalMessage = message;
+    const confirmModal = document.getElementById('confirmModal');
+    if (confirmModal) {
+      const bootstrapModal = new bootstrap.Modal(confirmModal);
+      bootstrapModal.show();
+    }
+  }
+
+  // Method to perform the action after confirming in the modal
+  performAction(): void {
+    if (this.confirmModalTitle === 'Add Material') {
+      // Logic for adding material...
+      // For example:
+      // this.addMaterial();
+      this.showSuccessModal('Material added successfully.');
+    } else if (this.confirmModalTitle === 'Update Material') {
+      // Logic for updating material...
+      // For example:
+      // this.updateMaterial();
+      this.showSuccessModal('Material updated successfully.');
+    } else if (this.confirmModalTitle === 'Delete Material') {
+      // Logic for deleting material...
+      // For example:
+      // this.deleteMaterial();
+      this.showSuccessModal('Material deleted successfully.');
+    } else if (this.confirmModalTitle === 'Add Product') {
+      // Logic for adding product...
+      // For example:
+      this.authService.insertProductData(this.newProduct).subscribe(
+        (response: any) => {
+          if (response.isSuccess) {
+            console.log('Product data inserted successfully:', response);
+            this.products.push({ ...this.newProduct });
+            this.saveProducts();
+
+            this.showSuccessModal('Product added successfully.');
+          } else {
+            console.error('Failed to insert product data:', response);
+            this.showErrorModal('Failed to add the product.');
+          }
+        },
+        (error: any) => {
+          console.error('Error occurred while inserting product data:', error);
+          this.showErrorModal('Failed to add the product.');
+        }
+      );
+    }
+  }
+
+  // Functions to handle different actions in your component
+  addMaterial(): void {
+    this.confirmModalTitle = 'Add Recipe';
+    this.confirmModalMessage = 'Are you sure you want to add this recipe?';
+    this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
+  }
+
+  updateMaterial(material: any): void {
+    this.confirmModalTitle = 'Update Recipe';
+    this.confirmModalMessage = 'Are you sure you want to update this recipe?';
+    this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
+  }
+
+  deleteMaterialConfirmed(): void {
+    this.confirmModalTitle = 'Delete Recipe';
+    this.confirmModalMessage = 'Are you sure you want to delete this recipe?';
+    this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
   }
 }
