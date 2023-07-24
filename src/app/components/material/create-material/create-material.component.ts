@@ -179,6 +179,7 @@ export class CreateMaterialComponent implements OnInit {
     const materialToEdit = this.materialsList[index];
     this.material = { ...materialToEdit };
   }
+
   filterMaterials(): void {
     if (this.searchKeyword.trim() === '') {
       this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]');
@@ -217,6 +218,7 @@ export class CreateMaterialComponent implements OnInit {
     if (successModal) {
       const bootstrapModal = new bootstrap.Modal(successModal);
       bootstrapModal.show();
+      setTimeout(() => bootstrapModal.hide(), 2000); // Automatically hide after 2 seconds
     }
   }
 
@@ -225,6 +227,7 @@ export class CreateMaterialComponent implements OnInit {
     if (errorModal) {
       const bootstrapModal = new bootstrap.Modal(errorModal);
       bootstrapModal.show();
+      setTimeout(() => bootstrapModal.hide(), 2000); // Automatically hide after 2 seconds
     }
   }
 }

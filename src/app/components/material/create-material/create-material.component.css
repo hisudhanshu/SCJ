@@ -1,5 +1,8 @@
 
-
+/* Custom CSS for top-aligned modals */
+.modal.fade.align-top .modal-dialog {
+  margin: -230px auto 0;
+}
 /* Position the alert at the top of the card */
 .alert {
   position: absolute;
