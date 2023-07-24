@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
+import { Modal } from 'bootstrap';
+
+declare const bootstrap: any;
 
 @Component({
   selector: 'app-create-material',
@@ -20,69 +23,141 @@ export class CreateMaterialComponent implements OnInit {
     M_Vendor: '',
     M_inventory: ''
   };
-  materialsList: any[] = []; // Array to store the added materials
-  editIndex: number = -1; // Index of the material being edited (-1 for none)
+  materialsList: any[] = [];
+  editIndex: number = -1;
   selectedMaterial: any;
 
-  constructor(private authService: AuthServicesService) {}
+  confirmModalTitle: string = '';
+  confirmModalMessage: string = '';
+
+  constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
     this.getMaterials1();
-    // Retrieve materials from local storage if available
     const storedMaterials = localStorage.getItem('materials');
     if (storedMaterials) {
       this.materialsList = JSON.parse(storedMaterials);
     }
   }
-    getMaterials1() {
-      this.authService.getMaterials().subscribe(
-        (response: any) => {
-          if (response.isSuccess && response.matdata !== null) {
-            this.materials = response.matdata;
-            this.filteredMaterials = response.matdata; // Initialize filteredMaterials with all materials
-          } else {
-            console.log('API request failed or no data received');
-          }
-        },
-        (error: any) => {
-          console.log('Error fetching materials:', error);
+
+  getMaterials1() {
+    this.authService.getMaterials().subscribe(
+      (response: any) => {
+        if (response.isSuccess && response.matdata !== null) {
+          this.materials = response.matdata;
+          this.filteredMaterials = response.matdata;
+        } else {
+          console.log('API request failed or no data received');
         }
-      );
+      },
+      (error: any) => {
+        console.log('Error fetching materials:', error);
+      }
+    );
+  }
+
+  addMaterial(): void {
+    this.confirmModalTitle = 'Add Material';
+    this.confirmModalMessage = 'Are you sure you want to add this material?';
+
+    // Show the confirmation modal
+    const confirmModal = document.getElementById('confirmModal');
+    if (confirmModal) {
+      const bootstrapModal = new bootstrap.Modal(confirmModal);
+      bootstrapModal.show();
     }
-    addMaterial(): void {
-      const confirmAdd = confirm('Are you sure you want to add this material?');
+  }
+
+  updateMaterial(): void {
+    this.confirmModalTitle = 'Update Material';
+    this.confirmModalMessage = 'Are you sure you want to update this material?';
+
+    // Show the confirmation modal
+    const confirmModal = document.getElementById('confirmModal');
+    if (confirmModal) {
+      const bootstrapModal = new bootstrap.Modal(confirmModal);
+      bootstrapModal.show();
+    }
+  }
+
+  deleteMaterialConfirmed(): void {
+    this.confirmModalTitle = 'Delete Material';
+    this.confirmModalMessage = 'Are you sure you want to delete this material?';
+
+    // Show the confirmation modal
+    const confirmModal = document.getElementById('confirmModal');
+    if (confirmModal) {
+      const bootstrapModal = new bootstrap.Modal(confirmModal);
+      bootstrapModal.show();
+    }
+  }
+
+  // This function is called after the user confirms the action in the modal
+  performAction(): void {
+    if (this.confirmModalTitle === 'Add Material') {
+      const confirmAdd = true; // Replace this with the actual API call or logic for adding material
       if (confirmAdd) {
+        // API call for adding material
         this.authService.insertData(this.material).subscribe(
           (response: any) => {
             if (response.isSuccess) {
               this.successMessage = 'Material added successfully.';
               this.errorMessage = '';
               this.clearAlertsAfterTimeout();
+              this.materialsList.push(this.material);
+              this.saveMaterials();
+              this.clearForm();
+              this.showSuccessModal();
             } else {
               this.errorMessage = 'Error adding material.';
               this.successMessage = '';
               this.clearAlertsAfterTimeout();
+              this.showErrorModal();
             }
-            this.materialsList.push(this.material); // Add material to the list
-            this.saveMaterials(); // Save materials to local storage
-            this.clearForm(); // Clear the form fields
           },
           (error: any) => {
             this.errorMessage = 'Error adding material.';
             this.successMessage = '';
             console.error('Error adding material.', error);
             this.clearAlertsAfterTimeout();
+            this.showErrorModal();
           }
         );
       }
+    } else if (this.confirmModalTitle === 'Update Material') {
+      const confirmUpdate = true; // Replace this with the actual API call or logic for updating material
+      if (confirmUpdate) {
+        // API call for updating material
+        const materialToUpdate = this.materialsList[this.editIndex];
+        materialToUpdate.name = this.material.name;
+        materialToUpdate.M_type = this.material.M_type;
+        materialToUpdate.code = this.material.code;
+        materialToUpdate.M_cost = this.material.M_cost;
+        materialToUpdate.M_Vendor = this.material.M_Vendor;
+        materialToUpdate.M_inventory = this.material.M_inventory;
+        this.saveMaterials();
+        this.clearForm();
+        this.editIndex = -1;
+        this.showSuccessModal();
+      }
+    } else if (this.confirmModalTitle === 'Delete Material') {
+      // Handle the delete logic here
+      const confirmDelete = true; // Replace this with the actual API call or logic for deleting material
+      if (confirmDelete) {
+        // API call for deleting material
+        this.materialsList.splice(this.editIndex, 1);
+        this.saveMaterials();
+        this.showSuccessModal();
+      }
     }
-  
-    clearAlertsAfterTimeout(): void {
-      setTimeout(() => {
-        this.successMessage = '';
-        this.errorMessage = '';
-      }, 2000);
-    }
+  }
+
+  clearAlertsAfterTimeout(): void {
+    setTimeout(() => {
+      this.successMessage = '';
+      this.errorMessage = '';
+    }, 2000);
+  }
 
   saveMaterials(): void {
     localStorage.setItem('materials', JSON.stringify(this.materialsList));
@@ -102,40 +177,12 @@ export class CreateMaterialComponent implements OnInit {
   editMaterial(index: number): void {
     this.editIndex = index;
     const materialToEdit = this.materialsList[index];
-    // Assign the values of the material to the form fields for editing
     this.material = { ...materialToEdit };
   }
-
-  updateMaterial(): void {
-    const confirmUpdate = confirm('Are you sure you want to update this material?');
-    if (confirmUpdate) {
-      const materialToUpdate = this.materialsList[this.editIndex];
-      materialToUpdate.name = this.material.name;
-      materialToUpdate.M_type = this.material.M_type;
-      materialToUpdate.code = this.material.code;
-      materialToUpdate.M_cost = this.material.M_cost;
-      materialToUpdate.M_Vendor = this.material.M_Vendor;
-      materialToUpdate.M_inventory = this.material.M_inventory;
-      this.saveMaterials(); // Save updated materials to local storage
-      this.clearForm(); // Clear the form fields
-      this.editIndex = -1; // Reset the edit index
-    }
-  }
-
-  deleteMaterial(index: number): void {
-    const confirmDelete = confirm('Are you sure you want to delete this material?');
-    if (confirmDelete) {
-      this.materialsList.splice(index, 1);
-      this.saveMaterials(); // Save updated materials to local storage
-    }
-  }
-
   filterMaterials(): void {
     if (this.searchKeyword.trim() === '') {
-      // Reset the materials list to show all materials when search keyword is empty
       this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]');
     } else {
-      // Filter the materials list based on the search keyword
       this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]').filter((material: any) =>
         material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
       );
@@ -144,10 +191,8 @@ export class CreateMaterialComponent implements OnInit {
 
   searchMaterials(): void {
     if (this.searchKeyword.trim() === '') {
-      // Reset the materials list to show all materials when search keyword is empty
       this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]');
     } else {
-      // Filter the materials list based on the search keyword
       this.materialsList = JSON.parse(localStorage.getItem('materials') || '[]').filter((material: any) =>
         material.name.toLowerCase().includes(this.searchKeyword.toLowerCase())
       );
@@ -155,15 +200,31 @@ export class CreateMaterialComponent implements OnInit {
   }
 
   openModal(material: any) {
-      this.selectedMaterial = material;
-      // Code to open the modal
+    this.selectedMaterial = material;
+    // Code to open the modal
   }
+
   formatDate(date: string): string {
-    // Format the date to display in dd/MM/yyyy format
     const formattedDate = new Date(date);
     const day = formattedDate.getDate().toString().padStart(2, '0');
     const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0');
     const year = formattedDate.getFullYear().toString();
     return `${day}/${month}/${year}`;
+  }
+
+  showSuccessModal(): void {
+    const successModal = document.getElementById('successModal');
+    if (successModal) {
+      const bootstrapModal = new bootstrap.Modal(successModal);
+      bootstrapModal.show();
+    }
+  }
+
+  showErrorModal(): void {
+    const errorModal = document.getElementById('errorModal');
+    if (errorModal) {
+      const bootstrapModal = new bootstrap.Modal(errorModal);
+      bootstrapModal.show();
+    }
   }
 }
