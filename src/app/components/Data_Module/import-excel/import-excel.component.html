@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body"><br>
+                    <div class="card-body">
+                        <br>
                         <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
                             <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">Import Excel
                                 Sheet</strong>
@@ -15,9 +16,7 @@
                                 <input class="form-control" type="file" #fileInput>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-success" (click)="uploadFile()">
-                                    Upload
-                                </button>
+                                <button class="btn btn-success" (click)="uploadFile()">Upload</button>
                             </div>
                         </div>
                         <br><br>
@@ -29,39 +28,50 @@
                         <div class="container" *ngIf="loading">
                             <h3>Loading ...</h3>
                         </div>
-                    
+
                         <!-- Confirm Modal -->
-                        <div class="modal" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                        <div class="modal" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                            id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
-                                    <div class="modal-header">
+                                    <div class="modal-header"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
                                         <h5 class="modal-title" id="confirmModalLabel">Confirm Upload</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
                                         Are you sure you want to upload the file?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-primary" (click)="uploadConfirmed()">Upload</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                            (click)="hideConfirmModal();">Cancel</button>
+                                        <button type="button" class="btn btn-primary"
+                                            (click)="uploadConfirmed(); hideConfirmModal();">Upload</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    
+
                         <!-- Success Modal -->
-                        <div class="modal" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+                        <div class="modal" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                            id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="successModalLabel">Upload Successful</h5>
+                                        <h5 class="modal-title" id="successModalLabel"
+                                            style="font-family: Georgia, 'Times New Roman', Times, serif;">Upload
+                                            Successful</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
                                         The file was successfully uploaded.
                                     </div>
                                     <div class="modal-footer">
@@ -70,25 +80,33 @@
                                 </div>
                             </div>
                         </div>
-                    
+
                         <!-- Error Modal -->
-                        <div class="modal" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+                        <div class="modal" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                            id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+                            aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                                        <h5 class="modal-title" id="errorModalLabel"
+                                            style="font-family: Georgia, 'Times New Roman', Times, serif;">Error</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
                                         There was an error uploading the file.
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div></div></div></div></section>
-                    </main>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

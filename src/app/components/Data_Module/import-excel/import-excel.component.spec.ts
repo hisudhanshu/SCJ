@@ -8,9 +8,9 @@ describe('ImportExcelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImportExcelComponent ]
+      declarations: [ImportExcelComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ImportExcelComponent);
     component = fixture.componentInstance;
