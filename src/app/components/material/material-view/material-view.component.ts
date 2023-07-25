@@ -102,4 +102,15 @@ export class MaterialViewComponent implements OnInit {
       console.log('Material not found:', material);
     }
   }
+  formatDate(dateStr: string): string {
+    // You can use any date formatting library like date-fns or moment.js,
+    // or use the built-in JavaScript Date object to format the date string.
+    // For simplicity, here's an example using the Date object:
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  }
 }
