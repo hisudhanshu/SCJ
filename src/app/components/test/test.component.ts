@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 @Component({
@@ -7,14 +7,15 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  recipesData: any[] = [];
-  selectedRecipe: any;
-  filteredRecipes: any[] = []; // Array to store filtered recipe data
-  searchKeyword: string = ''; // Variable to store the search keyword
-  recipes: any;
 
-  constructor(private authService: AuthServicesService) {}
+  constructor(private elementRef: ElementRef) { }
 
- ngOnInit(): void {
-   
- }}
+  ngOnInit(): void {
+
+    var s = document.createElement("script");
+    s.type = "text/javascript";
+    s.src = "../assets/js/main.js";
+    this.elementRef.nativeElement.appendChild(s);
+  }
+
+}
