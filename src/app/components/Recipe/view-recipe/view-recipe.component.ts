@@ -7,17 +7,18 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./view-recipe.component.css']
 })
 export class ViewRecipeComponent implements OnInit {
-
+  searchQuery: string = '';
+  searchKeyword: string = ''; // New property to hold the search keyword
   materials: any[] = []; // Assuming you have the materials data here
   selectedProductId: number | null = null;
   recipesData: any[] = [];
   selectedRecipe: any;
   filteredRecipes: any[] = [];
-  searchKeyword: string = '';
   recipes: any;
   isAscending: boolean = true;
   sortColumn: string = '';
   isModalOpen: boolean = false;
+  recipe: any[] = [];
 
 
   constructor(private authService: AuthServicesService) { }
@@ -61,20 +62,7 @@ export class ViewRecipeComponent implements OnInit {
     this.selectedRecipe = recipeData;
     this.selectedProductId = recipeData.Id;
   }
-  searchRecipes(): void {
-    const keyword = this.searchKeyword.toLowerCase().trim();
-    if (keyword === '') {
-      this.filteredRecipes = [...this.recipesData];
-    } else {
-      this.filteredRecipes = this.recipesData.filter(recipe =>
-        recipe.name.toLowerCase().includes(keyword) ||
-        recipe.category.toLowerCase().includes(keyword) ||
-        recipe.brand.toLowerCase().includes(keyword) ||
-        recipe.customer.toLowerCase().includes(keyword) ||
-        recipe.clienttype.toLowerCase().includes(keyword)
-      );
-    }
-  }
+
   sortTable(column: string) {
     if (column === this.sortColumn) {
       // If the same column is clicked again, reverse the sort order
@@ -135,7 +123,6 @@ export class ViewRecipeComponent implements OnInit {
       }
     }
   }
-
   openModal() {
     this.isModalOpen = true;
   }
@@ -156,6 +143,16 @@ export class ViewRecipeComponent implements OnInit {
     // Save the product details to localStorage with a unique key, for example, 'selectedProduct'
     localStorage.setItem('selectedProduct', productDetails);
   }
-
+  searchRecipes() {
+    if (!this.searchQuery) {
+      // If searchQuery is empty, reset filteredMaterials to show all materials
+      this.filteredRecipes = this.recipe;
+    } else {
+      // Perform the search operation on materials based on the search query
+      this.filteredRecipes = this.materials?.filter(recipe =>
+        recipe?.name?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+  }
 
 }

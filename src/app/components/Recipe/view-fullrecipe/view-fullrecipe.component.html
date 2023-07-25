@@ -246,8 +246,8 @@
               </table>
             </div><br>
             <ng-container>
-              <button *ngIf="!showBlankRow" class="btn btn-sm btn-success" style="display: flex; gap: 10px; margin-inline: 1080px;"
-                (click)="showBlankRow = true">Add</button>
+              <!-- <button *ngIf="!showBlankRow" class="btn btn-sm btn-success" style="display: flex; gap: 10px; margin-inline: 1080px;"
+                (click)="showBlankRow = true">Add</button> -->
               <div *ngIf="showBlankRow" style="display: flex; gap: 10px; margin-inline: 1000px;">
                 <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="addMaterial()">Save</button>
                 <button class="btn btn-sm btn-danger" (click)="cancelAddMaterial()">Cancel</button>
