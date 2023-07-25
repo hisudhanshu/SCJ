@@ -104,6 +104,27 @@
          </ul>
       </li>
       <li class="nav-item">
+         <a class="nav-link collapsed" data-bs-target="#datatype-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-activity"></i>
+            <span>Data Module</span>
+            <i class="bi bi-chevron-down ms-auto"></i>
+         </a>
+         <ul id="datatype-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+               <a routerLink="/importexcel">
+                  <i class="bi bi-circle"></i>
+                  <span>Data Import</span>
+               </a>
+            </li>
+            <li>
+               <a routerLink="/reconciliation">
+                  <i class="bi bi-circle"></i>
+                  <span>Data Reconciliation</span>
+               </a>
+            </li>
+         </ul>
+      </li>
+      <li class="nav-item">
          <a class="nav-link collapsed" data-bs-target="#invoice-nav" data-bs-toggle="collapse" href="#">
             <i class="bi bi-journal-text"></i>
             <span>Invoice</span>
@@ -224,12 +245,6 @@
                <a routerLink="/charts">
                   <i class="bi bi-circle"></i>
                   <span>Sales Charts</span>
-               </a>
-            </li>
-            <li>
-               <a routerLink="/import">
-                  <i class="bi bi-circle"></i>
-                  <span>Data Import</span>
                </a>
             </li>
             <li>

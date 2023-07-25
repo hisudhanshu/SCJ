@@ -19,7 +19,6 @@ import { CostAdjustmentComponent } from './components/cost/cost-adjustment/cost-
 import { PricingComponent } from './components/cost/pricing/pricing.component';
 import { MonthlyReportsComponent } from './components/reporting/monthly-reports/monthly-reports.component';
 import { InsightsComponent } from './components/reporting/insights/insights.component';
-import { ImportComponent } from './components/Data/import/import.component';
 import { IdentificationComponent } from './components/Gap/identification/identification.component';
 import { ReportingComponent } from './components/Gap/reporting/reporting.component';
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
@@ -32,6 +31,8 @@ import { MaterialViewComponent } from './components/material/material-view/mater
 import { ViewRecipeComponent } from './components/Recipe/view-recipe/view-recipe.component';
 import { RecipeComparisonComponent } from './components/Recipe/recipe-comparison/recipe-comparison.component';
 import { ViewFullrecipeComponent } from './components/Recipe/view-fullrecipe/view-fullrecipe.component';
+import { ImportExcelComponent } from './components/Data_Module/import-excel/import-excel.component';
+import { ReconciliationComponent } from './components/Data_Module/reconciliation/reconciliation.component';
 
 
 const routes: Routes = [
@@ -47,7 +48,6 @@ const routes: Routes = [
   { path: 'mapproduct', component: ProductComponent },
   { path: 'reporting', component: MonthlyReportsComponent },
   { path: 'insights', component: InsightsComponent },
-  { path: 'import', component: ImportComponent },
   { path: 'identification', component: IdentificationComponent },
   { path: 'gapreporting', component: ReportingComponent },
   { path: 'productmaterial', component: ProductMaterialComponent },
@@ -70,6 +70,8 @@ const routes: Routes = [
   { path: 'pages-login', component: PagesLoginComponent },
   { path: 'pages-register', component: PagesRegisterComponent },
   { path: 'user-profile', component: UsersProfileComponent },
+  { path: 'importexcel', component: ImportExcelComponent},
+  { path: 'reconciliation', component: ReconciliationComponent},
 ];
 
 
