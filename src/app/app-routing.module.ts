@@ -20,7 +20,6 @@ import { PricingComponent } from './components/cost/pricing/pricing.component';
 import { MonthlyReportsComponent } from './components/reporting/monthly-reports/monthly-reports.component';
 import { InsightsComponent } from './components/reporting/insights/insights.component';
 import { ImportComponent } from './components/Data/import/import.component';
-import { ReconciliationComponent } from './components/Data/reconciliation/reconciliation.component';
 import { IdentificationComponent } from './components/Gap/identification/identification.component';
 import { ReportingComponent } from './components/Gap/reporting/reporting.component';
 import { ProductMaterialComponent } from './components/material/product-material/product-material.component';
@@ -49,7 +48,6 @@ const routes: Routes = [
   { path: 'reporting', component: MonthlyReportsComponent },
   { path: 'insights', component: InsightsComponent },
   { path: 'import', component: ImportComponent },
-  { path: 'reconciliation', component: ReconciliationComponent },
   { path: 'identification', component: IdentificationComponent },
   { path: 'gapreporting', component: ReportingComponent },
   { path: 'productmaterial', component: ProductMaterialComponent },
