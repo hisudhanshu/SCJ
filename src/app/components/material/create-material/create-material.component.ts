@@ -209,12 +209,16 @@ export class CreateMaterialComponent implements OnInit {
     // Code to open the modal
   }
 
-  formatDate(date: string): string {
-    const formattedDate = new Date(date);
-    const day = formattedDate.getDate().toString().padStart(2, '0');
-    const month = (formattedDate.getMonth() + 1).toString().padStart(2, '0');
-    const year = formattedDate.getFullYear().toString();
-    return `${day}/${month}/${year}`;
+  formatDate(dateStr: string): string {
+    // You can use any date formatting library like date-fns or moment.js,
+    // or use the built-in JavaScript Date object to format the date string.
+    // For simplicity, here's an example using the Date object:
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
   }
 
   showSuccessModal(): void {
