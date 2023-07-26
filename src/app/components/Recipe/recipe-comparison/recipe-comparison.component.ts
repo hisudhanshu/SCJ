@@ -34,7 +34,7 @@ export class RecipeComparisonComponent implements OnInit {
   actualRecipeCategory: string = 'Normal';
   actualRecipeClientType: string = 'Claylogix';
   actualRecipeBrand: string = 'Type B';
-  actualRecipeCustomer: string = 'Aby Sir';
+  actualRecipeCustomer: string = 'Rahul Sir';
   actualRecipeMaterialName: string = 'Nylon';
   actualRecipeCode: string = 'N83912';
   actualRecipeType: string = 'Large Type';
@@ -101,4 +101,5 @@ export class RecipeComparisonComponent implements OnInit {
 
     this.editMode = false;
   }
+
 }
