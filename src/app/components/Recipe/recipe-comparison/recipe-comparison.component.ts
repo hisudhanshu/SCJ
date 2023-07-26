@@ -43,6 +43,10 @@ export class RecipeComparisonComponent implements OnInit {
   actualRecipeVendor: string = 'Vendor Old';
   actualRecipeStock: number = 2000;
 
+  // Define variables for the "Customer Name" dropdowns
+  customerName1: string = '';
+  customerName2: string = '';
+
   constructor(private authService: AuthServicesService) { }
 
   ngOnInit(): void {
@@ -101,5 +105,22 @@ export class RecipeComparisonComponent implements OnInit {
 
     this.editMode = false;
   }
+  resetData() {
+    // Reset dropdown selections to default values
+    this.selectedProduct = '';
+    this.selectedProduct1 = '';
+    // Define variables for the "Customer Name" dropdowns
+    this.customerName1 = '';
+    this.customerName2 = '';
 
+    // Reset other form data to default values (if you have other fields)
+
+    // Clear comparison results table data
+    this.createdRecipeCustomer = '';
+    this.createdRecipeCategory = '';
+    // Clear other table data (if you have other fields)
+
+    // Hide the comparison results table
+    this.showComparisonResults = false;
+  }
 }

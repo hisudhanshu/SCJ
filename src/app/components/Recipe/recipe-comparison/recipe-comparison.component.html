@@ -30,8 +30,8 @@
                     </select>
                   </div>
                   <div class="col-md-6">
-                    <label for="Customername">Customer Name</label>
-                    <select id="Customername" class="form-select" aria-label="Default select example">
+                    <label for="customerName1">Customer Name</label>
+                    <select id="customerName1" class="form-select" aria-label="Default select example">
                       <option value="">Select</option>
                       <option>Deepak Tiwari</option>
                     </select>
@@ -46,8 +46,8 @@
                     </select>
                   </div>
                   <div class="col-md-6">
-                    <label for="Customername">Customer Name</label>
-                    <select id="Customername" class="form-select" aria-label="Default select example">
+                    <label for="customerName2">Customer Name</label>
+                    <select id="customerName2" class="form-select" aria-label="Default select example">
                       <option value="">Select</option>
                       <option>Rahul Sir</option>
                     </select>
@@ -64,7 +64,8 @@
                       Results</h5><br><br> -->
                     <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
                       <br><br>
-                      <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Uploaded Excel Sheet Recipe</h6>
+                      <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Uploaded Excel Sheet Recipe
+                      </h6>
                       <br><br>
                       <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
                         <thead>
@@ -130,9 +131,8 @@
                             </td>
                             <td> <!-- Edit and Save/Cancel buttons -->
                               <div *ngIf="!editMode">
-                                  <button class="btn btn-sm btn-primary"
-                                    (click)="editMode = true">Edit</button>
-                                  <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
+                                <button class="btn btn-sm btn-primary" (click)="editMode = true">Edit</button>
+                                <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
                               </div>
                               <div *ngIf="editMode">
                                 <button class="btn btn-success" style="margin-right: 3px; height: 40px; width: 120px;"
@@ -223,9 +223,8 @@
                             </td>
                             <td> <!-- Edit and Save/Cancel buttons -->
                               <div *ngIf="!editMode">
-                                <button class="btn btn-sm btn-primary"
-                                  (click)="editMode = true">Edit</button>
-                                  <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
+                                <button class="btn btn-sm btn-primary" (click)="editMode = true">Edit</button>
+                                <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
                               </div>
                               <div *ngIf="editMode">
                                 <button class="btn btn-success" style="margin-inline: 2px;"
@@ -236,7 +235,9 @@
                             </td>
                           </tr>
                         </tbody>
-                      </table>
+                      </table><br>
+                      <button type="button" class="btn btn-sm btn-secondary reset-button" style="height: 30px; width: 70px; margin-inline: 1070px;"
+                      (click)="resetData()">Reset</button>
                     </div>
                   </div>
                   <br>
