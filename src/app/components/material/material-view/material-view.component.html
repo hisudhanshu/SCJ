@@ -6,12 +6,13 @@
         <div class="card">
           <div class="card-body">
             <!-- Success Message Modal -->
-            <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;" id="successModal" tabindex="-1" aria-labelledby="successModalLabel"
-              aria-hidden="true">
+            <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+              id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" style="font-family: Georgia, 'Times New Roman', Times, serif;" id="successModalLabel">Success</h5>
+                    <h5 class="modal-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                      id="successModalLabel">Success</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
@@ -22,12 +23,13 @@
             </div>
 
             <!-- Error Message Modal -->
-            <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel"
-              aria-hidden="true">
+            <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+              id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" style="font-family: Georgia, 'Times New Roman', Times, serif;" id="errorModalLabel">Error</h5>
+                    <h5 class="modal-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                      id="errorModalLabel">Error</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
@@ -38,12 +40,13 @@
             </div>
 
             <!-- Confirmation Modal -->
-            <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-              aria-hidden="true">
+            <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+              id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" style="font-family: Georgia, 'Times New Roman', Times, serif;" id="confirmModalLabel">{{ confirmModalTitle }}</h5>
+                    <h5 class="modal-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                      id="confirmModalLabel">{{ confirmModalTitle }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
@@ -51,19 +54,21 @@
                   </div>
                   <div class="modal-footer" style="font-family: Georgia, 'Times New Roman', Times, serif;">
                     <button type="button" class="btn btn-danger close" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary close" data-bs-dismiss="modal" (click)="performAction()">Confirm</button>
+                    <button type="button" class="btn btn-primary close" data-bs-dismiss="modal"
+                      (click)="performAction()">Confirm</button>
                   </div>
                 </div>
               </div>
             </div>
 
             <!-- Success Modal for Update -->
-            <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;" id="updateSuccessModal" tabindex="-1"
-              aria-labelledby="updateSuccessModalLabel" aria-hidden="true">
+            <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+              id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" style="font-family: Georgia, 'Times New Roman', Times, serif;" id="updateSuccessModalLabel">Success</h5>
+                    <h5 class="modal-title" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                      id="updateSuccessModalLabel">Success</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
@@ -75,17 +80,18 @@
 
             <br>
             <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-              <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">List Of Materials</strong>
+              <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">List Of Materials <div
+                  class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
+                  <form class="search-form d-flex align-items-center">
+                    <div class="input-group">
+                      <input class="form-control" id="searchKeyword" [(ngModel)]="searchQuery" name="query" type="text"
+                        placeholder="Search here.." title="Enter search keyword" (input)="searchMaterials()" />
+                      <button type="submit" class="btn btn-primary" title="Search"
+                        (click)="searchMaterials()">Search</button>
+                    </div>
+                  </form>
+                </div></strong>
             </h1>
-            <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
-              <form class="search-form d-flex align-items-center">
-                <div class="input-group">
-                  <input class="form-control" id="searchKeyword" [(ngModel)]="searchQuery" name="query" type="text"
-                    placeholder="Search here.." title="Enter search keyword" (input)="searchMaterials()" />
-                  <button type="submit" class="btn btn-primary" title="Search" (click)="searchMaterials()">Search</button>
-                </div>
-              </form>
-            </div>
             <br>
             <br>
             <table style="font-family: Georgia, 'Times New Roman', Times, serif;">
@@ -156,11 +162,14 @@
                   <td>{{ formatDate(material?.created_date) }}</td>
                   <td>
                     <ng-container *ngIf="!material.isEditing; else editButtons">
-                      <button class="btn btn-sm btn-primary" style="margin-inline: 2px;" (click)="editMaterial(material)">Edit</button>
-                      <button class="btn btn-sm btn-danger" style="margin-inline: 2px;" (click)="deleteMaterial(material)">Delete</button>
+                      <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
+                        (click)="editMaterial(material)">Edit</button>
+                      <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
+                        (click)="deleteMaterial(material)">Delete</button>
                     </ng-container>
                     <ng-template #editButtons>
-                      <button class="btn btn-sm btn-success" style="margin-inline: 2px;" (click)="updateMaterial(material)">Update</button>
+                      <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
+                        (click)="updateMaterial(material)">Update</button>
                     </ng-template>
                   </td>
                 </tr>
