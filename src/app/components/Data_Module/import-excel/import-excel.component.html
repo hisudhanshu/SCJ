@@ -13,11 +13,11 @@
                         <br><br>
                         <div class="row col-lg-12" style="font-family: Georgia, 'Times New Roman', Times, serif;">
                             <div class="col-md-4">
-                                <input class="form-control" type="file" #fileInput>
-                            </div>
-                            <div class="col-md-6">
+                                <input class="form-control" type="file" #fileInput (change)="handleFileInput($event)">
+                              </div>
+                              <div class="col-md-6">
                                 <button class="btn btn-success" (click)="uploadFile()">Upload</button>
-                            </div>
+                              </div>
                         </div>
                         <br><br>
                         <!-- Shareable short link of uploaded file -->

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AuthServicesService } from 'src/app/Service/auth-services.service';
 
 @Component({
   selector: 'app-import-excel',
@@ -9,45 +11,55 @@ export class ImportExcelComponent implements OnInit {
 
   loading: boolean = false;
   shortLink: boolean = false;
+  fileToUpload: File | null = null;
 
-  constructor() { }
+  constructor(private authService: AuthServicesService, private http: HttpClient) { }
 
   ngOnInit(): void {
   }
+    // Function to handle the file selection
+    handleFileInput(event: any): void {
+      const files: FileList = event.target.files;
+      if (files.length > 0) {
+        this.fileToUpload = files.item(0);
+      }
+    }
 
-  // Function to handle the upload button click event
   uploadFile(): void {
-    // Show the confirm modal
-    this.showConfirmModal();
+    if (this.fileToUpload) {
+      this.showConfirmModal();
+    }
   }
 
   // Function to handle the confirmed upload
   uploadConfirmed(): void {
     this.loading = true; // Show loading indicator
 
-    // Simulate the file upload process (replace this with your actual file upload logic)
-    setTimeout(() => {
-      const uploadSuccess = true; // Change this based on whether the upload was successful or not
+    // Prepare the form data with the file to upload
+    const formData: FormData = new FormData();
+    formData.append('file', this.fileToUpload!);
 
-      if (uploadSuccess) {
-        this.loading = false;
-        this.shortLink = true;
-        this.showSuccessModal();
-
-        // Hide the success modal after 2 seconds
-        setTimeout(() => {
-          this.hideSuccessModal();
-        }, 2000);
-      } else {
-        this.loading = false;
-        this.showErrorModal();
-
-        // Hide the error modal after 2 seconds
-        setTimeout(() => {
-          this.hideErrorModal();
-        }, 2000);
-      }
-    }, 2000); // Simulating a delay of 2 seconds for demonstration purposes
+    // Call the API to upload the file
+    this.http.post<any>(`${this.authService.urlprefix}api/your-upload-endpoint`, formData)
+      .subscribe(
+        (response) => {
+          // Handle successful response (if needed)
+          this.loading = false;
+          this.shortLink = true;
+          this.showSuccessModal();
+          setTimeout(() => {
+            this.hideSuccessModal();
+          }, 2000);
+        },
+        (error) => {
+          // Handle error (if needed)
+          this.loading = false;
+          this.showErrorModal();
+          setTimeout(() => {
+            this.hideErrorModal();
+          }, 2000);
+        }
+      );
   }
 
   // Function to show the confirm modal
