@@ -9,6 +9,7 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
 export class RecipeComparisonComponent implements OnInit {
 
   selectedProduct: string = '';
+  selectedProduct1: string = '';
   showComparisonResults: boolean = false;
   editMode: boolean = false;
 
@@ -17,7 +18,7 @@ export class RecipeComparisonComponent implements OnInit {
   createdRecipeCategory: string = 'Small';
   createdRecipeClientType: string = 'Clay';
   createdRecipeBrand: string = 'Type A';
-  createdRecipeCustomer: string = 'Claylogix';
+  createdRecipeCustomer: string = 'Deepak Tiwari';
   createdRecipeMaterialName: string = 'Polythiene';
   createdRecipeCode: string = 'P83912';
   createdRecipeType: string = 'Small Type';
@@ -29,6 +30,18 @@ export class RecipeComparisonComponent implements OnInit {
   filteredRecipes: any[] = []; // Array to store filtered recipes data
   searchKeyword: string = ''; // Variable to store the search keyword
   selectedRecipe: any = null;
+
+  actualRecipeCategory: string = 'Normal';
+  actualRecipeClientType: string = 'Claylogix';
+  actualRecipeBrand: string = 'Type B';
+  actualRecipeCustomer: string = 'Aby Sir';
+  actualRecipeMaterialName: string = 'Nylon';
+  actualRecipeCode: string = 'N83912';
+  actualRecipeType: string = 'Large Type';
+  actualRecipeQuantity: number = 200;
+  actualRecipeCostPerUnit: number = 2000;
+  actualRecipeVendor: string = 'Vendor Old';
+  actualRecipeStock: number = 2000;
 
   constructor(private authService: AuthServicesService) { }
 

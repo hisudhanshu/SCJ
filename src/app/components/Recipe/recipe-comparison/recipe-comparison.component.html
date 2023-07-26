@@ -6,7 +6,7 @@
         <div class="card"><br>
           <div class="card-body" style="font-family: Georgia, 'Times New Roman', Times, serif;">
             <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-              <strong>Recipe Compare</strong>
+              <strong>Reconciliation</strong>
             </h1>
             <!-- <div class="col-md-4" style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
               <form class="search-form d-flex align-items-center">
@@ -21,7 +21,7 @@
               <div class="col-lg-12">
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="name">Created Recipe</label>
+                    <label for="name">Uploaded Recipe</label>
                     <select id="name" class="form-select" aria-label="Default select example"
                       [(ngModel)]="selectedProduct">
                       <option value="">Select</option>
@@ -30,11 +30,28 @@
                     </select>
                   </div>
                   <div class="col-md-6">
+                    <label for="Customername">Customer Name</label>
+                    <select id="Customername" class="form-select" aria-label="Default select example">
+                      <option value="">Select</option>
+                      <option>Deepak Tiwari</option>
+                      <option>Anshul Sharma</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
                     <label for="Recipe">Actual Recipe</label>
                     <select id="Recipe" class="form-select" aria-label="Default select example"
-                      (change)="showDetails($event)">
+                      [(ngModel)]="selectedProduct1">
                       <option value="">Select</option>
-                      <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option>
+                      <!-- <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option> -->
+                      <option>Polyvinyl Chloride</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="Customername">Customer Name</label>
+                    <select id="Customername" class="form-select" aria-label="Default select example">
+                      <option value="">Select</option>
+                      <option>Rahul Sir</option>
+                      <option>Aby Sir</option>
                     </select>
                   </div>
                   <br>
@@ -51,8 +68,15 @@
                       <div class="col-md-6">
                         <table class="comparison-table" style="font-family: Georgia, 'Times New Roman', Times, serif;">
                           <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <td><strong>Created Recipe</strong></td>
+                            <td><strong>Uploaded Recipe</strong></td>
                             <td>{{ selectedProduct }}</td>
+                          </tr>
+                          <tr>
+                            <td><strong>Customer</strong></td>
+                            <td><span *ngIf="!editMode">{{ createdRecipeCustomer }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCustomer" type="text"
+                                class="form-control">
+                            </td>
                           </tr>
                           <tr>
                             <td><strong>Category</strong></td>
@@ -65,13 +89,6 @@
                             <td><strong>Brand</strong></td>
                             <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeBrand" type="text" class="form-control">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td><strong>Customer</strong></td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeCustomer }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCustomer" type="text"
-                                class="form-control">
                             </td>
                           </tr>
                           <tr>
@@ -130,54 +147,81 @@
                         </table>
                       </div>
                       <div class="col-md-6">
-                        <table *ngIf="selectedRecipe" class="comparison-table">
+                        <table *ngIf="showComparisonResults" class="comparison-table">
                           <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
                             <td><strong>Actual Recipe</strong></td>
-                            <td>{{ selectedRecipe?.name }}</td>
+                            <td>{{ selectedProduct1 }}</td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <td><strong>Category</strong></td>
-                            <td>{{ selectedRecipe?.category }}</td>
-                          </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <td><strong>Brand</strong></td>
-                            <td>{{ selectedRecipe?.brand }}</td>
-                          </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <td><strong>Customer</strong></td>
-                            <td>{{ selectedRecipe?.customer }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeCustomer }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeCustomer" type="text"
+                                class="form-control">
+                            </td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
+                            <td><strong>Category</strong></td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeCategory }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeCategory" type="text"
+                                class="form-control">
+                            </td>
+                          <tr>
+                            <td><strong>Brand</strong></td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeBrand }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeBrand" type="text" class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
                             <td><strong>Client Type</strong></td>
-                            <td>{{ selectedRecipe?.clienttype }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeClientType }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeClientType" type="text"
+                                class="form-control">
+                            </td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <td><strong>Material Name</strong></td>
-                            <td>{{ selectedRecipe?.material }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeMaterialName }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeMaterialName" type="text"
+                                class="form-control">
+                            </td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <td><strong>Material Code</strong></td>
-                            <td>{{ selectedRecipe?.mcode }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeCode }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeCode" type="text" class="form-control">
+                            </td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <td><strong>Material Type</strong></td>
-                            <td>{{ selectedRecipe?.mtype }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeType }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeType" type="text" class="form-control">
+                            </td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <td><strong>Material Quantity</strong></td>
-                            <td>{{ selectedRecipe?.mquantity }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeQuantity }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeQuantity" type="text"
+                                class="form-control">
+                            </td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <td><strong>Cost Per/unit</strong></td>
-                            <td>{{ selectedRecipe?.mcost }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeCostPerUnit }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeCostPerUnit" type="text"
+                                class="form-control">
+                            </td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <td><strong>Material Vendor</strong></td>
-                            <td>{{ selectedRecipe?.mvendor }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeVendor }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeVendor" type="text" class="form-control">
+                            </td>
                           </tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <td><strong>Material Stock</strong></td>
-                            <td>{{ selectedRecipe?.minventory }}</td>
+                            <td><span *ngIf="!editMode">{{ actualRecipeStock }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeStock" type="text" class="form-control">
+                            </td>
                           </tr>
                         </table>
                       </div>
