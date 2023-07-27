@@ -34,7 +34,7 @@ export class RecipeComparisonComponent implements OnInit {
   actualRecipeCategory: string = 'Normal';
   actualRecipeClientType: string = 'Claylogix';
   actualRecipeBrand: string = 'Type B';
-  actualRecipeCustomer: string = 'Rahul Sir';
+  actualRecipeCustomer: string = 'Deepak Tiwari';
   actualRecipeMaterialName: string = 'Nylon';
   actualRecipeCode: string = 'N83912';
   actualRecipeType: string = 'Large Type';
@@ -42,10 +42,6 @@ export class RecipeComparisonComponent implements OnInit {
   actualRecipeCostPerUnit: number = 2000;
   actualRecipeVendor: string = 'Vendor Old';
   actualRecipeStock: number = 2000;
-
-  // Define variables for the "Customer Name" dropdowns
-  customerName1: string = '';
-  customerName2: string = '';
 
   constructor(private authService: AuthServicesService) { }
 
@@ -109,9 +105,6 @@ export class RecipeComparisonComponent implements OnInit {
     // Reset dropdown selections to default values
     this.selectedProduct = '';
     this.selectedProduct1 = '';
-    // Define variables for the "Customer Name" dropdowns
-    this.customerName1 = '';
-    this.customerName2 = '';
 
     // Reset other form data to default values (if you have other fields)
 

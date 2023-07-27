@@ -20,7 +20,23 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-4">
+                    <label for="Customername">Customer Name</label>
+                    <select id="Customername" class="form-select" aria-label="Default select example">
+                      <option value="">Select</option>
+                      <option>Deepak Tiwari</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Recipe">Master Recipe</label>
+                    <select id="Recipe" class="form-select" aria-label="Default select example"
+                      [(ngModel)]="selectedProduct1">
+                      <option value="">Select</option>
+                      <!-- <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option> -->
+                      <option>Polyvinyl Chloride</option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
                     <label for="name">Uploaded Recipe</label>
                     <select id="name" class="form-select" aria-label="Default select example"
                       [(ngModel)]="selectedProduct">
@@ -29,29 +45,13 @@
                       <option value="Polyvinyl Chloride">Polyvinyl Chloride</option>
                     </select>
                   </div>
-                  <div class="col-md-6">
-                    <label for="customerName1">Customer Name</label>
-                    <select id="customerName1" class="form-select" aria-label="Default select example">
-                      <option value="">Select</option>
-                      <option>Deepak Tiwari</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="Recipe">Actual Recipe</label>
-                    <select id="Recipe" class="form-select" aria-label="Default select example"
-                      [(ngModel)]="selectedProduct1">
-                      <option value="">Select</option>
-                      <!-- <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option> -->
-                      <option>Polyvinyl Chloride</option>
-                    </select>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="customerName2">Customer Name</label>
-                    <select id="customerName2" class="form-select" aria-label="Default select example">
+                  <!-- <div class="col-md-6">
+                    <label for="Customername">Customer Name</label>
+                    <select id="Customername" class="form-select" aria-label="Default select example">
                       <option value="">Select</option>
                       <option>Rahul Sir</option>
                     </select>
-                  </div>
+                  </div> -->
                   <br>
                   <div>
                     <br><br>
@@ -147,7 +147,7 @@
                     </div>
                     <br><br>
                     <!-- Actual Recipe Table -->
-                    <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Actual Recipe</h6>
+                    <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Master Recipe</h6>
                     <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
                       <table class="table table-bordered"
                         style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
