@@ -90,8 +90,7 @@
                             <!-- ViewFullRecipe Screen -->
 
                             <button class="bi bi-info-circle" style="margin-inline-start: 40px;"
-                            [routerLink]="['/viewfullrecipe', recipe.Id]" (click)="saveProductDetailsToLocalstorage(recipe)"></button>
-                              
+                            [routerLink]="['/viewfullrecipe', recipe.Id]" (click)="saveProductDetailsToLocalstorage(recipe)"></button>                              
                           </td>
                           <td>
                             <ng-container *ngIf="!recipe.isEditing; else editButtons">

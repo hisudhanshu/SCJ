@@ -24,7 +24,7 @@
             <div class="table-responsive">
               <!-- <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Product Details</h6> -->
               <div *ngIf="selectedRecipe">
-                <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 12px;">
+                <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
                   <tbody style="font-family: Georgia, 'Times New Roman', Times, serif;">
                     <tr>
                       <!-- <th>Sn.</th> -->
@@ -33,7 +33,7 @@
                       <th>Brand</th>
                       <th>Customer Type</th>
                       <th>Client Type</th>
-                      <th>Action</th>
+                      <!-- <th>Action</th> -->
                     </tr>
                     <tr>
                       <!-- <td>1</td> -->
@@ -66,7 +66,7 @@
                         <ng-template #editProductClientType><input type="text" [(ngModel)]="selectedRecipe.clienttype"
                             class="form-control"></ng-template>
                       </td>
-                      <td>
+                      <!-- <td>
                         <ng-container *ngIf="!isEditing">
                           <button class="btn btn-sm btn-primary" style="margin-inline: 2px;"
                             (click)="editProduct()">Edit</button>
@@ -75,7 +75,7 @@
                           <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
                             (click)="updateProduct()">Update</button>
                         </ng-container>
-                      </td>
+                      </td> -->
                     </tr>
                   </tbody>
                 </table>
@@ -84,7 +84,7 @@
             <br><br><br>
             <div class="table-responsive">
               <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Material Details</h6>
-              <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 12px;">
+              <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
                 <tbody>
                   <tr>
                     <th>Recipe</th>
