@@ -8,7 +8,6 @@ import { AuthServicesService } from 'src/app/Service/auth-services.service';
   styleUrls: ['./import-excel.component.css']
 })
 export class ImportExcelComponent implements OnInit {
-
   loading: boolean = false;
   shortLink: boolean = false;
   fileToUpload: File | null = null;
@@ -17,13 +16,13 @@ export class ImportExcelComponent implements OnInit {
 
   ngOnInit(): void {
   }
-    // Function to handle the file selection
-    handleFileInput(event: any): void {
-      const files: FileList = event.target.files;
-      if (files.length > 0) {
-        this.fileToUpload = files.item(0);
-      }
+
+  handleFileInput(event: any): void {
+    const files: FileList = event.target.files;
+    if (files.length > 0) {
+      this.fileToUpload = files.item(0);
     }
+  }
 
   uploadFile(): void {
     if (this.fileToUpload) {
@@ -31,38 +30,32 @@ export class ImportExcelComponent implements OnInit {
     }
   }
 
-  // Function to handle the confirmed upload
   uploadConfirmed(): void {
-    this.loading = true; // Show loading indicator
-
-    // Prepare the form data with the file to upload
+    this.loading = true;
     const formData: FormData = new FormData();
     formData.append('file', this.fileToUpload!);
 
-    // Call the API to upload the file
-    this.http.post<any>(`${this.authService.urlprefix}api/your-upload-endpoint`, formData)
-      .subscribe(
-        (response) => {
-          // Handle successful response (if needed)
-          this.loading = false;
-          this.shortLink = true;
-          this.showSuccessModal();
-          setTimeout(() => {
-            this.hideSuccessModal();
-          }, 2000);
-        },
-        (error) => {
-          // Handle error (if needed)
-          this.loading = false;
-          this.showErrorModal();
-          setTimeout(() => {
-            this.hideErrorModal();
-          }, 2000);
-        }
-      );
+    this.authService.uploadFile(formData).subscribe(
+      (response) => {
+        this.loading = false;
+        this.shortLink = true;
+        this.showSuccessModal();
+        setTimeout(() => {
+          this.hideSuccessModal();
+        }, 2000);
+      },
+      (error) => {
+        this.loading = false;
+        this.showErrorModal();
+        setTimeout(() => {
+          this.hideErrorModal();
+        }, 2000);
+      }
+    );
   }
 
-  // Function to show the confirm modal
+  // ... (Existing code) ...
+
   showConfirmModal(): void {
     const confirmModal = document.getElementById('confirmModal');
     if (confirmModal) {
@@ -70,7 +63,6 @@ export class ImportExcelComponent implements OnInit {
     }
   }
 
-  // Function to hide the confirm modal
   hideConfirmModal(): void {
     const confirmModal = document.getElementById('confirmModal');
     if (confirmModal) {
@@ -78,7 +70,6 @@ export class ImportExcelComponent implements OnInit {
     }
   }
 
-  // Function to show the success modal
   showSuccessModal(): void {
     const successModal = document.getElementById('successModal');
     if (successModal) {
@@ -86,7 +77,6 @@ export class ImportExcelComponent implements OnInit {
     }
   }
 
-  // Function to hide the success modal
   hideSuccessModal(): void {
     const successModal = document.getElementById('successModal');
     if (successModal) {
@@ -94,7 +84,6 @@ export class ImportExcelComponent implements OnInit {
     }
   }
 
-  // Function to show the error modal
   showErrorModal(): void {
     const errorModal = document.getElementById('errorModal');
     if (errorModal) {
@@ -102,7 +91,6 @@ export class ImportExcelComponent implements OnInit {
     }
   }
 
-  // Function to hide the error modal
   hideErrorModal(): void {
     const errorModal = document.getElementById('errorModal');
     if (errorModal) {

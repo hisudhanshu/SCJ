@@ -162,9 +162,9 @@ export class AuthServicesService {
   // API to upload the file
   
   uploadFile(formData: FormData): Observable<any> {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
-    return this.http.post(`${this.urlprefix}api/your-upload-endpoint`, formData, { headers });
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.token}`
+    });
+    return this.http.post(`${baseUrl}Authentication/ImportExcel`, formData, { headers });
   }
-
-  
 }
