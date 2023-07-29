@@ -2,7 +2,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
-import { Modal } from 'bootstrap';
 
 declare const bootstrap: any;
 

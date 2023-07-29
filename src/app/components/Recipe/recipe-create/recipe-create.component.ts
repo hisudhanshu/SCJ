@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
-import { Modal } from 'bootstrap';
+// import { Modal } from 'bootstrap';
 declare const bootstrap: any;
 
 interface Material {
@@ -109,8 +109,8 @@ export class RecipeCreateComponent implements OnInit {
       // Update the existing product
       this.products[this.editIndex] = { ...this.newProduct };
     } else {
-      this.confirmModalTitle = 'Add Product';
-      this.confirmModalMessage = 'Are you sure you want to add this product?';
+      this.confirmModalTitle = 'Add Recipe';
+      this.confirmModalMessage = 'Are you sure you want to add this recipe?';
       this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
     }
   }
@@ -253,15 +253,15 @@ export class RecipeCreateComponent implements OnInit {
             this.products.push({ ...this.newProduct });
             this.saveProducts();
 
-            this.showSuccessModal('Product added successfully.');
+            this.showSuccessModal('Recipe added successfully.');
           } else {
             console.error('Failed to insert product data:', response);
-            this.showErrorModal('Failed to add the product.');
+            this.showErrorModal('Failed to add the recipe.');
           }
         },
         (error: any) => {
           console.error('Error occurred while inserting product data:', error);
-          this.showErrorModal('Failed to add the product.');
+          this.showErrorModal('Failed to add the recipe.');
         }
       );
     }

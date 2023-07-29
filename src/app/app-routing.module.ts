@@ -72,9 +72,8 @@ const routes: Routes = [
   { path: 'user-profile', component: UsersProfileComponent },
   { path: 'importexcel', component: ImportExcelComponent},
   { path: 'reconciliation', component: ReconciliationComponent},
+
 ];
-
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

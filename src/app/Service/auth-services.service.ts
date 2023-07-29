@@ -158,7 +158,7 @@ export class AuthServicesService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.token}`);
     return this.http.post(`${baseUrl}Authentication/InsertRecipe`, data, { headers });
   }
-
+ 
   // API to upload the file
   
   uploadFile(formData: FormData): Observable<any> {
@@ -166,5 +166,5 @@ export class AuthServicesService {
       'Authorization': `Bearer ${this.token}`
     });
     return this.http.post(`${baseUrl}Authentication/ImportExcel`, formData, { headers });
-  }
+  } 
 }

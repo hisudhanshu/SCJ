@@ -37,6 +37,8 @@ import { MaterialViewComponent } from './components/material/material-view/mater
 import { ViewRecipeComponent } from './components/Recipe/view-recipe/view-recipe.component';
 import { RecipeComparisonComponent } from './components/Recipe/recipe-comparison/recipe-comparison.component';
 import { ViewFullrecipeComponent } from './components/Recipe/view-fullrecipe/view-fullrecipe.component';
+import { ImportExcelComponent } from './components/Data_Module/import-excel/import-excel.component';
+import { ReconciliationComponent } from './components/Data_Module/reconciliation/reconciliation.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import { ViewFullrecipeComponent } from './components/Recipe/view-fullrecipe/vie
     ViewRecipeComponent,
     RecipeComparisonComponent,
     ViewFullrecipeComponent,
+    ImportExcelComponent,
+    ReconciliationComponent,
   ],
   imports: [
     BrowserModule,
