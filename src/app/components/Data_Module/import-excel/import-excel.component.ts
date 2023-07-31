@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AuthServicesService } from 'src/app/Service/auth-services.service';
+import 'xlsx/dist/xlsx.full.min.js'; // Import the ExcelPackage library
+import 'xlsx/dist/xlsx.core.min.js'; // Import the ExcelPackage core library
 
 @Component({
   selector: 'app-import-excel',
@@ -39,6 +41,7 @@ export class ImportExcelComponent implements OnInit {
       (response) => {
         this.loading = false;
         this.shortLink = true;
+        console.log('File uploaded successfully');
         this.showSuccessModal();
         setTimeout(() => {
           this.hideSuccessModal();
