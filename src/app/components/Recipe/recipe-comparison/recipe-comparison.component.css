@@ -143,6 +143,6 @@ th {
   text-align: left;
   padding: 8px;
   border: 1px solid black;
-  background-color: rgb(40, 110, 231); /* Add this line to set the background color */
-  color: white; /* Add this line to set the text color */
+  background-color: rgb(255, 255, 255); /* Add this line to set the background color */
+  color: rgb(5, 4, 4); /* Add this line to set the text color */
 }

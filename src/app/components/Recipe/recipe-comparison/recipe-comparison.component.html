@@ -59,121 +59,31 @@
                       (click)="compareRecipes()">Compare</button>
                   </div>
                   <br><br><br>
-                  <div *ngIf="showComparisonResults">
-                    <!-- <h5 style="font-family: Georgia, 'Times New Roman', Times, serif;">Comparison
-                      Results</h5><br><br> -->
-                    <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
+                  <div *ngIf="showComparisonResults"> <br><br><br>
+                    <div class="row col-md-12"
+                      style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
                       <br><br>
-                      <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Uploaded Excel Sheet Recipe
-                      </h6>
-                      <br><br>
+                      <!-- <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Compared Product Recipe
+                      </h6> -->
+                      <br><br> <br><br>
                       <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
                         <thead>
                           <tr>
-                            <th><strong>Product</strong></th>
-                            <th><strong>Customer</strong></th>
-                            <th><strong>Category</strong></th>
-                            <th><strong>Brand</strong></th>
-                            <th><strong>Client</strong></th>
-                            <th><strong>Material Name</strong></th>
-                            <th><strong>Code</strong></th>
-                            <th><strong>Type</strong></th>
-                            <th><strong>Quantity</strong></th>
-                            <th><strong>Cost Per/unit</strong></th>
-                            <th><strong>Vendor</strong></th>
-                            <th><strong>Stock</strong></th>
-                            <th><strong>Action</strong></th>
+                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <th>
+                              <h5>Compared Recipe</h5>
+                            </th>
+                            <td>
+                              <h5>Excel Recipe</h5>
+                            </td>
+                            <td>
+                              <h5>Master Recipe</h5>
+                            </td>
                           </tr>
-                        </thead>
-                        <tbody>
                           <tr>
-                            <td>{{ selectedProduct }}
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeCustomer }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCustomer" type="text"
-                                class="form-control">
-                            </td>
+                            <th><strong>Category</strong></th>
                             <td><span *ngIf="!editMode">{{ createdRecipeCategory }}</span>
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeCategory" type="text"
-                                class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeBrand" type="text" class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeClientType }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeClientType" type="text"
-                                class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeMaterialName }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeMaterialName" type="text"
-                                class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeCode }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCode" type="text" class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeType }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeType" type="text" class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeQuantity }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeQuantity" type="text"
-                                class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeCostPerUnit }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCostPerUnit" type="text"
-                                class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeVendor }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeVendor" type="text"
-                                class="form-control">
-                            </td>
-                            <td><span *ngIf="!editMode">{{ createdRecipeStock }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="createdRecipeStock" type="text" class="form-control">
-                            </td>
-                            <td> <!-- Edit and Save/Cancel buttons -->
-                              <div *ngIf="!editMode">
-                                <button class="btn btn-sm btn-primary" (click)="editMode = true">Edit</button>
-                                <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
-                              </div>
-                              <div *ngIf="editMode">
-                                <button class="btn btn-success" style="margin-right: 3px; height: 40px; width: 120px;"
-                                  (click)="saveChanges()">Save</button>
-                                <button class="btn btn-danger" style="height: 40px; width: 120px;"
-                                  (click)="cancelChanges()">Cancel</button>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <br><br>
-                    <!-- Actual Recipe Table -->
-                    <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Master Recipe</h6>
-                    <div class="row" style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
-                      <table class="table table-bordered"
-                        style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
-                        <thead>
-                          <tr>
-                            <th>Product</th>
-                            <th>Customer</th>
-                            <th>Category</th>
-                            <th>Brand</th>
-                            <th>Client</th>
-                            <th>Material Name</th>
-                            <th>Code</th>
-                            <th>Type</th>
-                            <th>Quantity</th>
-                            <th>Cost Per/unit</th>
-                            <th>Vendor</th>
-                            <th>Stock</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>{{ selectedProduct1 }}</td>
-                            <td>
-                              <span *ngIf="!editMode">{{ actualRecipeCustomer }}</span>
-                              <input *ngIf="editMode" [(ngModel)]="actualRecipeCustomer" type="text"
                                 class="form-control">
                             </td>
                             <td>
@@ -181,13 +91,33 @@
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeCategory" type="text"
                                 class="form-control">
                             </td>
+                          </tr>
+                          <tr>
+                            <th><strong>Brand</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeBrand" type="text" class="form-control">
+                            </td>
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeBrand }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeBrand" type="text" class="form-control">
                             </td>
+                          </tr>
+                          <tr>
+                            <th><strong>Client</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeClientType }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeClientType" type="text"
+                                class="form-control">
+                            </td>
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeClientType }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeClientType" type="text"
+                                class="form-control">
+                            </td>
+                          </tr>
+                          <tr>
+                            <th><strong>Material Name</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeMaterialName }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeMaterialName" type="text"
                                 class="form-control">
                             </td>
                             <td>
@@ -195,17 +125,46 @@
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeMaterialName" type="text"
                                 class="form-control">
                             </td>
+                          </tr>
+                          <tr>
+                            <th><strong>Code</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeCode }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCode" type="text" class="form-control">
+                            </td>
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeCode }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeCode" type="text" class="form-control">
+                            </td>
+
+                          </tr>
+                          <tr>
+                            <th><strong>Type</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeType }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeType" type="text" class="form-control">
                             </td>
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeType }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeType" type="text" class="form-control">
                             </td>
+
+                          </tr>
+                          <tr>
+                            <th><strong>Quantity</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeQuantity }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeQuantity" type="text"
+                                class="form-control">
+                            </td>
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeQuantity }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeQuantity" type="text"
+                                class="form-control">
+                            </td>
+
+                          </tr>
+                          <tr>
+                            <th><strong>Cost Per/unit</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeCostPerUnit }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCostPerUnit" type="text"
                                 class="form-control">
                             </td>
                             <td>
@@ -213,32 +172,36 @@
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeCostPerUnit" type="text"
                                 class="form-control">
                             </td>
+
+                          </tr>
+                          <tr>
+                            <th><strong>Vendor</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeVendor }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeVendor" type="text"
+                                class="form-control">
+                            </td>
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeVendor }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeVendor" type="text" class="form-control">
+                            </td>
+
+                          </tr>
+                          <tr>
+                            <th><strong>Stock</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeStock }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeStock" type="text" class="form-control">
                             </td>
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeStock }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeStock" type="text" class="form-control">
                             </td>
-                            <td> <!-- Edit and Save/Cancel buttons -->
-                              <div *ngIf="!editMode">
-                                <button class="btn btn-sm btn-primary" (click)="editMode = true">Edit</button>
-                                <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
-                              </div>
-                              <div *ngIf="editMode">
-                                <button class="btn btn-success" style="margin-inline: 2px;"
-                                  (click)="saveChanges()">Save</button>
-                                <button class="btn btn-danger" style="margin-inline: 2px;"
-                                  (click)="cancelChanges()">Cancel</button>
-                              </div>
-                            </td>
                           </tr>
-                        </tbody>
-                      </table><br>
-                      <button type="button" class="btn btn-sm btn-secondary reset-button" style="height: 30px; width: 70px; margin-inline: 1070px;"
-                      (click)="resetData()">Reset</button>
+                        </thead>
+                      </table>
                     </div>
+                    <br><br>
+                    <button type="button" class="btn btn-sm btn-secondary reset-button"
+                      style="height: 30px; width: 70px; margin-inline: 1040px;" (click)="resetData()">Reset</button>
                   </div>
                   <br>
                 </div>

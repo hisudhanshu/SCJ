@@ -35,8 +35,8 @@ export class RecipeComparisonComponent implements OnInit {
   actualRecipeClientType: string = 'Claylogix';
   actualRecipeBrand: string = 'Type B';
   actualRecipeCustomer: string = 'Deepak Tiwari';
-  actualRecipeMaterialName: string = 'Nylon';
-  actualRecipeCode: string = 'N83912';
+  actualRecipeMaterialName: string = 'Nylon, Carbon';
+  actualRecipeCode: string = 'N83912, C2912';
   actualRecipeType: string = 'Large Type';
   actualRecipeQuantity: number = 200;
   actualRecipeCostPerUnit: number = 2000;
