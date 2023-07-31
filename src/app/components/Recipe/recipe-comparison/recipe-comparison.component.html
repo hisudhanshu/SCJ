@@ -61,7 +61,7 @@
                   <br><br><br>
                   <div *ngIf="showComparisonResults"> <br><br><br>
                     <div class="row col-md-12"
-                      style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;">
+                      style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 14px;margin-left: 2px;">
                       <br><br>
                       <!-- <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">Compared Product Recipe
                       </h6> -->
@@ -69,15 +69,17 @@
                       <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 13px;">
                         <thead>
                           <tr>
-                          <tr style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                          <tr>
                             <th>
-                              <h5>Compared Recipe</h5>
+                              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                                <strong>Compared Recipe</strong>
+                              </h6>
                             </th>
                             <td>
-                              <h5>Excel Recipe</h5>
+                              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Excel Recipe</strong></h6>
                             </td>
                             <td>
-                              <h5>Master Recipe</h5>
+                              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Master Recipe</strong></h6>
                             </td>
                           </tr>
                           <tr>
@@ -196,12 +198,22 @@
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeStock" type="text" class="form-control">
                             </td>
                           </tr>
+                          <tr>
+                            <th><strong>Total Cost</strong></th>
+                            <td><span *ngIf="!editMode">{{ createdRecipeTotal }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeTotal" type="text" class="form-control">
+                            </td>
+                            <td>
+                              <span *ngIf="!editMode">{{ actualRecipeTotal }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="actualRecipeTotal" type="text" class="form-control">
+                            </td>
+                          </tr>
                         </thead>
                       </table>
                     </div>
                     <br><br>
                     <button type="button" class="btn btn-sm btn-secondary reset-button"
-                      style="height: 30px; width: 70px; margin-inline: 1040px;" (click)="resetData()">Reset</button>
+                      style="height: 30px; width: 70px; margin-inline: 1050px;" (click)="resetData()">Reset</button>
                   </div>
                   <br>
                 </div>

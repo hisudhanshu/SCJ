@@ -26,6 +26,7 @@ export class RecipeComparisonComponent implements OnInit {
   createdRecipeCostPerUnit: number = 1000;
   createdRecipeVendor: string = 'Vendor New';
   createdRecipeStock: number = 1000;
+  createdRecipeTotal: number = 1000;
   recipes: any[] = []; // Array to store all recipes data
   filteredRecipes: any[] = []; // Array to store filtered recipes data
   searchKeyword: string = ''; // Variable to store the search keyword
@@ -42,6 +43,7 @@ export class RecipeComparisonComponent implements OnInit {
   actualRecipeCostPerUnit: number = 2000;
   actualRecipeVendor: string = 'Vendor Old';
   actualRecipeStock: number = 2000;
+  actualRecipeTotal: number = 2000;
 
   constructor(private authService: AuthServicesService) { }
 
