@@ -164,7 +164,7 @@ export class AuthServicesService {
   uploadFile(formData: FormData): Observable<any> {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
-    });   
+    });
     return this.http.post(`${baseUrl}Authentication/ImportCsv`, formData, { headers });
   }
 }
