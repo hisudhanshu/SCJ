@@ -212,8 +212,18 @@
                       </table>
                     </div>
                     <br><br>
+                    <!-- <div *ngIf="!editMode">
+                      <button class="btn btn-sm btn-primary" (click)="editMode = true">Edit</button>
+                      <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
+                    </div>
+                    <div *ngIf="editMode">
+                      <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
+                        (click)="saveChanges()">Save</button>
+                      <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
+                        (click)="cancelChanges()">Cancel</button>
+                    </div> -->
                     <button type="button" class="btn btn-sm btn-secondary reset-button"
-                      style="height: 30px; width: 70px; margin-inline: 1050px;" (click)="resetData()">Reset</button>
+                    style="height: 30px; width: 70px; margin-inline: 1050px;" (click)="resetData()">Reset</button>
                   </div>
                   <br>
                 </div>
