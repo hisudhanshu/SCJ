@@ -30,7 +30,7 @@ interface RequestData {
   templateUrl: './recipe-create.component.html',
   styleUrls: ['./recipe-create.component.css']
 })
-export class RecipeCreateComponent implements OnInit { 
+export class RecipeCreateComponent implements OnInit {
 
   successMessage: string = '';
   errorMessage: string = '';
