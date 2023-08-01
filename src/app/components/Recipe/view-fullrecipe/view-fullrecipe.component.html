@@ -95,7 +95,6 @@
                     <th>Stock</th>
                     <th>Quantity</th>
                     <th>Cost</th>
-                    <th>Total Cost</th>
                     <th>Action</th>
                   </tr>
                   <tr *ngFor="let material of productDetails; let sn = index;">
@@ -138,11 +137,6 @@
                     </td>
                     <td>
                       <ng-container *ngIf="!material.isEditing; else editMaterialCost">{{ material.mcost
-                        }}</ng-container>
-                      <ng-template #editMaterialCost><input type="text" [(ngModel)]="material.mcost"
-                          class="form-control"></ng-template>
-                    </td>
-                    <td> <ng-container *ngIf="!material.isEditing; else editMaterialCost">{{ material.mcost
                         }}</ng-container>
                       <ng-template #editMaterialCost><input type="text" [(ngModel)]="material.mcost"
                           class="form-control"></ng-template>
@@ -244,7 +238,17 @@
                   </tr>
                 </tbody>
               </table>
-            </div><br>
+              <div class="row total-cost-row border-top col-lg-12">
+                <div class="col-md-8">
+                  <h6 style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 290px;"><strong>Total Cost</strong></h6>
+                </div>
+                <div class="col-md-4">
+                  <h6 style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 120px;"><strong>{{ calculateTotalCost() }}</strong></h6>
+                </div>
+              </div>
+            </div>
+            <br>
+            <br><br>
             <ng-container>
               <!-- <button *ngIf="!showBlankRow" class="btn btn-sm btn-success" style="display: flex; gap: 10px; margin-inline: 1080px;"
                 (click)="showBlankRow = true">Add</button> -->
