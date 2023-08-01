@@ -79,6 +79,10 @@
                               <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Excel
                                   Recipe</strong></h6>
                             </td>
+                            <!-- <td>
+                              <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Excel
+                                  Recipe 2</strong></h6>
+                            </td> -->
                             <td>
                               <h6 style="font-family: Georgia, 'Times New Roman', Times, serif;"><strong>Master
                                   Recipe</strong></h6>
@@ -90,6 +94,10 @@
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeCategory" type="text"
                                 class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeCategory }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCategory" type="text"
+                                class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeCategory }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeCategory" type="text"
@@ -101,7 +109,10 @@
                             <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeBrand" type="text" class="form-control">
                             </td>
-                            <td>
+                              <!-- <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
+                                <input *ngIf="editMode" [(ngModel)]="createdRecipeBrand" type="text" class="form-control">
+                              </td> -->
+                              <td>
                               <span *ngIf="!editMode">{{ actualRecipeBrand }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeBrand" type="text" class="form-control">
                             </td>
@@ -112,6 +123,10 @@
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeClientType" type="text"
                                 class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeClientType }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeClientType" type="text"
+                                class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeClientType }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeClientType" type="text"
@@ -124,6 +139,10 @@
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeMaterialName" type="text"
                                 class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeMaterialName }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeMaterialName" type="text"
+                                class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeMaterialName }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeMaterialName" type="text"
@@ -135,6 +154,9 @@
                             <td><span *ngIf="!editMode">{{ createdRecipeCode }}</span>
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeCode" type="text" class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeCode }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCode" type="text" class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeCode }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeCode" type="text" class="form-control">
@@ -146,6 +168,9 @@
                             <td><span *ngIf="!editMode">{{ createdRecipeType }}</span>
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeType" type="text" class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeType }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeType" type="text" class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeType }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeType" type="text" class="form-control">
@@ -158,6 +183,10 @@
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeQuantity" type="text"
                                 class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeQuantity }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeQuantity" type="text"
+                                class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeQuantity }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeQuantity" type="text"
@@ -171,6 +200,10 @@
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeCostPerUnit" type="text"
                                 class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeCostPerUnit }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeCostPerUnit" type="text"
+                                class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeCostPerUnit }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeCostPerUnit" type="text"
@@ -184,6 +217,10 @@
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeVendor" type="text"
                                 class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeVendor }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeVendor" type="text"
+                                class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeVendor }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeVendor" type="text" class="form-control">
@@ -195,6 +232,9 @@
                             <td><span *ngIf="!editMode">{{ createdRecipeStock }}</span>
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeStock" type="text" class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeStock }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeStock" type="text" class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeStock }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeStock" type="text" class="form-control">
@@ -205,6 +245,9 @@
                             <td><span *ngIf="!editMode">{{ createdRecipeTotal }}</span>
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeTotal" type="text" class="form-control">
                             </td>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeTotal }}</span>
+                              <input *ngIf="editMode" [(ngModel)]="createdRecipeTotal" type="text" class="form-control">
+                            </td> -->
                             <td>
                               <span *ngIf="!editMode">{{ actualRecipeTotal }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeTotal" type="text" class="form-control">
@@ -214,16 +257,16 @@
                       </table>
                     </div>
                     <br><br>
-                    <!-- <div *ngIf="!editMode">
+                    <div *ngIf="!editMode">
                       <button class="btn btn-sm btn-primary" (click)="editMode = true">Edit</button>
-                      <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button>
+                      <!-- <button class="btn btn-sm btn-danger" style="margin-inline: 2px;">Delete</button> -->
                     </div>
                     <div *ngIf="editMode">
                       <button class="btn btn-sm btn-success" style="margin-inline: 2px;"
                         (click)="saveChanges()">Save</button>
                       <button class="btn btn-sm btn-danger" style="margin-inline: 2px;"
                         (click)="cancelChanges()">Cancel</button>
-                    </div> -->
+                    </div>
                     <button type="button" class="btn btn-sm btn-secondary reset-button"
                       style="height: 30px; width: 70px; margin-inline: 1050px;" (click)="resetData()">Reset</button>
                   </div>

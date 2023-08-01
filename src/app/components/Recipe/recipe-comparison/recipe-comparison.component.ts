@@ -19,8 +19,8 @@ export class RecipeComparisonComponent implements OnInit {
   createdRecipeClientType: string = 'Clay';
   createdRecipeBrand: string = 'Type A';
   createdRecipeCustomer: string = 'Deepak Tiwari';
-  createdRecipeMaterialName: string = 'Polythiene';
-  createdRecipeCode: string = 'P83912';
+  createdRecipeMaterialName: string = 'Polythiene, Carbon';
+  createdRecipeCode: string = 'P83912, C2182';
   createdRecipeType: string = 'Small Type';
   createdRecipeQuantity: number = 100;
   createdRecipeCostPerUnit: number = 1000;
@@ -36,8 +36,8 @@ export class RecipeComparisonComponent implements OnInit {
   actualRecipeClientType: string = 'Claylogix';
   actualRecipeBrand: string = 'Type B';
   actualRecipeCustomer: string = 'Deepak Tiwari';
-  actualRecipeMaterialName: string = 'Nylon, Carbon';
-  actualRecipeCode: string = 'N83912, C2912';
+  actualRecipeMaterialName: string = 'Nylon';
+  actualRecipeCode: string = 'N83912';
   actualRecipeType: string = 'Large Type';
   actualRecipeQuantity: number = 200;
   actualRecipeCostPerUnit: number = 2000;
