@@ -97,7 +97,8 @@
             <table style="font-family: Georgia, 'Times New Roman', Times, serif;font-size: 13px;">
               <thead>
                 <tr>
-                  <th (click)="sortTable('id')">Id <i class="bi bi-arrow-down-up"></i></th>
+                  <th (click)="sortTable('Sn')">Sn.</th>
+                  <!-- <th (click)="sortTable('id')">Id <i class="bi bi-arrow-down-up"></i></th> -->
                   <th (click)="sortTable('name')">Name <i class="bi bi-arrow-down-up"></i></th>
                   <th (click)="sortTable('m_code')">Material Code <i class="bi bi-arrow-down-up"></i></th>
                   <th (click)="sortTable('m_type')">Material Type <i class="bi bi-arrow-down-up"></i></th>
@@ -109,8 +110,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let material of filteredMaterials">
-                  <td>{{ material?.id }}</td>
+                <tr *ngFor="let material of filteredMaterials let i = index">
+                  <td>{{ i + 1 }}</td> 
+                  <!-- <td>{{ material?.id }}</td> -->
                   <td>
                     <ng-container *ngIf="!material.isEditing; else editName">
                       {{ material?.name }}
