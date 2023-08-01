@@ -109,8 +109,8 @@ export class RecipeCreateComponent implements OnInit {
       // Update the existing product
       this.products[this.editIndex] = { ...this.newProduct };
     } else {
-      this.confirmModalTitle = 'Add Recipe';
-      this.confirmModalMessage = 'Are you sure you want to add this recipe?';
+      this.confirmModalTitle = 'Add Product';
+      this.confirmModalMessage = 'Are you sure you want to add this product?';
       this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
     }
   }
@@ -253,10 +253,10 @@ export class RecipeCreateComponent implements OnInit {
             this.products.push({ ...this.newProduct });
             this.saveProducts();
 
-            this.showSuccessModal('Recipe added successfully.');
+            this.showSuccessModal('Product added successfully.');
           } else {
             console.error('Failed to insert product data:', response);
-            this.showErrorModal('Failed to add the recipe.');
+            this.showErrorModal('Failed to add the Product.');
           }
         },
         (error: any) => {
@@ -269,7 +269,7 @@ export class RecipeCreateComponent implements OnInit {
 
   // Functions to handle different actions in your component
   addMaterial(): void {
-    this.confirmModalTitle = 'Add Recipe';
+    this.confirmModalTitle = 'Add Product';
     this.confirmModalMessage = 'Are you sure you want to add this recipe?';
     this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
   }
