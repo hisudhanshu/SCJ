@@ -91,10 +91,10 @@
                     <th>Material Name</th>
                     <th>Code</th>
                     <th>Type</th>
-                    <th>Quantity</th>
-                    <th>Cost</th>
                     <th>Vendor</th>
                     <th>Stock</th>
+                    <th>Quantity</th>
+                    <th>Cost</th>
                     <th>Total Cost</th>
                     <th>Action</th>
                   </tr>
@@ -119,18 +119,6 @@
                           class="form-control"></ng-template>
                     </td>
                     <td>
-                      <ng-container *ngIf="!material.isEditing; else editMaterialQuantity">{{ material.mquantity
-                        }}</ng-container>
-                      <ng-template #editMaterialQuantity><input type="text" [(ngModel)]="material.mquantity"
-                          class="form-control"></ng-template>
-                    </td>
-                    <td>
-                      <ng-container *ngIf="!material.isEditing; else editMaterialCost">{{ material.mcost
-                        }}</ng-container>
-                      <ng-template #editMaterialCost><input type="text" [(ngModel)]="material.mcost"
-                          class="form-control"></ng-template>
-                    </td>
-                    <td>
                       <ng-container *ngIf="!material.isEditing; else editMaterialVendor">{{ material.mvendor
                         }}</ng-container>
                       <ng-template #editMaterialVendor><input type="text" [(ngModel)]="material.mvendor"
@@ -140,6 +128,18 @@
                       <ng-container *ngIf="!material.isEditing; else editMaterialStock">{{ material.minventory
                         }}</ng-container>
                       <ng-template #editMaterialStock><input type="text" [(ngModel)]="material.minventory"
+                          class="form-control"></ng-template>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editMaterialQuantity">{{ material.mquantity
+                        }}</ng-container>
+                      <ng-template #editMaterialQuantity><input type="text" [(ngModel)]="material.mquantity"
+                          class="form-control"></ng-template>
+                    </td>
+                    <td>
+                      <ng-container *ngIf="!material.isEditing; else editMaterialCost">{{ material.mcost
+                        }}</ng-container>
+                      <ng-template #editMaterialCost><input type="text" [(ngModel)]="material.mcost"
                           class="form-control"></ng-template>
                     </td>
                     <td> <ng-container *ngIf="!material.isEditing; else editMaterialCost">{{ material.mcost

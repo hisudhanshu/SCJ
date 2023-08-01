@@ -26,7 +26,8 @@
                     <table style="font-family: Georgia, 'Times New Roman', Times, serif; font-size: 15px;">
                       <thead>
                         <tr>
-                          <th (click)="sortTable('Id')">ID <i class="bi bi-arrow-down-up"></i></th>
+                          <th (click)="sortTable('Sn')">Sn.</th>
+                          <!-- <th (click)="sortTable('Id')">ID <i class="bi bi-arrow-down-up"></i></th> -->
                           <th (click)="sortTable('NAME')">Product Name <i class="bi bi-arrow-down-up"></i></th>
                           <th (click)="sortTable('category')">Product Category <i class="bi bi-arrow-down-up"></i></th>
                           <th (click)="sortTable('brand')">Product Brand <i class="bi bi-arrow-down-up"></i></th>
@@ -38,8 +39,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                          <tr *ngFor="let recipe of filteredRecipes">
-                          <td>{{ recipe.Id }}</td>
+                          <tr *ngFor="let recipe of filteredRecipes let i = index">
+                            <td>{{ i + 1 }}</td> 
+                          <!-- <td>{{ recipe.Id }}</td> -->
                           <td>
                             <ng-container *ngIf="!recipe.isEditing; else editNAME">
                               {{ recipe.NAME }}
