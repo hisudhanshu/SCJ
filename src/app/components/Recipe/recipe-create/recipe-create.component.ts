@@ -200,7 +200,7 @@ export class RecipeCreateComponent implements OnInit {
     if (successModal) {
       const bootstrapModal = new bootstrap.Modal(successModal);
       bootstrapModal.show();
-      setTimeout(() => bootstrapModal.hide(), 2000); // Automatically hide after 2 seconds
+      setTimeout(() => bootstrapModal.hide(), 4000); // Automatically hide after 2 seconds
     }
   }
 
@@ -211,7 +211,7 @@ export class RecipeCreateComponent implements OnInit {
     if (errorModal) {
       const bootstrapModal = new bootstrap.Modal(errorModal);
       bootstrapModal.show();
-      setTimeout(() => bootstrapModal.hide(), 2000); // Automatically hide after 2 seconds
+      setTimeout(() => bootstrapModal.hide(), 4000); // Automatically hide after 2 seconds
     }
   }
 
@@ -284,5 +284,22 @@ export class RecipeCreateComponent implements OnInit {
     this.confirmModalTitle = 'Delete Recipe';
     this.confirmModalMessage = 'Are you sure you want to delete this recipe?';
     this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
+  }
+  // Add the following function for validation
+  validateAndSubmit(): void {
+    // Use optional chaining operator (?.) and nullish coalescing operator (??)
+    const selectedQuantity = parseFloat(this.selectedMaterialData?.mquantity ?? '');
+    const stockQuantity = parseFloat(this.selectedMaterialData?.m_inventory ?? '');
+
+    if (isNaN(selectedQuantity) || isNaN(stockQuantity)) {
+      // Invalid input (not a number)
+      this.showErrorModal('Please enter valid quantities.');
+    } else if (selectedQuantity > stockQuantity) {
+      // Selected quantity is greater than stock value
+      this.showErrorModal('Quantity cannot be more than Stocks.');
+    } else {
+      // Perform your submit logic here
+      this.onAddButtonClick();
+    }
   }
 }
