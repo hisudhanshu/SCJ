@@ -324,4 +324,23 @@ validateAndSubmit(): void {
     this.onAddButtonClick();
   }
 }
+validateAndSubmitbutton(): void {
+  // Use optional chaining operator (?.) and nullish coalescing operator (??)
+  const selectedQuantity = parseFloat(this.selectedMaterialData?.mquantity ?? '');
+  const stockQuantity = parseFloat(this.selectedMaterialData?.m_inventory ?? '');
+
+  if (isNaN(selectedQuantity) || isNaN(stockQuantity)) {
+    // Invalid input (not a number)
+    this.showErrorModal('Please select all dropdown values.');
+  } else if (selectedQuantity > stockQuantity) {
+    // Selected quantity is greater than stock value
+  } else if (!this.newProduct.category || !this.newProduct.brand || !this.newProduct.name ||
+             !this.newProduct.customer || !this.newProduct.clientType || !this.newProduct.material) {
+    // Some dropdowns are not selected
+    this.showErrorModal('Please select all dropdown values.');
+  } else {
+    // Perform your submit logic here
+    this.createOrUpdateProduct();
+  }
+}
 }
