@@ -214,7 +214,7 @@ export class RecipeCreateComponent implements OnInit {
     if (successModal) {
       const bootstrapModal = new bootstrap.Modal(successModal);
       bootstrapModal.show();
-      setTimeout(() => bootstrapModal.hide(), 4000); // Automatically hide after 2 seconds
+      setTimeout(() => bootstrapModal.hide(), 3000); // Automatically hide after 2 seconds
     }
   }
 
