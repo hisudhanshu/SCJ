@@ -114,6 +114,20 @@ export class RecipeCreateComponent implements OnInit {
       this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
     }
   }
+  // Add a function to reset the form fields
+  resetForm() {
+    this.newProduct = {
+      flag: 2,
+      name: '',
+      category: '',
+      brand: '',
+      customer: '',
+      clientType: '',
+      SelectedMaterial: this.selectedMaterial,
+    };
+    this.selectedMaterialData = undefined;
+    this.selectedMaterial = [];
+  }
 
   removeProduct(index: number) {
     this.products.splice(index, 1);
@@ -254,9 +268,12 @@ export class RecipeCreateComponent implements OnInit {
             this.saveProducts();
 
             this.showSuccessModal('Product added successfully.');
+              // Reset the form after submitting the data
+              this.resetForm();
           } else {
             console.error('Failed to insert product data:', response);
             this.showErrorModal('Failed to add the Product.');
+          
           }
         },
         (error: any) => {
@@ -285,21 +302,26 @@ export class RecipeCreateComponent implements OnInit {
     this.confirmModalMessage = 'Are you sure you want to delete this recipe?';
     this.showConfirmationModal(this.confirmModalTitle, this.confirmModalMessage);
   }
-  // Add the following function for validation
-  validateAndSubmit(): void {
-    // Use optional chaining operator (?.) and nullish coalescing operator (??)
-    const selectedQuantity = parseFloat(this.selectedMaterialData?.mquantity ?? '');
-    const stockQuantity = parseFloat(this.selectedMaterialData?.m_inventory ?? '');
+// ...
 
-    if (isNaN(selectedQuantity) || isNaN(stockQuantity)) {
-      // Invalid input (not a number)
-      this.showErrorModal('Please enter valid quantities.');
-    } else if (selectedQuantity > stockQuantity) {
-      // Selected quantity is greater than stock value
-      this.showErrorModal('Quantity cannot be more than Stocks.');
-    } else {
-      // Perform your submit logic here
-      this.onAddButtonClick();
-    }
+validateAndSubmit(): void {
+  // Use optional chaining operator (?.) and nullish coalescing operator (??)
+  const selectedQuantity = parseFloat(this.selectedMaterialData?.mquantity ?? '');
+  const stockQuantity = parseFloat(this.selectedMaterialData?.m_inventory ?? '');
+
+  if (isNaN(selectedQuantity) || isNaN(stockQuantity)) {
+    // Invalid input (not a number)
+    this.showErrorModal('Please enter valid quantities.');
+  } else if (selectedQuantity > stockQuantity) {
+    // Selected quantity is greater than stock value
+    this.showErrorModal('Quantity cannot be more than Stocks.');
+  } else if (!this.newProduct.category || !this.newProduct.brand || !this.newProduct.name ||
+             !this.newProduct.customer || !this.newProduct.clientType || !this.newProduct.material) {
+    // Some dropdowns are not selected
+    this.showErrorModal('Please select all dropdown values.');
+  } else {
+    // Perform your submit logic here
+    this.onAddButtonClick();
   }
+}
 }
