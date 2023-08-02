@@ -325,13 +325,13 @@ export class ViewFullrecipeComponent implements OnInit {
       this.selectedMaterial.push(selectedMaterialData);
     }
   }
-    // Define a method to calculate the total cost
-    calculateTotalCost(): number {
-      let totalCost = 0;
-      for (const material of this.productDetails) {
-        totalCost += parseFloat(material.mcost) || 0;
-      }
-      return totalCost;
+  // Define a method to calculate the total cost
+  calculateTotalCost(): number {
+    let totalCost = 0;
+    for (const material of this.productDetails) {
+      totalCost += parseFloat(material.mcost) || 0;
     }
-  
+    return totalCost;
+  }
+
 }

@@ -133,9 +133,8 @@ export class ViewRecipeComponent implements OnInit {
     return this.materials.reduce((total, material) => total + parseFloat(material.mcost), 0).toFixed(2);
   }
 
-
-   // Function to handle the click event for "Details" button
-   saveProductDetailsToLocalstorage(recipe: any) {
+  // Function to handle the click event for "Details" button
+  saveProductDetailsToLocalstorage(recipe: any) {
     // Assuming the 'recipe' parameter contains the product details
     // Convert the product details to a JSON string
     const productDetails = JSON.stringify(recipe);
@@ -154,5 +153,4 @@ export class ViewRecipeComponent implements OnInit {
       );
     }
   }
-
 }
