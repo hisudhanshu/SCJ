@@ -20,22 +20,22 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="row">
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <label for="Customername">Customer Name</label>
                     <select id="Customername" class="form-select" aria-label="Default select example">
                       <option value="">Select</option>
                       <option>Deepak Tiwari</option>
                     </select>
-                  </div>
-                  <!-- <div class="col-md-4">
-                    <label for="Recipe">Master Recipe</label>
-                    <select id="Recipe" class="form-select" aria-label="Default select example"
+                  </div> -->
+                  <div class="col-md-6">
+                    <label for="Customername">Customer Name</label>
+                    <select id="Customername" class="form-select" aria-label="Default select example"
                       [(ngModel)]="selectedProduct1">
                       <option value="">Select</option>
-                      <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option>
-                      <option>Polyvinyl Chloride</option>
+                      <!-- <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option> -->
+                      <option>Deepak Tiwari</option>
                     </select>
-                  </div> -->
+                  </div>
                   <div class="col-md-6">
                     <label for="name">Excel Recipe</label>
                     <select id="name" class="form-select" aria-label="Default select example"
@@ -109,10 +109,10 @@
                             <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
                               <input *ngIf="editMode" [(ngModel)]="createdRecipeBrand" type="text" class="form-control">
                             </td>
-                              <!-- <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
+                            <!-- <td><span *ngIf="!editMode">{{ createdRecipeBrand }}</span>
                                 <input *ngIf="editMode" [(ngModel)]="createdRecipeBrand" type="text" class="form-control">
                               </td> -->
-                              <td>
+                            <td>
                               <span *ngIf="!editMode">{{ actualRecipeBrand }}</span>
                               <input *ngIf="editMode" [(ngModel)]="actualRecipeBrand" type="text" class="form-control">
                             </td>
