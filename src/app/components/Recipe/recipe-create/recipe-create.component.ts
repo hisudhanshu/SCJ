@@ -318,7 +318,7 @@ validateAndSubmit(): void {
   } else if (!this.newProduct.category || !this.newProduct.brand || !this.newProduct.name ||
              !this.newProduct.customer || !this.newProduct.clientType || !this.newProduct.material) {
     // Some dropdowns are not selected
-    this.showErrorModal('Please select all dropdown values.');
+    this.showErrorModal('Field Cannot be empty.');
   } else {
     // Perform your submit logic here
     this.onAddButtonClick();
@@ -331,13 +331,13 @@ validateAndSubmitbutton(): void {
 
   if (isNaN(selectedQuantity) || isNaN(stockQuantity)) {
     // Invalid input (not a number)
-    this.showErrorModal('Please select all dropdown values.');
+    this.showErrorModal('Field Cannot be empty.');
   } else if (selectedQuantity > stockQuantity) {
     // Selected quantity is greater than stock value
   } else if (!this.newProduct.category || !this.newProduct.brand || !this.newProduct.name ||
              !this.newProduct.customer || !this.newProduct.clientType || !this.newProduct.material) {
     // Some dropdowns are not selected
-    this.showErrorModal('Please select all dropdown values.');
+    this.showErrorModal('Field Cannot be empty.');
   } else {
     // Perform your submit logic here
     this.createOrUpdateProduct();
