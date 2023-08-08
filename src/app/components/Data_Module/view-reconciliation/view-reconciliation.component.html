@@ -4,38 +4,239 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    <div class="card-body"><br>
-                        <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
-                            <strong
-                                style="font-family: Georgia, 'Times New Roman', Times, serif;">List of Reconciliation Products</strong>
-                        </h1><br>
-                        <div class="row">
-                            <div class="col-lg-12">
-  <div class="container">
-    <ul>
-      <li>
-        <div class="product-info">
-          <span class="product-name">Product 1</span>
-          <p>Description of Product 1.</p>
-        </div>
-        <span class="product-price">$99.99</span>
-      </li>
-      <li>
-        <div class="product-info">
-          <span class="product-name">Product 2</span>
-          <p>Description of Product 2.</p>
-        </div>
-        <span class="product-price">$149.99</span>
-      </li>
-      <li>
-        <div class="product-info">
-          <span class="product-name">Product 3</span>
-          <p>Description of Product 3.</p>
-        </div>
-        <span class="product-price">$199.99</span>
-      </li>
-      <!-- Add more products here -->
-    </ul>
-  </div>
+                    <div class="card-body">
+                        <!-- Success Message Modal -->
+                        <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                            id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"
+                                            style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                                            id="successModalLabel">Success</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                                        <p>{{ successMessage }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                            </div></div></div></div></div></div></section></main>
+                        <!-- Error Message Modal -->
+                        <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                            id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"
+                                            style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                                            id="errorModalLabel">Error</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                                        <p>{{ errorMessage }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Confirmation Modal -->
+                        <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                            id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"
+                                            style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                                            id="confirmModalLabel">{{ confirmModalTitle }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                                        <p>{{ confirmModalMessage }}</p>
+                                    </div>
+                                    <div class="modal-footer"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                                        <button type="button" class="btn btn-danger close"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                        <button type="button" class="btn btn-primary close" data-bs-dismiss="modal"
+                                            (click)="performAction()">Confirm</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Modal for Update -->
+                        <div class="modal fade align-top" style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                            id="updateSuccessModal" tabindex="-1" aria-labelledby="updateSuccessModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"
+                                            style="font-family: Georgia, 'Times New Roman', Times, serif;"
+                                            id="updateSuccessModalLabel">Success</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body"
+                                        style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                                        <p>{{ successMessage }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+                        <h1 class="card-title" style="font-family: Georgia, 'Times New Roman', Times, serif;">
+                            <strong style="font-family: Georgia, 'Times New Roman', Times, serif;">List Of
+                                Reconciliation Products
+                                <div class="col-md-4"
+                                    style="font-family: Georgia, 'Times New Roman', Times, serif; margin-inline: 750px;">
+                                    <form class="search-form d-flex align-items-center">
+                                        <div class="input-group">
+                                            <input class="form-control" id="searchKeyword" [(ngModel)]="searchQuery"
+                                                name="query" type="text" placeholder="Search here.."
+                                                title="Enter search keyword" (input)="searchMaterials()" />
+                                            <button type="submit" class="btn btn-primary" title="Search"
+                                                (click)="searchMaterials()">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </strong>
+                        </h1>
+                        <br>
+                        <br>
+                        <table style="font-family: Georgia, 'Times New Roman', Times, serif;font-size: 13px;">
+                            <thead>
+                                <tr>
+                                    <th (click)="sortTable('Sn')">Sn.</th>
+                                    <th (click)="sortTable('name')">Product</th>
+                                    <th (click)="sortTable('category')">Category</th>
+                                    <th (click)="sortTable('brand')">Brand</th>
+                                    <th (click)="sortTable('customer')">Customer</th>
+                                    <th (click)="sortTable('client')">Client</th>
+                                    <th (click)="sortTable('name')">Material Name </th>
+                                    <th (click)="sortTable('m_code')">Code</th>
+                                    <th (click)="sortTable('m_type')">Type</th>
+                                    <th (click)="sortTable('m_inventory')">Stock</th>
+                                    <th (click)="sortTable('m_quantity')">Quantity</th>
+                                    <th (click)="sortTable('m_cost')">Cost</th>
+                                    <th (click)="sortTable('m_Vendor')">Vendor</th>
+                                    <th (click)="sortTable('createddate')"> Reconciliation Dated</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Bottle</td>
+                                    <td>Small</td>
+                                    <td>Indica</td>
+                                    <td>SCJ</td>
+                                    <td>B2B</td>
+                                    <td>Carbon</td>
+                                    <td>C21301</td>
+                                    <td>Type A</td>
+                                    <td>100</td>
+                                    <td>10</td>
+                                    <td>$50.00</td>
+                                    <td>SCJ</td>
+                                    <td>2023-08-01</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Dell</td>
+                                    <td>Large</td>
+                                    <td>TATA</td>
+                                    <td>SCJ Plastic</td>
+                                    <td>B2B</td>
+                                    <td>Fiber</td>
+                                    <td>F99181</td>
+                                    <td>Type Soft</td>
+                                    <td>200</td>
+                                    <td>90</td>
+                                    <td>$40.00</td>
+                                    <td>SCJ</td>
+                                    <td>2023-08-01</td>
+                                </tr>
+                                <!-- Add more rows similarly -->
+                                <tr>
+                                    <td>3</td>
+                                    <td>Real me</td>
+                                    <td>Normal</td>
+                                    <td>TATA</td>
+                                    <td>Clay</td>
+                                    <td>B2B</td>
+                                    <td>Oxidation</td>
+                                    <td>O96182</td>
+                                    <td>Type Soft</td>
+                                    <td>500</td>
+                                    <td>110</td>
+                                    <td>$100.00</td>
+                                    <td>Claylogix</td>
+                                    <td>2023-08-01</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Excitel</td>
+                                    <td>Extra</td>
+                                    <td>Dell</td>
+                                    <td>Real me</td>
+                                    <td>Govt</td>
+                                    <td>Fiber</td>
+                                    <td>F62182</td>
+                                    <td>Type Soft</td>
+                                    <td>5100</td>
+                                    <td>1110</td>
+                                    <td>$1100.00</td>
+                                    <td>ClayTech</td>
+                                    <td>2023-08-01</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Iphone</td>
+                                    <td>Normal</td>
+                                    <td>Apple</td>
+                                    <td>Claylogix</td>
+                                    <td>B2C</td>
+                                    <td>Nylon</td>
+                                    <td>N28783</td>
+                                    <td>Type V</td>
+                                    <td>1250</td>
+                                    <td>1210</td>
+                                    <td>$100.00</td>
+                                    <td>Apple</td>
+                                    <td>2023-08-01</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>Example</td>
+                                    <td>Normal</td>
+                                    <td>Plastic</td>
+                                    <td>SCJ</td>
+                                    <td>B2B</td>
+                                    <td>Material</td>
+                                    <td>M96182</td>
+                                    <td>Type Hard</td>
+                                    <td>290</td>
+                                    <td>210</td>
+                                    <td>$200.00</td>
+                                    <td>Claylogix</td>
+                                    <td>2023-08-01</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
