@@ -42,7 +42,7 @@
                       [(ngModel)]="selectedProduct">
                       <option value="">Select</option>
                       <!-- <option *ngFor="let recipe of filteredRecipes" [value]="recipe.name">{{ recipe.name }}</option> -->
-                      <option value="Polyvinyl Chloride">Bottle</option>
+                      <option value="Bottle">Bottle</option>
                     </select>
                   </div>
                   <!-- <div class="col-md-6">
@@ -88,6 +88,14 @@
                                   Recipe</strong></h6>
                             </td>
                           </tr>
+                          <tr>
+                            <th><strong>Product</strong></th>
+                            <td>{{ selectedProduct}}
+                            </td>
+                            <td>{{ selectedProduct}}
+                            </td>
+                          </tr>
+                          <tr>
                           <tr>
                             <th><strong>Category</strong></th>
                             <td><span *ngIf="!editMode">{{ createdRecipeCategory }}</span>
