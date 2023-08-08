@@ -33,6 +33,7 @@ import { RecipeComparisonComponent } from './components/Recipe/recipe-comparison
 import { ViewFullrecipeComponent } from './components/Recipe/view-fullrecipe/view-fullrecipe.component';
 import { ImportExcelComponent } from './components/Data_Module/import-excel/import-excel.component';
 import { ReconciliationComponent } from './components/Data_Module/reconciliation/reconciliation.component';
+import { ViewReconciliationComponent } from './components/Data_Module/view-reconciliation/view-reconciliation.component';
 
 
 const routes: Routes = [
@@ -72,6 +73,7 @@ const routes: Routes = [
   { path: 'user-profile', component: UsersProfileComponent },
   { path: 'importexcel', component: ImportExcelComponent},
   { path: 'reconciliation', component: ReconciliationComponent},
+  { path: 'viewreconciliation', component: ViewReconciliationComponent}
 
 ];
 
